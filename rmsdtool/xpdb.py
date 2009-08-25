@@ -1,25 +1,3 @@
-#residue_id=("H_GLC", 10, " ")
-#residue=chain[residue_id]
-
-# Print all hetero residues in chain.
-# 
-# for residue in chain.get_list():
-#  residue_id=residue.get_id()
-#  hetfield=residue_id[0]
-#  if hetfield[0]=="H":
-#   print residue_id
-
-# Print out the coordinates of all CA atoms in a structure with B factor greater than 50.
-# 
-# for model in structure.get_list():
-#   for chain in model.get_list():
-#     for residue in chain.get_list():
-#       if residue.has_id("CA"):
-#         ca=residue["CA"]
-#         if ca.get_bfactor()>50.0:
-#           print ca.get_coord()
-
-
 # xpdb.py -- extensions to Bio.PDB
 # (c) 2009 Oliver Beckstein
 # Relased under the same license as Biopython.

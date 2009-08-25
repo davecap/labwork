@@ -122,7 +122,6 @@ def sum_rmsd(atoms1, atoms2):
   for atom1, atom2 in zip(atoms1, atoms2):
     sum_squared += vector3d.pos_distance(atom1.pos, atom2.pos)**2
   return math.sqrt(sum_squared/float(len(atoms1)))
-  
 
 def get_best_alignment(pdb1, pdb2, segments, atom_types):
   """Returns rmsd and filename of transformed pdb2."""
@@ -178,12 +177,44 @@ def segments_str(segments):
   return ', '.join(residues)
   
 
+def biopython_atom_to_vector3d(atom):
+    return vector3d.Vector3d(atom.get_coord()[0], atom.get_coord()[1], atom.get_coord()[2])
+
+#passing biopython Atom class
+def bp_sum_rmsd(residue1, residue2, atom_types=['CA', 'N', 'C', 'CB', 'CG']):
+    atoms1 = [ a for a in residue1.get_list() if a.get_name() in atom_types ]
+    atoms2 = [ a for a in residue2.get_list() if a.get_name() in atom_types ]
+    #convert Atom to vector3d
+    #v3d_atoms1 = [ biopython_atom_to_vector3d(a) for a in atoms1 ]
+    #v3d_atoms2 = [ biopython_atom_to_vector3d(a) for a in atoms2 ]
+    
+    sum_squared = 0.0
+    for atom1, atom2 in zip(atoms1, atoms2):
+        sum_squared += vector3d.pos_distance(biopython_atom_to_vector3d(atom1), biopython_atom_to_vector3d(atom2))**2
+    return math.sqrt(sum_squared/float(len(atoms1)))
+
+def residue_key(residue):
+    return "%s:%s:%s" % (residue.get_segid().strip(), residue.get_resname(), residue.get_id()[1])
+
+def get_target_residues_from_structure(structure, segids):
+    residues = []
+    for model in structure.get_list():
+        for chain in model.get_list():
+            for residue in chain.get_list():
+                #NOTE: there is whitespace in the .get_segid() value
+                if residue.get_segid().strip() in segids:
+                    residues.append(residue)
+                    #print residue.get_id()[1]
+                    #print residue.get_resname()
+                    #print residue.get_segid()
+    return residues
+
 if __name__ == '__main__':
     
     import sys, os, optparse
     
     usage = """
-    usage = "usage: %prog [options] <PDB 0> <PDB 1> <PDB 2> ... <PDB N>"
+        %prog [options] <PDB 0> <PDB 1> <PDB 2> ... <PDB N>"
     
     Copyright (c) 2007 Bosco Ho
     Modified by David Caplan, 2009
@@ -237,42 +268,34 @@ if __name__ == '__main__':
     # open PDB0 file
 
     # read
-    pdb0_structure = xpdb.get_structure(pdbid='pbd0', pdbfile=pdb0)
+    pdb0_structure = xpdb.get_structure(pdbid='pdb0', pdbfile=pdb0)
+    pdb0_residues = get_target_residues_from_structure(pdb0_structure, segids=["A"])
+    rmsd_data = { }
+    for r in pdb0_residues:
+        #print "%s:%s:%s" % (r.get_segid().strip(), r.get_resname(), r.get_id()[1])
+        rmsd_data[residue_key(r)] = { 'pdb0_residue': r, 'rmsds': [] }
+    
     # write PDB file
     # sloppyio = xpdb.SloppyPDBIO()
     # sloppyio.set_structure(structure)
     # sloppyio.save('new_big_fat.pdb')
     
-    print "opened PDB0 file"
-    for model in pdb0_structure.get_list():
-        print "model: %s" % model
-        for chain in model.get_list():
-            print "chain: %s" % chain
-            for residue in chain.get_list():
-                print "residue: %s" % residue
-                print residue.get_id()[1]
-                print residue.get_resname()
-                print residue.get_segid()
-                print "--"
+    for i, pdbi in enumerate(pdb1_to_n):
+        pdbi_structure = xpdb.get_structure(pdbid='pdb%d'%i, pdbfile=pdbi)
+        pdbi_residues = get_target_residues_from_structure(pdbi_structure, segids=["A"])
+        
+        for i, r in enumerate(pdbi_residues):
+            if not rmsd_data.has_key(residue_key(r)):
+                raise "Can't find residue key %s! Make sure structures have the same residues." % residue_key(r)
+            else:
+                rmsd = bp_sum_rmsd(rmsd_data[residue_key(r)]['pdb0_residue'], r)
+                #print "residue: %s, rmsd: %f" % (residue_key(r), rmsd)
+                #bp_sum_rmsd(residue1, residue2, atom_types=['CA', 'N', 'C', 'CB', 'CG']):
+                rmsd_data[residue_key(r)]['rmsds'].append(rmsd)
     
-    exit(0)
-    
-    pdb0_polymer = polymer.Polymer(pdb0)
-    #get list of valid residues
-    print pdb0_polymer.residues()
-    print pdb0_polymer.residues()[0].identifier()
-    exit(0)
-    pdb0_atoms = get_superposable_atoms(pdb0_polymer, segments, ['CA'])
-    #print pdb0_atoms[0]
-    #exit(0)
-    
-    for pdbi in pdb1_to_n:
-        pdbi_polymer = polymer.Polymer(pdbi)
-        #pdbi_atoms = get_superposable_atoms(pdbi_polymer, segments, ['CA'])
-        #TODO: optimize, only get specific residues
-        for i, residue in enumerate(pdbi_polymer.residues()):
-            atoms = [a for a in residue.atoms() if a.type in ['CA']]
-        sum_rmsd(pdb0_atoms, pdbi_atoms)
+    for r, d in rmsd_data.iteritems():
+        narray = numpy.array(d['rmsds'])
+        print "%s -> min: %f max: %f mean: %f" % (r, narray.min(), narray.max(), narray.mean())
     
     # if options.no_rotation:
     #     print "No rotations"
