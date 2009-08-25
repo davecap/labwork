@@ -18,6 +18,8 @@ import math
 import numpy
 import vector3d, util, molecule, polymer
 
+import Bio.PDB
+import xpdb
 
 def rmsd(crds1, crds2):
   """Returns RMSD between 2 sets of [nx3] numpy array"""
@@ -232,6 +234,29 @@ if __name__ == '__main__':
     #     segments2 = segments1
     #     print "Aligning CA atoms of residues:", s
 
+    # open PDB0 file
+
+    # read
+    pdb0_structure = xpdb.get_structure(pdbid='pbd0', pdbfile=pdb0)
+    # write PDB file
+    # sloppyio = xpdb.SloppyPDBIO()
+    # sloppyio.set_structure(structure)
+    # sloppyio.save('new_big_fat.pdb')
+    
+    print "opened PDB0 file"
+    for model in pdb0_structure.get_list():
+        print "model: %s" % model
+        for chain in model.get_list():
+            print "chain: %s" % chain
+            for residue in chain.get_list():
+                print "residue: %s" % residue
+                print residue.get_id()[1]
+                print residue.get_resname()
+                print residue.get_segid()
+                print "--"
+    
+    exit(0)
+    
     pdb0_polymer = polymer.Polymer(pdb0)
     #get list of valid residues
     print pdb0_polymer.residues()
