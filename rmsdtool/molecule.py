@@ -18,8 +18,8 @@ class Atom:
     self.occupancy = 0.0
     self.num = 0
   
-  def identifier():
-      return "%s%s-%s" %  (self.res_type, self.res_num, self.type)
+  def identifier(self):
+      return "%s:%s:%s" %  (self.res_type, self.res_num, self.type)
                   
   def pdb_str(self):
     if self.is_hetatm:

@@ -17,6 +17,9 @@ class Residue:
     atom_name = " ".join(atom_name_list)
     return "%s-%s { %s }" % (self.type, self.num, atom_name)
 
+  def identifier(self):
+    return "%s:%s:%s" % (self.chain_id, self.type, self.num)
+    
   def copy(self):
     return copy.deepcopy(self)
   
@@ -174,6 +177,7 @@ class Polymer(molecule.Molecule):
       if line.startswith("ATOM") or line.startswith("HETATM"):
         atom = molecule.AtomFromPdbLine(line);
         if (res_num != atom.res_num) or (res_insert != atom.res_insert):
+          print "atom -> %s" % atom.identifier()
           residue = Residue(atom.res_type, atom.chain_id,
                             atom.res_num, atom.res_insert)
           self.append_residue(residue)

@@ -234,7 +234,9 @@ if __name__ == '__main__':
 
     pdb0_polymer = polymer.Polymer(pdb0)
     #get list of valid residues
-    
+    print pdb0_polymer.residues()
+    print pdb0_polymer.residues()[0].identifier()
+    exit(0)
     pdb0_atoms = get_superposable_atoms(pdb0_polymer, segments, ['CA'])
     #print pdb0_atoms[0]
     #exit(0)
