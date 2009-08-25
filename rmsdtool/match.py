@@ -12,6 +12,8 @@ Output:
 
 """
 
+DEFAULT_THRESHOLD = 1
+
 import math
 import numpy
 import vector3d, util, molecule, polymer
@@ -71,22 +73,25 @@ def get_i_residue(residues, tag):
       return i
   raise "Can't find residue", tag
   
-  
-def get_superposable_atoms(polymer, segments, 
-           atom_types=['CA', 'N', 'C', 'CB']):
-  result = []
-  allowed_i = []
-  residues = polymer.residues()
-  for res_num_i, res_num_j in segments:
-    i = get_i_residue(residues, str(res_num_i))
-    j = get_i_residue(residues, str(res_num_j))
-    allowed_i.extend(range(i,j))
-  for i, residue in enumerate(residues):
-    if i in allowed_i:
-      result.extend([a for a in residue.atoms()
-                     if a.type in atom_types])
-  return result
-
+def get_superposable_atoms(polymer, segments, atom_types=['CA', 'N', 'C', 'CB']):
+    result = []
+    allowed_i = []
+    residues = polymer.residues()
+    #if no segments provided, take the whole backbone
+    if len(segments) == 0:
+        print "no segments given, using backbone"
+        for i, residue in enumerate(residues):
+            result.extend([a for a in residue.atoms() if a.type in atom_types])
+    else:
+        print segments
+        for res_num_i, res_num_j in segments:
+            i = get_i_residue(residues, str(res_num_i))
+            j = get_i_residue(residues, str(res_num_j))
+            allowed_i.extend(range(i,j))
+        for i, residue in enumerate(residues):
+            if i in allowed_i:
+                result.extend([a for a in residue.atoms() if a.type in atom_types])
+    return result
 
 def get_crds(atoms):
   crds = numpy.zeros((len(atoms), 3), float)
@@ -117,20 +122,12 @@ def sum_rmsd(atoms1, atoms2):
   return math.sqrt(sum_squared/float(len(atoms1)))
   
 
-def get_raw_rmsd(pdb1, pdb2, segments1, segments2, atom_types):
-  polymer1 = polymer.Polymer(pdb1)
-  polymer2 = polymer.Polymer(pdb2)
-  atoms1 = get_superposable_atoms(polymer1, segments1, atom_types)
-  atoms2 = get_superposable_atoms(polymer2, segments2, atom_types)
-  return sum_rmsd(atoms1, atoms2)
-
-
-def get_best_alignment(pdb1, pdb2, segments1, segments2, atom_types):
+def get_best_alignment(pdb1, pdb2, segments, atom_types):
   """Returns rmsd and filename of transformed pdb2."""
   polymer1 = polymer.Polymer(pdb1)
-  atoms1 = get_superposable_atoms(polymer1, segments1, atom_types)
+  atoms1 = get_superposable_atoms(polymer1, segments, atom_types)
   polymer2 = polymer.Polymer(pdb2)
-  atoms2 = get_superposable_atoms(polymer2, segments2, atom_types)
+  atoms2 = get_superposable_atoms(polymer2, segments, atom_types)
 
   center1 = molecule.get_center(atoms1)
   polymer1.transform(vector3d.Translation(-center1))
@@ -145,20 +142,28 @@ def get_best_alignment(pdb1, pdb2, segments1, segments2, atom_types):
   
   return rmsd, temp_pdb2
 
+def get_raw_rmsd(pdb1, pdb2, segments, atom_types):
+    polymer1 = polymer.Polymer(pdb1)
+    atoms1 = get_superposable_atoms(polymer1, segments, atom_types)
+    polymer2 = polymer.Polymer(pdb2)
+    atoms2 = get_superposable_atoms(polymer2, segments, atom_types)
+    
+    return sum_rmsd(atoms1, atoms2)
 
-def get_rmsd(pdb1, pdb2, segments1, segments2, atom_types):
-  polymer1 = polymer.Polymer(pdb1)
-  atoms1 = get_superposable_atoms(polymer1, segments1, atom_types)
-  polymer2 = polymer.Polymer(pdb2)
-  atoms2 = get_superposable_atoms(polymer2, segments2, atom_types)
+def get_rmsd(pdb1, pdb2, segments, atom_types):
+    polymer1 = polymer.Polymer(pdb1)
+    atoms1 = get_superposable_atoms(polymer1, segments, atom_types)
+    polymer2 = polymer.Polymer(pdb2)
+    atoms2 = get_superposable_atoms(polymer2, segments, atom_types)
 
-  center1 = molecule.get_center(atoms1)
-  polymer1.transform(vector3d.Translation(-center1))
-  polymer2.transform(vector3d.Translation(-molecule.get_center(atoms2)))
+    #do alignment
+    center1 = molecule.get_center(atoms1)
+    polymer1.transform(vector3d.Translation(-center1))
+    polymer2.transform(vector3d.Translation(-molecule.get_center(atoms2)))
 
-  crds1 = get_crds(atoms1)
-  crds2 = get_crds(atoms2)
-  return rmsd(crds1, crds2)
+    crds1 = get_crds(atoms1)
+    crds2 = get_crds(atoms2)
+    return rmsd(crds1, crds2)
 
 
 def segments_str(segments):
@@ -171,78 +176,83 @@ def segments_str(segments):
   return ', '.join(residues)
   
 
-
 if __name__ == '__main__':
+    
+    import sys, os, optparse
+    
+    usage = """
+    usage = "usage: %prog [options] <PDB 0> <PDB 1> <PDB 2> ... <PDB N>"
+    
+    Copyright (c) 2007 Bosco Ho
+    Modified by David Caplan, 2009
+    
+    Calculate the RMSD between two or more structures.
+    
+    PDB 0 is the starting structure. All following structures (PDB 1 ... PDB N) are compared to it.
+    
+    Optional segments can be specified. This will perform a simple analysis on those residues and rank them by RMSD.
 
-  import sys, os, getopt
-  
-  opts, args = getopt.getopt(sys.argv[1:], "nrs")
-  flags = [o for o,a in opts]
+    segments: a string that encodes the residues to be matched.
+    
+    e.g, "[('A:5', 'A:10'), ('B:3', 'B:19')]". For
+    convenience, the ":" character is optional, and quotes are not
+    needed if there are no chain identifiers. Put insertions at the end 
+    of the residue tag "A:335E"
 
-  usage = """
+    """
+    
+    parser = optparse.OptionParser(usage)
+    
+    parser.add_option("-r", action="store_true", dest="no_rotation", default=False,
+                        help="Calculates direct RMSD without any rotations [default: %default]")
+    parser.add_option("-n", action="store_true", dest="no_save", default=True,
+                        help="Calculates RMSD without saving rotated structure [default: %default]")
+    parser.add_option("-s", "--segments", dest="segments", default="[]",
+                        help="Segments to be compared [default: whole backbone]")
+    parser.add_option("-t", "--threshold", dest="threshold", default=DEFAULT_THRESHOLD, 
+                        help="Default RMSD threshold [default: %default]")
+    options, args = parser.parse_args()
 
-  Copyright (c) 2007 Bosco Ho
+    #if options.index_range and len(args) != 2:
+    #    parser.error("When using an indx range, only <start> <end> are required as arguments")
 
-  Calculates the CA rmsd between 2 PDB structures, and generates the
-  optimal superposition of the 2nd structure to the 1st
+    if len(args) < 2:
+        parser.error("Provide some PDB files")
+        
+    pdb0 = args[0]
+    pdb1_to_n = args[1:]
 
-  Usage: python match.py [-nrs] pdb1 pdb2 segments1 [segments2]
+    segments = eval(options.segments)
+    # segments1 = eval(args[2])
+    # s = segments_str(segments1)
+    # if len(args) > 3:
+    #     segments2 = eval(args[3])
+    #     s += 'to ' + segments_str(segments2)
+    # else:
+    #     segments2 = segments1
+    #     print "Aligning CA atoms of residues:", s
 
-  -n Calculates direct RMSD without any rotations
-
-  -r Calculates RMSD without saving rotated structure
-
-  -s Show aligned structures with pymol
-
-  segments1: a string that encodes the residues to be matched from
-  pdb1. if segments2 is not given, it is assumed that the residues
-  listed in segments1 will be used for pdb2
-
-  segments2: string encoding residues from pdb2
-
-  format of the string: e.g, "[('A:5', 'A:10'), ('B:3', 'B:19')]". For
-  convenience, the ":" character is optional, and quotes are not
-  needed if there are no chain identifiers. Put insertions at the end 
-  of the residue tag "A:335E"
-
-  """
-
-  if len(args) < 3:
-    print usage 
-    sys.exit(0)
-
-  pdb1 = args[0]
-  pdb2 = args[1]
-
-  segments1 = eval(args[2])
-  s = segments_str(segments1)
-  if len(args) > 3:
-    segments2 = eval(args[3])
-    s += 'to ' + segments_str(segments2)
-  else:
-    segments2 = segments1
-  print "Aligning CA atoms of residues:", s
-
-  if '-n' in flags:
-    print "No rotations"
-    rmsd = get_raw_rmsd(pdb1, pdb2, segments1, segments2, ['CA'])
-  elif '-r' in flags:
-    rmsd = get_rmsd(pdb1, pdb2, segments1, segments2, ['CA'])
-  else:
-    rmsd, temp_pdb = get_best_alignment(pdb1, pdb2, segments1, segments2, ['CA'])
-    print "Optimal superposition of %s written to: %s" % (pdb2, temp_pdb)
-
-  print "RMSD: %.3f" % rmsd
-
-  if '-s' in flags:
-    # insert your own command here
-    # cmd = 'show.py %s %s > /dev/null &' % (pdb1, temp_pdb)
-    # os.system(cmd)
-    pass
-
-
-
-
-
-
-
+    pdb0_polymer = polymer.Polymer(pdb0)
+    #get list of valid residues
+    
+    pdb0_atoms = get_superposable_atoms(pdb0_polymer, segments, ['CA'])
+    #print pdb0_atoms[0]
+    #exit(0)
+    
+    for pdbi in pdb1_to_n:
+        pdbi_polymer = polymer.Polymer(pdbi)
+        #pdbi_atoms = get_superposable_atoms(pdbi_polymer, segments, ['CA'])
+        #TODO: optimize, only get specific residues
+        for i, residue in enumerate(pdbi_polymer.residues()):
+            atoms = [a for a in residue.atoms() if a.type in ['CA']]
+        sum_rmsd(pdb0_atoms, pdbi_atoms)
+    
+    # if options.no_rotation:
+    #     print "No rotations"
+    #     rmsd = get_raw_rmsd(pdb0, pdb1_to_n[0], segments, ['CA'])
+    # elif options.no_save:
+    #     rmsd = get_rmsd(pdb0, pdb1_to_n[0], segments, ['CA'])
+    # else:
+    #     rmsd, temp_pdb = get_best_alignment(pdb0, pdb1_to_n[0], segments, ['CA'])
+    #     print "Optimal superposition of %s written to: %s" % (pdb1_to_n[0], temp_pdb)
+    #print "RMSD: %.3f" % rmsd
