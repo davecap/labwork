@@ -118,6 +118,7 @@ if __name__ == '__main__':
     # sloppyio.save('new_big_fat.pdb')
     
     for i, pdbi in enumerate(pdb1_to_n):
+        #print "Comparing pdb%d" % i
         pdbi_structure = xpdb.get_structure(pdbid='pdb%d'%i, pdbfile=pdbi)
         pdbi_residues = get_target_residues_from_structure(pdbi_structure, segids=segments)
         
@@ -130,11 +131,11 @@ if __name__ == '__main__':
                 #bp_sum_rmsd(residue1, residue2, atom_types=['CA', 'N', 'C', 'CB', 'CG']):
                 rmsd_data[residue_key(r)]['rmsds'].append(rmsd)
     
-    print "RESIDUE\tMIN\tMAX\tMEAN"
+    print "RESIDUE,MIN,MAX,MEAN"
     
     for r, d in rmsd_data.iteritems():
         narray = numpy.array(d['rmsds'])
-        print "%s\t%f\t%f\t%f" % (r, narray.min(), narray.max(), narray.mean())
+        print "%s,%f,%f,%f" % (r, narray.min(), narray.max(), narray.mean())
     
     # if options.no_rotation:
     #     print "No rotations"
