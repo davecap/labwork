@@ -1,0 +1,100 @@
+* DREP CYTOX
+*
+
+bomblev -1
+fast -1
+!PRNLev 2
+PRNLev 3
+
+set temperature  298
+
+OPEN READ UNIT 11 CARD NAME a_b_c_d_m.rtf
+READ RTF UNIT 11 CARD
+CLOSE UNIT 11
+
+OPEN READ UNIT 14 CARD NAME a_b_c_d_m.prm
+READ PARAMETERS UNIT 14 CARD
+CLOSE UNIT 14
+
+open read card unit 11 name ./initial/initial.psf
+read psf card unit 11
+close unit 11
+
+OPEN READ UNIT 11 CARD NAME ./initial/initial.crd 
+READ COOR CARD UNIT 11
+CLOSE UNIT 11
+
+define near sele segid A .and. ( -
+  residue 11 .or.  residue 12 .or.  residue 13 .or.  residue 16 .or. -
+  residue 20 .or.  residue 94 .or.  residue 95 .or.  residue 96 .or. -
+  residue 99 .or.  residue 100 .or.  residue 103 .or.  residue 104 .or. -
+  residue 108 .or.  residue 112 .or.  residue 119 .or.  residue 120 .or. -
+  residue 122 .or.  residue 123 .or.  residue 124 .or.  residue 126 .or. -
+  residue 127 .or.  residue 129 .or.  residue 130 .or.  residue 133 .or. -
+  residue 159 .or.  residue 181 .or.  residue 184 .or.  residue 185 .or. -
+  residue 187 .or.  residue 188 .or.  residue 190 .or.  residue 191 .or. -
+  residue 192 .or.  residue 194 .or.  residue 195 .or.  residue 226 .or. -
+  residue 230 .or.  residue 233 .or.  residue 269 .or.  residue 273 .or. -
+  residue 276 .or.  residue 277 ) end 
+define movi sele near .or. segid S .or. segid w end
+
+define woh2 select segid W .and. type OH2 end
+
+define w2nd select woh2 .and. ( -
+       residue 6 .or.  residue 7 .or. residue 8 ) show end
+
+define w3rd select woh2 .and. residue 9 show end
+
+define w4th select woh2 .and. residue 12 show end
+
+define w5th select woh2 .and. ( -
+       residue 1 .or. residue 2 .or. residue 3 .or. -
+       residue 4 .or. residue 5 .or. residue 6 .or. residue 7 .or. residue 8 ) show end
+
+cons fix sele .not. movi end
+
+! ONLY movi residues are in the trajectory file so we delete everything else (just for interaction energy calculation)
+delete atoms sele .not. movi end
+
+!this is a hack to get rid of the decimal 0's
+set strucnum 0
+INCR strucnum BY 0
+
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB 14.0 CTOFNB 16.0 CUTNB 18.0 -
+        WMIN 1.5  EPS 1.0
+
+!!!! PDB READ LOOP !!!!
+
+!total number of pdb files
+set lastfile 28702 
+set totframes 28703
+
+OPEN WRITE FILE UNIT 22 name ./new.trj
+TRAJECTORY IWRITE 22 NWRITE 1 NFILE @{totframes}
+* PDB to TRAJ
+*
+
+set strucnum 0
+
+label loop
+
+!skip one pdb file... corrupted or something?
+!if @{strucnum} .eq. 11741 goto next
+
+set strucname ./pdbs/@strucnum.pdb
+
+!Read sequence from the PDB coordinate file
+OPEN UNIT 1 CARD READ NAME @strucname
+READ COOR PDB resi UNIT 1
+CLOSe UNIT 1
+
+TRAJ WRITE
+
+!label next
+
+INCR strucnum BY 1
+if strucnum .le. @{lastfile} goto loop
+
+stop
