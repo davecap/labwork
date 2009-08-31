@@ -1,0 +1,101 @@
+// coordinate_type   move_type        move data (sent vie energy file)    sizeof(move_data)
+//==============================================================================================
+// Spatial           MonteCarlo       system dE                           2 floats
+// Spatial           Boltjmann        discrete Es                         Nreplicas floats
+// Spatial           Continuous       Error: not supported
+// Spatial           NoMoves          None                                0
+// Temperature       MonteCarlo       system E                            1 float
+// Temperature       Boltjmann        system E                            1 float
+// Temperature       Continuous       system E                            1 float
+// Temperature       NoMoves          None                                0
+// Umbrella          MonteCarlo       position of what umbrella acts on   1 float
+// Umbrella          Boltjmann        position of what umbrella acts on   1 float
+// Umbrella          Continuous       position of what umbrella acts on   1 float
+// Umbrella          NoMoves          None                                0
+
+SIMULATION Umbrella MonteCarlo     // here specify the simulation and move type here; see chart above
+REPLICASTEP 1.0                // step size in terms of fraction of distance to next replica; only specify this for MonteCarlo
+TEMPERATURE 298                  // need to specify the temperature for a 'spatial' or 'umbrella' simulation. Do not specify this for a 'temperature' simulation
+
+SUBMITJOBS                     // we want the server to automatically submit JOBs to the queue using "qsub working_directory/QueuedJOB.run"
+PORT       2333                  // the server will listen for client connections on this port
+NEEDSAMPLEDATA                   // we want sample data to be sent
+//NEEDCOORDINATEDATA               // we want coordinate data to be sent
+//POTENTIALSCALAR 1000.0 1000.0
+POTENTIALSCALAR 0.004 0.1   // two constants that are used in the calculation of the replica potential energy function (the DRPE)
+//CANCELLATION    0.004 0.1 500    // after the specified number (third parameter) of sequence numbers have elapsed for all replicas, energy cancellation is invoked and new constants (first two parameters) for the distributed replica potential energy function are used; specify 0 as the third parameter to prevent energy cancellation or ommit this command
+NODETIME        82800            // approximate time (in seconds) that a node will be occupied before re-queueing
+REPLICACHANGETIME 0              // a change of replica running on a node can occur as often as this many seconds
+SNAPSHOTTIME    21600            // time interval between saving state snapshots (seconds)
+TIMEOUT         9000                // maximum time allowed for one sequence number to finish before we give up and restart it (seconds)
+RUNNINGREPLICAS 0 51            // suspend replicas when conditions have been met but keep the replicas in this range (inclusive) running until all sampling is done
+
+// the JOBs: (specify: w coordinate, force constant, equilibriation steps, sampling steps)
+// OR        (specify: w coordinate, w 2nd ligand, force constant, equilibriation steps, sampling steps)
+// w coordinate of first ligand is used in force file naming and can have a maximum of two deciaml places
+
+
+                                 // The 'COLUMN' command is used to specify what the columns in the 'JOB' lines below represent
+                                 // the possibilities are:
+                                 // LIGAND1 : the coordinate position of the ligand or of ligand 1 in the case of two ligands
+                                 // LIGAND2 : the coordinate position of the second ligand when a substitution simulation is performed
+                                 // FUNNEL  : the size (for example the radius) of a restraint in 'funnel simulations'
+                                 // FORCE   : the force constant for an umbrella (This must be in kcal/mol*degrees^2, but then must be converted to radians for CHARMM)
+                                 // MOVES   : the number of move attempts to perform for the replica
+                                 // STEPS   : the number of MD or MC steps to perform during a single short simulation between move attempts
+                                 // CANCEL  : the cancellation energe for this bin
+                                 // The 'JOB' commands list the parameters for each replica in order as specified by 'COLUMN'
+//What ever value i have for steps, i actually want 100 times that. I take care of that in charmm (multipling by 100) this is because DR server is stupid
+COLUMNS LIGAND1 FORCE MOVES  STEPS   CANCEL
+JOB       10.0  0.0203   100    5    0.0
+JOB       16.0  0.0203   100    5    0.8621
+JOB       18.0  0.0305   100    5    1.213
+JOB       25.0  0.0203   100    5    3.5683
+JOB       32.0  0.0203   100    5    5.4212
+JOB       40.0  0.0203   100    5    7.1316
+JOB       50.0  0.0203   100    5    8.299
+JOB       57.0  0.0203   100    5    8.5501
+JOB       65.0  0.0203   100    5    8.4646
+JOB       72.0  0.0203   100    5    7.9349
+JOB       79.0  0.0152   100    5    7.8484
+JOB       85.0  0.0203   100    5    7.7642
+JOB       92.0  0.0203   100    5    7.7346
+JOB       96.0  0.0305   100    5    7.6622
+JOB      100.0  0.0203   100    5    7.7399
+JOB      107.0  0.0203   100    5    7.8127
+JOB      110.0  0.0305   100    5    7.8987
+JOB      115.0  0.0305   100    5    8.2657
+JOB      120.0  0.0203   100    5    8.7375
+JOB      127.0  0.0203   100    5    9.0743
+JOB      135.0  0.0203   100    5    9.3424
+JOB      138.0  0.0305   100    5    9.4955
+JOB      142.0  0.0305   100    5    9.9189
+JOB      147.0  0.0203   100    5    11.3302
+JOB      154.0  0.0305   100    5    12.6104
+JOB      161.0  0.0203   100    5    15.4841
+JOB      170.0  0.0203   100    5    17.6581
+JOB      177.0  0.0203   100    5    18.7192
+JOB      186.0  0.0203   100    5    19.7315
+JOB      194.0  0.0203   100    5    20.0546
+JOB      199.0  0.0305   100    5    19.9651
+JOB      203.0  0.0203   100    5    19.8898
+JOB      210.0  0.0305   100    5    19.024
+JOB      216.0  0.0305   100    5    18.4948
+JOB      224.0  0.0203   100    5    18.8658
+JOB      230.0  0.0305   100    5    18.6216
+JOB      237.0  0.0305   100    5    18.0104
+JOB      244.0  0.0305   100    5    17.0764
+JOB      251.0  0.0305   100    5    15.7359
+JOB      254.0  0.0305   100    5    15.4065
+JOB      257.0  0.0203   100    5    15.1216
+JOB      264.0  0.0203   100    5    14.9557
+JOB      271.0  0.0203   100    5    15.1249
+JOB      277.0  0.0203   100    5    15.2904
+JOB      286.0  0.0203   100    5    15.3618
+JOB      295.0  0.0203   100    5    14.79
+JOB      304.0  0.0203   100    5    13.5045
+JOB      308.0  0.0305   100    5    12.0989
+JOB      312.0  0.0203   100    5    11.2831
+JOB      320.0  0.0203   100    5    9.4844
+JOB      328.0  0.0203   100    5    7.8964
+JOB      337.0  0.0203   100    5    6.1574

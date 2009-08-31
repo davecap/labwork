@@ -1,0 +1,28 @@
+#!/bin/sh
+
+WORKINGDIR=/hpf/projects1/pomes/dacaplan/projects/cytoxdrep/wildtype/all_subunits/chi_one_pmf/pmf_e_cancel
+PACKAGE=package.tar.gz
+
+export IP="192.168.1.3"
+
+PATH=.:/hpf/projects1/pomes/rhenry/cytoxdrep/prog/igod_v1.1.4:$PATH
+
+PATH=/home/rodinger/bin:/home/rodinger/exe:$PATH
+cd $TMPDIR
+DIR=`get_simulation_package $WORKINGDIR/$PACKAGE`
+cd $DIR
+tar -xzf $PACKAGE
+rm $PACKAGE
+PORT=`cat port`
+
+ID=`iGod_helper_v1.0 $IP $PORT '**'`
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/dacaplan/lib/
+
+if [ -n "$ID" ]; then
+   /hpf/projects1/pomes/dacaplan/charmm/c28/charmm ip=$IP port=$PORT < d139_chione_dihedral_umbrella.inp > out.out 
+fi
+
+cp out.out $WORKINGDIR/output/$ID.out 
+
+rm -rf $DIR
