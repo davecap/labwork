@@ -9,7 +9,9 @@ my $SS = 0;
 my $avg;
 while( my $line = <stdin> ){
      chomp $line;
+     next if ($line =~ m/^[ \#]/);
      last if($line eq "");
+    #print $line;
      push(@X, $line);
      $N ++;
      $sum += $line;
