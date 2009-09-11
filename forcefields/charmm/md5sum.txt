@@ -1,0 +1,4 @@
+MD5 (charmm1992.prm) = ae40bc6158055b5f4cb93c9392e5c126
+MD5 (charmm1992.rtf) = 16a94275f642d69c7cf4131da503c2f6
+MD5 (charmm27.prm) = 00243681105fe7fe841aa90f8eff774f
+MD5 (charmm27.rtf) = cacd9fa8de1171a2032039192e9c64cf
