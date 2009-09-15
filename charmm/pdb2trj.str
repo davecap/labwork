@@ -1,0 +1,42 @@
+* PDB to TRJ stream file
+*
+
+! Requires:
+!   pdbdir         path to PDB files
+!   trjfile  path to output trajectory file
+!   totframes       total number of PDB files
+!
+
+! PDB READ LOOP
+
+! total number of pdb files
+! set totframes 2170
+
+! PDB file numbering starts at 1 (1.pdb, 2.pdb... totframes.pdb)
+set strucnum 1
+
+OPEN WRITE FILE UNIT 22 name @trjfile
+TRAJECTORY IWRITE 22 NWRITE 1 NFILE @totframes
+* PDB to TRAJ, @totframes frames
+*
+
+label pdbloop
+
+!skip one pdb file... corrupted or something?
+!if @{strucnum} .eq. 11741 goto next
+
+set currentpdbfile @pdbdir/@strucnum.pdb
+
+!Read sequence from the PDB coordinate file
+OPEN UNIT 1 CARD READ NAME @currentpdbfile
+READ COOR PDB resi UNIT 1
+CLOSe UNIT 1
+
+TRAJ WRITE
+
+!label next
+
+INCR strucnum BY 1
+if strucnum .le. @{totframes} goto pdbloop
+
+! TODO: verify the trajectory file by comparing the frames with the input PDB files

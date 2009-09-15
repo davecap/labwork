@@ -1,26 +1,36 @@
-* DREP CYTOX
+* ENERGY ANALYSIS for CcO
 *
 
 bomblev -1
 fast -1
-!PRNLev 2
 PRNLev 3
+
+! trjfile
+! outputfile
+! title
+! cwd
+
+! set trajectoryfile ./data/current.trj
+! set trajectoryfile ./data/65.trj
+set trjfile ./data/@title.trj
+set pdbdir ./data/pdbs_@title
+set outputfile ./output/energies_@title.csv
 
 set temperature  298
 
-OPEN READ UNIT 11 CARD NAME a_b_c_d_m.rtf
+OPEN READ UNIT 11 CARD NAME ./shared/data/a_b_c_d_m.rtf
 READ RTF UNIT 11 CARD
 CLOSE UNIT 11
 
-OPEN READ UNIT 14 CARD NAME a_b_c_d_m.prm
+OPEN READ UNIT 14 CARD NAME ./shared/data/a_b_c_d_m.prm
 READ PARAMETERS UNIT 14 CARD
 CLOSE UNIT 14
 
-open read card unit 11 name ./initial/initial.psf
+open read card unit 11 name "./initial/initial.psf"
 read psf card unit 11
 close unit 11
 
-OPEN READ UNIT 11 CARD NAME ./initial/initial.crd 
+OPEN READ UNIT 11 CARD NAME "./initial/initial.crd"
 READ COOR CARD UNIT 11
 CLOSE UNIT 11
 
@@ -56,45 +66,10 @@ cons fix sele .not. movi end
 ! ONLY movi residues are in the trajectory file so we delete everything else (just for interaction energy calculation)
 delete atoms sele .not. movi end
 
-!this is a hack to get rid of the decimal 0's
-set strucnum 0
-INCR strucnum BY 0
+if @skippdbtotraj .eq. 1 goto skippdbtotraj
+STREam ./shared/scripts/pdb2trj.str
+label skippdbtotraj
 
-NBONDS  ATOM  FSWITCH   CDIE -
-        NBXMOD 5 VATOM VFSWITCH  BYGR -
-        CTONNB 14.0 CTOFNB 16.0 CUTNB 18.0 -
-        WMIN 1.5  EPS 1.0
-
-!!!! PDB READ LOOP !!!!
-
-!total number of pdb files
-set lastfile 28702 
-set totframes 28703
-
-OPEN WRITE FILE UNIT 22 name ./new.trj
-TRAJECTORY IWRITE 22 NWRITE 1 NFILE @{totframes}
-* PDB to TRAJ
-*
-
-set strucnum 0
-
-label loop
-
-!skip one pdb file... corrupted or something?
-!if @{strucnum} .eq. 11741 goto next
-
-set strucname ./pdbs/@strucnum.pdb
-
-!Read sequence from the PDB coordinate file
-OPEN UNIT 1 CARD READ NAME @strucname
-READ COOR PDB resi UNIT 1
-CLOSe UNIT 1
-
-TRAJ WRITE
-
-!label next
-
-INCR strucnum BY 1
-if strucnum .le. @{lastfile} goto loop
+STREam ./shared/scripts/calc_energy.str
 
 stop

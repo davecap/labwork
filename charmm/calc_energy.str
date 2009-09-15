@@ -1,0 +1,155 @@
+* Calculate overall energy of a system
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!set cutoff 30.0
+!set cutoffnear 24.0
+!set cutofffar 28.0
+
+!set cutoff 20.0
+!set cutoffnear 14.0
+!set cutofffar 16.0
+
+!set cutoff 100.0
+!set cutoffnear 94.0
+!set cutofffar 98.0
+
+!FAST 1
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+UPDATE RDIE SHIFT VSHIFT
+
+OPEN WRITE CARD UNIT 10 NAME @outputfile
+WRITE TITLE UNIT 10
+*# Energies with cutoff: @ctonnb/@ctofnb/@cutnb
+*
+
+set j 1
+
+ESTAts LENGTH @{totframes} SKIP 0 IPRFreq 1 NPRINT -1 FPRInt -
+VDW ELEC BOND ANGL IMPR SBOU DIHE -
+IUNWrite 10 NUPRint 2 NEPR 2
+
+OPEN READ UNIT 51 FILE NAME @trjfile
+TRAJ IREAD 51 NUNIT 1
+
+label loop
+
+TRAJ READ
+
+!UPDATE RDIE SHIFT VSHIFT
+ENERGY
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+close unit 10
+
+return
+
+
+!print coor
+!open write card unit 8 name ./output/@j.pdb
+!write coor pdb unit 8
+!close unit 8
+
+! Copy coordinates to comparison set
+!COOR COPY COMP
+! Update nonbonded lists
+!UPDATE RDIE SHIFT VSHIFT
+! FAST 0
+!ENERGY
+
+!set tot ?ENER
+!set elec ?ELEC
+
+!write title unit 10
+!*?ener
+
+! GETE PRINT
+! ENERGY COMP
+
+!FAST 1
+! Get energy using optimized routines
+!ENERGY
+! Get nonbonded energy only
+!SKIPE ALL EXCL VDW ELEC
+!ENERGY
+! Restore default energy terms
+!SKIPE EXCL ALL
+!ENERGY
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+close unit 10
+
+return
+
+!'TOTE'  - total energy
+!'TOTK'  - total kinetic energy
+!'ENER'  - total potential energy
+!'TEMP'  - temperature (from KE)
+!'GRMS'  - rms gradient
+
+! Energy term names:
+!'BOND'  - bond (1-2) energy
+!'ANGL'  - angle (1-3) energy
+!'UREY'  - additional 1-3 urey bradley energy
+!'DIHE'  - dihedral 1-4 energy
+!'IMPR'  - improper planar of chiral energy
+!'STRB'  - Strech-Bend coupling energy (MMFF)
+!'OOPL'  - Out-off-plane energy (MMFF)
+!'VDW '  - van der waal energy
+!'ELEC'  - electrostatic energy
+!'HBON'  - hydrogen bonding energy
+!'USER'  - user supplied energy term
+!'HARM'  - harmonic positional restraint energy
+!'CDIH'  - dihedral restraint energy
+!'CIC '  - internal coordinate restraint energy
+!'CDRO'  - droplet restraint energy (approx const press)
+!'NOE'   - general distance restraint energy (for NOE)
+!'SBOU'  - solvent boundary lookup table energy
+!'IMNB'  - primary-image van der waal energy
+!'IMEL'  - primary-image electrostatic energy
+!'IMHB'  - primary-image hydrogen bond energy
+!'EXTE'  - extended electrostatic energy
+!'EWKS'  - Ewald k-space sum energy term
+!'EWSE'  - Ewald self energy term
+!'RXNF'  - reaction field electrostatic energy
+!'ST2'   - ST2 water-water energy
+!'IMST'  - primary-image ST2 water-water energy
+!'TSM'   - TMS free energy term
+!'QMEL'  - Quantum (QM) energy with QM/MM electrostatics
+!'QMVD'  - Quantum (QM/MM) van der Waal term
+!'ASP'   - Atomic solvation parameter (surface) energy
+!'EHAR'  - Restraint term for Implicit Euler integration
+!'GEO '  - Mean-Field-Potential energy term
+!'MDIP'  - Dipole Mean-Field-Potential energy term
+!'PRMS'  - Replica/Path RMS deviation energy 
+!'PANG'  - Replica/Path RMS angle deviation energy 
+!'SSBP'  - ???????  (undocumented)
+!'BK4D'  - 4-D energy
+!'SHEL'  - ???????  (undocumented)
+!!'RESD'  - Restrained Distance energy
+!'SHAP'  - Shape restraint energy
+!'PULL'  - Pulling force energy
+!'POLA'  - Polarizable water energy
+!'DMC '  - Distance map restraint energy
+!'RGY '  - Radius of Gyration restraint energy
+!'EWEX'  - Ewald exclusion correction energy
+!'EWQC'  - Ewald total charge correction energy
+!'EWUT'  - Ewald utility energy term (for misc. corrections)
