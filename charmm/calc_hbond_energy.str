@@ -1,0 +1,52 @@
+* Calculate overall energy of a system
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+UPDATE RDIE SHIFT VSHIFT
+
+!OPEN WRITE CARD UNIT 10 NAME @outputfile
+!WRITE TITLE UNIT 10
+!*# Energies with cutoff: @ctonnb/@ctofnb/@cutnb
+!*
+
+set j 1
+
+OPEN READ UNIT 51 FILE NAME @trjfile
+TRAJ IREAD 51 NUNIT 1
+
+label loop
+
+TRAJ READ
+
+UPDATE RDIE SHIFT VSHIFT
+
+
+!COOR HBONd command (corman.doc) finds and lists all hydrogen bonds between two atom-selections based on r(H-A), and optionally ∧(D-H-A).
+
+!coor hbond sele type hn end sele type O end coor hbond sele segid prot end sele segid wat end verb
+
+!!! For each donor/acceptor in the first selection the number of hydrogen bonds to any acceptor/donor in the second selection is printed out.
+!!! Keyword VERBose gives a more detailed listing that includes the identity of the atoms involved in the second selection, and the actual geometry.
+!!! CHARMM substitution variables ?NHBOND and ?AVNOHB are set if VERBose is not used.
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+close unit 10
+return

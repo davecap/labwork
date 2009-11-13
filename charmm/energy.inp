@@ -10,11 +10,13 @@ PRNLev 3
 ! title
 ! cwd
 
-! set trajectoryfile ./data/current.trj
-! set trajectoryfile ./data/65.trj
 set trjfile ./data/@title.trj
-set pdbdir ./data/pdbs_@title
-set outputfile ./output/energies_@title.csv
+set pdbdir ./data/pdbs/@title
+set outputfile ./output/energies_@title
+
+set ctonnb 24
+set ctofnb 28
+set cutnb 30
 
 set temperature  298
 
@@ -26,13 +28,16 @@ OPEN READ UNIT 14 CARD NAME ./shared/data/a_b_c_d_m.prm
 READ PARAMETERS UNIT 14 CARD
 CLOSE UNIT 14
 
-open read card unit 11 name "./initial/initial.psf"
+open read card unit 11 name "./input/initial.psf"
 read psf card unit 11
 close unit 11
 
-OPEN READ UNIT 11 CARD NAME "./initial/initial.crd"
+OPEN READ UNIT 11 CARD NAME "./input/initial.crd"
 READ COOR CARD UNIT 11
 CLOSE UNIT 11
+
+! set DONOR properties for TIP3
+DONOr ADD SELECT RESN TIP3 .AND. type H* END SHOW
 
 define near sele segid A .and. ( -
   residue 11 .or.  residue 12 .or.  residue 13 .or.  residue 16 .or. -
@@ -66,10 +71,15 @@ cons fix sele .not. movi end
 ! ONLY movi residues are in the trajectory file so we delete everything else (just for interaction energy calculation)
 delete atoms sele .not. movi end
 
-if @skippdbtotraj .eq. 1 goto skippdbtotraj
-STREam ./shared/scripts/pdb2trj.str
-label skippdbtotraj
+!if @skippdbtotraj .eq. 1 goto skippdbtotraj
+!STREam ./shared/scripts/pdb2trj.str
+!label skippdbtotraj
 
-STREam ./shared/scripts/calc_energy.str
+!STREam ./shared/scripts/calc_hbonds.str
+!STREam ./shared/scripts/calc_inte_energy.str
+STREam ./shared/scripts/dihedrals.str
+
+
+!STREam ./shared/scripts/calc_tot_inte_energy.str
 
 stop

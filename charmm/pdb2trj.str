@@ -40,3 +40,5 @@ INCR strucnum BY 1
 if strucnum .le. @{totframes} goto pdbloop
 
 ! TODO: verify the trajectory file by comparing the frames with the input PDB files
+
+return

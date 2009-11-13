@@ -1,0 +1,69 @@
+* Calc interaction energy between one residue and surrounding residues
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+UPDATE RDIE SHIFT VSHIFT
+
+
+! *** INTERACTION ENERGY LOOP *** !
+
+OPEN WRITE CARD UNIT 10 NAME ./output/tot_inte_energy_@title
+WRITE TITLE UNIT 10
+*#D ENER VDW ELEC DIHE UREY BOND
+*
+
+OPEN WRITE CARD UNIT 11 NAME ./output/tot_inte_energy_@title_aux
+WRITE TITLE UNIT 11
+*#D ANGL IMPR 
+*
+
+set j 1
+
+
+OPEN READ UNIT 51 FILE NAME @trjfile
+TRAJ IREAD 51 NUNIT 1
+
+label loop
+
+TRAJ READ
+
+!print coor
+
+!open write card unit 8 name ./output/@j.pdb
+!write coor pdb unit 8
+!close unit 8
+
+INTE SELE SEGID A .and. resid 126 END SELE all end
+
+WRITE TITLE UNIT 10
+*@title ?ENER ?VDW ?ELEC ?DIHE ?UREY ?BOND
+*
+
+WRITE TITLE UNIT 11
+*@title ?ANGL ?IMPR
+*
+
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+close unit 10
+close unit 11
+
+return

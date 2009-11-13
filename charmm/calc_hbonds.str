@@ -1,0 +1,135 @@
+* Calculate overall energy of a system
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+set ctonnb 24
+set ctofnb 28
+set cutnb 30
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+
+!OPEN WRITE CARD UNIT 10 NAME @outputfile
+!WRITE TITLE UNIT 10
+!*# Energies with cutoff: @ctonnb/@ctofnb/@cutnb
+!*
+
+set j 1
+
+!open unit 21 write form name ./output/inte_@title.dat
+open unit 22 write form name ./output/hbond_@title.dat
+
+!WRITE TITLE UNIT 21
+!*#dihedral i139132ENER  i139132VDW  i139132ELEC
+!*
+
+!WRITE TITLE UNIT 22
+!*#dihedral nh132	nh139	nh139t34	nh139t9	nh139t10	nh139t11	nhALL
+!*
+
+!WRITE TITLE UNIT 22
+!*#d nh139
+!*
+
+OPEN READ UNIT 51 FILE NAME @trjfile
+TRAJ IREAD 51 NUNIT 1
+
+label loop
+
+TRAJ READ
+UPDATE RDIE SHIFT VSHIFT
+
+
+!! get 139 <-> 132 interaction energy
+!! residue N139 is 126
+!INTE SELE SEGID A .and. RESID 126 END SELE SEGID A .and. RESID 119 end
+!set ie139132ener ?ENER
+!set ie139132vdw ?VDW
+!set ie139132elec ?ELEC
+
+
+!coor force comp
+!scalar wcomp show sele type ca .and. ires 119:?NRES end
+!analysis on
+!skipe bond
+!energy
+!scalar econt show
+!?ener ?elec ?grms !energy.doc
+
+!! HBONDS
+
+!! get 132 <-> surrounding waters
+!! residue D132 is 119
+!! waters surrounding 119
+
+!! analysis of the inward flip of 119
+!! TIP3: 34S, 49S, 11W
+
+!coor hbond select (SEGID A .and. RESID 119) end select (SEGID W .and. RESID 11) .or. (SEGID S .and. RESID 49) .or. (SEGID S .and. RESID 34) end
+!set nh132 ?NHBOND
+
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .and. RESID 11) .or. (SEGID S .and. RESID 49) .or. (SEGID S .and. RESID 34) end
+
+coor hbond select (SEGID A .and. RESID 126) end select all end
+set nh139 ?NHBOND
+
+coor hbond select (SEGID A .and. RESID 126) end select all end VERBOSE
+
+!coor hbond select (SEGID A .and. RESID 119) end select (SEGID W .or. SEGID S) end VERBOSE
+!set nh132 ?NHBOND
+
+!! get 139 <-> surrounding waters
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .or. SEGID S) end
+!set nh139 ?NHBOND
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .or. SEGID S) end VERBOSE
+
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID S .and. RESID 34) end
+!set nh139t34 ?NHBOND
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .and. RESID 9) end
+!set nh139t9 ?NHBOND
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .and. RESID 10) end
+!set nh139t10 ?NHBOND
+!coor hbond select (SEGID A .and. RESID 126) end select (SEGID W .and. RESID 11) end
+!set nh139t11 ?NHBOND
+
+
+!coor hbond sele type TIP3 end sele type O end
+!coor hbond sele segid A end sele (segid W .or. SEGID S) end
+!set nhall ?NHBOND
+
+
+!CORREL
+!ENTER PHI DIHE A 126 N  A 126 CA  A 126 CB  A 126 CG 
+!ENTER CHI TORSION A 126 N  A 126 CA  A 126 CB  A 126 CG  GEOMETRY
+!ENTER CH2 TORSION A 126 CA  A 126 CB  A 126 CG  A 126 ND2  GEOMETRY
+
+
+!WRITE TITLE UNIT 21
+!*@title @ie139132ener	@ie139132vdw	@ie139132elec
+
+!WRITE TITLE UNIT 22
+!*@title @nh132	@nh139	@nh139t34	@nh139t9	@nh139t10	@nh139t11	@nhALL
+
+WRITE TITLE UNIT 22
+*@title @nh139
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+!close unit 21
+close unit 22
+
+return

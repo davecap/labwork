@@ -1,0 +1,99 @@
+* Calc interaction energy between one residue and surrounding residues
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+UPDATE RDIE SHIFT VSHIFT
+
+
+! *** INTERACTION ENERGY LOOP *** !
+
+OPEN WRITE CARD UNIT 10 NAME ./output/residue_inte_energy_@title_a
+WRITE TITLE UNIT 10
+*#D TOT 13 16 108 119 120
+*
+
+OPEN WRITE CARD UNIT 11 NAME ./output/residue_inte_energy_@title_b
+WRITE TITLE UNIT 11
+*#D 122 123 194 195
+*
+
+set j 1
+
+
+OPEN READ UNIT 51 FILE NAME @trjfile
+TRAJ IREAD 51 NUNIT 1
+
+label loop
+
+TRAJ READ
+
+!print coor
+
+!open write card unit 8 name ./output/@j.pdb
+!write coor pdb unit 8
+!close unit 8
+
+!126 <-> 122,123,108,13,16,194,195,120,119
+
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. (resid 122 -
+    .or. resid 123 -
+    .or. resid 108 -
+    .or. resid 13 -
+    .or. resid 16 -
+    .or. resid 194 -
+    .or. resid 195 -
+    .or. resid 120 -
+    .or. resid 119) end 
+set eall ?ener
+
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 122 end
+set e122 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 123 end
+set e123 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 108 end
+set e108 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 13 end
+set e13 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 16 end
+set e16 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 194 end
+set e194 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 195 end
+set e195 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 120 end
+set e120 ?ener
+INTE SELE SEGID A .and. resid 126 END SELE SEGID A .and. resid 119 end
+set e119 ?ener
+
+
+WRITE TITLE UNIT 10
+*@title @eall @e13 @e16 @e108 @e119 @e120
+*
+
+WRITE TITLE UNIT 11
+*@title @e122 @e123 @e194 @e195
+*
+
+INCR j BY 1
+if j .le. @{totframes} goto loop
+
+close unit 10
+close unit 11
+
+return

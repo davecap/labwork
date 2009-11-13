@@ -1,0 +1,53 @@
+* An illustration of using CORREL to compute the distributions of backbone
+* phi and psi angles of specified residue.
+*
+
+!Open file unit for trajectory
+open read  unit 51 file name @trajfile
+traj query unit 51
+
+! by default, let's look at Gly41 (the most flexible residue from nmr 
+! relaxation analysis; see nmr.inp and plot_nmr-s2.gnu)
+if @?rid eq 0   set rid = @resid
+
+!Open the output file and write header
+open write unit 11 card name phipsi-dist.dat
+write title unit 11
+*#phi and psi distribution of residue: @rid
+*#angle p_phi p_psi
+*
+
+open write unit 12 card name phipsi.dat
+write title unit 12
+*#phi and psi time series of residue: @rid
+*#time phi psi
+*
+
+!Invoke CORREL mode
+correl maxtime ?nfile maxseries 2 maxatoms 10
+
+    !compute phi(t) and psi(t)   
+    set  sg = @segid     ! protein segid
+    calc ip = @rid - 1
+    calc in = @rid + 1
+    enter phi dihe  @SG @ip c   @SG @rid n   @SG @rid ca  @SG @rid c
+    enter psi dihe  @SG @rid n  @SG @rid ca  @SG @rid c   @SG @in  n
+
+    traj firstu 51 nunit 1 
+
+    !write the time series
+    edit phi veccod 2
+    write phi dumb time unit 12 
+
+    !compute and print histograms
+    edit phi veccod 1
+    edit psi veccod 1
+    mantim phi hist -180 180 36
+    mantim psi hist -180 180 36
+
+    edit phi veccod 2
+    write phi dumb time unit 11
+
+end
+
+return

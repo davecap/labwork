@@ -1,0 +1,50 @@
+* Extract dihedrals
+*
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+set ctonnb 24
+set ctofnb 28
+set cutnb 30
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+
+
+!This is the analysis of the CHI1 and CHI2 angles of ASN
+CORREL MAXT 10000 MAXS 5
+ENTER CHI TORSION A 126 N  A 126 CA  A 126 CB  A 126 CG  GEOMETRY
+!ENTER CH2  TORSION A 126 CA  A 126 CB  A 126 CG  A 126 ND2  GEOMETRY
+open write card unit 89 name ./dihedrals/@title.139.dihed
+open unit 11 READ unform name @trjfile
+TRAJECTORY FIRSTU 11 NUNIT 1 SKIP 1
+write all unit 89 dumb time
+close unit 11
+!close unit 89
+END
+
+!This is the chi1 and chi2 of residue 119.
+CORREL MAXT 10000 MAXS 5
+ENTER CHI TORSION A 119 N  A 119 CA  A 119 CB  A 119 CG  GEOMETRY
+!ENTER CH2  TORSION A 119 CA  A 119 CB  A 119 CG  A 119 OD2  GEOMETRY
+open write card unit 88 name ./dihedrals/@title.132.dihed
+open unit 11 READ unform name @trjfile
+TRAJECTORY FIRSTU 11 NUNIT 1 SKIP 1
+write all unit 88 dumb time
+close unit 11
+!close unit 88
+END
+
+return

@@ -1,0 +1,37 @@
+* Compute the average structure from a trajectory
+*
+
+NOTE: THIS IS INCOMPLETE
+
+! Requires:
+!   outputfile      Output file for energy data (CSV)
+!   trjfile         trajectory file
+!   ctonnb          near cutoff for switched cutoffs
+!   ctofnb          far cutoff
+!   cutnb           total cutoff distance
+
+! Energy Calculations
+
+!FAST 1
+
+! set the cutoffs
+NBONDS  ATOM  FSWITCH   CDIE -
+        NBXMOD 5 VATOM VFSWITCH  BYGR -
+        CTONNB @ctonnb CTOFNB @ctofnb CUTNB @cutnb -
+        WMIN 1.5  EPS 1.0
+
+UPDATE RDIE SHIFT VSHIFT
+
+
+open read unform unit 51 name @trjfile
+coor dyna first 51 nunit 2 begin 2500 skip 50 stop 5000
+
+close unit 51
+
+return
+
+
+!print coor
+!open write card unit 8 name ./output/@j.pdb
+!write coor pdb unit 8
+!close unit 8

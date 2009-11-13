@@ -1,0 +1,22 @@
+* MSD of a single coordinate set w.r.t the reference set
+*
+
+!By default, coordinates are read in to the MAIN set.  The following 
+!command saves a copy of the MAIN set in the COMParison set
+coor copy comp
+
+!Read another set of coordinates (e.g., the last frame of NPT production)
+read coor pdb resid name @comparisonpdb
+
+!Compute the heavy atom and CA RMSD values
+coor orient rms select .not. hydrogen .and. .not. resn tip3 end
+set hvyrms = ?rms
+
+coor orient rms select type CA end
+set carms = ?rms
+
+write title name rmsd.dat
+* Heavy atom rmsd = @hvyrms   CA rms = @carms
+*
+
+return
