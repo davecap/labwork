@@ -1,0 +1,27 @@
+[ None ]
+
+[ COO- ]
+[ replace ]
+C		CC 	12.011	0.34
+[ add ]
+2	8	OT	C	CA	N
+	OC	15.9994	-0.67
+[ delete ]
+O
+[ impropers ]
+C	CA	OT2	OT1      
+
+; CHO terminus
+
+[ CHO ]
+[ replace ]
+C		CC 	12.011	0.41
+O		O	15.99900	-0.51
+[ add ]
+1	8	HCO	C	CA	N
+	HA	1.00800	0.10	
+[ bonds ]
+C	HCO
+[ impropers ]
+C	CA	O	HCO      
+

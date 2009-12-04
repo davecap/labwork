@@ -1,0 +1,1610 @@
+[ bondtypes ]
+ ; i    j    func   b0      kb
+  NH2   CT1     1 0.1455 2.008e+05
+  CST   OST     1 0.116 7.849e+05
+   SS    FE     1 0.232 2.092e+05
+    C     C     1 0.1335 5.021e+05
+   CA    CA     1 0.1375 2.552e+05
+  CE1   CE1     1 0.134 3.682e+05
+  CE1   CE2     1 0.1342 4.184e+05
+  CE1   CT2     1 0.1502 3.054e+05
+  CE1   CT3     1 0.1504 3.205e+05
+  CE2   CE2     1 0.133 4.268e+05
+  CP1     C     1 0.149 2.092e+05
+  CP1    CC     1 0.149 2.092e+05
+  CP1    CD     1 0.149 1.674e+05
+  CP2   CP1     1 0.1527 1.862e+05
+  CP2   CP2     1 0.1537 1.862e+05
+  CP3   CP2     1 0.1537 1.862e+05
+  CPB   CE1     1 0.138 3.766e+05
+  CPB   CPA     1 0.1443 2.509e+05
+  CPB   CPB     1 0.1346 2.851e+05
+ CPH1  CPH1     1 0.136 3.431e+05
+  CPM   CPA     1 0.1372 3.012e+05
+  CPT    CA     1 0.1368 2.552e+05
+  CPT   CPT     1 0.14 3.012e+05
+  CT1     C     1 0.149 2.092e+05
+  CT1    CC     1 0.1522 1.674e+05
+  CT1    CD     1 0.1522 1.674e+05
+  CT1   CT1     1 0.15 1.862e+05
+  CT2     C     1 0.149 2.092e+05
+  CT2    CA     1 0.149 1.925e+05
+  CT2    CC     1 0.1522 1.674e+05
+  CT2    CD     1 0.1522 1.674e+05
+  CT2   CPB     1 0.149 1.925e+05
+  CT2  CPH1     1 0.15 1.922e+05
+  CT2   CT1     1 0.1538 1.862e+05
+  CT2   CT2     1 0.153 1.862e+05
+  CT3     C     1 0.149 2.092e+05
+  CT3    CA     1 0.149 1.925e+05
+  CT3    CC     1 0.1522 1.674e+05
+  CT3    CD     1 0.1522 1.674e+05
+  CT3   CPB     1 0.149 1.925e+05
+  CT3  CPH1     1 0.15 1.922e+05
+  CT3    CS     1 0.1531 1.59e+05
+  CT3   CT1     1 0.1538 1.862e+05
+  CT3   CT2     1 0.1528 1.862e+05
+  CT3   CT3     1 0.153 1.862e+05
+   CY    CA     1 0.1365 2.929e+05
+   CY   CPT     1 0.144 2.929e+05
+   CY   CT2     1 0.151 1.925e+05
+   FE    CM     1 0.19 2.159e+05
+   FE   CPM     1 0.3381 0
+    H    CD     1 0.111 2.761e+05
+   HA    CA     1 0.1083 2.845e+05
+   HA    CC     1 0.11 2.654e+05
+   HA   CP2     1 0.1111 2.586e+05
+   HA   CP3     1 0.1111 2.586e+05
+   HA   CPM     1 0.109 3.076e+05
+   HA    CS     1 0.1111 2.51e+05
+   HA   CT1     1 0.1111 2.586e+05
+   HA   CT2     1 0.1111 2.586e+05
+   HA   CT3     1 0.1111 2.694e+05
+   HA    CY     1 0.108 2.761e+05
+  HE1   CE1     1 0.11 3.017e+05
+  HE2   CE2     1 0.11 3.054e+05
+   HB   CP1     1 0.108 2.761e+05
+   HB   CT1     1 0.108 2.761e+05
+   HB   CT2     1 0.108 2.761e+05
+   HB   CT3     1 0.108 2.761e+05
+   HP    CA     1 0.108 2.845e+05
+   HP    CY     1 0.108 2.929e+05
+  HR1  CPH1     1 0.1083 3.138e+05
+  HR1  CPH2     1 0.109 2.845e+05
+  HR2  CPH2     1 0.107 2.787e+05
+  HR3  CPH1     1 0.1083 3.054e+05
+   HT    HT     1 0.1514 0
+    N     C     1 0.13 2.176e+05
+    N   CP1     1 0.1434 2.678e+05
+    N   CP3     1 0.1455 2.678e+05
+  NC2     C     1 0.1365 3.874e+05
+  NC2   CT2     1 0.149 2.184e+05
+  NC2   CT3     1 0.149 2.184e+05
+  NC2    HC     1 0.1 3.807e+05
+  NH1     C     1 0.1345 3.096e+05
+  NH1   CT1     1 0.143 2.678e+05
+  NH1   CT2     1 0.143 2.678e+05
+  NH1   CT3     1 0.143 2.678e+05
+  NH1     H     1 0.0997 3.682e+05
+  NH1    HC     1 0.098 3.389e+05
+  NH2    CC     1 0.136 3.598e+05
+  NH2   CT2     1 0.1455 2.008e+05
+  NH2   CT3     1 0.1455 2.008e+05
+  NH2     H     1 0.1 4.017e+05
+  NH2    HC     1 0.1 3.849e+05
+  NH3   CT1     1 0.148 1.674e+05
+  NH3   CT2     1 0.148 1.674e+05
+  NH3   CT3     1 0.148 1.674e+05
+  NH3    HC     1 0.104 3.372e+05
+   NP   CP1     1 0.1485 2.678e+05
+   NP   CP3     1 0.1502 2.678e+05
+   NP    HC     1 0.1006 3.849e+05
+  NPH   CPA     1 0.1376 3.156e+05
+  NPH    FE     1 0.1958 2.261e+05
+  NR1  CPH1     1 0.138 3.347e+05
+  NR1  CPH2     1 0.136 3.347e+05
+  NR1     H     1 0.1 3.899e+05
+  NR2  CPH1     1 0.138 3.347e+05
+  NR2  CPH2     1 0.132 3.347e+05
+  NR2    FE     1 0.22 5.439e+04
+  NR3  CPH1     1 0.137 3.18e+05
+  NR3  CPH2     1 0.132 3.18e+05
+  NR3     H     1 0.1 3.791e+05
+   NY    CA     1 0.137 2.259e+05
+   NY   CPT     1 0.1375 2.259e+05
+   NY     H     1 0.0976 3.891e+05
+    O     C     1 0.123 5.188e+05
+    O    CC     1 0.123 5.439e+05
+   OB    CC     1 0.122 6.276e+05
+   OB    CD     1 0.122 6.276e+05
+   OC    CA     1 0.126 4.393e+05
+   OC    CC     1 0.126 4.393e+05
+   OC   CT2     1 0.133 3.766e+05
+   OC   CT3     1 0.133 3.766e+05
+  OH1    CA     1 0.1411 2.797e+05
+  OH1    CD     1 0.14 1.925e+05
+  OH1   CT1     1 0.142 3.582e+05
+  OH1   CT2     1 0.142 3.582e+05
+  OH1   CT3     1 0.142 3.582e+05
+  OH1     H     1 0.096 4.561e+05
+   OM    CM     1 0.1128 9.33e+05
+   OM    FE     1 0.18 2.092e+05
+   OM    OM     1 0.123 5.021e+05
+   OS    CD     1 0.1334 1.255e+05
+   OS   CT3     1 0.143 2.845e+05
+   OT    HT     1 0.09572 3.766e+05
+    S   CT2     1 0.1818 1.657e+05
+    S   CT3     1 0.1816 2.008e+05
+    S    HS     1 0.1325 2.301e+05
+   SM   CT2     1 0.1816 1.791e+05
+   SM   CT3     1 0.1816 1.791e+05
+   SM    SM     1 0.2029 1.448e+05
+   SS    CS     1 0.1836 1.715e+05
+
+[ angletypes ] ; normal potential harmonic in theta
+  ;  i    j    k   func    th0         kth
+    H   NH2   CT1     1 111 418.4
+  NH2   CT1   CT2     1 110 566.5
+  CT1    CD   OH1     1 110.5 460.2
+  NH2   CT1   CT3     1 110 566.5
+  CT3   CT1    CD     1 108 435.1
+  NH2   CT1     C     1 107 418.4
+  OST   CST   OST     1 180 2.51e+04
+   CS    SS    FE     1 100.6 418.4
+   SS    FE   NPH     1 90 836.8
+  CE1   CE1   CT2     1 123.5 401.7
+  CE1   CE1   CT3     1 123.5 401.7
+  CE1   CT2   CT3     1 112.2 267.8
+  CE2   CE1   CT2     1 126 401.7
+  CE2   CE1   CT3     1 125.2 393.3
+  CP1     N     C     1 117 502.1
+  CP2   CP1     C     1 112.3 435.1
+  CP2   CP1    CC     1 112.3 435.1
+  CP2   CP1    CD     1 112.3 418.4
+  CP2   CP2   CP1     1 108.5 585.8
+  CP3   CP2   CP2     1 108.5 585.8
+  CP3     N     C     1 117 502.1
+  CP3     N   CP1     1 114.2 836.8
+  CP3    NP   CP1     1 111 836.8
+  CPA   CPB   CE1     1 126.7 585.8
+  CPA   CPM   CPA     1 125.1 788.3
+  CPA   NPH   CPA     1 103.9 1166
+  CPB   CE1   CE2     1 121.5 585.8
+  CPB   CPB   CE1     1 126.8 585.8
+  CPB   CPB   CPA     1 106.5 257.7
+ CPH2   NR1  CPH1     1 107.5 1088
+ CPH2   NR2  CPH1     1 104 1088
+ CPH2   NR3  CPH1     1 108 1213
+  CPM   CPA   CPB     1 124.1 515.5
+  CPT    CA    CA     1 118 502.1
+  CPT   CPT    CA     1 122 502.1
+  CPT    NY    CA     1 108 920.5
+  CT1   CT1     C     1 108 435.1
+  CT1   CT1    CC     1 108 435.1
+  CT1   CT2    CA     1 107.5 433.5
+  CT1   CT2    CC     1 108 435.1
+  CT1   CT2    CD     1 108 435.1
+  CT1   CT2  CPH1     1 113 488.3
+  CT1   NH1     C     1 120 418.4
+  CT2    CA    CA     1 122.3 383.3
+  CT2   CPB   CPA     1 126.7 543.9
+  CT2   CPB   CPB     1 126.8 543.9
+  CT2  CPH1  CPH1     1 130 383.3
+  CT2   CT1     C     1 108 435.1
+  CT2   CT1    CC     1 108 435.1
+  CT2   CT1    CD     1 108 435.1
+  CT2   CT2     C     1 108 435.1
+  CT2   CT2    CC     1 108 435.1
+  CT3   CT2    CC     1 108 435.1
+  CT2   CT2    CD     1 108 435.1
+  CT2   CT2   CPB     1 113 585.8
+  CT2    CY    CA     1 129.4 383.3
+  CT2    CY   CPT     1 124 383.3
+  CT2   NC2     C     1 120 521.3
+  CT2   NH1     C     1 120 418.4
+  CT3    CA    CA     1 122.3 383.3
+  CT3   CPB   CPA     1 126.7 543.9
+  CT3   CPB   CPB     1 126.8 543.9
+  CT3  CPH1  CPH1     1 130 383.3
+  CT3   CT1     C     1 108 435.1
+  CT3   CT1    CC     1 108 435.1
+  CT3   CT2    CA     1 107.5 433.5
+  CT3   CT2  CPH1     1 113 488.3
+  CT3   NC2     C     1 120 521.3
+  CT3   NH1     C     1 120 418.4
+  CT3     S   CT2     1 95 284.5
+   CY   CPT    CA     1 130.6 1339
+   CY   CPT   CPT     1 107.4 920.5
+   CY   CT2   CT1     1 114 488.3
+   CY   CT2   CT3     1 114 488.3
+   FE   NPH   CPA     1 128.1 804.6
+   FE   NR2  CPH1     1 133 251
+   FE   NR2  CPH2     1 123 251
+    H   NH1     C     1 123 284.5
+    H   NH1   CT1     1 117 292.9
+    H   NH1   CT2     1 117 292.9
+    H   NH1   CT3     1 117 292.9
+    H   NH2    CC     1 120 418.4
+    H   NH2     H     1 120 192.5
+    H    NY    CA     1 126 234.3
+    H    NY   CPT     1 126 234.3
+    H   OH1    CA     1 108 543.9
+    H   OH1    CD     1 115 460.2
+    H   OH1   CT1     1 106 481.2
+    H   OH1   CT2     1 106 481.2
+    H   OH1   CT3     1 106 481.2
+   HA    CA   CPT     1 122 343.1
+   HA   CPM   CPA     1 117.4 106.3
+   HA   CPM    FE     1 180 0
+   HA   CT2    CA     1 107.5 412.5
+   HA   CT2   CE1     1 111.5 376.6
+   HA   CT2   CPB     1 109.5 418.4
+   HA   CT2  CPH1     1 109.5 279.7
+   HA   CT2    CY     1 109.5 279.7
+   HA   CT3    CA     1 107.5 412.5
+   HA   CT3   CE1     1 111.5 351.5
+   HA   CT3   CPB     1 109.5 418.4
+   HA   CT3  CPH1     1 109.5 279.7
+  HE1   CE1   CE1     1 119.5 435.1
+  HE1   CE1   CE2     1 118 351.5
+  HE1   CE1   CT2     1 116 334.7
+  HE1   CE1   CT3     1 117 184.1
+  HE1   CE1   CPB     1 120 418.4
+  HE2   CE2   CE1     1 120.5 376.6
+  HE2   CE2   CE2     1 120.5 464.4
+  HE2   CE2   HE2     1 119 159
+   HB   CP1     C     1 112 418.4
+   HB   CP1    CC     1 112 418.4
+   HB   CP1    CD     1 112 418.4
+   HB   CP1   CP2     1 118 292.9
+   HB   CT1     C     1 109.5 418.4
+   HB   CT1    CC     1 109.5 418.4
+   HB   CT1    CD     1 109.5 418.4
+   HB   CT1   CT1     1 111 292.9
+   HB   CT1   CT2     1 111 292.9
+   HB   CT1   CT3     1 111 292.9
+   HB   CT2     C     1 109.5 418.4
+   HB   CT2    CC     1 109.5 418.4
+   HB   CT2    CD     1 109.5 418.4
+   HB   CT2    HB     1 115 301.2
+   HB   CT3     C     1 109.5 418.4
+   HC   NC2     C     1 120 410
+   HC   NC2   CT2     1 120 338.1
+   HC   NC2   CT3     1 120 338.1
+   HC   NC2    HC     1 120 209.2
+   HC   NH2   CT2     1 111 418.4
+   HC   NH2   CT3     1 111 418.4
+   HC   NH2    HC     1 106.5 326.4
+   HC   NH3    HC     1 109.5 368.2
+   HC    NP    HC     1 107.5 426.8
+   HS     S   CT2     1 95 324.7
+   HS     S   CT3     1 95 359.8
+   HT    OT    HT     1 104.5 460.2
+    N     C   CP1     1 112.5 167.4
+    N     C   CT1     1 112.5 167.4
+    N     C   CT2     1 112.5 167.4
+    N     C   CT3     1 112.5 167.4
+    N   CP1     C     1 108.2 418.4
+    N   CP1    CC     1 108.2 418.4
+    N   CP1    CD     1 108.2 418.4
+    N   CP1   CP2     1 110.8 585.8
+    N   CP1    HB     1 112 401.7
+    N   CP3   CP2     1 110.5 585.8
+    N   CP3    HA     1 108 401.7
+  NC2   CT2   CT2     1 107.5 566.5
+  NC2   CT2    HA     1 107.5 431
+  NC2   CT3    HA     1 107.5 431
+  NH1     C   CP1     1 116.5 669.4
+  NH1     C   CT1     1 116.5 669.4
+  NH1     C   CT2     1 116.5 669.4
+  NH1     C   CT3     1 116.5 669.4
+  NH1   CT1     C     1 107 418.4
+  NH1   CT1    CC     1 107 418.4
+  NH1   CT1    CD     1 107 418.4
+  NH1   CT1   CT1     1 113.5 585.8
+  NH1   CT1   CT2     1 113.5 585.8
+  NH1   CT1   CT3     1 113.5 585.8
+  NH1   CT1    HB     1 108 401.7
+  NH1   CT2     C     1 107 418.4
+  NH1   CT2    CC     1 107 418.4
+  NH1   CT2    CD     1 107 418.4
+  NH1   CT2   CT2     1 113.5 585.8
+  NH1   CT2    HA     1 109.5 431
+  NH1   CT2    HB     1 108 401.7
+  NH1   CT3    HA     1 109.5 431
+  NH2    CC   CP1     1 112.5 669.4
+  NH2   CT2    CD     1 108 435.1
+  NH2   CT2   CT2     1 110 566.5
+  NH3   CT1     C     1 110 365.7
+  NH3   CT1    CC     1 110 365.7
+  NH3   CT1   CT1     1 110 566.5
+  NH3   CT1   CT2     1 110 566.5
+  NH3   CT1   CT3     1 110 566.5
+  NH3   CT1    HB     1 107.5 431
+  NH3   CT2     C     1 110 365.7
+  NH3   CT2    CC     1 110 365.7
+  NH3   CT2    CD     1 110 365.7
+  NH3   CT2   CT2     1 110 566.5
+  NH3   CT2   CT3     1 110 566.5
+  NH3   CT2    HB     1 107.5 431
+   NP   CP1     C     1 106 418.4
+   NP   CP1    CC     1 106 418.4
+   NP   CP1    CD     1 106 418.4
+   NP   CP1   CP2     1 108.5 585.8
+   NP   CP1    HB     1 107.5 431
+   NP   CP3   CP2     1 108.5 585.8
+   NP   CP3    HA     1 109.2 431
+  NPH   CPA   CPB     1 111.5 1021
+  NPH   CPA   CPM     1 124.4 736.4
+  NPH    FE    CM     1 90 418.4
+  NPH    FE   CPM     1 45 0
+  NPH    FE   NPH     1 90 120.4
+  NR1  CPH1  CPH1     1 106 1088
+  NR1  CPH1   CT2     1 124 383.3
+  NR1  CPH1   CT3     1 124 383.3
+  NR2  CPH1  CPH1     1 110 1088
+  NR2  CPH1   CT2     1 120 383.3
+  NR2  CPH2   NR1     1 112.5 1088
+  NR2    FE    CM     1 180 418.4
+  NR2    FE   NPH     1 90 418.4
+  NR3  CPH1  CPH1     1 108 1213
+  NR3  CPH1   CT2     1 122 383.3
+  NR3  CPH2   NR3     1 108 1213
+   NY   CPT    CA     1 130.6 1339
+   NY   CPT   CPT     1 107.4 920.5
+    O     C   CP1     1 118 669.4
+    O     C   CT1     1 121 669.4
+    O     C   CT2     1 121 669.4
+    O     C   CT3     1 121 669.4
+    O     C     H     1 121.7 418.4
+    O     C     N     1 122.5 669.4
+    O     C   NH1     1 122.5 669.4
+    O    CC   CP1     1 118 669.4
+    O    CC    HA     1 122 368.2
+   OC    CA    CA     1 120 334.7
+   OC   CT2   CT3     1 122 543.9
+   OC   CT2    HA     1 118.3 543.9
+   OC   CT3    HA     1 118.3 543.9
+  OH1    CA    CA     1 120 378.2
+  OH1    CD   CT2     1 110.5 460.2
+  OH1    CD   CT3     1 110.5 460.2
+  OH1   CT1   CT1     1 110.1 633.5
+  OH1   CT1   CT3     1 110.1 633.5
+  OH1   CT1    HA     1 108.9 384.1
+  OH1   CT2   CT1     1 110.1 633.5
+  OH1   CT2   CT2     1 110.1 633.5
+  OH1   CT2   CT3     1 110.1 633.5
+  OH1   CT2    HA     1 108.9 384.1
+  OH1   CT3    HA     1 108.9 384.1
+   OM    CM    FE     1 180 292.9
+   OM    FE   NPH     1 90 41.84
+   OM    OM    FE     1 180 0
+   OS   CT2    HA     1 109.5 502.1
+   OS   CT3    HA     1 109.5 502.1
+    S   CT2   CT1     1 112.5 485.3
+    S   CT2   CT2     1 114.5 485.3
+    S   CT2   CT3     1 114.5 485.3
+    S   CT2    HA     1 111.3 385.8
+    S   CT3    HA     1 111.3 385.8
+   SM   CT2   CT1     1 112.5 485.3
+   SM   CT2   CT2     1 112.5 485.3
+   SM   CT2   CT3     1 112.5 485.3
+   SM   CT2    HA     1 111 318
+   SM   CT3    HA     1 111 318
+   SM    SM   CT2     1 103.3 606.7
+   SM    SM   CT3     1 103.3 606.7
+   SS    CS   CT3     1 118 460.2
+   SS    CS    HA     1 112.3 334.7
+[ angletypes ] ; Urey-Bradley potentials
+ ; i     j     k   func    th0         kth      b0       kb
+  NH2   CT1    HB     5 109.5 318 0.214 4.184e+04
+   CA    CA    CA     5 120 334.7 0.2416 2.929e+04
+  CPT    CY    CA     5 107.4 1004 0.2261 2.092e+04
+  CT1   CT1   CT1     5 111 446.4 0.2561 6694
+  CT1   CT2   CT1     5 113.5 488.3 0.2561 9339
+  CT2   CT1   CT1     5 111 446.4 0.2561 6694
+  CT2   CT2   CT1     5 113.5 488.3 0.2561 9339
+  CT2   CT2   CT2     5 113.6 488.3 0.2561 9339
+  CT2   CT3   CT1     5 113.5 488.3 0.2561 9339
+  CT2    OS    CD     5 109.6 334.7 0.2265 2.51e+04
+  CT3   CT1   CT1     5 108.5 446.4 0.2561 6694
+  CT3   CT1   CT2     5 114 446.4 0.2561 6694
+  CT3   CT1   CT3     5 114 446.4 0.2561 6694
+  CT3   CT2   CT1     5 113.5 488.3 0.2561 9339
+  CT3   CT2   CT2     5 115 485.3 0.2561 6694
+  CT3   CT2   CT3     5 114 446.4 0.2561 6694
+  CT3    OS    CD     5 109.6 334.7 0.2265 2.51e+04
+    H   NR1  CPH1     5 125.5 251 0.215 1.674e+04
+    H   NR1  CPH2     5 127 251 0.214 1.674e+04
+    H   NR3  CPH1     5 126 209.2 0.213 1.255e+04
+    H   NR3  CPH2     5 126 209.2 0.209 1.255e+04
+   HA    CA    CA     5 120 242.7 0.2152 2.092e+04
+   HA    CA    CY     5 125 267.8 0.2173 2.092e+04
+   HA   CP2   CP1     5 110.1 279.7 0.2179 1.885e+04
+   HA   CP2   CP2     5 110.1 221.8 0.2179 1.885e+04
+   HA   CP2   CP3     5 110.1 221.8 0.2179 1.885e+04
+   HA   CP2    HA     5 109 297.1 0.1802 4519
+   HA   CP3   CP2     5 110.1 221.8 0.2179 1.885e+04
+   HA   CP3    HA     5 109 297.1 0.1802 4519
+   HA    CS   CT3     5 110.1 289.5 0.2179 1.885e+04
+   HA    CS    HA     5 108.4 297.1 0.1775 1.172e+04
+   HA   CT1     C     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT1    CD     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT1   CT1     5 110.1 288.7 0.2179 1.885e+04
+   HA   CT1   CT2     5 110.1 288.7 0.2179 1.885e+04
+   HA   CT1   CT3     5 110.1 288.7 0.2179 1.885e+04
+   HA   CT1    HA     5 109 297.1 0.1802 4519
+   HA   CT2     C     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT2    CC     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT2    CD     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT2   CT1     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT2   CT2     5 110.1 221.8 0.2179 1.885e+04
+   HA   CT2   CT3     5 110.1 289.5 0.2179 1.885e+04
+   HA   CT2    HA     5 109 297.1 0.1802 4519
+   HA   CT3     C     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT3    CC     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT3    CD     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT3    CS     5 110.1 289.5 0.2179 1.885e+04
+   HA   CT3   CT1     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT3   CT2     5 110.1 289.5 0.2179 1.885e+04
+   HA   CT3   CT3     5 110.1 313.8 0.2179 1.885e+04
+   HA   CT3    HA     5 108.4 297.1 0.1802 4519
+   HA    CY    CA     5 126.4 167.4 0.2186 2.092e+04
+   HA    CY   CPT     5 126.4 267.8 0.2255 2.092e+04
+   HC   NH3   CT1     5 109.5 251 0.2074 1.674e+04
+   HC   NH3   CT2     5 109.5 251 0.2074 1.674e+04
+   HC   NH3   CT3     5 109.5 251 0.2074 1.674e+04
+   HC    NP   CP1     5 109.5 276.1 0.2056 3347
+   HC    NP   CP3     5 109.5 276.1 0.2056 3347
+   HP    CA    CA     5 120 251 0.2152 1.841e+04
+   HP    CA   CPT     5 122 251 0.2146 1.841e+04
+   HP    CA    CY     5 125 267.8 0.2173 2.092e+04
+   HP    CY    CA     5 126.4 267.8 0.2186 2.092e+04
+   HP    CY   CPT     5 126.4 267.8 0.2255 2.092e+04
+  HR1  CPH1  CPH1     5 130 184.1 0.2215 1.255e+04
+  HR3  CPH1  CPH1     5 130 209.2 0.22 1.674e+04
+  NC2     C   NC2     5 120 435.1 0.2364 7.531e+04
+  NH2    CC   CT1     5 116.5 418.4 0.245 4.184e+04
+  NH2    CC   CT2     5 116.5 418.4 0.245 4.184e+04
+  NH2    CC   CT3     5 116.5 418.4 0.245 4.184e+04
+  NH2    CC    HA     5 111 368.2 0.198 4.184e+04
+  NH2   CT2    HA     5 109.5 318 0.214 4.184e+04
+  NH2   CT2    HB     5 109.5 318 0.214 4.184e+04
+  NH2   CT3    HA     5 109.5 318 0.214 4.184e+04
+  NH3   CT2    HA     5 107.5 376.6 0.2101 2.929e+04
+  NH3   CT3    HA     5 107.5 376.6 0.2101 2.929e+04
+  NR1  CPH1   HR3     5 124 209.2 0.214 1.674e+04
+  NR1  CPH2   HR1     5 122.5 209.2 0.214 1.674e+04
+  NR2  CPH1   HR3     5 120 209.2 0.214 1.674e+04
+  NR2  CPH2   HR1     5 125 209.2 0.212 1.674e+04
+  NR3  CPH1   HR1     5 122 184.1 0.218 1.255e+04
+  NR3  CPH2   HR2     5 126 267.8 0.214 2.092e+04
+   NY    CA    CY     5 110 1004 0.224 2.092e+04
+   NY    CA    HA     5 125 267.8 0.2177 2.092e+04
+   NY    CA    HP     5 125 267.8 0.2177 2.092e+04
+    O    CC   CT1     5 121 125.5 0.244 4.184e+04
+    O    CC   CT2     5 121 125.5 0.244 4.184e+04
+    O    CC   CT3     5 121 125.5 0.244 4.184e+04
+    O    CC   NH2     5 122.5 627.6 0.237 4.184e+04
+   OB    CD   CP1     5 125 585.8 0.2442 1.674e+04
+   OB    CD   CT1     5 125 585.8 0.2442 1.674e+04
+   OB    CD   CT2     5 125 585.8 0.2442 1.674e+04
+   OB    CD   CT3     5 125 585.8 0.2442 1.674e+04
+   OC    CC   CP1     5 118 334.7 0.2388 4.184e+04
+   OC    CC   CT1     5 118 334.7 0.2388 4.184e+04
+   OC    CC   CT2     5 118 334.7 0.2388 4.184e+04
+   OC    CC   CT3     5 118 334.7 0.2388 4.184e+04
+   OC    CC    OC     5 124 836.8 0.2225 5.858e+04
+  OH1    CD    OB     5 123 418.4 0.2262 1.757e+05
+   OS    CD   CP1     5 109 460.2 0.2326 1.674e+04
+   OS    CD   CT1     5 109 460.2 0.2326 1.674e+04
+   OS    CD   CT2     5 109 460.2 0.2326 1.674e+04
+   OS    CD   CT3     5 109 460.2 0.2326 1.674e+04
+   OS    CD    OB     5 125.9 753.1 0.2258 1.339e+05
+
+[ dihedraltypes ]
+  ;  i    j    k     l   func    phi0     kphi      n
+; First come the dihedrals with sin delta != 0 and those with
+;  multiplicity >= 6, then the remainder, converted to Ryckaert-Bellemans
+;  form, followed by comments of the contributing underlying periodic form(s).
+    X    CS    SS     X     1 0.2 0 3
+    X   CP1     C     X     1 180 0 6
+    X   CP1    CC     X     1 180 0 6
+    X   CP1    CD     X     1 180 0 6
+    X   CPB   CT2     X     1 0 0 6
+    X   CPB   CT3     X     1 0 0 6
+    X   CT1    CC     X     1 180 0.2092 6
+    X   CT1    CD     X     1 180 0 6
+    X   CT2    CA     X     1 0 0 6
+    X   CT2    CC     X     1 180 0.2092 6
+    X   CT2    CD     X     1 180 0 6
+    X   CT2   NC2     X     1 180 0 6
+    X   CT3    CA     X     1 0 0 6
+    X   CT3    CC     X     1 180 0.2092 6
+    X   CT3    CD     X     1 180 0 6
+    X   CT3   NC2     X     1 180 0 6
+  NH2    CC   CP1     N     3 -1.255 -1.255 10.04 0 -10.04 0
+; NH2    CC   CP1     N     1 0 1.255 1
+; NH2    CC   CP1     N     1 0 -1.255 4
+    O     C   NH1   CT1     3 20.92 0 -20.92 0 0 0
+;   O     C   NH1   CT1     1 180 10.46 2
+    H   NH1     C   CT3     3 20.92 0 -20.92 0 0 0
+;   H   NH1     C   CT3     1 180 10.46 2
+    X   CPA   CPM     X     3 0 0 0 0 0 0
+;   X   CPA   CPM     X     1 0 0 2
+    O     C   CT2    HA     3 0 0 0 0 0 0
+;   O     C   CT2    HA     1 180 0 3
+   HA   CT2   NH1     C     3 0 0 0 0 0 0
+;  HA   CT2   NH1     C     1 0 0 3
+  CT3   CT2   CT2   CT3     3 0.6276 -0.6276 0 0 0 0
+; CT3   CT2   CT2   CT3     1 0 0.6276 1
+   SM    SM   CT2    HA     3 0.6611 1.983 0 -2.644 0 0
+;  SM    SM   CT2    HA     1 0 0.6611 3
+  CP3     N   CP1   CP2     3 0.4184 1.255 0 -1.674 0 0
+; CP3     N   CP1   CP2     1 0 0.4184 3
+    N   CT1   CT2    CA     3 0.1674 0.5021 0 -0.6694 0 0
+;   N   CT1   CT2    CA     1 0 0.1674 3
+  CT3     S   CT2   CT2     3 2.552 5.648 0 -6.192 0 0
+; CT3     S   CT2   CT2     1 180 1.004 1
+; CT3     S   CT2   CT2     1 0 1.548 3
+  CP2   CP3    NP   CP1     3 0.3347 1.004 0 -1.339 0 0
+; CP2   CP3    NP   CP1     1 0 0.3347 3
+   OC    CC   CP1    NP     3 0.6694 2.008 0 -2.678 0 0
+;  OC    CC   CP1    NP     1 0 0.6694 3
+  NR1  CPH1  CPH1   CT3     3 25.1 0 -25.1 0 0 0
+; NR1  CPH1  CPH1   CT3     1 180 12.55 2
+    O    CC   CP1    HB     3 1.674 -1.674 5.021 0 0 0
+;   O    CC   CP1    HB     1 0 1.674 1
+;   O    CC   CP1    HB     1 0 2.51 2
+  CT3     C   NH1   CT3     3 27.61 -6.694 -20.92 0 0 0
+; CT3     C   NH1   CT3     1 0 6.694 1
+; CT3     C   NH1   CT3     1 180 10.46 2
+  NR2  CPH1   CT2   CT3     3 0.795 2.385 0 -3.18 0 0
+; NR2  CPH1   CT2   CT3     1 0 0.795 3
+  NH1     C   CT3    HA     3 0 0 0 0 0 0
+; NH1     C   CT3    HA     1 0 0 3
+  CPT   CPT    CY    CA     3 33.47 0 -33.47 0 0 0
+; CPT   CPT    CY    CA     1 180 16.74 2
+  NR3  CPH1   CT2    HA     3 0.795 2.385 0 -3.18 0 0
+; NR3  CPH1   CT2    HA     1 0 0.795 3
+    X   CT2   CT2     X     3 0.8159 2.448 0 -3.264 0 0
+;   X   CT2   CT2     X     1 0 0.8159 3
+    X   CT1   OH1     X     3 0.5858 1.757 0 -2.343 0 0
+;   X   CT1   OH1     X     1 0 0.5858 3
+  NR3  CPH1  CPH1   CT2     3 20.92 0 -20.92 0 0 0
+; NR3  CPH1  CPH1   CT2     1 180 10.46 2
+    X   CP3   CP2     X     3 0.5858 1.757 0 -2.343 0 0
+;   X   CP3   CP2     X     1 0 0.5858 3
+    X   CT1   CT1     X     3 0.8368 2.51 0 -3.347 0 0
+;   X   CT1   CT1     X     1 0 0.8368 3
+  NR3  CPH1   CT3    HA     3 0.795 2.385 0 -3.18 0 0
+; NR3  CPH1   CT3    HA     1 0 0.795 3
+   CA    NY   CPT    CA     3 25.1 0 -25.1 0 0 0
+;  CA    NY   CPT    CA     1 180 12.55 2
+    H   NH2    CC   CT3     3 11.72 0 -11.72 0 0 0
+;   H   NH2    CC   CT3     1 180 5.858 2
+   CD   CT2   NH1     C     3 0.8368 0.8368 0 0 0 0
+;  CD   CT2   NH1     C     1 180 0.8368 1
+    H   NH2    CC   CP1     3 20.92 0 -20.92 0 0 0
+;   H   NH2    CC   CP1     1 180 10.46 2
+    N     C   CT1   CT2     3 0 0 0 0 0 0
+;   N     C   CT1   CT2     1 0 0 1
+  CT3    SM    SM   CT3     3 7.95 7.113 34.31 -15.06 0 0
+; CT3    SM    SM   CT3     1 0 4.184 1
+; CT3    SM    SM   CT3     1 0 17.15 2
+; CT3    SM    SM   CT3     1 0 3.766 3
+  CT3   CT2    CY    CA     3 1.925 0 -1.925 0 0 0
+; CT3   CT2    CY    CA     1 180 0.9623 2
+  NR2  CPH2   NR1     H     3 8.368 0 -8.368 0 0 0
+; NR2  CPH2   NR1     H     1 180 4.184 2
+  NH1     C   CP1    HB     3 1.674 1.674 5.021 0 0 0
+; NH1     C   CP1    HB     1 180 1.674 1
+; NH1     C   CP1    HB     1 0 2.51 2
+    N     C   CT1   CT1     3 0 0 0 0 0 0
+;   N     C   CT1   CT1     1 0 0 1
+    O     C   CP1     N     3 -2.51 0 10.04 0 -10.04 0
+;   O     C   CP1     N     1 0 -1.255 4
+   NY    CA    CY    HP     3 29.29 0 -29.29 0 0 0
+;  NY    CA    CY    HP     1 180 14.64 2
+  CPT   CPT    CA    CA     3 25.94 0 -25.94 0 0 0
+; CPT   CPT    CA    CA     1 180 12.97 2
+   HA   CT2    CY    CA     3 2.092 0 -2.092 0 0 0
+;  HA   CT2    CY    CA     1 180 1.046 2
+   CC   CT1   NH1     C     3 0.8368 0.8368 0 0 0 0
+;  CC   CT1   NH1     C     1 180 0.8368 1
+  CT1   CT1   NH1     C     3 7.531 -7.531 0 0 0 0
+; CT1   CT1   NH1     C     1 0 7.531 1
+   SM    SM   CT3    HA     3 0.6611 1.983 0 -2.644 0 0
+;  SM    SM   CT3    HA     1 0 0.6611 3
+  CE2   CE1   CT2    HA     3 0.5021 1.506 0 -2.008 0 0
+; CE2   CE1   CT2    HA     1 0 0.5021 3
+   OC    CC   CP1   CP2     3 0.6694 2.008 0 -2.678 0 0
+;  OC    CC   CP1   CP2     1 0 0.6694 3
+   NY    CA    CY    HA     3 29.29 0 -29.29 0 0 0
+;  NY    CA    CY    HA     1 180 14.64 2
+   CA   CPT   CPT    CA     3 25.94 0 -25.94 0 0 0
+;  CA   CPT   CPT    CA     1 180 12.97 2
+  CPT   CPT    NY    CA     3 41.84 0 -41.84 0 0 0
+; CPT   CPT    NY    CA     1 180 20.92 2
+    O     C   CT2    HB     3 0 0 0 0 0 0
+;   O     C   CT2    HB     1 0 0 1
+  HE1   CE1   CE1   HE1     3 8.368 0 -8.368 0 0 0
+; HE1   CE1   CE1   HE1     1 180 4.184 2
+    H   NR1  CPH1   CT3     3 8.368 0 -8.368 0 0 0
+;   H   NR1  CPH1   CT3     1 180 4.184 2
+    X   NPH   CPA     X     3 0 0 0 0 0 0
+;   X   NPH   CPA     X     1 0 0 2
+  CT3   CT2    CA    CA     3 1.925 0 -1.925 0 0 0
+; CT3   CT2    CA    CA     1 180 0.9623 2
+  NH1     C   CT1   CT3     3 0 0 0 0 0 0
+; NH1     C   CT1   CT3     1 0 0 1
+  CP3    NP   CP1    CC     3 0.3347 1.004 0 -1.339 0 0
+; CP3    NP   CP1    CC     1 0 0.3347 3
+  NH1     C   CT2    HA     3 0 0 0 0 0 0
+; NH1     C   CT2    HA     1 0 0 3
+   HA   CT3   NH1     C     3 0 0 0 0 0 0
+;  HA   CT3   NH1     C     1 0 0 3
+  CT1   CT2    CY   CPT     3 1.925 0 -1.925 0 0 0
+; CT1   CT2    CY   CPT     1 180 0.9623 2
+   NY   CPT    CA    HA     3 33.47 0 -33.47 0 0 0
+;  NY   CPT    CA    HA     1 180 16.74 2
+   HC    NP   CP1    HB     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP1    HB     1 0 0.3347 3
+  CT2   CT1   NH1     C     3 7.531 -7.531 0 0 0 0
+; CT2   CT1   NH1     C     1 0 7.531 1
+  CPT    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+; CPT    CA    CA    CA     1 180 12.97 2
+  NH2    CC   CP1    HB     3 1.674 1.674 5.021 0 0 0
+; NH2    CC   CP1    HB     1 180 1.674 1
+; NH2    CC   CP1    HB     1 0 2.51 2
+  CP2   CP3     N   CP1     3 0.4184 1.255 0 -1.674 0 0
+; CP2   CP3     N   CP1     1 0 0.4184 3
+   NY   CPT   CPT    CY     3 41.84 0 -41.84 0 0 0
+;  NY   CPT   CPT    CY     1 180 20.92 2
+    O     C   CT1   NH3     3 0 0 0 0 0 0
+;   O     C   CT1   NH3     1 0 0 1
+    N     C   CP1    HB     3 1.674 1.674 5.021 0 0 0
+;   N     C   CP1    HB     1 180 1.674 1
+;   N     C   CP1    HB     1 0 2.51 2
+   HA   CT3    CS    HA     3 0.6694 2.008 0 -2.678 0 0
+;  HA   CT3    CS    HA     1 0 0.6694 3
+  CT2     C     N   CP1     3 25.52 0 -33.05 0 10.04 0
+; CT2     C     N   CP1     1 180 11.51 2
+; CT2     C     N   CP1     1 0 1.255 4
+    X   CT3    OS     X     3 -0.4184 -1.255 0 1.674 0 0
+;   X   CT3    OS     X     1 0 -0.4184 3
+  NH1     C   CT1   CT1     3 0 0 0 0 0 0
+; NH1     C   CT1   CT1     1 0 0 1
+  CP3    NP   CP1   CP2     3 0.3347 1.004 0 -1.339 0 0
+; CP3    NP   CP1   CP2     1 0 0.3347 3
+  CT2     C   NH1   CT2     3 27.61 -6.694 -20.92 0 0 0
+; CT2     C   NH1   CT2     1 0 6.694 1
+; CT2     C   NH1   CT2     1 180 10.46 2
+    H   OH1   CT2   CT1     3 7.196 -0.1674 2.51 -7.029 0 0
+;   H   OH1   CT2   CT1     1 0 5.439 1
+;   H   OH1   CT2   CT1     1 0 1.255 2
+;   H   OH1   CT2   CT1     1 0 1.757 3
+  CT2     C   NH1   CT1     3 27.61 -6.694 -20.92 0 0 0
+; CT2     C   NH1   CT1     1 0 6.694 1
+; CT2     C   NH1   CT1     1 180 10.46 2
+    H   NH1     C   CT1     3 20.92 0 -20.92 0 0 0
+;   H   NH1     C   CT1     1 180 10.46 2
+   HP    CA    CA   CPT     3 25.1 0 -25.1 0 0 0
+;  HP    CA    CA   CPT     1 180 12.55 2
+   CC   CT1   CT2    CA     3 0.1674 0.5021 0 -0.6694 0 0
+;  CC   CT1   CT2    CA     1 0 0.1674 3
+  NR1  CPH2   NR2  CPH1     3 117.2 0 -117.2 0 0 0
+; NR1  CPH2   NR2  CPH1     1 180 58.58 2
+   OC    CC   CT1   NH3     3 26.78 0 -26.78 0 0 0
+;  OC    CC   CT1   NH3     1 180 13.39 2
+    O     C   CT3    HA     3 0 0 0 0 0 0
+;   O     C   CT3    HA     1 180 0 3
+   HA   CT3  CPH1  CPH1     3 0 0 0 0 0 0
+;  HA   CT3  CPH1  CPH1     1 0 0 3
+  NR1  CPH1  CPH1   CT2     3 25.1 0 -25.1 0 0 0
+; NR1  CPH1  CPH1   CT2     1 180 12.55 2
+  NR3  CPH1   CT2   CT1     3 0.795 2.385 0 -3.18 0 0
+; NR3  CPH1   CT2   CT1     1 0 0.795 3
+   HS     S   CT2    HA     3 0.8368 2.51 0 -3.347 0 0
+;  HS     S   CT2    HA     1 0 0.8368 3
+   OC    CC   CP1    HB     3 0.6694 2.008 0 -2.678 0 0
+;  OC    CC   CP1    HB     1 0 0.6694 3
+  NH1     C   CT1    HB     3 0 0 0 0 0 0
+; NH1     C   CT1    HB     1 0 0 1
+    H   NH1     C   CP1     3 20.92 0 -20.92 0 0 0
+;   H   NH1     C   CP1     1 180 10.46 2
+    H   NH1   CT2    CD     3 0 0 0 0 0 0
+;   H   NH1   CT2    CD     1 0 0 1
+    X    FE    SS     X     3 0 0 0 0 0 0
+;   X    FE    SS     X     1 0 0 4
+  CT1   CT2    CA    CA     3 1.925 0 -1.925 0 0 0
+; CT1   CT2    CA    CA     1 180 0.9623 2
+  NR3  CPH1   CT2   CT3     3 0.795 2.385 0 -3.18 0 0
+; NR3  CPH1   CT2   CT3     1 0 0.795 3
+  CT3   CT2  CPH1  CPH1     3 0.8368 -0.8368 2.259 0 0 0
+; CT3   CT2  CPH1  CPH1     1 0 0.8368 1
+; CT3   CT2  CPH1  CPH1     1 0 1.13 2
+; CT3   CT2  CPH1  CPH1     1 0 0 3
+   HP    CY   CPT    CA     3 23.43 0 -23.43 0 0 0
+;  HP    CY   CPT    CA     1 180 11.72 2
+  CT3   CE1   CE2   HE2     3 43.51 0 -43.51 0 0 0
+; CT3   CE1   CE2   HE2     1 180 21.76 2
+  NR1  CPH1   CT2    HA     3 0.795 2.385 0 -3.18 0 0
+; NR1  CPH1   CT2    HA     1 0 0.795 3
+   HC   NH2   CT2    CD     3 0.4602 1.381 0 -1.841 0 0
+;  HC   NH2   CT2    CD     1 0 0.4602 3
+   HS     S   CT2   CT1     3 2.134 2.385 1.255 -4.519 0 0
+;  HS     S   CT2   CT1     1 0 1.004 1
+;  HS     S   CT2   CT1     1 0 0.6276 2
+;  HS     S   CT2   CT1     1 0 1.13 3
+    X    FE   NPH     X     3 0 0 0 0 0 0
+;   X    FE   NPH     X     1 0 0 2
+   HB   CT2   NH1     C     3 0 0 0 0 0 0
+;  HB   CT2   NH1     C     1 0 0 1
+  CT3  CPH1   NR1  CPH2     3 25.1 0 -25.1 0 0 0
+; CT3  CPH1   NR1  CPH2     1 180 12.55 2
+   NY    CA    CY   CT2     3 29.29 0 -29.29 0 0 0
+;  NY    CA    CY   CT2     1 180 14.64 2
+  CT3     C   NH1   CT1     3 27.61 -6.694 -20.92 0 0 0
+; CT3     C   NH1   CT1     1 0 6.694 1
+; CT3     C   NH1   CT1     1 180 10.46 2
+  HR3  CPH1  CPH1   HR3     3 16.74 0 -16.74 0 0 0
+; HR3  CPH1  CPH1   HR3     1 180 8.368 2
+  HR2  CPH2   NR3  CPH1     3 25.1 0 -25.1 0 0 0
+; HR2  CPH2   NR3  CPH1     1 180 12.55 2
+    H    NY   CPT    CA     3 6.694 0 -6.694 0 0 0
+;   H    NY   CPT    CA     1 180 3.347 2
+    H   OH1   CT2   CT3     3 7.196 -0.1674 2.51 -7.029 0 0
+;   H   OH1   CT2   CT3     1 0 5.439 1
+;   H   OH1   CT2   CT3     1 0 1.255 2
+;   H   OH1   CT2   CT3     1 0 1.757 3
+  CP3     N   CP1    CC     3 0.4184 1.255 0 -1.674 0 0
+; CP3     N   CP1    CC     1 0 0.4184 3
+    H    NY    CA    CY     3 6.694 0 -6.694 0 0 0
+;   H    NY    CA    CY     1 180 3.347 2
+   HA    CA    NY     H     3 8.368 0 -8.368 0 0 0
+;  HA    CA    NY     H     1 180 4.184 2
+    X   CT1   NH3     X     3 0.4184 1.255 0 -1.674 0 0
+;   X   CT1   NH3     X     1 0 0.4184 3
+  NH3   CT2    CC   NH2     3 1.674 -1.674 0 0 0 0
+; NH3   CT2    CC   NH2     1 0 1.674 1
+   HA    CY    CA    HA     3 10.04 0 -10.04 0 0 0
+;  HA    CY    CA    HA     1 180 5.021 2
+  HR1  CPH2   NR2  CPH1     3 25.1 0 -25.1 0 0 0
+; HR1  CPH2   NR2  CPH1     1 180 12.55 2
+   HP    CA   CPT   CPT     3 25.1 0 -25.1 0 0 0
+;  HP    CA   CPT   CPT     1 180 12.55 2
+   HB   CP1    NP   CP3     3 0.3347 1.004 0 -1.339 0 0
+;  HB   CP1    NP   CP3     1 0 0.3347 3
+   HA    CA   CPT    CY     3 33.47 0 -33.47 0 0 0
+;  HA    CA   CPT    CY     1 180 16.74 2
+    O     C   CT2   CT2     3 5.858 -5.858 0 0 0 0
+;   O     C   CT2   CT2     1 0 5.858 1
+   HP    CY   CPT   CPT     3 23.43 0 -23.43 0 0 0
+;  HP    CY   CPT   CPT     1 180 11.72 2
+  NR2  CPH1   CT2    HA     3 0.795 2.385 0 -3.18 0 0
+; NR2  CPH1   CT2    HA     1 0 0.795 3
+    X   CPB   CE1     X     3 25.1 0 -25.1 0 0 0
+;   X   CPB   CE1     X     1 180 12.55 2
+    X    FE    OM     X     3 0 0 0 0 0 0
+;   X    FE    OM     X     1 0 0 4
+   OC    CC   CP1     N     3 0.6694 2.008 0 -2.678 0 0
+;  OC    CC   CP1     N     1 0 0.6694 3
+    O     C     N   CP3     3 25.52 0 -33.05 0 10.04 0
+;   O     C     N   CP3     1 180 11.51 2
+;   O     C     N   CP3     1 0 1.255 4
+   CD   CP1     N     C     3 0 0 0 0 0 0
+;  CD   CP1     N     C     1 180 0 1
+   CA    CY   CPT    CA     3 25.1 0 -25.1 0 0 0
+;  CA    CY   CPT    CA     1 180 12.55 2
+   HC    NP   CP1    CD     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP1    CD     1 0 0.3347 3
+    N     C   CT1   CT3     3 0 0 0 0 0 0
+;   N     C   CT1   CT3     1 0 0 1
+    X   CT2   OH1     X     3 0.5858 1.757 0 -2.343 0 0
+;   X   CT2   OH1     X     1 0 0.5858 3
+  NH2   CT1     C   NH1     3 0 0 0 0 0 0
+; NH2   CT1     C   NH1     1 0 0 1
+  NH3   CT1     C     N     3 1.674 -1.674 0 0 0 0
+; NH3   CT1     C     N     1 0 1.674 1
+  HE2   CE2   CE1   CT2     3 43.51 0 -43.51 0 0 0
+; HE2   CE2   CE1   CT2     1 180 21.76 2
+   HA   CT1   CT2    CA     3 0.1674 0.5021 0 -0.6694 0 0
+;  HA   CT1   CT2    CA     1 0 0.1674 3
+ CPH2   NR3  CPH1  CPH1     3 100.4 0 -100.4 0 0 0
+; PH2   NR3  CPH1  CPH1     1 180 50.21 2
+   HA   CT3   CT2    CA     3 0.1674 0.5021 0 -0.6694 0 0
+;  HA   CT3   CT2    CA     1 0 0.1674 3
+  CE1   CE1   CT3    HA     3 0.1255 0.3766 0 -0.5021 0 0
+; CE1   CE1   CT3    HA     1 0 0.1255 3
+  CT3   CT2   CT2   CT2     3 0.6276 -0.6276 0 0 0 0
+; CT3   CT2   CT2   CT2     1 0 0.6276 1
+  CP3    NP   CP1    CD     3 0.3347 1.004 0 -1.339 0 0
+; CP3    NP   CP1    CD     1 0 0.3347 3
+    H   NH1   CT2     C     3 0 0 0 0 0 0
+;   H   NH1   CT2     C     1 0 0 1
+   HB   CT3   NH1     H     3 0 0 0 0 0 0
+;  HB   CT3   NH1     H     1 0 0 1
+   HA    CY   CPT   CPT     3 25.1 0 -25.1 0 0 0
+;  HA    CY   CPT   CPT     1 180 12.55 2
+    X   CT1   CT3     X     3 0.8368 2.51 0 -3.347 0 0
+;   X   CT1   CT3     X     1 0 0.8368 3
+    X   CT2   NH3     X     3 0.4184 1.255 0 -1.674 0 0
+;   X   CT2   NH3     X     1 0 0.4184 3
+   HA    CA    CA    HA     3 20.92 0 -20.92 0 0 0
+;  HA    CA    CA    HA     1 180 10.46 2
+  HR1  CPH1  CPH1   CT3     3 8.368 0 -8.368 0 0 0
+; HR1  CPH1  CPH1   CT3     1 180 4.184 2
+  HR3  CPH1   NR1  CPH2     3 25.1 0 -25.1 0 0 0
+; HR3  CPH1   NR1  CPH2     1 180 12.55 2
+   HC   NH2   CT2    HA     3 0.4602 1.381 0 -1.841 0 0
+;  HC   NH2   CT2    HA     1 0 0.4602 3
+  NR1  CPH1   CT2   CT2     3 0.795 2.385 0 -3.18 0 0
+; NR1  CPH1   CT2   CT2     1 0 0.795 3
+  OH1    CA    CA    HP     3 35.15 0 -35.15 0 0 0
+; OH1    CA    CA    HP     1 180 17.57 2
+  NH2   CT1     C     O     3 0 0 0 0 0 0
+; NH2   CT1     C     O     1 0 0 1
+  CT2    SM    SM   CT2     3 7.95 7.113 34.31 -15.06 0 0
+; CT2    SM    SM   CT2     1 0 4.184 1
+; CT2    SM    SM   CT2     1 0 17.15 2
+; CT2    SM    SM   CT2     1 0 3.766 3
+   HA   CP3    NP   CP1     3 0.3347 1.004 0 -1.339 0 0
+;  HA   CP3    NP   CP1     1 0 0.3347 3
+  HR1  CPH2   NR1  CPH1     3 25.1 0 -25.1 0 0 0
+; HR1  CPH2   NR1  CPH1     1 180 12.55 2
+    H   NH1   CT2    CC     3 0 0 0 0 0 0
+;   H   NH1   CT2    CC     1 0 0 1
+   HP    CA    CA   CT3     3 35.15 0 -35.15 0 0 0
+;  HP    CA    CA   CT3     1 180 17.57 2
+  NR2  CPH1  CPH1   CT3     3 25.1 0 -25.1 0 0 0
+; NR2  CPH1  CPH1   CT3     1 180 12.55 2
+   NP   CP1    CC   NH2     3 1.255 -1.255 0 0 0 0
+;  NP   CP1    CC   NH2     1 0 1.255 1
+    X   CPA   CPB     X     3 0 0 0 0 0 0
+;   X   CPA   CPB     X     1 0 0 2
+   HP    CA   CPT    CY     3 25.1 0 -25.1 0 0 0
+;  HP    CA   CPT    CY     1 180 12.55 2
+    H   NH2   CT1     C     3 0 0 0 0 0 0
+;   H   NH2   CT1     C     1 0 0 1
+    H   NH1   CT2   CT2     3 0 0 0 0 0 0
+;   H   NH1   CT2   CT2     1 0 0 1
+  CT2  CPH1   NR2  CPH2     3 25.1 0 -25.1 0 0 0
+; CT2  CPH1   NR2  CPH2     1 180 12.55 2
+  HR3  CPH1  CPH1   CT2     3 16.74 0 -16.74 0 0 0
+; HR3  CPH1  CPH1   CT2     1 180 8.368 2
+   HP    CA    CY   CPT     3 16.74 0 -16.74 0 0 0
+;  HP    CA    CY   CPT     1 180 8.368 2
+  HR1  CPH1  CPH1   CT2     3 8.368 0 -8.368 0 0 0
+; HR1  CPH1  CPH1   CT2     1 180 4.184 2
+    X   CPT   CPT     X     3 0 0 0 0 0 0
+;   X   CPT   CPT     X     1 180 0 2
+  CT2  CPH1   NR1  CPH2     3 25.1 0 -25.1 0 0 0
+; CT2  CPH1   NR1  CPH2     1 180 12.55 2
+    X   CPB   CPB     X     3 0 0 0 0 0 0
+;   X   CPB   CPB     X     1 0 0 2
+    H   NH2   CT1   CT3     3 0.4602 1.381 0 -1.841 0 0
+;   H   NH2   CT1   CT3     1 0 0.4602 3
+  CT2   NH1     C   CP1     3 27.61 -6.694 -20.92 0 0 0
+; CT2   NH1     C   CP1     1 0 6.694 1
+; CT2   NH1     C   CP1     1 180 10.46 2
+  CT2     C   NH1   CT3     3 27.61 -6.694 -20.92 0 0 0
+; CT2     C   NH1   CT3     1 0 6.694 1
+; CT2     C   NH1   CT3     1 180 10.46 2
+  CT3     C   NH1   CT2     3 27.61 -6.694 -20.92 0 0 0
+; CT3     C   NH1   CT2     1 0 6.694 1
+; CT3     C   NH1   CT2     1 180 10.46 2
+   HC    NP   CP1    CC     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP1    CC     1 0 0.3347 3
+  NR3  CPH1  CPH1   CT3     3 20.92 0 -20.92 0 0 0
+; NR3  CPH1  CPH1   CT3     1 180 10.46 2
+  CT2   NH1     C   CT1     3 27.61 -6.694 -20.92 0 0 0
+; CT2   NH1     C   CT1     1 0 6.694 1
+; CT2   NH1     C   CT1     1 180 10.46 2
+    H   NH2   CT1    HB     3 0.4602 1.381 0 -1.841 0 0
+;   H   NH2   CT1    HB     1 0 0.4602 3
+    H   OH1   CT1   CT3     3 6.904 -1.548 1.506 -5.356 0 0
+;   H   OH1   CT1   CT3     1 0 5.565 1
+;   H   OH1   CT1   CT3     1 0 0.7531 2
+;   H   OH1   CT1   CT3     1 0 1.339 3
+    O     C   CP1   CP2     3 1.674 1.674 5.021 0 0 0
+;   O     C   CP1   CP2     1 180 1.674 1
+;   O     C   CP1   CP2     1 0 2.51 2
+  NR2  CPH1   CT3    HA     3 0.795 2.385 0 -3.18 0 0
+; NR2  CPH1   CT3    HA     1 0 0.795 3
+   CA    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+;  CA    CA    CA    CA     1 180 12.97 2
+  HR1  CPH1   NR3  CPH2     3 20.92 0 -20.92 0 0 0
+; HR1  CPH1   NR3  CPH2     1 180 10.46 2
+  CT2     C     N   CP3     3 25.52 0 -33.05 0 10.04 0
+; CT2     C     N   CP3     1 180 11.51 2
+; CT2     C     N   CP3     1 0 1.255 4
+  HR1  CPH1   NR3     H     3 25.1 0 -25.1 0 0 0
+; HR1  CPH1   NR3     H     1 180 12.55 2
+    H   NH2    CC   CT2     3 11.72 0 -11.72 0 0 0
+;   H   NH2    CC   CT2     1 180 5.858 2
+    O     C   NH1   CT2     3 20.92 0 -20.92 0 0 0
+;   O     C   NH1   CT2     1 180 10.46 2
+   CY   CPT   CPT    CA     3 83.68 0 -83.68 0 0 0
+;  CY   CPT   CPT    CA     1 180 41.84 2
+  CT2    CY   CPT   CPT     3 25.1 0 -25.1 0 0 0
+; CT2    CY   CPT   CPT     1 180 12.55 2
+    X   CE1   CE1     X     3 71.76 -0.6276 -71.13 0 0 0
+;   X   CE1   CE1     X     1 0 0.6276 1
+;   X   CE1   CE1     X     1 180 35.56 2
+   HP    CA    CY   CT2     3 10.04 0 -10.04 0 0 0
+;  HP    CA    CY   CT2     1 180 5.021 2
+    X   CE2   CE2     X     3 41 0 -41 0 0 0
+;   X   CE2   CE2     X     1 180 20.5 2
+   HA    CC   NH2     H     3 11.72 0 -11.72 0 0 0
+;  HA    CC   NH2     H     1 180 5.858 2
+  NH1     C   CP1     N     3 -1.255 -1.255 10.04 0 -10.04 0
+; NH1     C   CP1     N     1 0 1.255 1
+; NH1     C   CP1     N     1 0 -1.255 4
+  NH1   CT2     C     N     3 1.674 -1.674 0 0 0 0
+; NH1   CT2     C     N     1 0 1.674 1
+    O    CC   CT2    HA     3 0 0 0 0 0 0
+;   O    CC   CT2    HA     1 180 0 3
+  CP3     N   CP1     C     3 0.4184 1.255 0 -1.674 0 0
+; CP3     N   CP1     C     1 0 0.4184 3
+  CT2   CT2  CPH1  CPH1     3 1.674 -1.674 0 0 0 0
+; CT2   CT2  CPH1  CPH1     1 0 1.674 1
+   HB   CT2   NH1     H     3 0 0 0 0 0 0
+;  HB   CT2   NH1     H     1 0 0 1
+   HB   CT1   NH1     C     3 0 0 0 0 0 0
+;  HB   CT1   NH1     C     1 0 0 1
+   OC    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+;  OC    CA    CA    CA     1 180 12.97 2
+    X    FE   NR2     X     3 0.4184 0 -1.674 0 1.674 0
+;   X    FE   NR2     X     1 0 0.2092 4
+  CT3   CT2    CY   CPT     3 1.925 0 -1.925 0 0 0
+; CT3   CT2    CY   CPT     1 180 0.9623 2
+   HA    CY   CPT    CA     3 25.1 0 -25.1 0 0 0
+;  HA    CY   CPT    CA     1 180 12.55 2
+    X   CT2    OS     X     3 -0.4184 -1.255 0 1.674 0 0
+;   X   CT2    OS     X     1 0 -0.4184 3
+   NY   CPT    CA    CA     3 23.43 0 -23.43 0 0 0
+;  NY   CPT    CA    CA     1 180 11.72 2
+    X   CT3   NH3     X     3 0.3766 1.13 0 -1.506 0 0
+;   X   CT3   NH3     X     1 0 0.3766 3
+ CPH2   NR1  CPH1  CPH1     3 117.2 0 -117.2 0 0 0
+; PH2   NR1  CPH1  CPH1     1 180 58.58 2
+  NH1     C   CT2    HB     3 0 0 0 0 0 0
+; NH1     C   CT2    HB     1 0 0 1
+  HR3  CPH1   NR1     H     3 8.368 0 -8.368 0 0 0
+; HR3  CPH1   NR1     H     1 180 4.184 2
+  CT3     C     N   CP1     3 25.52 0 -33.05 0 10.04 0
+; CT3     C     N   CP1     1 180 11.51 2
+; CT3     C     N   CP1     1 0 1.255 4
+    O     C   CT1   NH1     3 0 0 0 0 0 0
+;   O     C   CT1   NH1     1 0 0 1
+  CP2   CP3     N     C     3 0 0 0 0 0 0
+; CP2   CP3     N     C     1 180 0 3
+    O     C   CT1   CT1     3 5.858 -5.858 0 0 0 0
+;   O     C   CT1   CT1     1 0 5.858 1
+  CT2   CT2   NH1     C     3 7.531 -7.531 0 0 0 0
+; CT2   CT2   NH1     C     1 0 7.531 1
+  NH1     C   CT2   NH1     3 2.51 -2.51 0 0 0 0
+; NH1     C   CT2   NH1     1 0 2.51 1
+    C   CT2   NH1     C     3 0.8368 0.8368 0 0 0 0
+;   C   CT2   NH1     C     1 180 0.8368 1
+   HC    NP   CP1   CP2     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP1   CP2     1 0 0.3347 3
+  NH1   CT1     C     N     3 1.674 -1.674 0 0 0 0
+; NH1   CT1     C     N     1 0 1.674 1
+  NH3   CT2     C     N     3 1.674 -1.674 0 0 0 0
+; NH3   CT2     C     N     1 0 1.674 1
+  NR3  CPH1  CPH1   NR3     3 100.4 0 -100.4 0 0 0
+; NR3  CPH1  CPH1   NR3     1 180 50.21 2
+   NY    CA    CY   CPT     3 33.47 0 -33.47 0 0 0
+;  NY    CA    CY   CPT     1 180 16.74 2
+    H   NH2    CC   CT1     3 11.72 0 -11.72 0 0 0
+;   H   NH2    CC   CT1     1 180 5.858 2
+   HA   CP3     N   CP1     3 0.4184 1.255 0 -1.674 0 0
+;  HA   CP3     N   CP1     1 0 0.4184 3
+   HP    CY    CA    HP     3 8.368 0 -8.368 0 0 0
+;  HP    CY    CA    HP     1 180 4.184 2
+  NR2  CPH2   NR1  CPH1     3 117.2 0 -117.2 0 0 0
+; NR2  CPH2   NR1  CPH1     1 180 58.58 2
+    X   CT3   NH2     X     3 0.4602 1.381 0 -1.841 0 0
+;   X   CT3   NH2     X     1 0 0.4602 3
+    N     C   CT2    HB     3 0 0 0 0 0 0
+;   N     C   CT2    HB     1 0 0 1
+    H   NR1  CPH1  CPH1     3 8.368 0 -8.368 0 0 0
+;   H   NR1  CPH1  CPH1     1 180 4.184 2
+  NR3  CPH2   NR3  CPH1     3 100.4 0 -100.4 0 0 0
+; NR3  CPH2   NR3  CPH1     1 180 50.21 2
+  NR1  CPH1  CPH1   HR3     3 25.1 0 -25.1 0 0 0
+; NR1  CPH1  CPH1   HR3     1 180 12.55 2
+  CP2   CP1     N     C     3 3.347 10.04 0 -13.39 0 0
+; CP2   CP1     N     C     1 0 3.347 3
+   CC   CP1     N     C     3 3.347 10.04 0 -13.39 0 0
+;  CC   CP1     N     C     1 0 3.347 3
+    X   CP2   CP2     X     3 0.6694 2.008 0 -2.678 0 0
+;   X   CP2   CP2     X     1 0 0.6694 3
+    N     C   CT1    HB     3 0 0 0 0 0 0
+;   N     C   CT1    HB     1 0 0 1
+  CT1   CT2  CPH1  CPH1     3 0.8368 -0.8368 2.259 0 0 0
+; CT1   CT2  CPH1  CPH1     1 0 0.8368 1
+; CT1   CT2  CPH1  CPH1     1 0 1.13 2
+; CT1   CT2  CPH1  CPH1     1 0 0 3
+ CPH2   NR2  CPH1  CPH1     3 117.2 0 -117.2 0 0 0
+; PH2   NR2  CPH1  CPH1     1 180 58.58 2
+  CT1     C     N   CP1     3 25.52 0 -33.05 0 10.04 0
+; CT1     C     N   CP1     1 180 11.51 2
+; CT1     C     N   CP1     1 0 1.255 4
+  CP1     C     N   CP1     3 25.52 0 -33.05 0 10.04 0
+; CP1     C     N   CP1     1 180 11.51 2
+; CP1     C     N   CP1     1 0 1.255 4
+   HA    CA    NY   CPT     3 25.1 0 -25.1 0 0 0
+;  HA    CA    NY   CPT     1 180 12.55 2
+   HP    CA    NY     H     3 3.347 0 -3.347 0 0 0
+;  HP    CA    NY     H     1 180 1.674 2
+    S   CT2   CT2    HA     3 0.04184 0.1255 0 -0.1674 0 0
+;   S   CT2   CT2    HA     1 0 0.04184 3
+    X   CP1   CP2     X     3 0.5858 1.757 0 -2.343 0 0
+;   X   CP1   CP2     X     1 0 0.5858 3
+    X     C   NC2     X     3 18.83 0 -18.83 0 0 0
+;   X     C   NC2     X     1 180 9.414 2
+    H    NY   CPT   CPT     3 6.694 0 -6.694 0 0 0
+;   H    NY   CPT   CPT     1 180 3.347 2
+  NR2  CPH1   CT2   CT2     3 0.795 2.385 0 -3.18 0 0
+; NR2  CPH1   CT2   CT2     1 0 0.795 3
+  NH1     C   CT2   CT2     3 0 0 0 0 0 0
+; NH1     C   CT2   CT2     1 0 0 1
+   HA    CY    CA   CPT     3 10.04 0 -10.04 0 0 0
+;  HA    CY    CA   CPT     1 180 5.021 2
+    O    CC   NH2     H     3 11.72 0 -11.72 0 0 0
+;   O    CC   NH2     H     1 180 5.858 2
+   OB    CD    OS   CT3     3 36.25 4.038 -32.22 0 0 0
+;  OB    CD    OS   CT3     1 180 4.038 1
+;  OB    CD    OS   CT3     1 180 16.11 2
+   HA   CT2   NH1     H     3 0 0 0 0 0 0
+;  HA   CT2   NH1     H     1 0 0 3
+   HA   CT2     S   CT3     3 1.172 3.515 0 -4.686 0 0
+;  HA   CT2     S   CT3     1 0 1.172 3
+  HR1  CPH2   NR1     H     3 8.368 0 -8.368 0 0 0
+; HR1  CPH2   NR1     H     1 180 4.184 2
+    H   NH1   CT1   CT3     3 0 0 0 0 0 0
+;   H   NH1   CT1   CT3     1 0 0 1
+   HB   CT1   NH1     H     3 0 0 0 0 0 0
+;  HB   CT1   NH1     H     1 0 0 1
+    X   CT2   CT3     X     3 0.6694 2.008 0 -2.678 0 0
+;   X   CT2   CT3     X     1 0 0.6694 3
+    X   CT1   CT2     X     3 0.8368 2.51 0 -3.347 0 0
+;   X   CT1   CT2     X     1 0 0.8368 3
+   HP    CA    CA    HP     3 20.08 0 -20.08 0 0 0
+;  HP    CA    CA    HP     1 180 10.04 2
+  NR1  CPH1   CT2   CT3     3 0.795 2.385 0 -3.18 0 0
+; NR1  CPH1   CT2   CT3     1 0 0.795 3
+    X   CT3   CT3     X     3 0.6485 1.946 0 -2.594 0 0
+;   X   CT3   CT3     X     1 0 0.6485 3
+  CT2    CY   CPT    CA     3 25.1 0 -25.1 0 0 0
+; CT2    CY   CPT    CA     1 180 12.55 2
+   HA   CT3   NH1     H     3 0 0 0 0 0 0
+;  HA   CT3   NH1     H     1 0 0 3
+   NY   CPT   CPT    CA     3 83.68 0 -83.68 0 0 0
+;  NY   CPT   CPT    CA     1 180 41.84 2
+   HC    NP   CP1     C     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP1     C     1 0 0.3347 3
+  NR3  CPH1   CT2   CT2     3 0.795 2.385 0 -3.18 0 0
+; NR3  CPH1   CT2   CT2     1 0 0.795 3
+  NH1     C   CT1   CT2     3 0 0 0 0 0 0
+; NH1     C   CT1   CT2     1 0 0 1
+    X    CD    OS     X     3 17.15 0 -17.15 0 0 0
+;   X    CD    OS     X     1 180 8.577 2
+    O     C     N   CP1     3 25.52 0 -33.05 0 10.04 0
+;   O     C     N   CP1     1 180 11.51 2
+;   O     C     N   CP1     1 0 1.255 4
+    O     C   CT2   NH1     3 0 0 0 0 0 0
+;   O     C   CT2   NH1     1 0 0 1
+  CP3     N     C   CP1     3 25.52 0 -33.05 0 10.04 0
+; CP3     N     C   CP1     1 180 11.51 2
+; CP3     N     C   CP1     1 0 1.255 4
+    O    CC   CP1     N     3 -2.51 0 10.04 0 -10.04 0
+;   O    CC   CP1     N     1 0 -1.255 4
+    O     C   CT1    HB     3 0 0 0 0 0 0
+;   O     C   CT1    HB     1 0 0 1
+   HA   CT2  CPH1  CPH1     3 0 0 0 0 0 0
+;  HA   CT2  CPH1  CPH1     1 0 0 3
+   SM   CT2   CT2    HA     3 0.04184 0.1255 0 -0.1674 0 0
+;  SM   CT2   CT2    HA     1 0 0.04184 3
+   HC    NP   CP3   CP2     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP3   CP2     1 0 0.3347 3
+    O     C   CT1   CT3     3 5.858 -5.858 0 0 0 0
+;   O     C   CT1   CT3     1 0 5.858 1
+  HE1   CE1   CE2   HE2     3 43.51 0 -43.51 0 0 0
+; HE1   CE1   CE2   HE2     1 180 21.76 2
+  HR1  CPH1  CPH1   HR1     3 8.368 0 -8.368 0 0 0
+; HR1  CPH1  CPH1   HR1     1 180 4.184 2
+  HE1   CE1   CT3    HA     3 0 0 0 0 0 0
+; HE1   CE1   CT3    HA     1 0 0 3
+   CC   CT2   NH1     C     3 0.8368 0.8368 0 0 0 0
+;  CC   CT2   NH1     C     1 180 0.8368 1
+  HR3  CPH1   NR2  CPH2     3 25.1 0 -25.1 0 0 0
+; HR3  CPH1   NR2  CPH2     1 180 12.55 2
+  CE2   CE1   CT2   CT3     3 7.531 -14.23 0 21.76 0 0
+; CE2   CE1   CT2   CT3     1 180 2.092 1
+; CE2   CE1   CT2   CT3     1 180 5.439 3
+  HE1   CE1   CT2    HA     3 0 0 0 0 0 0
+; HE1   CE1   CT2    HA     1 0 0 3
+    O     C   CP1    HB     3 1.674 -1.674 5.021 0 0 0
+;   O     C   CP1    HB     1 0 1.674 1
+;   O     C   CP1    HB     1 0 2.51 2
+  HR3  CPH1  CPH1   CT3     3 16.74 0 -16.74 0 0 0
+; HR3  CPH1  CPH1   CT3     1 180 8.368 2
+   CD   CT1   NH1     C     3 0.8368 0.8368 0 0 0 0
+;  CD   CT1   NH1     C     1 180 0.8368 1
+   HA    CA   CPT   CPT     3 25.1 0 -25.1 0 0 0
+;  HA    CA   CPT   CPT     1 180 12.55 2
+   HC   NH2   CT2   CT2     3 0.4602 1.381 0 -1.841 0 0
+;  HC   NH2   CT2   CT2     1 0 0.4602 3
+    O     C   NH1     H     3 20.92 0 -20.92 0 0 0
+;   O     C   NH1     H     1 180 10.46 2
+    H   NH1   CT1    CC     3 0 0 0 0 0 0
+;   H   NH1   CT1    CC     1 0 0 1
+   OB    CD    OS   CT2     3 36.25 4.038 -32.22 0 0 0
+;  OB    CD    OS   CT2     1 180 4.038 1
+;  OB    CD    OS   CT2     1 180 16.11 2
+   HB   CT3   NH1     C     3 0 0 0 0 0 0
+;  HB   CT3   NH1     C     1 0 0 1
+  OH1    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+; OH1    CA    CA    CA     1 180 12.97 2
+    H   NR3  CPH1  CPH1     3 11.72 0 -11.72 0 0 0
+;   H   NR3  CPH1  CPH1     1 180 5.858 2
+    H   NH1   CT1     C     3 0 0 0 0 0 0
+;   H   NH1   CT1     C     1 0 0 1
+   CY    CA    NY   CPT     3 41.84 0 -41.84 0 0 0
+;  CY    CA    NY   CPT     1 180 20.92 2
+  CP3    NP   CP1     C     3 0.3347 1.004 0 -1.339 0 0
+; CP3    NP   CP1     C     1 0 0.3347 3
+  HE1   CE1   CT2   CT3     3 0.5021 1.506 0 -2.008 0 0
+; HE1   CE1   CT2   CT3     1 0 0.5021 3
+   SM    SM   CT2   CT2     3 1.297 3.891 0 -5.188 0 0
+;  SM    SM   CT2   CT2     1 0 1.297 3
+  NH1     C   CP1   CP2     3 1.674 -1.674 5.021 0 0 0
+; NH1     C   CP1   CP2     1 0 1.674 1
+; NH1     C   CP1   CP2     1 0 2.51 2
+  CT1     C   NH1   CT1     3 27.61 -6.694 -20.92 0 0 0
+; CT1     C   NH1   CT1     1 0 6.694 1
+; CT1     C   NH1   CT1     1 180 10.46 2
+  NR3  CPH2   NR3     H     3 11.72 0 -11.72 0 0 0
+; NR3  CPH2   NR3     H     1 180 5.858 2
+   HA   CT2    CY   CPT     3 2.092 0 -2.092 0 0 0
+;  HA   CT2    CY   CPT     1 180 1.046 2
+  CT1   CT2    CY    CA     3 1.925 0 -1.925 0 0 0
+; CT1   CT2    CY    CA     1 180 0.9623 2
+  NH3   CT1    CC   NH2     3 1.674 -1.674 0 0 0 0
+; NH3   CT1    CC   NH2     1 0 1.674 1
+  CT2   CT2   CT2   CT2     3 0.6276 -0.6276 0 0 0 0
+; CT2   CT2   CT2   CT2     1 0 0.6276 1
+  NR1  CPH1   CT2   CT1     3 0.795 2.385 0 -3.18 0 0
+; NR1  CPH1   CT2   CT1     1 0 0.795 3
+   HP    CA    CA    CA     3 35.15 0 -35.15 0 0 0
+;  HP    CA    CA    CA     1 180 17.57 2
+  CT2    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+; CT2    CA    CA    CA     1 180 12.97 2
+   SS    CS   CT3    HA     3 0.6276 1.883 0 -2.51 0 0
+;  SS    CS   CT3    HA     1 0 0.6276 3
+    H   OH1   CT2   CT2     3 7.196 -0.1674 2.51 -7.029 0 0
+;   H   OH1   CT2   CT2     1 0 5.439 1
+;   H   OH1   CT2   CT2     1 0 1.255 2
+;   H   OH1   CT2   CT2     1 0 1.757 3
+    N     C   CP1     N     3 -1.255 -1.255 10.04 0 -10.04 0
+;   N     C   CP1     N     1 0 1.255 1
+;   N     C   CP1     N     1 0 -1.255 4
+    C   CT1   NH1     C     3 0.8368 0.8368 0 0 0 0
+;   C   CT1   NH1     C     1 180 0.8368 1
+  CT3   NH1     C   CT1     3 27.61 -6.694 -20.92 0 0 0
+; CT3   NH1     C   CT1     1 0 6.694 1
+; CT3   NH1     C   CT1     1 180 10.46 2
+    O    CC   CP1   CP2     3 1.674 1.674 5.021 0 0 0
+;   O    CC   CP1   CP2     1 180 1.674 1
+;   O    CC   CP1   CP2     1 0 2.51 2
+  NH3   CT2     C   NH1     3 1.674 -1.674 0 0 0 0
+; NH3   CT2     C   NH1     1 0 1.674 1
+    H   NR3  CPH1   CT2     3 25.1 0 -25.1 0 0 0
+;   H   NR3  CPH1   CT2     1 180 12.55 2
+    H   NH1     C   CT2     3 20.92 0 -20.92 0 0 0
+;   H   NH1     C   CT2     1 180 10.46 2
+  HR2  CPH2   NR3     H     3 0 0 0 0 0 0
+; HR2  CPH2   NR3     H     1 180 0 2
+    H   NH2   CT1   CT1     3 0 0 0 0 0 0
+;   H   NH2   CT1   CT1     1 0 0 1
+   HB   CP1     N   CP3     3 0.4184 1.255 0 -1.674 0 0
+;  HB   CP1     N   CP3     1 0 0.4184 3
+   CA   CT2   CT1     C     3 0.1674 0.5021 0 -0.6694 0 0
+;  CA   CT2   CT1     C     1 0 0.1674 3
+    H   OH1   CT1   CT1     3 6.904 -1.548 1.506 -5.356 0 0
+;   H   OH1   CT1   CT1     1 0 5.565 1
+;   H   OH1   CT1   CT1     1 0 0.7531 2
+;   H   OH1   CT1   CT1     1 0 1.339 3
+    H   NH1   CT1   CT1     3 0 0 0 0 0 0
+;   H   NH1   CT1   CT1     1 0 0 1
+    O     C   NH1   CT3     3 20.92 0 -20.92 0 0 0
+;   O     C   NH1   CT3     1 180 10.46 2
+  NH2    CC   CP1   CP2     3 1.674 -1.674 5.021 0 0 0
+; NH2    CC   CP1   CP2     1 0 1.674 1
+; NH2    CC   CP1   CP2     1 0 2.51 2
+    X    CD   OH1     X     3 17.15 0 -17.15 0 0 0
+;   X    CD   OH1     X     1 180 8.577 2
+   HS     S   CT3    HA     3 0.8368 2.51 0 -3.347 0 0
+;  HS     S   CT3    HA     1 0 0.8368 3
+   OC    CC   CT2   NH3     3 26.78 0 -26.78 0 0 0
+;  OC    CC   CT2   NH3     1 180 13.39 2
+   HA    CA    CA   CPT     3 29.29 0 -29.29 0 0 0
+;  HA    CA    CA   CPT     1 180 14.64 2
+  NR2  CPH1  CPH1   HR3     3 25.1 0 -25.1 0 0 0
+; NR2  CPH1  CPH1   HR3     1 180 12.55 2
+  NR2  CPH1  CPH1   CT2     3 25.1 0 -25.1 0 0 0
+; NR2  CPH1  CPH1   CT2     1 180 12.55 2
+   HP    CA    CA   CT2     3 35.15 0 -35.15 0 0 0
+;  HP    CA    CA   CT2     1 180 17.57 2
+   HS     S   CT2   CT3     3 2.134 2.385 1.255 -4.519 0 0
+;  HS     S   CT2   CT3     1 0 1.004 1
+;  HS     S   CT2   CT3     1 0 0.6276 2
+;  HS     S   CT2   CT3     1 0 1.13 3
+  NH1     C   CT1   NH1     3 2.51 -2.51 0 0 0 0
+; NH1     C   CT1   NH1     1 0 2.51 1
+  NH3   CT1     C   NH1     3 2.51 -2.51 0 0 0 0
+; NH3   CT1     C   NH1     1 0 2.51 1
+    C     N   CP1     C     3 3.347 10.04 0 -13.39 0 0
+;   C     N   CP1     C     1 0 3.347 3
+    X   CT1    OS     X     3 -0.4184 -1.255 0 1.674 0 0
+;   X   CT1    OS     X     1 0 -0.4184 3
+  NR3  CPH1  CPH1   HR1     3 20.92 0 -20.92 0 0 0
+; NR3  CPH1  CPH1   HR1     1 180 10.46 2
+   HA   CP3     N     C     3 0 0 0 0 0 0
+;  HA   CP3     N     C     1 180 0 3
+   CY   CPT    CA    CA     3 25.1 0 -25.1 0 0 0
+;  CY   CPT    CA    CA     1 180 12.55 2
+   HC    NP   CP3    HA     3 0.3347 1.004 0 -1.339 0 0
+;  HC    NP   CP3    HA     1 0 0.3347 3
+   NP   CP1     C   NH1     3 1.255 -1.255 0 0 0 0
+;  NP   CP1     C   NH1     1 0 1.255 1
+    N     C   CP1   CP2     3 1.674 -1.674 5.021 0 0 0
+;   N     C   CP1   CP2     1 0 1.674 1
+;   N     C   CP1   CP2     1 0 2.51 2
+    H   NR3  CPH1   CT3     3 25.1 0 -25.1 0 0 0
+;   H   NR3  CPH1   CT3     1 180 12.55 2
+  CE2   CE1   CT3    HA     3 0.2092 -0.6276 0 0.8368 0 0
+; CE2   CE1   CT3    HA     1 180 0.2092 3
+  CT1   NH1     C   CP1     3 27.61 -6.694 -20.92 0 0 0
+; CT1   NH1     C   CP1     1 0 6.694 1
+; CT1   NH1     C   CP1     1 180 10.46 2
+  CT2  CPH1   NR3  CPH2     3 20.92 0 -20.92 0 0 0
+; CT2  CPH1   NR3  CPH2     1 180 10.46 2
+    H   NH1   CT1   CT2     3 0 0 0 0 0 0
+;   H   NH1   CT1   CT2     1 0 0 1
+  NH2    CC   CT2    HA     3 0 0 0 0 0 0
+; NH2    CC   CT2    HA     1 180 0 3
+   NY   CPT    CA    HP     3 25.1 0 -25.1 0 0 0
+;  NY   CPT    CA    HP     1 180 12.55 2
+    H   OH1    CA    CA     3 8.284 0 -8.284 0 0 0
+;   H   OH1    CA    CA     1 180 4.142 2
+  CT3   CT1   NH1     C     3 7.531 -7.531 0 0 0 0
+; CT3   CT1   NH1     C     1 0 7.531 1
+   SM    SM   CT2   CT1     3 1.297 3.891 0 -5.188 0 0
+;  SM    SM   CT2   CT1     1 0 1.297 3
+    H   NR1  CPH1   CT2     3 8.368 0 -8.368 0 0 0
+;   H   NR1  CPH1   CT2     1 180 4.184 2
+   HA    CA    CY   CT2     3 10.04 0 -10.04 0 0 0
+;  HA    CA    CY   CT2     1 180 5.021 2
+    H   NH2   CT1   CT2     3 0.4602 1.381 0 -1.841 0 0
+;   H   NH2   CT1   CT2     1 0 0.4602 3
+    X    FE    CM     X     3 0.4184 0 -1.674 0 1.674 0
+;   X    FE    CM     X     1 0 0.2092 4
+   NP   CP1     C     N     3 1.255 -1.255 0 0 0 0
+;  NP   CP1     C     N     1 0 1.255 1
+   HB   CP1     N     C     3 3.347 10.04 0 -13.39 0 0
+;  HB   CP1     N     C     1 0 3.347 3
+   HP    CA    NY   CPT     3 16.74 0 -16.74 0 0 0
+;  HP    CA    NY   CPT     1 180 8.368 2
+   OC    CA    CA    HP     3 35.15 0 -35.15 0 0 0
+;  OC    CA    CA    HP     1 180 17.57 2
+    H   NH1   CT1    CD     3 0 0 0 0 0 0
+;   H   NH1   CT1    CD     1 0 0 1
+  CT3   CT2     S   CT3     3 2.552 5.648 0 -6.192 0 0
+; CT3   CT2     S   CT3     1 180 1.004 1
+; CT3   CT2     S   CT3     1 0 1.548 3
+    O     C   CT2   NH3     3 0 0 0 0 0 0
+;   O     C   CT2   NH3     1 0 0 1
+   HA   CT3     S   CT2     3 1.172 3.515 0 -4.686 0 0
+;  HA   CT3     S   CT2     1 0 1.172 3
+  CT3    CA    CA    CA     3 25.94 0 -25.94 0 0 0
+; CT3    CA    CA    CA     1 180 12.97 2
+    N     C   CT3    HA     3 0 0 0 0 0 0
+;   N     C   CT3    HA     1 0 0 1
+  CT3   NH1     C   CP1     3 27.61 -6.694 -20.92 0 0 0
+; CT3   NH1     C   CP1     1 0 6.694 1
+; CT3   NH1     C   CP1     1 180 10.46 2
+   HA    CA    CY   CPT     3 10.04 0 -10.04 0 0 0
+;  HA    CA    CY   CPT     1 180 5.021 2
+  HE2   CE2   CE1   CPB     3 43.51 0 -43.51 0 0 0
+; HE2   CE2   CE1   CPB     1 180 21.76 2
+  NR2  CPH1  CPH1   NR1     3 117.2 0 -117.2 0 0 0
+; NR2  CPH1  CPH1   NR1     1 180 58.58 2
+  NR1  CPH1   CT3    HA     3 0.795 2.385 0 -3.18 0 0
+; NR1  CPH1   CT3    HA     1 0 0.795 3
+   HA    CA    CA    CA     3 29.29 0 -29.29 0 0 0
+;  HA    CA    CA    CA     1 180 14.64 2
+    H   NH1   CT2   CT3     3 0 0 0 0 0 0
+;   H   NH1   CT2   CT3     1 0 0 1
+  CT3   CE1   CE1   HE1     3 8.368 0 -8.368 0 0 0
+; CT3   CE1   CE1   HE1     1 180 4.184 2
+    O     C   CT1   CT2     3 5.858 -5.858 0 0 0 0
+;   O     C   CT1   CT2     1 0 5.858 1
+    X   CT3   OH1     X     3 0.5858 1.757 0 -2.343 0 0
+;   X   CT3   OH1     X     1 0 0.5858 3
+  CT3     C     N   CP3     3 25.52 0 -33.05 0 10.04 0
+; CT3     C     N   CP3     1 180 11.51 2
+; CT3     C     N   CP3     1 0 1.255 4
+  CT1     C     N   CP3     3 25.52 0 -33.05 0 10.04 0
+; CT1     C     N   CP3     1 180 11.51 2
+; CT1     C     N   CP3     1 0 1.255 4
+  NR2  CPH1   CT2   CT1     3 0.795 2.385 0 -3.18 0 0
+; NR2  CPH1   CT2   CT1     1 0 0.795 3
+   HC   NH2   CT2    HB     3 0.4602 1.381 0 -1.841 0 0
+;  HC   NH2   CT2    HB     1 0 0.4602 3
+; Now the improper dihedrals
+  CPB   CPA   NPH   CPA     2 0 174.1
+  CPB     X     X   CE1     2 0 753.1
+  CT2     X     X   CPB     2 0 753.1
+  CT3     X     X   CPB     2 0 753.1
+   HA   CPA   CPA   CPM     2 0 246
+  HE2   HE2   CE2   CE2     2 0 25.1
+  HR1   NR1   NR2  CPH2     2 0 4.184
+  HR1   NR2   NR1  CPH2     2 0 4.184
+  HR3  CPH1   NR1  CPH1     2 0 4.184
+  HR3  CPH1   NR2  CPH1     2 0 4.184
+  HR3  CPH1   NR3  CPH1     2 0 8.368
+  HR3   NR1  CPH1  CPH1     2 0 4.184
+  HR3   NR2  CPH1  CPH1     2 0 4.184
+    N     C   CP1   CP3     2 0 0
+  NC2     X     X     C     2 0 334.7
+  NH1     X     X     H     2 0 167.4
+  NH2     X     X     H     2 0 33.47
+  NPH   CPA   CPA    FE     2 0 1150
+  NPH   CPA   CPB   CPB     2 0 339.7
+  NPH   CPA   CPM   CPA     2 0 153.1
+  NPH   CPM   CPB   CPA     2 0 273.6
+  NR1  CPH1  CPH2     H     2 0 3.766
+  NR1  CPH2  CPH1     H     2 0 3.766
+  NR3  CPH1  CPH2     H     2 0 10.04
+  NR3  CPH2  CPH1     H     2 0 10.04
+   NY    CA    CY   CPT     2 0 836.8
+    O   CP1   NH2    CC     2 0 376.6
+    O   CT1   NH2    CC     2 0 376.6
+    O   CT2   NH2    CC     2 0 376.6
+    O   CT3   NH2    CC     2 0 376.6
+    O    HA   NH2    CC     2 0 376.6
+    O     N   CT2    CC     2 0 1004
+    O   NH2   CP1    CC     2 0 376.6
+    O   NH2   CT1    CC     2 0 376.6
+    O   NH2   CT2    CC     2 0 376.6
+    O   NH2   CT3    CC     2 0 376.6
+    O   NH2    HA    CC     2 0 376.6
+    O     X     X     C     2 0 1004
+   OB     X     X    CD     2 0 836.8
+   OC     X     X    CC     2 0 803.3
+   CC     X     X   CT1     2 0 803.3
+   CC     X     X   CT2     2 0 803.3
+   CC     X     X   CT3     2 0 803.3
+
+[ bondtypes ]
+ ; i    j    func   b0      kb
+  CPB     C     1 0.138 3.766e+05
+  CT1   CPM     1 0.15 1.862e+05
+  CT2    CT     1 0.1538 1.862e+05
+  CT3    CT     1 0.1538 1.862e+05
+   HA     C     1 0.11 2.761e+05
+  NPH     H     1 0.1006 3.849e+05
+    O    CA     1 0.123 5.188e+05
+   OC    FE     1 0.18 2.092e+05
+   OS    CC     1 0.1334 1.255e+05
+   OS     C     1 0.1334 1.255e+05
+   OS    CA     1 0.1334 1.255e+05
+   OS    CT     1 0.143 2.845e+05
+   OS   CT2     1 0.143 2.845e+05
+ CTL4   HAL     1 0.1111 2.694e+05
+    H     C     1 0.11 2.761e+05
+  NH3    FE     1 0.1958 2.261e+05
+   HL   OHL     1 0.096 4.561e+05
+  NTL   CT2     1 0.151 1.799e+05
+  NTL   CT3     1 0.151 1.799e+05
+  NTL   OH1     1 0.14 2.929e+05
+
+[ angletypes ] ; normal potential harmonic in theta
+  ;  i    j    k   func    th0         kth
+  CPA   CPB     C     1 126.7 585.8
+  CPB   CPB     C     1 126.7 585.8
+  CPA   CPM   CT1     1 125.1 788.3
+  CPB     C     C     1 121.5 585.8
+  CPB     C   CT1     1 121.5 585.8
+  CPB     C   CT2     1 126.8 585.8
+  CPB     C   CT3     1 126.8 585.8
+  CPB     C   CPB     1 126.8 585.8
+  CPB   CT2   CT3     1 126.8 585.8
+  CPM   CT1    CC     1 108 435.1
+  CPM   CT1     C     1 108 435.1
+    C   CT1     C     1 108 435.1
+    C   CT2     C     1 108 435.1
+    C   CT2    CA     1 107.5 433.5
+    C   CT1    CC     1 108 435.1
+  CT1     C    HA     1 117.3 418.4
+  CT2    CT    OS     1 110.1 633.5
+  CT3    CT    OS     1 110.1 633.5
+  CT3   NTL   CT2     1 109.5 292.9
+  CT3   NTL   CT3     1 109.5 292.9
+    H   OH1   NTL     1 112.5 418.4
+   HA     C   CT3     1 120.5 418.4
+   HA     C     C     1 120.5 418.4
+   HA     C   CPB     1 120 418.4
+   HA     C    HA     1 118 418.4
+  NTL   CT2   CT2     1 113.5 585.8
+  NTL   CT2    HA     1 108 401.7
+    O     C   CPB     1 121 669.4
+   OS    CA    CA     1 120 378.2
+    O    CA    CA     1 120 378.2
+  OH1   NTL   CT2     1 110 418.4
+  OH1   NTL   CT3     1 110 418.4
+   CC    OC    FE     1 180 0
+   OS   CT2     C     1 109.5 502.1
+   OS     C    HA     1 109.5 502.1
+   FE   NH3   CT1     1 109.5 251
+   FE   NH3    HC     1 109.5 251
+    H   NPH   CPA     1 126 234.3
+  NH3    FE   NPH     1 90 418.4
+  NH3    FE   NR2     1 180 418.4
+  OHL    PL   OHL     1 108 402.5
+    O     C    HA     1 122 368.2
+[ angletypes ] ; Urey-Bradley potentials
+ ; i     j     k   func    th0         kth      b0       kb
+  CT2   CT2    CT     5 113.5 488.3 0.2561 9339
+  CT2     C    HA     5 120 125.5 0.244 4.184e+04
+  CT2     C     C     5 120 125.5 0.244 4.184e+04
+  CT3     C     C     5 120 125.5 0.244 4.184e+04
+  CT3     C   CT2     5 120 125.5 0.244 4.184e+04
+  CT3     C   CT3     5 120 125.5 0.244 4.184e+04
+  CT3   CPB     C     5 120 125.5 0.244 4.184e+04
+  CT1    CC    OS     5 121 125.5 0.244 4.184e+04
+  CT2    CC    OS     5 121 125.5 0.244 4.184e+04
+    O    CC    OS     5 125.9 753.1 0.2258 1.339e+05
+    O     C    OS     5 125.9 753.1 0.2258 1.339e+05
+   CA    OS     C     5 109.6 334.7 0.2265 2.51e+04
+  CT2   CT1   CT2     5 114 446.4 0.2561 6694
+  CT3    CT   CT2     5 114 446.4 0.2561 6694
+  CT3    CT   CT3     5 114 446.4 0.2561 6694
+  CT3    OS    CA     5 109.6 334.7 0.2265 2.51e+04
+  CT2    OS    CC     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS     C     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS    CC     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS   CT3     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS    CT     5 109.6 334.7 0.2265 2.51e+04
+   HA   CT1   CPM     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT1    CC     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT2    CT     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT3    CT     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT3   NTL     5 110.1 313.8 0.2179 1.885e+04
+   OS     C   CT1     5 109 460.2 0.2326 1.674e+04
+  HAL  CTL2    CL     5 109.5 276.1 0.2163 2.51e+04
+  HAL  CTL3    CL     5 109.5 276.1 0.2163 2.51e+04
+  HAL  CTL2   HAL     5 109 297.1 0.1802 4519
+  HAL  CTL3   HAL     5 108.4 297.1 0.1802 4519
+  HAL  CTL4   HAL     5 107.9 297.1 0.1802 4519
+  HAL  CTL1  CTL1     5 110.1 288.7 0.2179 1.885e+04
+  HAL  CTL1  CTL2     5 110.1 288.7 0.2179 1.885e+04
+  HAL  CTL1  CTL3     5 110.1 288.7 0.2179 1.885e+04
+  HAL  CTL2  CTL1     5 110.1 221.8 0.2179 1.885e+04
+  HAL  CTL2  CTL2     5 110.1 221.8 0.2179 1.885e+04
+  HAL  CTL2  CTL3     5 110.1 289.5 0.2179 1.885e+04
+  HAL  CTL3  CTL1     5 110.1 279.7 0.2179 1.885e+04
+  HAL  CTL3  CTL2     5 110.1 289.5 0.2179 1.885e+04
+  HAL  CTL3  CTL3     5 110.1 313.8 0.2179 1.885e+04
+
+[ dihedraltypes ]
+  ;  i    j    k     l   func    phi0     kphi      n
+; First come the dihedrals with sin delta != 0 and those with
+;  multiplicity >= 6, then the remainder, converted to Ryckaert-Bellemans
+;  form, followed by comments of the contributing underlying periodic form(s).
+    X   NTL   OH1     X     1 180 0 6
+    X   NTL   CT3     X     1 180 0 6
+    X   NTL   CT2     X     1 180 0 6
+    X    CT   CT2     X     1 180 0 6
+    X    CT   CT3     X     1 180 0 6
+    X   CT1   CPM     X     1 0 0 6
+  CT3     C   CT2   CT2     3 0 0 0 0 0 0
+; CT3     C   CT2   CT2     1 180 0 3
+    X    FE   NH3     X     3 0 0 0 0 0 0
+;   X    FE   NH3     X     1 0 0 4
+  CPB     C   CT1    CC     3 0 0 0 0 0 0
+; CPB     C   CT1    CC     1 180 0 3
+  CT3     C   CT2    HA     3 0 0 0 0 0 0
+; CT3     C   CT2    HA     1 180 0 3
+    O    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+;   O    CA    CA    OS     1 180 12.97 2
+    C   CPB   CT3    HA     3 0 0 0 0 0 0
+;   C   CPB   CT3    HA     1 180 0 3
+    X   CPB     C     X     3 25.1 0 -25.1 0 0 0
+;   X   CPB     C     X     1 180 12.55 2
+    X     C   CT3     X     3 0 0 0 0 0 0
+;   X     C   CT3     X     1 180 0 3
+   CA    CA    OS   CT3     3 16.74 0 -16.74 0 0 0
+;  CA    CA    OS   CT3     1 180 8.368 2
+    O    CC    OS   CT3     3 4.038 4.038 0 0 0 0
+;   O    CC    OS   CT3     1 180 4.038 1
+   HA     C   CT2   CT2     3 0 0 0 0 0 0
+;  HA     C   CT2   CT2     1 180 0 3
+   OS   CT2     C     C     3 1.925 0 -1.925 0 0 0
+;  OS   CT2     C     C     1 180 0.9623 2
+   OS     C   CT2    HA     3 0 0 0 0 0 0
+;  OS     C   CT2    HA     1 180 0 3
+    X     C     C     X     3 33.47 0 -33.47 0 0 0
+;   X     C     C     X     1 180 16.74 2
+   HA   CT3    OS    CA     3 0 0 0 0 0 0
+;  HA   CT3    OS    CA     1 0 0 3
+    C     C   CT3    HA     3 0 0 0 0 0 0
+;   C     C   CT3    HA     1 180 0 3
+  CPB     C   CT1   CPM     3 0 0 0 0 0 0
+; CPB     C   CT1   CPM     1 180 0 3
+   FE   NR2  CPH2   NR1     3 83.68 0 -83.68 0 0 0
+;  FE   NR2  CPH2   NR1     1 180 41.84 2
+    X     C   CT2     X     3 0 0 0 0 0 0
+;   X     C   CT2     X     1 180 0 3
+    C     C   CT2   CT2     3 0 0 0 0 0 0
+;   C     C   CT2   CT2     1 180 0 3
+  CT3    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
+; CT3    CA    CA   CT2     1 180 12.97 2
+ CPH1  CPH1   NR2    FE     3 83.68 0 -83.68 0 0 0
+; PH1  CPH1   NR2    FE     1 180 41.84 2
+  CT1    CC    OS   CT3     3 4.038 -4.038 0 0 0 0
+; CT1    CC    OS   CT3     1 0 4.038 1
+   HA     C   CT2    HA     3 0 0 0 0 0 0
+;  HA     C   CT2    HA     1 180 0 3
+   HA     C   CT2    CA     3 0 0 0 0 0 0
+;  HA     C   CT2    CA     1 180 0 3
+   OS    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+;  OS    CA    CA    OS     1 180 12.97 2
+    C     C   CT2    HA     3 0 0 0 0 0 0
+;   C     C   CT2    HA     1 180 0 3
+   HA   CT3     C   CT2     3 0 0 0 0 0 0
+;  HA   CT3     C   CT2     1 0 0 3
+  CT2    CC    OC    FE     3 83.68 0 -83.68 0 0 0
+; CT2    CC    OC    FE     1 180 41.84 2
+  CT3    CA    CA     O     3 25.94 0 -25.94 0 0 0
+; CT3    CA    CA     O     1 180 12.97 2
+   CA    CA    CA     O     3 25.94 0 -25.94 0 0 0
+;  CA    CA    CA     O     1 180 12.97 2
+   OS   CT2     C    HA     3 1.925 0 -1.925 0 0 0
+;  OS   CT2     C    HA     1 180 0.9623 2
+    C     C   CT2    CA     3 0 0 0 0 0 0
+;   C     C   CT2    CA     1 180 0 3
+   CA    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+;  CA    CA    CA    OS     1 180 12.97 2
+  CPB     C   CT2    HA     3 0 0 0 0 0 0
+; CPB     C   CT2    HA     1 180 0 3
+  CPB     C   CT3    HA     3 0 0 0 0 0 0
+; CPB     C   CT3    HA     1 180 0 3
+    O    CC    OS   CT2     3 4.038 4.038 0 0 0 0
+;   O    CC    OS   CT2     1 180 4.038 1
+    X    CT    OS     X     3 0 0 0 0 0 0
+;   X    CT    OS     X     1 180 0 2
+  CT2    CC    OS   CT2     3 4.038 -4.038 0 0 0 0
+; CT2    CC    OS   CT2     1 0 4.038 1
+    O    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
+;   O    CA    CA   CT2     1 180 12.97 2
+; Now the improper dihedrals
+    C     X     X   CT2     2 0 753.1
+    C     X     X   CT3     2 0 753.1
+    C     X     X     C     2 0 753.1
+  CPB     X     X     C     2 0 753.1
+  CPM     X     X   CPA     2 0 753.1
+  CT2     X     X   CT1     2 35.26 460.2
+   HA     C     C    HA     2 0 167.4
+   HA    HA     C     C     2 180 167.4
+    H   CPA   CPA   NPH     2 0 246
+  CT1   CPA   CPA   CPM     2 0 246
+   HA     X     X   CPM     2 0 246
+   CA     X     X    CA     2 0 753.1
+   HA     X     X     C     2 0 1004
+    O     X     X    CC     2 0 803.3
