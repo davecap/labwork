@@ -1,0 +1,53 @@
+[ None ]
+
+[ GLY-NH3+ ]
+[ replace ]
+ N		NH3		14.0027	-0.3
+ CA		CT2		12.011	0.13
+[ Add ]
+ 3	4	H	N	CA	C
+	HC	1.008	0.33
+[ delete ]
+ H
+
+[ NH3+ ]
+[ replace ]
+ N               NH3             14.0027 -0.3
+ CA              CT1             12.011  0.21
+ HA		 HB		 1.008	 0.10
+[ Add ]
+ 3       4       H       N       CA      C
+         HC      1.008   0.33
+[ delete ]
+ H
+
+; Created by Michel Cuendet
+[ NH2 ]
+[ replace ]
+ N		NH2		14.0067	-0.96
+ CA		CT1		12.011	0.19
+ HA		HB		1.008	0.09
+[ add ]
+ 2	4	HT	N	CA	C
+ 	H	1.008	0.34
+[ delete ]
+ H
+
+
+; Needs to be created! 
+;[ GLY-NH2 ]
+
+; Needs to be created! 
+;[ PRO-NH ]
+
+[ PRO-NH2+ ]
+[ replace ]
+ N               NP       14.0027 -0.07
+ CA              CP1      12.011  0.16
+ CD              CP3      12.011  0.16
+[ add ]
+ 2       4       H       N       CA      C
+    	 HC      1.008   0.24
+
+
+

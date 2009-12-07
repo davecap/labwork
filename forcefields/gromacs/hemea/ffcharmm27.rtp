@@ -13,7 +13,7 @@
 [ ALA ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT3	-0.27	1
@@ -24,7 +24,7 @@
 	O	O	-0.51	2
  [ bonds ]
 	CB	CA
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -34,13 +34,15 @@
 	CB	HB3
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ ARG ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -70,7 +72,7 @@
 	NE	CD
 	CZ	NE
 	NH2	CZ
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -89,14 +91,16 @@
 	O	C
 	CZ	NH1
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
 	CZ	NH1	NH2	NE
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ ASN ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -113,7 +117,7 @@
 	CB	CA
 	CG	CB
 	ND2	CG
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -125,17 +129,19 @@
 	C	O
 	CG	OD1
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
 	CG	ND2	CB	OD1
 	CG	CB	ND2	OD1
 	ND2	CG	HD21	HD22
 	ND2	CG	HD22	HD21
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ ASP ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.28	1
@@ -150,7 +156,7 @@
 	CB	CA
 	CG	CB
 	OD2	CG
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -160,14 +166,16 @@
 	O	C
 	CG	OD1
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
 	CG	CB	OD2	OD1
+ [ cmap ]
+	-C	N	CA	C	+N
 
-[ CYS ]
+[ CYSH ] ; Protonated cys, corresponding to charmm CYS residue] 
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.11	1
@@ -180,7 +188,7 @@
  [ bonds ]
 	CB	CA
 	SG	CB
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -190,13 +198,44 @@
 	SG	HG1
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
+
+[ CYS2 ]  ; disulfide cystine residue provided by Michel Cuendet
+ [ atoms ]
+        N       NH1     -0.47   0
+        H       H       0.31    0
+        CA      CT1     0.07    0
+        HA      HB      0.09    0
+        CB      CT2     -0.10   1
+        HB1     HA      0.09    1
+        HB2     HA      0.09    1
+        SG      SM      -0.08   1
+        C       C       0.51    2
+        O       O       -0.51   2
+ [ bonds ]
+        CB      CA
+        SG      CB
+        N       H
+        N       CA
+        C       CA
+        C       +N
+        CA      HA
+        CB      HB1
+        CB      HB2
+        O       C
+ [ impropers ]
+        N       -C      CA      H
+        C       CA      +N      O
+[ cmap ]
+        -C      N       CA      C       +N
 
 [ GLN ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -217,7 +256,7 @@
 	CG	CB
 	CD	CG
 	NE2	CD
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -231,17 +270,19 @@
 	O	C
 	CD	OE1
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
 	CD	NE2	CG	OE1
 	CD	CG	NE2	OE1
 	NE2	CD	HE21	HE22
 	NE2	CD	HE22	HE21
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ GLU ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -260,7 +301,7 @@
 	CG	CB
 	CD	CG
 	OE2	CD
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -272,21 +313,23 @@
 	O	C
 	CD	OE1
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
 	CD	CG	OE2	OE1
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ GLY ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT2	-0.02	0
 	HA1	HB	0.09	0
 	HA2	HB	0.09	0
 	C	C	0.51	1
 	O	O	-0.51	1
  [ bonds ]
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -294,13 +337,15 @@
 	CA	HA2
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ HSD ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.09	1
@@ -322,7 +367,7 @@
 	ND1	CG
 	CE1	ND1
 	NE2	CD2
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -342,13 +387,65 @@
 	ND1	CE1	CG	HD1
 	CD2	NE2	CG	HD2
 	CE1	NE2	ND1	HE1
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
+
+[ HISA ]  ; Corresponding to charmm HSD residue
+ [ atoms ]
+	N	NH1	-0.47	0
+	H	H	0.31	0
+	CA	CT1	0.07	0
+	HA	HB	0.09	0
+	CB	CT2	-0.09	1
+	HB1	HA	0.09	1
+	HB2	HA	0.09	1
+	ND1	NR1	-0.36	1
+	HD1	H	0.32	1
+	CG	CPH1	-0.05	1
+	CE1	CPH2	0.25	2
+	HE1	HR1	0.13	2
+	NE2	NR2	-0.70	2
+	CD2	CPH1	0.22	2
+	HD2	HR3	0.10	2
+	C	C	0.51	3
+	O	O	-0.51	3
+ [ bonds ]
+	CB	CA
+	CG	CB
+	ND1	CG
+	CE1	ND1
+	NE2	CD2
+	N	H
+	N	CA
+	C	CA
+	C	+N
+	CA	HA
+	CB	HB1
+	CB	HB2
+	ND1	HD1
+	CD2	HD2
+	CE1	HE1
+	O	C
+	CG	CD2
+	CE1	NE2
+ [ impropers ]
+	ND1	CG	CE1	HD1
+	CD2	CG	NE2	HD2
+	CE1	ND1	NE2	HE1
+	ND1	CE1	CG	HD1
+	CD2	NE2	CG	HD2
+	CE1	NE2	ND1	HE1
+	N	-C	CA	H
+	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ HSE ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.08	1
@@ -369,7 +466,7 @@
 	CG	CB
 	ND1	CG
 	NE2	CD2
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -390,13 +487,65 @@
 	NE2	CE1	CD2	HE2
 	CD2	NE2	CG	HD2
 	CE1	NE2	ND1	HE1
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
+
+[ HISB ]  ; Corresponding to charmm HSE residue
+ [ atoms ]
+	N	NH1	-0.47	0
+	H	H	0.31	0
+	CA	CT1	0.07	0
+	HA	HB	0.09	0
+	CB	CT2	-0.08	1
+	HB1	HA	0.09	1
+	HB2	HA	0.09	1
+	ND1	NR2	-0.70	1
+	CG	CPH1	0.22	1
+	CE1	CPH2	0.25	1
+	HE1	HR1	0.13	1
+	NE2	NR1	-0.36	2
+	HE2	H	0.32	2
+	CD2	CPH1	-0.05	2
+	HD2	HR3	0.09	2
+	C	C	0.51	3
+	O	O	-0.51	3
+ [ bonds ]
+	CB	CA
+	CG	CB
+	ND1	CG
+	NE2	CD2
+	N	H
+	N	CA
+	C	CA
+	C	+N
+	NE2	CE1
+	CA	HA
+	CB	HB1
+	CB	HB2
+	NE2	HE2
+	CD2	HD2
+	CE1	HE1
+	O	C
+	CD2	CG
+	CE1	ND1
+ [ impropers ]
+	NE2	CD2	CE1	HE2
+	CD2	CG	NE2	HD2
+	CE1	ND1	NE2	HE1
+	NE2	CE1	CD2	HE2
+	CD2	NE2	CG	HD2
+	CE1	NE2	ND1	HE1
+	N	-C	CA	H
+	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ HSP ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.05	1
@@ -419,7 +568,7 @@
 	ND1	CG
 	CE1	ND1
 	NE2	CD2
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -438,13 +587,65 @@
 	ND1	CE1	CG	HD1
 	NE2	CD2	CE1	HE2
 	NE2	CE1	CD2	HE2
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
+
+[ HISH ]  ; Corresponding to charmm HSP residue
+ [ atoms ]
+	N	NH1	-0.47	0
+	H	H	0.31	0
+	CA	CT1	0.07	0
+	HA	HB	0.09	0
+	CB	CT2	-0.05	1
+	HB1	HA	0.09	1
+	HB2	HA	0.09	1
+	CD2	CPH1	0.19	1
+	HD2	HR1	0.13	1
+	CG	CPH1	0.19	1
+	NE2	NR3	-0.51	2
+	HE2	H	0.44	2
+	ND1	NR3	-0.51	2
+	HD1	H	0.44	2
+	CE1	CPH2	0.32	2
+	HE1	HR2	0.18	2
+	C	C	0.51	3
+	O	O	-0.51	3
+ [ bonds ]
+	CB	CA
+	CG	CB
+	ND1	CG
+	CE1	ND1
+	NE2	CD2
+	N	H
+	N	CA
+	C	CA
+	C	+N
+	CA	HA
+	CB	HB1
+	CB	HB2
+	ND1	HD1
+	NE2	HE2
+	CD2	HD2
+	CE1	HE1
+	O	C
+	CD2	CG
+	NE2	CE1
+ [ impropers ]
+	ND1	CG	CE1	HD1
+	ND1	CE1	CG	HD1
+	NE2	CD2	CE1	HE2
+	NE2	CE1	CD2	HE2
+	N	-C	CA	H
+	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ ILE ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT1	-0.09	1
@@ -467,7 +668,7 @@
 	CG1	CB
 	CG2	CB
 	CD	CG1
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -483,13 +684,15 @@
 	CD	HD3
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ LEU ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -512,7 +715,7 @@
 	CG	CB
 	CD1	CG
 	CD2	CG
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -528,13 +731,15 @@
 	CD2	HD23
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
-[ LYS ]
+[ LYSH ] ; Protonated lys, corresponding to charmm LYS residue]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -561,7 +766,7 @@
 	CD	CG
 	CE	CD
 	NZ	CE
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -579,13 +784,66 @@
 	NZ	HZ2
 	NZ	HZ3
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
+
+[ LYS ]  ; neutral lysine residue provided by Mark Abraham
+ [ atoms ]
+        N       NH1     -0.47   0
+        H       H       0.31    0
+        CA      CT1     0.07    0
+        HA      HB      0.09    0
+        CB      CT2     -0.18   1
+        HB1     HA      0.09    1
+        HB2     HA      0.09    1
+        CG      CT2     -0.18   2
+        HG1     HA      0.09    2
+        HG2     HA      0.09    2
+        CD      CT2     -0.18   3
+        HD1     HA      0.09    3
+        HD2     HA      0.09    3
+        CE      CT2     0.13    4
+        HE1     HA      0.075   4
+        HE2     HA      0.075   4
+        NZ      NH2     -0.96   4
+        HZ1     HC      0.34    4
+        HZ2     HC      0.34    4
+        C       C       0.51    5
+        O       O       -0.51   5
+ [ bonds ]
+        CB      CA
+        CG      CB
+        CD      CG
+        CE      CD
+        NZ      CE
+        N       H
+        N       CA
+        C       CA
+        C       +N
+        CA      HA
+        CB      HB1
+        CB      HB2
+        CG      HG1
+        CG      HG2
+        CD      HD1
+        CD      HD2
+        CE      HE1
+        CE      HE2
+        O       C
+        NZ      HZ1
+        NZ      HZ2
+ [ impropers ]
+        N       -C      CA      H
+        C       CA      +N      O
+[ cmap ]
+        -C      N       CA      C       +N
 
 [ MET ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -606,7 +864,7 @@
 	CG	CB
 	SD	CG
 	CE	SD
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -620,13 +878,15 @@
 	CE	HE3
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ PHE ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -651,7 +911,7 @@
 	CD2	CG
 	CE1	CD1
 	CZ	CE2
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -668,8 +928,10 @@
 	CE2	HE2
 	CZ	HZ
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ PRO ]
  [ atoms ]
@@ -706,11 +968,13 @@
  [ impropers ]
 	N	-C	CA	CD
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ SER ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	0.05	1
@@ -723,7 +987,7 @@
  [ bonds ]
 	CB	CA
 	OG	CB
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -733,13 +997,15 @@
 	OG	HG1
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ THR ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT1	0.14	1
@@ -756,7 +1022,7 @@
 	CB	CA
 	OG1	CB
 	CG2	CB
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -768,13 +1034,15 @@
 	CG2	HG23
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ TRP ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -803,7 +1071,7 @@
 	CD2	CG
 	NE1	CD1
 	CZ2	CE2
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -825,13 +1093,15 @@
 	CZ3	CE3
 	CH2	CZ2
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ TYR ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT2	-0.18	1
@@ -858,7 +1128,7 @@
 	CE1	CD1
 	CZ	CE2
 	OH	CZ
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -875,13 +1145,15 @@
 	CE1	CZ
 	CE2	CD2
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ VAL ]
  [ atoms ]
 	N	NH1	-0.47	0
-	HN	H	0.31	0
+	H	H	0.31	0
 	CA	CT1	0.07	0
 	HA	HB	0.09	0
 	CB	CT1	-0.09	1
@@ -900,7 +1172,7 @@
 	CB	CA
 	CG1	CB
 	CG2	CB
-	N	HN
+	N	H
 	N	CA
 	C	CA
 	C	+N
@@ -914,8 +1186,10 @@
 	CG2	HG23
 	O	C
  [ impropers ]
-	N	-C	CA	HN
+	N	-C	CA	H
 	C	CA	+N	O
+ [ cmap ]
+	-C	N	CA	C	+N
 
 [ ALAD ]
  [ atoms ]
@@ -968,6 +1242,55 @@
 	NL	CLP	CA	HL
 	CRP	CA	NR	OR
 	NR	CRP	CR	HR
+ [ cmap ]
+	CLP	NL	CA	CRP	NR
+
+[ ACE ] ; terminal residue, provided by Mark Abraham
+ [ atoms ]
+       CH3     CT3     -0.270  1
+       HH31    HA      0.090   1
+       HH32    HA      0.090   1
+       HH33    HA      0.090   1
+       C       C       0.510   2
+       O       O       -0.510  2
+ [ bonds ]
+       C       CH3
+       C       +N
+       CH3     HH31
+       CH3     HH32
+       CH3     HH33
+       O       C
+ [ impropers ]
+       C       CH3     +N      O
+
+[ NMA ] ; terminal residue, provided by Mark Abraham
+ [ atoms ]
+       N       NH1     -0.470  1
+       H       H       0.310   1
+       CH3     CT3     -0.110  1
+       HH31    HA      0.090   1
+       HH32    HA      0.090   1
+       HH33    HA      0.090   1
+ [ bonds ]
+       -C      N
+       N       H
+       N       CH3
+       CH3     HH31
+       CH3     HH32
+       CH3     HH33
+ [ impropers ]
+       N       -C      CH3     H
+       -C      CH3     N       -O
+
+[ HOH ]
+ [ atoms ]
+        OW      OT      -0.834  0
+        HW1     HT      0.417   0
+        HW2     HT      0.417   0
+ [ bonds ]
+        OW      HW1
+        OW      HW2
+        HW1     HW2
 
 [ TIP3 ]
  [ atoms ]

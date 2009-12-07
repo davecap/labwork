@@ -1,0 +1,33 @@
+****************************************************************
+*               Charmm to Gromacs port v1.1 writted by         *
+*               Par Bjelkmar, bjelkmar@cbr.su.se               *
+*               Alternative correspondance:                    *
+*               Erik Lindahl, lindahl@cbr.su.se                *
+****************************************************************
+
+HEME A Parameters were incorporated December 4, 2009 by David A. Caplan
+
+****************************************************************
+
+NOTE: Version 1.1 of the force field is a beta version of the official release scheduled for GROMACS 4.1.
+NOTE2: When publishing research using these files, please find and cite our (yet to be published) paper(s) (see below)
+
+MODIFICATIONS IN V1.1 (compared to v1.0)
+* added one #endif statement in ffcharmm27nb.itp, in order to close the #ifdef CHARMM_TIP3P block
+* ffcharmm27_tip3p.itp file added to be able to use "true" charmm tip3p waters with LJ interactions. Add '#define CHARMM_TIP3P' in ffcharmm27.itp to use these but beware, you lose some performance. For more information, see below.
+* renamed some residues in rtp file and added residues for ACE NMA termini (provided by Mark Abraham)
+* supports CMAP (in git master branch from Oct 2009). Paper by Pär Bjelkmar, Per Larsson, Michel Cuendet, Berk Hess and Erik Lindahl submitted.
+* supports virtual sites
+* supports implicit solvent models (implemented by Per Larsson and Erik Lindahl, submitted paper)
+* neutral COOH and NH2 termini added
+
+USING FFCHARMM27_TIP3P
+First, both SPC, TIP3P, and TIP4P were all parameterized (by Berendsen and Jorgensen, respectively) without any Lennard-Jones interaction on the hydrogens. One of the reasons for this is that it is virtually impossible to determine what the interaction should be (since the radius is negligible compared to the oxygen), and the other that it potentially saves a whole lot of interactions - between two waters only the OW-OW interaction has LJ.
+
+For some reason Martin Karplus still decided to use these water models with a hydrogen from Charmm (possibly because of GB-related radius issues) that has L-J interactions. In pratice the effect is so small that it won't affect any water properties significantly, so Charmm runs with these models still reproduce the model properties almost perfectly.
+
+However, the special water and water-water optimizations in Gromacs use the special properties of the common water models to speed up nonbonded interactions - so once we detect that the hydrogen in a charge group has Lennard-Jones interactions these will be disabled, and you lose a factor ~2 in performance.
+
+One solution (which we'll eventually do) is of course to write charmm-optimized water loops that are only a couple of percent slower, but since it won't improve any results and still be slightly slower than just removing the hydrogen Lennard-Jones (which in our opinion shouldn't be there in the first place!) and use the vanilla SPC/TIP models it's not exactly on the top of our priority list...
+
+Although we haven't tested it in detail, my gut feeling is that a user is much better of with the vanilla models and 2x better performance, unless it is critical to exactly reproduce Charmm values. The best option is probably to have grompp warn about this (either warning that your current setup is slow, or that it won't reproduce charmm exactly) and tell the user how it can be changed.
