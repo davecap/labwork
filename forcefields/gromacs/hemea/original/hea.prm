@@ -1,0 +1,330 @@
+* Parameters for HEA
+*
+
+BONDS
+CPB  C     450.000     1.3800 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+CT1  CPM   222.500     1.5000 ! ALLOW   BCL
+                ! RP 15-1-96
+CT2  CT    222.500     1.5380 ! ALLOW   SPO
+                ! RP 15-1-96
+CT3  CT    222.500     1.5380 ! ALLOW   SPO
+                ! RP 15-1-96
+HA   C     330.000     1.1000 ! ALLOW ARO HEM
+                ! Heme vinyl substituent (KK, from propene (JCS))
+NPH  H     460.000     1.0060 ! ALLOW BCL
+                ! RP 15-1-96
+O    CA    620.000     1.2300 ! ALLOW   U10
+                ! RP 15-1-96
+OC   FE    250.000     1.8000 ! ALLOW FEGL
+                ! RP 15-1-96
+OS   CC    150.000     1.3340 ! ALLOW RBS
+                ! RP 15-1-96
+OS   C     150.000     1.3340 ! ALLOW U10
+                ! RP 15-1-96
+OS   CA    150.000     1.3340 ! ALLOW U10
+                ! RP 15-1-96
+OS   CT    340.000     1.4300 ! ALLOW SPO
+                ! RP 15-1-96
+OS   CT2   340.000     1.4300 ! ALLOW RBS
+                ! RP 15-1-96
+CTL4  HAL    322.00     1.111   ! alkanes, 3/92
+H    C     330.000     1.1000 ! ALLOW CHO
+                ! aldehyde C-terminus (RP 06-8-96)
+NH3  FE    270.200     1.9580 ! ALLOW NCYT
+                ! Heme (6-liganded): N-terminal ligand (RP 01/8/96)
+HL    OHL   545.0       0.960   ! ALLOW PO4 - RP 15-1-96
+NTL   CT2   215.00      1.51    ! ALLOW LDA - RP 15-1-96
+NTL   CT3   215.00      1.51    ! ALLOW LDA - RP 15-1-96
+NTL   OH1   350.00      1.40    ! ALLOW LDA - RP 15-1-96
+
+
+ANGLES
+CPA  CPB  C      70.000   126.7400 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+CPB  CPB  C      70.000   126.7400 ! ALLOW BCL
+                ! RP 15-1-96
+CPA  CPM  CT1    94.200   125.1200 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    C      70.000   121.5000 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+CPB  C    CT1    70.000   121.5000 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CT2    70.000   126.7500 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CT3    70.000   126.7500 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CPB    70.000   126.7500 ! ALLOW BCL
+                ! RP 21-5-97
+CPB  CT2  CT3    70.000   126.7500 ! ALLOW BCL
+                ! RP 15-1-96
+CPM  CT1  CC     52.000   108.0000 ! ALLOW BCL
+                ! RP 15-1-96
+CPM  CT1  C      52.000   108.0000 ! ALLOW BCL
+                ! RP 15-1-96
+C    CT1  C      52.000   108.0000 ! ALLOW BCL
+                ! RP 15-1-96
+C    CT2  C      52.000   108.0000 ! ALLOW BCL
+                ! RP 21-5-97
+C    CT2  CA     51.800   107.5000 ! ALLOW   U10
+                ! RP 15-1-96
+CT2  CT2  CT    58.350    113.50   11.16   2.56100 ! ALLOW   SPO
+                ! RP 15-1-96
+CT2  C    HA    15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT2  C    C     15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT3  C    C     15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT3  C    CT2   15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT3  C    CT3   15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 21-5-97
+CT3  CPB  C     15.000    120.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 21-5-97
+CT1  CC   OS    15.000    121.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT2  CC   OS    15.000    121.00   50.00   2.44000 ! ALLOW  BCL
+                ! RP 15-1-96
+O    CC   OS    90.000    125.90  160.00   2.25760 ! ALLOW  BCL
+                ! RP 15-1-96
+O    C    OS    90.000    125.90  160.00   2.25760 ! ALLOW  BCL
+                ! RP 15-1-96
+CA   OS   C     40.000    109.60   30.00   2.26510 ! ALLOW  U10
+                ! RP 15-1-96
+C    CT1  CC     52.000   108.0000 ! ALLOW  BCL
+                ! RP 15-1-96
+CT1  C    HA     50.000   117.3000 ! ALLOW   CHO
+                ! aldehyde C-terminus (RP 06-8-96), untested
+CT2  CT1  CT2   53.350    114.00    8.00   2.56100 ! ALLOW   BCL
+                ! RP 15-1-96
+CT3  CT   CT2   53.350    114.00    8.00   2.56100 ! ALLOW   SPO
+                ! RP 15-1-96
+CT3  CT   CT3   53.350    114.00    8.00   2.56100 ! ALLOW   SPO
+                ! RP 15-1-96
+CT2  CT   OS    75.700    110.10   ! ALLOW SPO
+                ! RP 15-1-96
+CT3  CT   OS    75.700    110.10   ! ALLOW SPO
+                ! RP 15-1-96
+CT3  OS   CA    40.000    109.60   30.00   2.26510 ! ALLOW U10
+                ! RP 15-1-96
+CT2  OS   CC    40.000    109.60   30.00   2.26510 ! ALLOW BCL 
+                ! RP 15-1-96
+CT3  OS   C     40.000    109.60   30.00   2.26510 ! ALLOW BCL 
+                ! RP 15-1-96
+CT3  OS   CC    40.000    109.60   30.00   2.26510 ! ALLOW BCL 
+                ! RP 15-1-96
+CT3  OS   CT3   40.000    109.60   30.00   2.26510 ! ALLOW BCL 
+                ! RP 15-1-96
+CT3  OS   CT    40.000    109.60   30.00   2.26510 ! ALLOW SPO 
+                ! RP 15-1-96
+CT3  NTL  CT2    35.000   109.4700 ! ALLOW LDA
+                !RP 15-1-96
+CT3  NTL  CT3    35.000   109.4700 ! ALLOW LDA
+                !RP 15-1-96
+H    OH1  NTL    50.000   112.5000 ! ALLOW LDA
+                ! RP 15-1-96
+HA   C    CT3    50.000   120.5000 ! ALLOW   U10
+                ! RP 15-1-96
+HA   C    C      50.000   120.5000 ! ALLOW   PEP POL ARO
+                ! Heme vinyl substituent (KK from propene (JCS))
+HA   C    CPB    50.000   120.0000 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+HA   C    HA     50.000   118.0000 ! ALLOW   PEP POL ARO
+                ! Heme vinyl substituent (KK from propene (JCS))
+HA   CT1  CPM   33.000    109.50   30.00   2.16300 ! ALLOW BCL 
+                ! RP 15-1-96
+HA   CT1  CC    33.000    109.50   30.00   2.16300 ! ALLOW BCL
+                ! RP 15-1-96
+HA   CT2  CT    33.430    110.10   22.53   2.17900 ! ALLOW   SPO
+                ! RP 15-1-96
+HA   CT3  CT    33.430    110.10   22.53   2.17900 ! ALLOW   SPO
+                ! RP 15-1-96
+HA   CT3  NTL   37.500    110.10   22.53   2.17900 ! ALLOW   LDA
+                ! RP 15-1-96
+NTL  CT2  CT2    70.000   113.5000 ! ALLOW   LDA
+                ! RP 15-1-96
+NTL  CT2  HA     48.000   108.0000 ! ALLOW LDA
+                ! RP 15-1-96
+O    C    CPB    80.000   121.0000 ! ALLOW BCL
+                ! RP 15-1-96
+OS   CA   CA     45.200   120.0000 ! ALLOW   U10
+                ! RP 15-1-96
+O    CA   CA     45.200   120.0000 ! ALLOW   U10
+                ! RP 15-1-96
+OH1  NTL  CT2    50.000   110.0000 ! ALLOW LDA
+                ! RP 15-1-96
+OH1  NTL  CT3    50.000   110.0000 ! ALLOW LDA
+                ! RP 15-1-96
+CC   OC   FE      0.000   180.0000 ! ALLOW FEGL
+                ! RP 15-1-96
+OS   C    CT1   55.000    109.00   20.00   2.32600 ! ALLOW BCL
+                ! RP 15-1-96
+OS   CT2  C      60.000   109.5000 ! ALLOW BCL
+                ! RP 15-1-96
+OS   C    HA     60.000   109.5000 ! ALLOW U10
+                ! RP 15-1-96
+FE   NH3  CT1    30.000   109.5000 ! ALLOW NCYT cytf N-terminal
+                ! Heme (6-liganded): N-terminal ligand (RP 01/8/96)
+FE   NH3  HC     30.000   109.5000 ! ALLOW NCYT cytf N-terminal
+                ! Heme (6-liganded): N-terminal ligand (RP 01/8/96)
+H    NPH  CPA    28.000   126.0000 ! ALLOW   heme
+                !RP 15-1-96
+NH3  FE   NPH    50.000    90.0000 ! ALLOW NCYT 
+                ! Heme (6-liganded): N-terminal link in cytf (RP 01/8/96)
+NH3  FE   NR2    50.000   180.0000 ! ALLOW NCYT 
+                ! Heme (6-liganded): N-terminal link in cytf (RP 01/8/96)
+OHL  PL   OHL    48.1      108.0    ! ALLOW PO4 - RP 15-1-96
+
+HAL  CTL2 CL      33.00    109.50   30.00   2.163  ! methyl acetate
+HAL  CTL3 CL      33.00    109.50   30.00   2.163  ! methyl acetate
+HAL  CTL2 HAL    35.500    109.00    5.40   1.80200 ! alkane, 3/92
+HAL  CTL3 HAL    35.500    108.40    5.40   1.80200 ! alkane, 3/92
+HAL  CTL4 HAL    35.500    107.9     5.40   1.80200 ! alkane, 3/92
+HAL  CTL1 CTL1   34.500    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL1 CTL2   34.500    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL1 CTL3   34.500    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL2 CTL1   26.500    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL2 CTL2   26.500    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL2 CTL3   34.600    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL3 CTL1   33.430    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL3 CTL2   34.600    110.10   22.53   2.179  ! alkane, 3/92
+HAL  CTL3 CTL3   37.500    110.10   22.53   2.179  ! alkane, 3/92
+O    C    HA     44.000   122.0000 ! ALLOW POL
+                ! adm jr., 5/13/91, formamide geometry and vibrations  (copy (TBW) )
+
+
+DIHEDRALS
+OS   CT2  C    HA       0.2300  2   180.00 ! ALLOW   BCL
+                ! RP 15-1-96
+OS   CT2  C    C        0.2300  2   180.00 ! ALLOW  BCL
+                ! RP 15-1-96
+HA   CT3  C    CT2      0.0000  3     0.00 ! ALLOW BCL
+                ! RP 15-1-96
+HA   CT3  OS   CA       0.0000  3     0.00 ! ALLOW U10
+                ! RP 15-1-96
+CT3  CA   CA   CT2      3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+CT3  CA   CA   O        3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+CA   CA   CA   O        3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+CA   CA   CA   OS       3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+OS   CA   CA   OS       3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+O    CA   CA   OS       3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+O    CA   CA   CT2      3.1000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+CA   CA   OS   CT3      2.0000  2   180.00 ! ALLOW   U10
+                ! RP 15-1-96
+CPH1 CPH1 NR2  FE      10.0000  2   180.00 ! ALLOW HIFE
+                ! RP 15-1-96
+CT2  CC   OC   FE      10.0000  2   180.00 ! ALLOW FEGL
+                ! RP 15-1-96
+FE   NR2  CPH2 NR1     10.0000  2   180.00 ! ALLOW HIFE
+                ! RP 15-1-96
+HA   C    CT2  CT2      0.0000  3   180.00 ! ALLOW U10
+                ! RP 15-1-96
+C    C    CT2  CT2      0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+C    C    CT2  CA       0.0000  3   180.00 ! ALLOW U10
+                ! RP 15-1-96
+C    C    CT2  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+CT3  C    CT2  CT2      0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+CT3  C    CT2  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+OS   C    CT2  HA       0.0000  3   180.00 ! ALLOW RBS
+                ! RP 15-1-96
+HA   C    CT2  CA       0.0000  3   180.00 ! ALLOW U10
+                ! RP 15-1-96
+HA   C    CT2  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+C    C    CT3  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+X    C    CT2  X        0.0000  3   180.00 ! ALLOW BCL
+                ! RP 97-05-21
+X    C    CT3  X        0.0000  3   180.00 ! ALLOW BCL
+                ! RP 97-05-21
+CPB  C    CT1  CPM      0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CT1  CC       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CT2  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  C    CT3  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 15-1-96
+C    CPB  CT3  HA       0.0000  3   180.00 ! ALLOW BCL
+                ! RP 21-5-97
+CT1  CC   OS   CT3      0.9650  1     0.00 ! ALLOW  RBS 
+                ! RP 15-1-96
+CT2  CC   OS   CT2      0.9650  1     0.00 ! ALLOW  RBS 
+                ! RP 15-1-96
+O    CC   OS   CT3      0.9650  1   180.00 ! ALLOW  RBS 
+                ! RP 15-1-96
+O    CC   OS   CT2      0.9650  1   180.00 ! ALLOW  RBS 
+                ! RP 15-1-96
+X    NTL  OH1  X        0.0000  6   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    NTL  CT3  X        0.0000  6   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    NTL  CT2  X        0.0000  6   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    CT   CT2  X        0.0000  6   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    CT   CT3  X        0.0000  6   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    CT   OS   X        0.0000  2   180.00 ! ALLOW  SPO 
+                ! RP 15-1-96
+X    CT1  CPM  X        0.0000  6     0.00 ! ALLOW BCL
+                ! RP 15-1-96  vaseux
+X    FE   NH3  X        0.0000  4     0.00 ! ALLOW NCYT
+                ! Heme (6-liganded): cytf N-terminal ligand (RP 01/8/96)
+X    CPB  C    X        3.0000  2   180.00 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+X    C    C    X        4.0000  2   180.00 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+
+IMPROPER
+C    X    X    CT2    90.0000         0      0.0000 ! ALLOW U10
+                ! RP 15-1-96
+C    X    X    CT3    90.0000         0      0.0000 ! ALLOW U10
+                ! RP 15-1-96
+C    X    X    C      90.0000         0      0.0000 ! ALLOW U10
+                ! RP 15-1-96
+CPB  X    X    C      90.0000         0      0.0000 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (KK 05/13/91)
+CPM  X    X    CPA    90.0000         0      0.0000 ! ALLOW BCL
+                ! RP 15-1-96
+CT2  X    X    CT1     55.0           0     35.2644 ! ALLOW U10
+                ! RP 15-1-96
+HA   C    C    HA     20.0000         0      0.0000 ! ALLOW   PEP POL ARO
+                ! Heme vinyl substituent (KK, from propene (JCS))
+HA   HA   C    C      20.0000         0    180.0000 ! ALLOW   PEP POL ARO
+                ! Heme vinyl substituent (KK, from propene (JCS))
+H    CPA  CPA  NPH    29.4000         0      0.0000 ! ALLOW BCL
+                ! RP 15-1-96
+CT1  CPA  CPA  CPM    29.4000         0      0.0000 ! ALLOW BCL
+                ! RP 15-1-96
+HA   X    X    CPM    29.4000         0      0.0000 ! ALLOW HEM
+                ! Heme (6-liganded): porphyrin macrocycle (RP 97-05-21)
+CA   X    X    CA     90.0000         0      0.0000 ! ALLOW BCL
+                ! RP 15-1-96
+HA   X    X    C     120.0000         0      0.0000 ! ALLOW   CHO
+                ! Aldehyde C-terminus (RP 06-8-96)
+O    X    X    CC     96.0000         0      0.0000 ! ALLOW  RBS 
+                ! RP 15-1-96
+
+
+NONBONDED nbxmod  5 atom cdiel switch vatom vdistance vswitch -
+cutnb 13.0 ctofnb 12.0 ctonnb  11.0 eps 1.0 e14fac 1.0 wmin 1.5
+                !adm jr., 5/08/91, suggested cutoff scheme
+CTL4     0.0       -0.0800    2.06  0.0 -0.01 1.9 ! alkane, 3/92
+HAL      0.0       -0.022     1.3200 ! alkane, 3/92
+CU     0.000000  -0.250000     1.000000 ! ALLOW  ION
+                ! R. Pomes 97-08-05 for cytox, dummy values to refine
+
+END

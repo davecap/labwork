@@ -162,6 +162,12 @@ Ar	18	39.94800	0.00	A	3.41000e-01	2.74580e-02
 ; Added by DvdS 05/2005 copied from GROMACS force field.
 SI	14	28.08000	0.00	A	3.38550e-01	2.44704e+00
 
+[ atomtypes ] ; HEME A specific atom types
+;name mass     charge ptype     c6       c12
+ CTL4 12.011000   0.0     A -0.003274 -8.007e-06 ; -0.000252 -3.793e-07
+  HAL 1.008000   0.0     A -6.233e-05 -1.055e-08
+   CU 12.011000   0.0     A -0.0001339 -4.284e-09
+
 [ pairtypes ]
 ; i	j	func	sigma1-4	epsilon1-4 ; THESE ARE 1-4 INTERACTIONS
 CP1	CP1	1	0.338541512893	0.04184
