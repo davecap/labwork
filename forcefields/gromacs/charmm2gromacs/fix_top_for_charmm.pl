@@ -62,7 +62,7 @@ if ( $#warnings == -1 ) {
 
 # first parse ffcharmnb.itp to get the atom types that need special 1-4
 # interactions
-my $nb_filename = (defined $ENV{GMXLIB} ? "$ENV{GMXLIB}/" : "./") . 'ffcharmmnb.itp';
+my $nb_filename = (defined $ENV{GMXLIB} ? "$ENV{GMXLIB}/" : "./") . 'ffcharmm27nb.itp';
 unless ( -r $nb_filename ) {
     die "Couldn't find ffcharmnb.itp as $nb_filename!";
 }
