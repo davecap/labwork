@@ -20,7 +20,7 @@
 
 use strict;
 use IO::File;
-#use Data::Dumper;   # this line is needed if you want the debugging output
+use Data::Dumper;   # this line is needed if you want the debugging output
 
 # This script prepares a .top file produced by "pdb2gmx -ff charmm" for
 # actual use as input to grompp. It requires that grompp be used 
@@ -72,11 +72,16 @@ my %LJ_params;
 while ( my $line = <$nb_file> ) {
     #skip commented lines
     next if ( $line =~ /^[\[;]/ );
-    my @words = split ' ', $line;
+    # split off the ending comment if there is one
+    my @split_line = split ';', $line;
+    # now split the actual data
+    #print Dumper(@split_line);
+    my @words = split ' ', $split_line[0];
     if ( $#words >= 6 ) {
-        print @words;
+        #print "#### WORDS START ####\n";
+        #print Dumper(@words) . "\n";
+        #print "#### WORDS END ####\n";
 	# we've got a line with the special 1-4 parameters
-#	print "Got $line\n";
 	$special_LJ_params{$words[0]} = [ $words[7], $words[8] ];
     }
     # and keep these because we need them too
@@ -107,6 +112,7 @@ my $line_to_seek;
 # We rely on the grompp warnings being in numerical order
 if ( $warnings[$i] =~ /line (\d+)\]/ ) {
     $line_to_seek = $1;
+    print "line to seek: " . $line_to_seek . "\n";
 } else {
     $line_to_seek = -1;
 }
@@ -175,7 +181,7 @@ while ( my $line = <$input> ) {
 		    $second_LJ = $LJ_params{$atom_types[$words[1]]};
 		}
 		chop $line;
-#		print STDERR Dumper($$first_LJ[0], $$second_LJ[0]);
+        #print STDERR Dumper($$first_LJ[0], $$second_LJ[0]);
 		$line .= sprintf " %e %e ; %s %s\n", sqrt($$first_LJ[0] * $$second_LJ[0]), sqrt($$first_LJ[1] * $$second_LJ[1]), $atom_types[$words[0]], $atom_types[$words[1]];
 	    }
 	}
