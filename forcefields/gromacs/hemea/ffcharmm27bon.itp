@@ -1441,97 +1441,98 @@ OCL	X	X	CL	2	0.00	803.328
   HAL  CTL3  CTL2     5 110.1 289.5 0.2179 1.885e+04
   HAL  CTL3  CTL3     5 110.1 313.8 0.2179 1.885e+04
 
+
 [ dihedraltypes ]
   ;  i    j    k     l   func    phi0     kphi      n
 ; First come the dihedrals with sin delta != 0 and those with
-;  multiplicity >= 6, then the remainder, converted to Ryckaert-Bellemans
-;  form, followed by comments of the contributing underlying periodic form(s).
-    X   NTL   OH1     X     1 180 0 6
-    X   NTL   CT3     X     1 180 0 6
-    X   NTL   CT2     X     1 180 0 6
-    X    CT   CT2     X     1 180 0 6
-    X    CT   CT3     X     1 180 0 6
-    X   CT1   CPM     X     1 0 0 6
-  CT3     C   CT2   CT2     3 0 0 0 0 0 0
-; CT3     C   CT2   CT2     1 180 0 3
-    X    FE   NH3     X     3 0 0 0 0 0 0
-;   X    FE   NH3     X     1 0 0 4
-  CPB     C   CT1    CC     3 0 0 0 0 0 0
-; CPB     C   CT1    CC     1 180 0 3
-  CT3     C   CT2    HA     3 0 0 0 0 0 0
-; CT3     C   CT2    HA     1 180 0 3
-    O    CA    CA    OS     3 25.94 0 -25.94 0 0 0
-;   O    CA    CA    OS     1 180 12.97 2
-    C   CPB   CT3    HA     3 0 0 0 0 0 0
-;   C   CPB   CT3    HA     1 180 0 3
-    X   CPB     C     X     3 25.1 0 -25.1 0 0 0
-;   X   CPB     C     X     1 180 12.55 2
-    X     C   CT3     X     3 0 0 0 0 0 0
-;   X     C   CT3     X     1 180 0 3
-   CA    CA    OS   CT3     3 16.74 0 -16.74 0 0 0
-;  CA    CA    OS   CT3     1 180 8.368 2
-    O    CC    OS   CT3     3 4.038 4.038 0 0 0 0
-;   O    CC    OS   CT3     1 180 4.038 1
-   HA     C   CT2   CT2     3 0 0 0 0 0 0
-;  HA     C   CT2   CT2     1 180 0 3
-   OS   CT2     C     C     3 1.925 0 -1.925 0 0 0
-;  OS   CT2     C     C     1 180 0.9623 2
-   OS     C   CT2    HA     3 0 0 0 0 0 0
-;  OS     C   CT2    HA     1 180 0 3
-    X     C     C     X     3 33.47 0 -33.47 0 0 0
-;   X     C     C     X     1 180 16.74 2
-   HA   CT3    OS    CA     3 0 0 0 0 0 0
-;  HA   CT3    OS    CA     1 0 0 3
-    C     C   CT3    HA     3 0 0 0 0 0 0
-;   C     C   CT3    HA     1 180 0 3
-  CPB     C   CT1   CPM     3 0 0 0 0 0 0
-; CPB     C   CT1   CPM     1 180 0 3
-   FE   NR2  CPH2   NR1     3 83.68 0 -83.68 0 0 0
-;  FE   NR2  CPH2   NR1     1 180 41.84 2
-    X     C   CT2     X     3 0 0 0 0 0 0
-;   X     C   CT2     X     1 180 0 3
-    C     C   CT2   CT2     3 0 0 0 0 0 0
-;   C     C   CT2   CT2     1 180 0 3
-  CT3    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
-; CT3    CA    CA   CT2     1 180 12.97 2
- CPH1  CPH1   NR2    FE     3 83.68 0 -83.68 0 0 0
-; PH1  CPH1   NR2    FE     1 180 41.84 2
-  CT1    CC    OS   CT3     3 4.038 -4.038 0 0 0 0
-; CT1    CC    OS   CT3     1 0 4.038 1
-   HA     C   CT2    HA     3 0 0 0 0 0 0
-;  HA     C   CT2    HA     1 180 0 3
-   HA     C   CT2    CA     3 0 0 0 0 0 0
-;  HA     C   CT2    CA     1 180 0 3
-   OS    CA    CA    OS     3 25.94 0 -25.94 0 0 0
-;  OS    CA    CA    OS     1 180 12.97 2
-    C     C   CT2    HA     3 0 0 0 0 0 0
-;   C     C   CT2    HA     1 180 0 3
-   HA   CT3     C   CT2     3 0 0 0 0 0 0
-;  HA   CT3     C   CT2     1 0 0 3
-  CT2    CC    OC    FE     3 83.68 0 -83.68 0 0 0
-; CT2    CC    OC    FE     1 180 41.84 2
-  CT3    CA    CA     O     3 25.94 0 -25.94 0 0 0
-; CT3    CA    CA     O     1 180 12.97 2
-   CA    CA    CA     O     3 25.94 0 -25.94 0 0 0
-;  CA    CA    CA     O     1 180 12.97 2
-   OS   CT2     C    HA     3 1.925 0 -1.925 0 0 0
-;  OS   CT2     C    HA     1 180 0.9623 2
-    C     C   CT2    CA     3 0 0 0 0 0 0
-;   C     C   CT2    CA     1 180 0 3
-   CA    CA    CA    OS     3 25.94 0 -25.94 0 0 0
-;  CA    CA    CA    OS     1 180 12.97 2
-  CPB     C   CT2    HA     3 0 0 0 0 0 0
-; CPB     C   CT2    HA     1 180 0 3
-  CPB     C   CT3    HA     3 0 0 0 0 0 0
-; CPB     C   CT3    HA     1 180 0 3
-    O    CC    OS   CT2     3 4.038 4.038 0 0 0 0
-;   O    CC    OS   CT2     1 180 4.038 1
-    X    CT    OS     X     3 0 0 0 0 0 0
-;   X    CT    OS     X     1 180 0 2
-  CT2    CC    OS   CT2     3 4.038 -4.038 0 0 0 0
-; CT2    CC    OS   CT2     1 0 4.038 1
-    O    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
-;   O    CA    CA   CT2     1 180 12.97 2
+;  multiplicity >= 6, then the remainder, converted to Gromacs periodic dihedral form
+; with Ryckaert-Bellemans converted form commented underneath.
+    X   NTL   OH1     X     9 180.00 0.00 6
+    X   NTL   CT3     X     9 180.00 0.00 6
+    X   NTL   CT2     X     9 180.00 0.00 6
+    X    CT   CT2     X     9 180.00 0.00 6
+    X    CT   CT3     X     9 180.00 0.00 6
+    X   CT1   CPM     X     9 0.00 0.00 6
+; CT3     C   CT2   CT2     3 0 0 0 0 0 0
+  CT3     C   CT2   CT2     9 180.00 0.00 3
+;   X    FE   NH3     X     3 0 0 0 0 0 0
+    X    FE   NH3     X     9 0.00 0.00 4
+; CPB     C   CT1    CC     3 0 0 0 0 0 0
+  CPB     C   CT1    CC     9 180.00 0.00 3
+; CT3     C   CT2    HA     3 0 0 0 0 0 0
+  CT3     C   CT2    HA     9 180.00 0.00 3
+;   O    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+    O    CA    CA    OS     9 180.00 12.97 2
+;   C   CPB   CT3    HA     3 0 0 0 0 0 0
+    C   CPB   CT3    HA     9 180.00 0.00 3
+;   X   CPB     C     X     3 25.1 0 -25.1 0 0 0
+    X   CPB     C     X     9 180.00 12.55 2
+;   X     C   CT3     X     3 0 0 0 0 0 0
+    X     C   CT3     X     9 180.00 0.00 3
+;  CA    CA    OS   CT3     3 16.74 0 -16.74 0 0 0
+   CA    CA    OS   CT3     9 180.00 8.37 2
+;   O    CC    OS   CT3     3 4.038 4.038 0 0 0 0
+    O    CC    OS   CT3     9 180.00 4.04 1
+;  HA     C   CT2   CT2     3 0 0 0 0 0 0
+   HA     C   CT2   CT2     9 180.00 0.00 3
+;  OS   CT2     C     C     3 1.925 0 -1.925 0 0 0
+   OS   CT2     C     C     9 180.00 0.96 2
+;  OS     C   CT2    HA     3 0 0 0 0 0 0
+   OS     C   CT2    HA     9 180.00 0.00 3
+;   X     C     C     X     3 33.47 0 -33.47 0 0 0
+    X     C     C     X     9 180.00 16.74 2
+;  HA   CT3    OS    CA     3 0 0 0 0 0 0
+   HA   CT3    OS    CA     9 0.00 0.00 3
+;   C     C   CT3    HA     3 0 0 0 0 0 0
+    C     C   CT3    HA     9 180.00 0.00 3
+; CPB     C   CT1   CPM     3 0 0 0 0 0 0
+  CPB     C   CT1   CPM     9 180.00 0.00 3
+;  FE   NR2  CPH2   NR1     3 83.68 0 -83.68 0 0 0
+   FE   NR2  CPH2   NR1     9 180.00 41.84 2
+;   X     C   CT2     X     3 0 0 0 0 0 0
+    X     C   CT2     X     9 180.00 0.00 3
+;   C     C   CT2   CT2     3 0 0 0 0 0 0
+    C     C   CT2   CT2     9 180.00 0.00 3
+; CT3    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
+  CT3    CA    CA   CT2     9 180.00 12.97 2
+; PH1  CPH1   NR2    FE     3 83.68 0 -83.68 0 0 0
+ CPH1  CPH1   NR2    FE     9 180.00 41.84 2
+; CT1    CC    OS   CT3     3 4.038 -4.038 0 0 0 0
+  CT1    CC    OS   CT3     9 0.00 4.04 1
+;  HA     C   CT2    HA     3 0 0 0 0 0 0
+   HA     C   CT2    HA     9 180.00 0.00 3
+;  HA     C   CT2    CA     3 0 0 0 0 0 0
+   HA     C   CT2    CA     9 180.00 0.00 3
+;  OS    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+   OS    CA    CA    OS     9 180.00 12.97 2
+;   C     C   CT2    HA     3 0 0 0 0 0 0
+    C     C   CT2    HA     9 180.00 0.00 3
+;  HA   CT3     C   CT2     3 0 0 0 0 0 0
+   HA   CT3     C   CT2     9 0.00 0.00 3
+; CT2    CC    OC    FE     3 83.68 0 -83.68 0 0 0
+  CT2    CC    OC    FE     9 180.00 41.84 2
+; CT3    CA    CA     O     3 25.94 0 -25.94 0 0 0
+  CT3    CA    CA     O     9 180.00 12.97 2
+;  CA    CA    CA     O     3 25.94 0 -25.94 0 0 0
+   CA    CA    CA     O     9 180.00 12.97 2
+;  OS   CT2     C    HA     3 1.925 0 -1.925 0 0 0
+   OS   CT2     C    HA     9 180.00 0.96 2
+;   C     C   CT2    CA     3 0 0 0 0 0 0
+    C     C   CT2    CA     9 180.00 0.00 3
+;  CA    CA    CA    OS     3 25.94 0 -25.94 0 0 0
+   CA    CA    CA    OS     9 180.00 12.97 2
+; CPB     C   CT2    HA     3 0 0 0 0 0 0
+  CPB     C   CT2    HA     9 180.00 0.00 3
+; CPB     C   CT3    HA     3 0 0 0 0 0 0
+  CPB     C   CT3    HA     9 180.00 0.00 3
+;   O    CC    OS   CT2     3 4.038 4.038 0 0 0 0
+    O    CC    OS   CT2     9 180.00 4.04 1
+;   X    CT    OS     X     3 0 0 0 0 0 0
+    X    CT    OS     X     9 180.00 0.00 2
+; CT2    CC    OS   CT2     3 4.038 -4.038 0 0 0 0
+  CT2    CC    OS   CT2     9 0.00 4.04 1
+;   O    CA    CA   CT2     3 25.94 0 -25.94 0 0 0
+    O    CA    CA   CT2     9 180.00 12.97 2
 ; Now the improper dihedrals
     C     X     X   CT2     2 0 753.1
     C     X     X   CT3     2 0 753.1
@@ -1547,4 +1548,3 @@ OCL	X	X	CL	2	0.00	803.328
    CA     X     X    CA     2 0 753.1
    HA     X     X     C     2 0 1004
     O     X     X    CC     2 0 803.3
-
