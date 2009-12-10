@@ -50,7 +50,7 @@
 
 [ CHO ]
 [ replace ]
-C		CC 	12.011	0.41
+C		C 	12.011	0.41
 O		O	15.99900	-0.51
 [ add ]
 1	8	HCO	C	CA	N
