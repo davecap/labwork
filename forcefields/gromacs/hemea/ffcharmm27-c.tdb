@@ -50,12 +50,12 @@
 
 [ CHO ]
 [ replace ]
-C		C 	12.011	0.41
-O		O	15.99900	-0.51
+ C		C 	12.011	0.41
+ O		O	15.99900	-0.51
 [ add ]
-1	8	HCO	C	CA	N
+ 1	8	HCO	C	CA	N
 	HA	1.00800	0.10	
 [ bonds ]
-C	HCO
+ C	HCO
 [ impropers ]
-C	CA	O	HCO      
+ C	CA	O	HCO      
