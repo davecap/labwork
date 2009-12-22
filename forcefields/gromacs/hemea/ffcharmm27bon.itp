@@ -1441,7 +1441,7 @@ OCL	X	X	CL	2	0.00	803.328
   HAL  CTL3  CTL2     5 110.1 289.5 0.2179 1.885e+04
   HAL  CTL3  CTL3     5 110.1 313.8 0.2179 1.885e+04
 ; R.P. Aldehyde C-terminus for CcO PEPA
-  CT1  C       HA     5 117.3000 418.4 0.0 0.0
+  CT1  CC       HA     5 117.3000 418.4 0.0 0.0
 
 
 [ dihedraltypes ]
@@ -1549,4 +1549,5 @@ OCL	X	X	CL	2	0.00	803.328
    HA     X     X   CPM     2 0 246
    CA     X     X    CA     2 0 753.1
    HA     X     X     C     2 0 1004
+   HA     X     X    CC     2 0 1004 ; for CHO terminus
     O     X     X    CC     2 0 803.3
