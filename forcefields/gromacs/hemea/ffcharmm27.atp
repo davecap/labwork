@@ -122,6 +122,6 @@ MNH2	0.0000 ; vsite
 MCH3	0.0000 ; vsite (rigid CH3 group)
 
 ; Atom types for HEME A
-CTL4  12.011000 ;   carbon of methane  (-CH4)
-HAL  1.008000 ; Nucleic acid proton (equivalent to protein HA)
+;CTL4  12.011000 ;   carbon of methane  (-CH4)
+;HAL  1.008000 ; Nucleic acid proton (equivalent to protein HA)
 CU  63.546000 ; Dummy CU atom
