@@ -1,6 +1,6 @@
 ; This is the topology used by Taylor J. 2009
 ; The numbering is different from the CHARMM27 topology
-; Using modified CHARMM parameters for POPC headgroup
+; Using modified CHARMM parameters for DPPC headgroup
 ; Sonne et al. Reparameterization of all-atom dipalmitoylphosphatidylcholine lipid parameters enables simulation of fluid bilayers at zero tension. Biophys J (2007) vol. 92 (12) pp. 4157-67
 [ DPPC ]
  [ atoms ]
