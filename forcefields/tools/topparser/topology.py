@@ -90,7 +90,6 @@ class CharmmTopology(Topology):
 
         if new_type.symbol in self.atom_types:
             sys.stderr.write("Warning: Atom type duplicate found: %s\n" % new_type.symbol)
-
         self.atom_types[new_type.symbol] = new_type
 
     def find_or_create_atom_type(self, name):
