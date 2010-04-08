@@ -45,3 +45,16 @@
  C	CA	NT	O
  NT	C	HT1	HT2
  NT	C	HT2	HT1
+
+; CHO terminus R. Pomes / D. A. Caplan
+[ CHO ]
+[ replace ]
+ C		CC 	12.011	0.41
+ O		O	15.99900	-0.51
+[ add ]
+ 1	8	HCO	C	CA	N
+ 	HA	1.00800	0.10	
+[ bonds ]
+ C	HCO
+[ impropers ]
+ C	CA	O	HCO

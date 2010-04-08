@@ -112,6 +112,7 @@ CES	132.900000 ;	Cesium Ion
 CAL	40.080000 ;	Calcium Ion 
 CLA	35.450000 ;	Chloride Ion 
 ZN	65.370000 ;	zinc (II) cation 
+CU  63.546000 ; Dummy CU atom
 CC1A	12.01100 ;	alkene conjugation 
 CC1B	12.01100 ;	alkene conjugation 
 CC2	12.01100 ;	alkene conjugation 
