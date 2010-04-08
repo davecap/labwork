@@ -29,3 +29,5 @@
 ; Nucleic acids nonbonded and bonded parameters"
 #include "ffnanb.itp"
 #include "ffnabon.itp"
+; HEME A bonded parameters
+#include "heabon.itp"

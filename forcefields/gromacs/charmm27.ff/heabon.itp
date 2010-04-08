@@ -1,0 +1,165 @@
+; HEME A Bonded Parameters (converted using Perl script)
+; December 7, 2009
+
+[ bondtypes ]
+ ; i    j    func   b0      kb
+  CPB     C     1 0.138 3.766e+05
+  CT1   CPM     1 0.15 1.862e+05
+  CT2    CT     1 0.1538 1.862e+05
+  CT3    CT     1 0.1538 1.862e+05
+   HA     C     1 0.11 2.761e+05
+  NPH     H     1 0.1006 3.849e+05
+    O    CA     1 0.123 5.188e+05
+   OC    FE     1 0.18 2.092e+05
+   OS    CC     1 0.1334 1.255e+05
+   OS     C     1 0.1334 1.255e+05
+   OS    CA     1 0.1334 1.255e+05
+   OS    CT     1 0.143 2.845e+05
+   OS   CT2     1 0.143 2.845e+05
+    H     C     1 0.11 2.761e+05
+  NH3    FE     1 0.1958 2.261e+05
+   HL   OHL     1 0.096 4.561e+05
+  NTL   CT2     1 0.151 1.799e+05
+  NTL   CT3     1 0.151 1.799e+05
+  NTL   OH1     1 0.14 2.929e+05
+
+[ angletypes ] ; normal potential harmonic in theta
+  ;  i    j    k   func    th0         kth
+  CPA   CPB     C     1 126.7 585.8
+  CPB   CPB     C     1 126.7 585.8
+  CPA   CPM   CT1     1 125.1 788.3
+  CPB     C     C     1 121.5 585.8
+  CPB     C   CT1     1 121.5 585.8
+  CPB     C   CT2     1 126.8 585.8
+  CPB     C   CT3     1 126.8 585.8
+  CPB     C   CPB     1 126.8 585.8
+  CPB   CT2   CT3     1 126.8 585.8
+  CPM   CT1    CC     1 108 435.1
+  CPM   CT1     C     1 108 435.1
+    C   CT1     C     1 108 435.1
+    C   CT2     C     1 108 435.1
+    C   CT2    CA     1 107.5 433.5
+    C   CT1    CC     1 108 435.1
+  CT1     C    HA     1 117.3 418.4
+  CT2    CT    OS     1 110.1 633.5
+  CT3    CT    OS     1 110.1 633.5
+  CT3   NTL   CT2     1 109.5 292.9
+  CT3   NTL   CT3     1 109.5 292.9
+    H   OH1   NTL     1 112.5 418.4
+   HA     C   CT3     1 120.5 418.4
+   HA     C     C     1 120.5 418.4
+   HA     C   CPB     1 120 418.4
+   HA     C    HA     1 118 418.4
+  NTL   CT2   CT2     1 113.5 585.8
+  NTL   CT2    HA     1 108 401.7
+    O     C   CPB     1 121 669.4
+   OS    CA    CA     1 120 378.2
+    O    CA    CA     1 120 378.2
+  OH1   NTL   CT2     1 110 418.4
+  OH1   NTL   CT3     1 110 418.4
+   CC    OC    FE     1 180 0
+   OS   CT2     C     1 109.5 502.1
+   OS     C    HA     1 109.5 502.1
+   FE   NH3   CT1     1 109.5 251
+   FE   NH3    HC     1 109.5 251
+    H   NPH   CPA     1 126 234.3
+  NH3    FE   NPH     1 90 418.4
+  NH3    FE   NR2     1 180 418.4
+  OHL    PL   OHL     1 108 402.5
+    O     C    HA     1 122 368.2
+[ angletypes ] ; Urey-Bradley potentials
+ ; i     j     k   func    th0         kth      b0       kb
+  CT2   CT2    CT     5 113.5 488.3 0.2561 9339
+  CT2     C    HA     5 120 125.5 0.244 4.184e+04
+  CT2     C     C     5 120 125.5 0.244 4.184e+04
+  CT3     C     C     5 120 125.5 0.244 4.184e+04
+  CT3     C   CT2     5 120 125.5 0.244 4.184e+04
+  CT3     C   CT3     5 120 125.5 0.244 4.184e+04
+  CT3   CPB     C     5 120 125.5 0.244 4.184e+04
+  CT1    CC    OS     5 121 125.5 0.244 4.184e+04
+  CT2    CC    OS     5 121 125.5 0.244 4.184e+04
+    O    CC    OS     5 125.9 753.1 0.2258 1.339e+05
+    O     C    OS     5 125.9 753.1 0.2258 1.339e+05
+   CA    OS     C     5 109.6 334.7 0.2265 2.51e+04
+  CT2   CT1   CT2     5 114 446.4 0.2561 6694
+  CT3    CT   CT2     5 114 446.4 0.2561 6694
+  CT3    CT   CT3     5 114 446.4 0.2561 6694
+  CT3    OS    CA     5 109.6 334.7 0.2265 2.51e+04
+  CT2    OS    CC     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS     C     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS    CC     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS   CT3     5 109.6 334.7 0.2265 2.51e+04
+  CT3    OS    CT     5 109.6 334.7 0.2265 2.51e+04
+   HA   CT1   CPM     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT1    CC     5 109.5 276.1 0.2163 2.51e+04
+   HA   CT2    CT     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT3    CT     5 110.1 279.7 0.2179 1.885e+04
+   HA   CT3   NTL     5 110.1 313.8 0.2179 1.885e+04
+   OS     C   CT1     5 109 460.2 0.2326 1.674e+04
+; R.P. Aldehyde C-terminus for CcO PEPA
+  CT1  CC       HA     5 117.3000 418.4 0.0 0.0
+
+
+[ dihedraltypes ]
+    X   NTL   OH1     X     9 180.00 0.00 6
+    X   NTL   CT3     X     9 180.00 0.00 6
+    X   NTL   CT2     X     9 180.00 0.00 6
+    X    CT   CT2     X     9 180.00 0.00 6
+    X    CT   CT3     X     9 180.00 0.00 6
+    X   CT1   CPM     X     9 0.00 0.00 6
+  CT3     C   CT2   CT2     9 180.00 0.00 3
+    X    FE   NH3     X     9 0.00 0.00 4
+  CPB     C   CT1    CC     9 180.00 0.00 3
+  CT3     C   CT2    HA     9 180.00 0.00 3
+    O    CA    CA    OS     9 180.00 12.97 2
+    C   CPB   CT3    HA     9 180.00 0.00 3
+    X   CPB     C     X     9 180.00 12.55 2
+    X     C   CT3     X     9 180.00 0.00 3
+   CA    CA    OS   CT3     9 180.00 8.37 2
+    O    CC    OS   CT3     9 180.00 4.04 1
+   HA     C   CT2   CT2     9 180.00 0.00 3
+   OS   CT2     C     C     9 180.00 0.96 2
+   OS     C   CT2    HA     9 180.00 0.00 3
+    X     C     C     X     9 180.00 16.74 2
+   HA   CT3    OS    CA     9 0.00 0.00 3
+    C     C   CT3    HA     9 180.00 0.00 3
+  CPB     C   CT1   CPM     9 180.00 0.00 3
+   FE   NR2  CPH2   NR1     9 180.00 41.84 2
+    X     C   CT2     X     9 180.00 0.00 3
+    C     C   CT2   CT2     9 180.00 0.00 3
+  CT3    CA    CA   CT2     9 180.00 12.97 2
+ CPH1  CPH1   NR2    FE     9 180.00 41.84 2
+  CT1    CC    OS   CT3     9 0.00 4.04 1
+   HA     C   CT2    HA     9 180.00 0.00 3
+   HA     C   CT2    CA     9 180.00 0.00 3
+   OS    CA    CA    OS     9 180.00 12.97 2
+    C     C   CT2    HA     9 180.00 0.00 3
+   HA   CT3     C   CT2     9 0.00 0.00 3
+  CT2    CC    OC    FE     9 180.00 41.84 2
+  CT3    CA    CA     O     9 180.00 12.97 2
+   CA    CA    CA     O     9 180.00 12.97 2
+   OS   CT2     C    HA     9 180.00 0.96 2
+    C     C   CT2    CA     9 180.00 0.00 3
+   CA    CA    CA    OS     9 180.00 12.97 2
+  CPB     C   CT2    HA     9 180.00 0.00 3
+  CPB     C   CT3    HA     9 180.00 0.00 3
+    O    CC    OS   CT2     9 180.00 4.04 1
+    X    CT    OS     X     9 180.00 0.00 2
+  CT2    CC    OS   CT2     9 0.00 4.04 1
+    O    CA    CA   CT2     9 180.00 12.97 2
+; Now the improper dihedrals
+    C     X     X   CT2     2 0 753.1
+    C     X     X   CT3     2 0 753.1
+    C     X     X     C     2 0 753.1
+  CPB     X     X     C     2 0 753.1
+  CPM     X     X   CPA     2 0 753.1
+  CT2     X     X   CT1     2 35.26 460.2
+   HA     C     C    HA     2 0 167.4
+   HA    HA     C     C     2 180 167.4
+    H   CPA   CPA   NPH     2 0 246
+  CT1   CPA   CPA   CPM     2 0 246
+   HA     X     X   CPM     2 0 246
+   CA     X     X    CA     2 0 753.1
+   HA     X     X     C     2 0 1004
+   HA     X     X    CC     2 0 1004 ; for CHO terminus
+    O     X     X    CC     2 0 803.3
