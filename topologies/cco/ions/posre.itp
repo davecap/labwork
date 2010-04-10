@@ -1,0 +1,5 @@
+; position restraints for ions, the same for each one
+
+[ position_restraints ]
+; atom  type      fx      fy      fz
+     1     1  1000  1000  1000

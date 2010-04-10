@@ -1,0 +1,12 @@
+[ moleculetype ]
+; Name            nrexcl
+MG             3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+     1         MG      4     MG     MG      1          2     24.305   ; qtot 2
+
+#ifdef POSRES_MG
+#include "posre.itp"
+#endif
+

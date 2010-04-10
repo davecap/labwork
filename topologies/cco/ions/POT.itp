@@ -1,0 +1,12 @@
+[ moleculetype ]
+; Name            nrexcl
+POT               3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+     1        POT      1    POT    POT      1          1     39.102   ; qtot 1
+
+#ifdef POSRES_POT
+#include "posre.itp"
+#endif
+

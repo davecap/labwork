@@ -1,0 +1,11 @@
+[ moleculetype ]
+; Name            nrexcl
+CAL             3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+     1        CAL      5    CAL    CAL      1          2      40.08   ; qtot 2
+
+#ifdef POSRES_CAL
+#include "posre.itp"
+#endif

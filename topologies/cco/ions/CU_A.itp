@@ -1,0 +1,11 @@
+[ moleculetype ]
+; Name            nrexcl
+CU             3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+     1         CU      1     CU     CU      1     0.0112     63.546   ; qtot 2
+
+#ifdef POSRES_CU
+#include "posre.itp"
+#endif
