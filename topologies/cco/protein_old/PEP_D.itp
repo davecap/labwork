@@ -1,6 +1,6 @@
 [ moleculetype ]
 ; Name            nrexcl
-D             3
+Protein_D             3
 
 [ atoms ]
 ;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
@@ -5892,4 +5892,8 @@ D             3
 ; Include Position restraint file
 #ifdef POSRES_PROTEIN
 #include "posre_D.itp"
+#endif
+
+#ifdef POSRES_PROTEIN_BB
+#include "posre_D_bb.itp"
 #endif

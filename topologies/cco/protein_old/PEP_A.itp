@@ -1,6 +1,6 @@
 [ moleculetype ]
 ; Name            nrexcl
-A             3
+Protein_A             3
 
 
 [ atoms ]
@@ -80434,4 +80434,8 @@ A             3
 ; Include Position restraint file
 #ifdef POSRES_PROTEIN
 #include "posre_A.itp"
+#endif
+
+#ifdef POSRES_PROTEIN_BB
+#include "posre_A_bb.itp"
 #endif
