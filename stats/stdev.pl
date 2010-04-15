@@ -32,7 +32,11 @@ print "Max: $max\n";
 foreach my $X (@X){
      $SS += ($X - $avg)**2;
 }
-my $stdev = sqrt($SS/($N-1));
-print "Stdev: ";
-print $stdev/sqrt($N);
+my $sample_stdev = sqrt($SS/($N-1));
+my $stdev_pop = sqrt($SS/($N));
+print "Standard error of the mean: ";
+print $sample_stdev/sqrt($N);
+print "\n";
+print "Standard deviation of the mean: ";
+print $stdev_pop/sqrt($N);
 print "\n";

@@ -1119,6 +1119,6 @@ HEA3            3
   110   112   107   111     2 
 
 #ifdef POSRES_HEA
-#include "posres_heme_a3.itp"
+#include "posres_hea.itp"
 #endif
 

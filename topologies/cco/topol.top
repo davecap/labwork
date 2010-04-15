@@ -1,54 +1,40 @@
 ;
-; This is the topology file for the full CcO embedded in a DPPC bilayer 
-; You can choose the 'state' of the system by using DEFINEs
+;	File 'topol.top' was generated
+;	By user: onbekend (0)
+;	On host: onbekend
+;	At date: Sat Apr 10 14:32:54 2010
 ;
+;	This is your topology file
+;	Green Red Orange Magenta Azure Cyan Skyblue
 ;
-#include "ffcharmm27.itp"
+; Include forcefield parameters
+#include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/forcefield.itp"
 
-#include "protein/PEP_VSITE_A.itp"
-#include "protein/PEP_VSITE_B.itp"
-#include "protein/PEP_VSITE_C.itp"
-#include "protein/PEP_VSITE_D.itp"
-
-;#include "ions/CU_A.itp"
-#include "ions/CU_2.itp"
-;#include "ions/CU_1.itp"
-
-#include "ions/MG.itp"
-#include "ions/CAL.itp"
-
-;#include "heme/HEA3.itp"
-;#include "heme/HEA3_A.itp"
-#include "heme/HEA.itp"
-
-#include "peh/PEH_VSITE.itp"
-;#include "peh/PEH.itp"
-
-#include "dppc/DPPC_VSITE.itp"
-;#include "dppc/DPPC_CHARMM27.itp"
-;#include "dppc/DPPC_SONNE.itp"
+#include "DPPC_SONNE.itp"
 
 #include "ions/POT.itp"
 #include "ions/CLA.itp"
 
-#include "tip3p.itp"
+; Include water topology
+#include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/ions.itp"
 
 [ system ]
 ; Name
-CcO VSITE embedded in a lipid bilayer in water
+Green Red Orange Magenta Azure Cyan Skyblue in water
 
 [ molecules ]
 ; Compound        #mols
-A       1
-B       1
-C       1
-D       1
-CU      3
-MG      1
-CAL     1
-HEA     2
-PEH     6
-DPPC    513
-SOL     69915
-POT     329
-CLA     317
+Lipid            180
+SOL             13028
+POT		55
+CLA		55

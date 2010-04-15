@@ -1,0 +1,50 @@
+;
+; This is the topology file for the full CcO embedded in a DPPC bilayer 
+; You can choose the 'state' of the system by using DEFINEs
+;
+;
+#include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/forcefield.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/PEP_A.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/PEP_B.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/PEP_C.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/PEP_D.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/CU_A.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/CU_2.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/MG.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/CAL.itp"
+
+;#include "/home/dacaplan/projects/labwork/topologies/cco/heme/HEA3.itp"
+;#include "/home/dacaplan/projects/labwork/topologies/cco/heme/HEA3_A.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/heme/HEA.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/peh/PEH.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/dppc/DPPC_SONNE.itp"
+
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/POT.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/ions/CLA.itp"
+
+#include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/tip3p.itp"
+
+[ system ]
+; Name
+CcO State A embedded in a lipid bilayer in water
+
+[ molecules ]
+; Compound        #mols
+A       1
+B       1
+C       1
+D       1
+CU      3
+MG      1
+CAL     1
+HEA     2
+PEH     6
+DPPC    513
+SOL     69915
+POT     329
+CLA     317
