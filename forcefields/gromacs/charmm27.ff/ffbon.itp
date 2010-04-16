@@ -217,15 +217,19 @@ MNH3    MNH3   2    0.080236
 MCH3     CT1   2    0.167031
 MCH3     CT2   2    0.167031
 MCH3     CT3   2    0.167031
-MCH3    CTL2   2    0.167031
 MCH3    CTL3   2    0.167031
 MCH3    CTL5   2    0.167031
 MCH3    MCH3   2    0.092160
 MCH3       S   2    0.193874
 MCH3     NTL   2    0.158255
+; these were added for HEA VSITE, use at own risk
+MCH3       C   2    0.167031
+MCH3     CPB   2    0.167031
+; added for DPPC VSITE, use at own risk
+MCH3    CTL2   2    0.167031
 #endif
 ; angle-derived constraints for OH and SH groups in proteins
-; The constraint A-C is calculated from the angle A-B-C and bonds A-B, B-C.
+; The constraint A-C is calculated from the angle A-B-C and 
 CA        H   2     0.19393
 CD        H   2     0.19305
 CT1       H   2     0.19305
