@@ -1,11 +1,11 @@
 ;
-;	File '1m56_D.itp' was generated
+;	File 'topol_D.itp' was generated
 ;	By user: onbekend (0)
 ;	On host: onbekend
-;	At date: Wed Mar 24 15:33:14 2010
+;	At date: Fri Apr 23 16:11:59 2010
 ;
 ;	This is your include topology file
-;	CYTOCHROME C OXIDASE(E.C.1.9.3.1)
+;	"Just Give Me a Blip" (F. Black)
 ;
 [ moleculetype ]
 ; Name            nrexcl
@@ -13,6 +13,7 @@ Protein_D           3
 
 [ atoms ]
 ;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue  10 GLY rtp GLY  q +1.0
      1        NH3     10    GLY      N      1       -0.3     14.007   ; qtot -0.3
      2         HC     10    GLY     H1      1       0.33      1.008   ; qtot 0.03
      3         HC     10    GLY     H2      1       0.33      1.008   ; qtot 0.36
@@ -22,25 +23,27 @@ Protein_D           3
      7         HB     10    GLY    HA2      1       0.09      1.008   ; qtot 1
      8          C     10    GLY      C      2       0.51     12.011   ; qtot 1.51
      9          O     10    GLY      O      2      -0.51     15.999   ; qtot 1
-    10        NH1     11   HISB      N      3      -0.47     14.007   ; qtot 0.53
-    11          H     11   HISB      H      3       0.31      1.008   ; qtot 0.84
-    12        CT1     11   HISB     CA      3       0.07     12.011   ; qtot 0.91
-    13         HB     11   HISB     HA      3       0.09      1.008   ; qtot 1
-    14        CT2     11   HISB     CB      4      -0.08     12.011   ; qtot 0.92
-    15         HA     11   HISB    HB1      4       0.09      1.008   ; qtot 1.01
-    16         HA     11   HISB    HB2      4       0.09      1.008   ; qtot 1.1
-    17        NR2     11   HISB    ND1      4       -0.7     14.007   ; qtot 0.4
-    18       CPH1     11   HISB     CG      4       0.22     12.011   ; qtot 0.62
-    19       CPH2     11   HISB    CE1      4       0.25     12.011   ; qtot 0.87
-    20        HR1     11   HISB    HE1      4       0.13      1.008   ; qtot 1
-    21        NR1     11   HISB    NE2      5      -0.36     14.007   ; qtot 0.64
-    22          H     11   HISB    HE2      5       0.32      1.008   ; qtot 0.96
-    23       CPH1     11   HISB    CD2      5      -0.05     12.011   ; qtot 0.91
-    24        HR3     11   HISB    HD2      5       0.09      1.008   ; qtot 1
-    25          C     11   HISB      C      6       0.51     12.011   ; qtot 1.51
-    26          O     11   HISB      O      6      -0.51     15.999   ; qtot 1
+; residue  11 HIS rtp HSE  q  0.0
+    10        NH1     11    HIS      N      3      -0.47     14.007   ; qtot 0.53
+    11          H     11    HIS     HN      3       0.31      1.008   ; qtot 0.84
+    12        CT1     11    HIS     CA      3       0.07     12.011   ; qtot 0.91
+    13         HB     11    HIS     HA      3       0.09      1.008   ; qtot 1
+    14        CT2     11    HIS     CB      4      -0.08     12.011   ; qtot 0.92
+    15         HA     11    HIS    HB1      4       0.09      1.008   ; qtot 1.01
+    16         HA     11    HIS    HB2      4       0.09      1.008   ; qtot 1.1
+    17        NR2     11    HIS    ND1      4       -0.7     14.007   ; qtot 0.4
+    18       CPH1     11    HIS     CG      4       0.22     12.011   ; qtot 0.62
+    19       CPH2     11    HIS    CE1      4       0.25     12.011   ; qtot 0.87
+    20        HR1     11    HIS    HE1      4       0.13      1.008   ; qtot 1
+    21        NR1     11    HIS    NE2      5      -0.36     14.007   ; qtot 0.64
+    22          H     11    HIS    HE2      5       0.32      1.008   ; qtot 0.96
+    23       CPH1     11    HIS    CD2      5      -0.05     12.011   ; qtot 0.91
+    24        HR3     11    HIS    HD2      5       0.09      1.008   ; qtot 1
+    25          C     11    HIS      C      6       0.51     12.011   ; qtot 1.51
+    26          O     11    HIS      O      6      -0.51     15.999   ; qtot 1
+; residue  12 VAL rtp VAL  q  0.0
     27        NH1     12    VAL      N      7      -0.47     14.007   ; qtot 0.53
-    28          H     12    VAL      H      7       0.31      1.008   ; qtot 0.84
+    28          H     12    VAL     HN      7       0.31      1.008   ; qtot 0.84
     29        CT1     12    VAL     CA      7       0.07     12.011   ; qtot 0.91
     30         HB     12    VAL     HA      7       0.09      1.008   ; qtot 1
     31        CT1     12    VAL     CB      8      -0.09     12.011   ; qtot 0.91
@@ -55,8 +58,9 @@ Protein_D           3
     40         HA     12    VAL   HG23     10       0.09      1.008   ; qtot 1
     41          C     12    VAL      C     11       0.51     12.011   ; qtot 1.51
     42          O     12    VAL      O     11      -0.51     15.999   ; qtot 1
+; residue  13 ALA rtp ALA  q  0.0
     43        NH1     13    ALA      N     12      -0.47     14.007   ; qtot 0.53
-    44          H     13    ALA      H     12       0.31      1.008   ; qtot 0.84
+    44          H     13    ALA     HN     12       0.31      1.008   ; qtot 0.84
     45        CT1     13    ALA     CA     12       0.07     12.011   ; qtot 0.91
     46         HB     13    ALA     HA     12       0.09      1.008   ; qtot 1
     47        CT3     13    ALA     CB     13      -0.27     12.011   ; qtot 0.73
@@ -65,15 +69,17 @@ Protein_D           3
     50         HA     13    ALA    HB3     13       0.09      1.008   ; qtot 1
     51          C     13    ALA      C     14       0.51     12.011   ; qtot 1.51
     52          O     13    ALA      O     14      -0.51     15.999   ; qtot 1
+; residue  14 GLY rtp GLY  q  0.0
     53        NH1     14    GLY      N     15      -0.47     14.007   ; qtot 0.53
-    54          H     14    GLY      H     15       0.31      1.008   ; qtot 0.84
+    54          H     14    GLY     HN     15       0.31      1.008   ; qtot 0.84
     55        CT2     14    GLY     CA     15      -0.02     12.011   ; qtot 0.82
     56         HB     14    GLY    HA1     15       0.09      1.008   ; qtot 0.91
     57         HB     14    GLY    HA2     15       0.09      1.008   ; qtot 1
     58          C     14    GLY      C     16       0.51     12.011   ; qtot 1.51
     59          O     14    GLY      O     16      -0.51     15.999   ; qtot 1
+; residue  15 SER rtp SER  q  0.0
     60        NH1     15    SER      N     17      -0.47     14.007   ; qtot 0.53
-    61          H     15    SER      H     17       0.31      1.008   ; qtot 0.84
+    61          H     15    SER     HN     17       0.31      1.008   ; qtot 0.84
     62        CT1     15    SER     CA     17       0.07     12.011   ; qtot 0.91
     63         HB     15    SER     HA     17       0.09      1.008   ; qtot 1
     64        CT2     15    SER     CB     18       0.05     12.011   ; qtot 1.05
@@ -83,8 +89,9 @@ Protein_D           3
     68          H     15    SER    HG1     18       0.43      1.008   ; qtot 1
     69          C     15    SER      C     19       0.51     12.011   ; qtot 1.51
     70          O     15    SER      O     19      -0.51     15.999   ; qtot 1
+; residue  16 MET rtp MET  q  0.0
     71        NH1     16    MET      N     20      -0.47     14.007   ; qtot 0.53
-    72          H     16    MET      H     20       0.31      1.008   ; qtot 0.84
+    72          H     16    MET     HN     20       0.31      1.008   ; qtot 0.84
     73        CT1     16    MET     CA     20       0.07     12.011   ; qtot 0.91
     74         HB     16    MET     HA     20       0.09      1.008   ; qtot 1
     75        CT2     16    MET     CB     21      -0.18     12.011   ; qtot 0.82
@@ -100,8 +107,9 @@ Protein_D           3
     85         HA     16    MET    HE3     22       0.09      1.008   ; qtot 1
     86          C     16    MET      C     23       0.51     12.011   ; qtot 1.51
     87          O     16    MET      O     23      -0.51     15.999   ; qtot 1
+; residue  17 ASP rtp ASP  q -1.0
     88        NH1     17    ASP      N     24      -0.47     14.007   ; qtot 0.53
-    89          H     17    ASP      H     24       0.31      1.008   ; qtot 0.84
+    89          H     17    ASP     HN     24       0.31      1.008   ; qtot 0.84
     90        CT1     17    ASP     CA     24       0.07     12.011   ; qtot 0.91
     91         HB     17    ASP     HA     24       0.09      1.008   ; qtot 1
     92        CT2     17    ASP     CB     25      -0.28     12.011   ; qtot 0.72
@@ -112,8 +120,9 @@ Protein_D           3
     97         OC     17    ASP    OD2     25      -0.76     15.999   ; qtot 0
     98          C     17    ASP      C     26       0.51     12.011   ; qtot 0.51
     99          O     17    ASP      O     26      -0.51     15.999   ; qtot 0
+; residue  18 ILE rtp ILE  q  0.0
    100        NH1     18    ILE      N     27      -0.47     14.007   ; qtot -0.47
-   101          H     18    ILE      H     27       0.31      1.008   ; qtot -0.16
+   101          H     18    ILE     HN     27       0.31      1.008   ; qtot -0.16
    102        CT1     18    ILE     CA     27       0.07     12.011   ; qtot -0.09
    103         HB     18    ILE     HA     27       0.09      1.008   ; qtot 0
    104        CT1     18    ILE     CB     28      -0.09     12.011   ; qtot -0.09
@@ -131,8 +140,9 @@ Protein_D           3
    116         HA     18    ILE    HD3     31       0.09      1.008   ; qtot 0
    117          C     18    ILE      C     32       0.51     12.011   ; qtot 0.51
    118          O     18    ILE      O     32      -0.51     15.999   ; qtot 0
+; residue  19 THR rtp THR  q  0.0
    119        NH1     19    THR      N     33      -0.47     14.007   ; qtot -0.47
-   120          H     19    THR      H     33       0.31      1.008   ; qtot -0.16
+   120          H     19    THR     HN     33       0.31      1.008   ; qtot -0.16
    121        CT1     19    THR     CA     33       0.07     12.011   ; qtot -0.09
    122         HB     19    THR     HA     33       0.09      1.008   ; qtot 0
    123        CT1     19    THR     CB     34       0.14     12.011   ; qtot 0.14
@@ -145,8 +155,9 @@ Protein_D           3
    130         HA     19    THR   HG23     35       0.09      1.008   ; qtot 0
    131          C     19    THR      C     36       0.51     12.011   ; qtot 0.51
    132          O     19    THR      O     36      -0.51     15.999   ; qtot 0
+; residue  20 GLN rtp GLN  q  0.0
    133        NH1     20    GLN      N     37      -0.47     14.007   ; qtot -0.47
-   134          H     20    GLN      H     37       0.31      1.008   ; qtot -0.16
+   134          H     20    GLN     HN     37       0.31      1.008   ; qtot -0.16
    135        CT1     20    GLN     CA     37       0.07     12.011   ; qtot -0.09
    136         HB     20    GLN     HA     37       0.09      1.008   ; qtot 0
    137        CT2     20    GLN     CB     38      -0.18     12.011   ; qtot -0.18
@@ -162,8 +173,9 @@ Protein_D           3
    147          H     20    GLN   HE22     41        0.3      1.008   ; qtot 0
    148          C     20    GLN      C     42       0.51     12.011   ; qtot 0.51
    149          O     20    GLN      O     42      -0.51     15.999   ; qtot 0
+; residue  21 GLN rtp GLN  q  0.0
    150        NH1     21    GLN      N     43      -0.47     14.007   ; qtot -0.47
-   151          H     21    GLN      H     43       0.31      1.008   ; qtot -0.16
+   151          H     21    GLN     HN     43       0.31      1.008   ; qtot -0.16
    152        CT1     21    GLN     CA     43       0.07     12.011   ; qtot -0.09
    153         HB     21    GLN     HA     43       0.09      1.008   ; qtot 0
    154        CT2     21    GLN     CB     44      -0.18     12.011   ; qtot -0.18
@@ -179,8 +191,9 @@ Protein_D           3
    164          H     21    GLN   HE22     47        0.3      1.008   ; qtot 0
    165          C     21    GLN      C     48       0.51     12.011   ; qtot 0.51
    166          O     21    GLN      O     48      -0.51     15.999   ; qtot 0
+; residue  22 GLU rtp GLU  q -1.0
    167        NH1     22    GLU      N     49      -0.47     14.007   ; qtot -0.47
-   168          H     22    GLU      H     49       0.31      1.008   ; qtot -0.16
+   168          H     22    GLU     HN     49       0.31      1.008   ; qtot -0.16
    169        CT1     22    GLU     CA     49       0.07     12.011   ; qtot -0.09
    170         HB     22    GLU     HA     49       0.09      1.008   ; qtot 0
    171        CT2     22    GLU     CB     50      -0.18     12.011   ; qtot -0.18
@@ -194,30 +207,32 @@ Protein_D           3
    179         OC     22    GLU    OE2     51      -0.76     15.999   ; qtot -1
    180          C     22    GLU      C     52       0.51     12.011   ; qtot -0.49
    181          O     22    GLU      O     52      -0.51     15.999   ; qtot -1
-   182        NH1     23   LYSH      N     53      -0.47     14.007   ; qtot -1.47
-   183          H     23   LYSH      H     53       0.31      1.008   ; qtot -1.16
-   184        CT1     23   LYSH     CA     53       0.07     12.011   ; qtot -1.09
-   185         HB     23   LYSH     HA     53       0.09      1.008   ; qtot -1
-   186        CT2     23   LYSH     CB     54      -0.18     12.011   ; qtot -1.18
-   187         HA     23   LYSH    HB1     54       0.09      1.008   ; qtot -1.09
-   188         HA     23   LYSH    HB2     54       0.09      1.008   ; qtot -1
-   189        CT2     23   LYSH     CG     55      -0.18     12.011   ; qtot -1.18
-   190         HA     23   LYSH    HG1     55       0.09      1.008   ; qtot -1.09
-   191         HA     23   LYSH    HG2     55       0.09      1.008   ; qtot -1
-   192        CT2     23   LYSH     CD     56      -0.18     12.011   ; qtot -1.18
-   193         HA     23   LYSH    HD1     56       0.09      1.008   ; qtot -1.09
-   194         HA     23   LYSH    HD2     56       0.09      1.008   ; qtot -1
-   195        CT2     23   LYSH     CE     57       0.21     12.011   ; qtot -0.79
-   196         HA     23   LYSH    HE1     57       0.05      1.008   ; qtot -0.74
-   197         HA     23   LYSH    HE2     57       0.05      1.008   ; qtot -0.69
-   198        NH3     23   LYSH     NZ     57       -0.3     14.007   ; qtot -0.99
-   199         HC     23   LYSH    HZ1     57       0.33      1.008   ; qtot -0.66
-   200         HC     23   LYSH    HZ2     57       0.33      1.008   ; qtot -0.33
-   201         HC     23   LYSH    HZ3     57       0.33      1.008   ; qtot 0
-   202          C     23   LYSH      C     58       0.51     12.011   ; qtot 0.51
-   203          O     23   LYSH      O     58      -0.51     15.999   ; qtot 0
+; residue  23 LYS rtp LYS  q +1.0
+   182        NH1     23    LYS      N     53      -0.47     14.007   ; qtot -1.47
+   183          H     23    LYS     HN     53       0.31      1.008   ; qtot -1.16
+   184        CT1     23    LYS     CA     53       0.07     12.011   ; qtot -1.09
+   185         HB     23    LYS     HA     53       0.09      1.008   ; qtot -1
+   186        CT2     23    LYS     CB     54      -0.18     12.011   ; qtot -1.18
+   187         HA     23    LYS    HB1     54       0.09      1.008   ; qtot -1.09
+   188         HA     23    LYS    HB2     54       0.09      1.008   ; qtot -1
+   189        CT2     23    LYS     CG     55      -0.18     12.011   ; qtot -1.18
+   190         HA     23    LYS    HG1     55       0.09      1.008   ; qtot -1.09
+   191         HA     23    LYS    HG2     55       0.09      1.008   ; qtot -1
+   192        CT2     23    LYS     CD     56      -0.18     12.011   ; qtot -1.18
+   193         HA     23    LYS    HD1     56       0.09      1.008   ; qtot -1.09
+   194         HA     23    LYS    HD2     56       0.09      1.008   ; qtot -1
+   195        CT2     23    LYS     CE     57       0.21     12.011   ; qtot -0.79
+   196         HA     23    LYS    HE1     57       0.05      1.008   ; qtot -0.74
+   197         HA     23    LYS    HE2     57       0.05      1.008   ; qtot -0.69
+   198        NH3     23    LYS     NZ     57       -0.3     14.007   ; qtot -0.99
+   199         HC     23    LYS    HZ1     57       0.33      1.008   ; qtot -0.66
+   200         HC     23    LYS    HZ2     57       0.33      1.008   ; qtot -0.33
+   201         HC     23    LYS    HZ3     57       0.33      1.008   ; qtot 0
+   202          C     23    LYS      C     58       0.51     12.011   ; qtot 0.51
+   203          O     23    LYS      O     58      -0.51     15.999   ; qtot 0
+; residue  24 THR rtp THR  q  0.0
    204        NH1     24    THR      N     59      -0.47     14.007   ; qtot -0.47
-   205          H     24    THR      H     59       0.31      1.008   ; qtot -0.16
+   205          H     24    THR     HN     59       0.31      1.008   ; qtot -0.16
    206        CT1     24    THR     CA     59       0.07     12.011   ; qtot -0.09
    207         HB     24    THR     HA     59       0.09      1.008   ; qtot 0
    208        CT1     24    THR     CB     60       0.14     12.011   ; qtot 0.14
@@ -230,8 +245,9 @@ Protein_D           3
    215         HA     24    THR   HG23     61       0.09      1.008   ; qtot 0
    216          C     24    THR      C     62       0.51     12.011   ; qtot 0.51
    217          O     24    THR      O     62      -0.51     15.999   ; qtot 0
+; residue  25 PHE rtp PHE  q  0.0
    218        NH1     25    PHE      N     63      -0.47     14.007   ; qtot -0.47
-   219          H     25    PHE      H     63       0.31      1.008   ; qtot -0.16
+   219          H     25    PHE     HN     63       0.31      1.008   ; qtot -0.16
    220        CT1     25    PHE     CA     63       0.07     12.011   ; qtot -0.09
    221         HB     25    PHE     HA     63       0.09      1.008   ; qtot 0
    222        CT2     25    PHE     CB     64      -0.18     12.011   ; qtot -0.18
@@ -250,8 +266,9 @@ Protein_D           3
    235         HP     25    PHE    HE2     70      0.115      1.008   ; qtot 0
    236          C     25    PHE      C     71       0.51     12.011   ; qtot 0.51
    237          O     25    PHE      O     71      -0.51     15.999   ; qtot 0
+; residue  26 ALA rtp ALA  q  0.0
    238        NH1     26    ALA      N     72      -0.47     14.007   ; qtot -0.47
-   239          H     26    ALA      H     72       0.31      1.008   ; qtot -0.16
+   239          H     26    ALA     HN     72       0.31      1.008   ; qtot -0.16
    240        CT1     26    ALA     CA     72       0.07     12.011   ; qtot -0.09
    241         HB     26    ALA     HA     72       0.09      1.008   ; qtot 0
    242        CT3     26    ALA     CB     73      -0.27     12.011   ; qtot -0.27
@@ -260,15 +277,17 @@ Protein_D           3
    245         HA     26    ALA    HB3     73       0.09      1.008   ; qtot 0
    246          C     26    ALA      C     74       0.51     12.011   ; qtot 0.51
    247          O     26    ALA      O     74      -0.51     15.999   ; qtot 0
+; residue  27 GLY rtp GLY  q  0.0
    248        NH1     27    GLY      N     75      -0.47     14.007   ; qtot -0.47
-   249          H     27    GLY      H     75       0.31      1.008   ; qtot -0.16
+   249          H     27    GLY     HN     75       0.31      1.008   ; qtot -0.16
    250        CT2     27    GLY     CA     75      -0.02     12.011   ; qtot -0.18
    251         HB     27    GLY    HA1     75       0.09      1.008   ; qtot -0.09
    252         HB     27    GLY    HA2     75       0.09      1.008   ; qtot 0
    253          C     27    GLY      C     76       0.51     12.011   ; qtot 0.51
    254          O     27    GLY      O     76      -0.51     15.999   ; qtot 0
+; residue  28 PHE rtp PHE  q  0.0
    255        NH1     28    PHE      N     77      -0.47     14.007   ; qtot -0.47
-   256          H     28    PHE      H     77       0.31      1.008   ; qtot -0.16
+   256          H     28    PHE     HN     77       0.31      1.008   ; qtot -0.16
    257        CT1     28    PHE     CA     77       0.07     12.011   ; qtot -0.09
    258         HB     28    PHE     HA     77       0.09      1.008   ; qtot 0
    259        CT2     28    PHE     CB     78      -0.18     12.011   ; qtot -0.18
@@ -287,8 +306,9 @@ Protein_D           3
    272         HP     28    PHE    HE2     84      0.115      1.008   ; qtot 0
    273          C     28    PHE      C     85       0.51     12.011   ; qtot 0.51
    274          O     28    PHE      O     85      -0.51     15.999   ; qtot 0
+; residue  29 VAL rtp VAL  q  0.0
    275        NH1     29    VAL      N     86      -0.47     14.007   ; qtot -0.47
-   276          H     29    VAL      H     86       0.31      1.008   ; qtot -0.16
+   276          H     29    VAL     HN     86       0.31      1.008   ; qtot -0.16
    277        CT1     29    VAL     CA     86       0.07     12.011   ; qtot -0.09
    278         HB     29    VAL     HA     86       0.09      1.008   ; qtot 0
    279        CT1     29    VAL     CB     87      -0.09     12.011   ; qtot -0.09
@@ -303,8 +323,9 @@ Protein_D           3
    288         HA     29    VAL   HG23     89       0.09      1.008   ; qtot 0
    289          C     29    VAL      C     90       0.51     12.011   ; qtot 0.51
    290          O     29    VAL      O     90      -0.51     15.999   ; qtot 0
+; residue  30 ARG rtp ARG  q +1.0
    291        NH1     30    ARG      N     91      -0.47     14.007   ; qtot -0.47
-   292          H     30    ARG      H     91       0.31      1.008   ; qtot -0.16
+   292          H     30    ARG     HN     91       0.31      1.008   ; qtot -0.16
    293        CT1     30    ARG     CA     91       0.07     12.011   ; qtot -0.09
    294         HB     30    ARG     HA     91       0.09      1.008   ; qtot 0
    295        CT2     30    ARG     CB     92      -0.18     12.011   ; qtot -0.18
@@ -327,8 +348,9 @@ Protein_D           3
    312         HC     30    ARG   HH22     94       0.46      1.008   ; qtot 1
    313          C     30    ARG      C     95       0.51     12.011   ; qtot 1.51
    314          O     30    ARG      O     95      -0.51     15.999   ; qtot 1
+; residue  31 MET rtp MET  q  0.0
    315        NH1     31    MET      N     96      -0.47     14.007   ; qtot 0.53
-   316          H     31    MET      H     96       0.31      1.008   ; qtot 0.84
+   316          H     31    MET     HN     96       0.31      1.008   ; qtot 0.84
    317        CT1     31    MET     CA     96       0.07     12.011   ; qtot 0.91
    318         HB     31    MET     HA     96       0.09      1.008   ; qtot 1
    319        CT2     31    MET     CB     97      -0.18     12.011   ; qtot 0.82
@@ -344,8 +366,9 @@ Protein_D           3
    329         HA     31    MET    HE3     98       0.09      1.008   ; qtot 1
    330          C     31    MET      C     99       0.51     12.011   ; qtot 1.51
    331          O     31    MET      O     99      -0.51     15.999   ; qtot 1
+; residue  32 VAL rtp VAL  q  0.0
    332        NH1     32    VAL      N    100      -0.47     14.007   ; qtot 0.53
-   333          H     32    VAL      H    100       0.31      1.008   ; qtot 0.84
+   333          H     32    VAL     HN    100       0.31      1.008   ; qtot 0.84
    334        CT1     32    VAL     CA    100       0.07     12.011   ; qtot 0.91
    335         HB     32    VAL     HA    100       0.09      1.008   ; qtot 1
    336        CT1     32    VAL     CB    101      -0.09     12.011   ; qtot 0.91
@@ -360,8 +383,9 @@ Protein_D           3
    345         HA     32    VAL   HG23    103       0.09      1.008   ; qtot 1
    346          C     32    VAL      C    104       0.51     12.011   ; qtot 1.51
    347          O     32    VAL      O    104      -0.51     15.999   ; qtot 1
+; residue  33 THR rtp THR  q  0.0
    348        NH1     33    THR      N    105      -0.47     14.007   ; qtot 0.53
-   349          H     33    THR      H    105       0.31      1.008   ; qtot 0.84
+   349          H     33    THR     HN    105       0.31      1.008   ; qtot 0.84
    350        CT1     33    THR     CA    105       0.07     12.011   ; qtot 0.91
    351         HB     33    THR     HA    105       0.09      1.008   ; qtot 1
    352        CT1     33    THR     CB    106       0.14     12.011   ; qtot 1.14
@@ -374,8 +398,9 @@ Protein_D           3
    359         HA     33    THR   HG23    107       0.09      1.008   ; qtot 1
    360          C     33    THR      C    108       0.51     12.011   ; qtot 1.51
    361          O     33    THR      O    108      -0.51     15.999   ; qtot 1
+; residue  34 TRP rtp TRP  q  0.0
    362        NH1     34    TRP      N    109      -0.47     14.007   ; qtot 0.53
-   363          H     34    TRP      H    109       0.31      1.008   ; qtot 0.84
+   363          H     34    TRP     HN    109       0.31      1.008   ; qtot 0.84
    364        CT1     34    TRP     CA    109       0.07     12.011   ; qtot 0.91
    365         HB     34    TRP     HA    109       0.09      1.008   ; qtot 1
    366        CT2     34    TRP     CB    110      -0.18     12.011   ; qtot 0.82
@@ -398,8 +423,9 @@ Protein_D           3
    383         HP     34    TRP    HH2    115      0.115      1.008   ; qtot 1
    384          C     34    TRP      C    116       0.51     12.011   ; qtot 1.51
    385          O     34    TRP      O    116      -0.51     15.999   ; qtot 1
+; residue  35 ALA rtp ALA  q  0.0
    386        NH1     35    ALA      N    117      -0.47     14.007   ; qtot 0.53
-   387          H     35    ALA      H    117       0.31      1.008   ; qtot 0.84
+   387          H     35    ALA     HN    117       0.31      1.008   ; qtot 0.84
    388        CT1     35    ALA     CA    117       0.07     12.011   ; qtot 0.91
    389         HB     35    ALA     HA    117       0.09      1.008   ; qtot 1
    390        CT3     35    ALA     CB    118      -0.27     12.011   ; qtot 0.73
@@ -408,8 +434,9 @@ Protein_D           3
    393         HA     35    ALA    HB3    118       0.09      1.008   ; qtot 1
    394          C     35    ALA      C    119       0.51     12.011   ; qtot 1.51
    395          O     35    ALA      O    119      -0.51     15.999   ; qtot 1
+; residue  36 ALA rtp ALA  q  0.0
    396        NH1     36    ALA      N    120      -0.47     14.007   ; qtot 0.53
-   397          H     36    ALA      H    120       0.31      1.008   ; qtot 0.84
+   397          H     36    ALA     HN    120       0.31      1.008   ; qtot 0.84
    398        CT1     36    ALA     CA    120       0.07     12.011   ; qtot 0.91
    399         HB     36    ALA     HA    120       0.09      1.008   ; qtot 1
    400        CT3     36    ALA     CB    121      -0.27     12.011   ; qtot 0.73
@@ -418,8 +445,9 @@ Protein_D           3
    403         HA     36    ALA    HB3    121       0.09      1.008   ; qtot 1
    404          C     36    ALA      C    122       0.51     12.011   ; qtot 1.51
    405          O     36    ALA      O    122      -0.51     15.999   ; qtot 1
+; residue  37 VAL rtp VAL  q  0.0
    406        NH1     37    VAL      N    123      -0.47     14.007   ; qtot 0.53
-   407          H     37    VAL      H    123       0.31      1.008   ; qtot 0.84
+   407          H     37    VAL     HN    123       0.31      1.008   ; qtot 0.84
    408        CT1     37    VAL     CA    123       0.07     12.011   ; qtot 0.91
    409         HB     37    VAL     HA    123       0.09      1.008   ; qtot 1
    410        CT1     37    VAL     CB    124      -0.09     12.011   ; qtot 0.91
@@ -434,8 +462,9 @@ Protein_D           3
    419         HA     37    VAL   HG23    126       0.09      1.008   ; qtot 1
    420          C     37    VAL      C    127       0.51     12.011   ; qtot 1.51
    421          O     37    VAL      O    127      -0.51     15.999   ; qtot 1
+; residue  38 VAL rtp VAL  q  0.0
    422        NH1     38    VAL      N    128      -0.47     14.007   ; qtot 0.53
-   423          H     38    VAL      H    128       0.31      1.008   ; qtot 0.84
+   423          H     38    VAL     HN    128       0.31      1.008   ; qtot 0.84
    424        CT1     38    VAL     CA    128       0.07     12.011   ; qtot 0.91
    425         HB     38    VAL     HA    128       0.09      1.008   ; qtot 1
    426        CT1     38    VAL     CB    129      -0.09     12.011   ; qtot 0.91
@@ -450,8 +479,9 @@ Protein_D           3
    435         HA     38    VAL   HG23    131       0.09      1.008   ; qtot 1
    436          C     38    VAL      C    132       0.51     12.011   ; qtot 1.51
    437          O     38    VAL      O    132      -0.51     15.999   ; qtot 1
+; residue  39 ILE rtp ILE  q  0.0
    438        NH1     39    ILE      N    133      -0.47     14.007   ; qtot 0.53
-   439          H     39    ILE      H    133       0.31      1.008   ; qtot 0.84
+   439          H     39    ILE     HN    133       0.31      1.008   ; qtot 0.84
    440        CT1     39    ILE     CA    133       0.07     12.011   ; qtot 0.91
    441         HB     39    ILE     HA    133       0.09      1.008   ; qtot 1
    442        CT1     39    ILE     CB    134      -0.09     12.011   ; qtot 0.91
@@ -469,8 +499,9 @@ Protein_D           3
    454         HA     39    ILE    HD3    137       0.09      1.008   ; qtot 1
    455          C     39    ILE      C    138       0.51     12.011   ; qtot 1.51
    456          O     39    ILE      O    138      -0.51     15.999   ; qtot 1
+; residue  40 VAL rtp VAL  q  0.0
    457        NH1     40    VAL      N    139      -0.47     14.007   ; qtot 0.53
-   458          H     40    VAL      H    139       0.31      1.008   ; qtot 0.84
+   458          H     40    VAL     HN    139       0.31      1.008   ; qtot 0.84
    459        CT1     40    VAL     CA    139       0.07     12.011   ; qtot 0.91
    460         HB     40    VAL     HA    139       0.09      1.008   ; qtot 1
    461        CT1     40    VAL     CB    140      -0.09     12.011   ; qtot 0.91
@@ -485,8 +516,9 @@ Protein_D           3
    470         HA     40    VAL   HG23    142       0.09      1.008   ; qtot 1
    471          C     40    VAL      C    143       0.51     12.011   ; qtot 1.51
    472          O     40    VAL      O    143      -0.51     15.999   ; qtot 1
+; residue  41 ALA rtp ALA  q  0.0
    473        NH1     41    ALA      N    144      -0.47     14.007   ; qtot 0.53
-   474          H     41    ALA      H    144       0.31      1.008   ; qtot 0.84
+   474          H     41    ALA     HN    144       0.31      1.008   ; qtot 0.84
    475        CT1     41    ALA     CA    144       0.07     12.011   ; qtot 0.91
    476         HB     41    ALA     HA    144       0.09      1.008   ; qtot 1
    477        CT3     41    ALA     CB    145      -0.27     12.011   ; qtot 0.73
@@ -495,8 +527,9 @@ Protein_D           3
    480         HA     41    ALA    HB3    145       0.09      1.008   ; qtot 1
    481          C     41    ALA      C    146       0.51     12.011   ; qtot 1.51
    482          O     41    ALA      O    146      -0.51     15.999   ; qtot 1
+; residue  42 ALA rtp ALA  q  0.0
    483        NH1     42    ALA      N    147      -0.47     14.007   ; qtot 0.53
-   484          H     42    ALA      H    147       0.31      1.008   ; qtot 0.84
+   484          H     42    ALA     HN    147       0.31      1.008   ; qtot 0.84
    485        CT1     42    ALA     CA    147       0.07     12.011   ; qtot 0.91
    486         HB     42    ALA     HA    147       0.09      1.008   ; qtot 1
    487        CT3     42    ALA     CB    148      -0.27     12.011   ; qtot 0.73
@@ -505,8 +538,9 @@ Protein_D           3
    490         HA     42    ALA    HB3    148       0.09      1.008   ; qtot 1
    491          C     42    ALA      C    149       0.51     12.011   ; qtot 1.51
    492          O     42    ALA      O    149      -0.51     15.999   ; qtot 1
+; residue  43 LEU rtp LEU  q  0.0
    493        NH1     43    LEU      N    150      -0.47     14.007   ; qtot 0.53
-   494          H     43    LEU      H    150       0.31      1.008   ; qtot 0.84
+   494          H     43    LEU     HN    150       0.31      1.008   ; qtot 0.84
    495        CT1     43    LEU     CA    150       0.07     12.011   ; qtot 0.91
    496         HB     43    LEU     HA    150       0.09      1.008   ; qtot 1
    497        CT2     43    LEU     CB    151      -0.18     12.011   ; qtot 0.82
@@ -524,8 +558,9 @@ Protein_D           3
    509         HA     43    LEU   HD23    154       0.09      1.008   ; qtot 1
    510          C     43    LEU      C    155       0.51     12.011   ; qtot 1.51
    511          O     43    LEU      O    155      -0.51     15.999   ; qtot 1
+; residue  44 ILE rtp ILE  q  0.0
    512        NH1     44    ILE      N    156      -0.47     14.007   ; qtot 0.53
-   513          H     44    ILE      H    156       0.31      1.008   ; qtot 0.84
+   513          H     44    ILE     HN    156       0.31      1.008   ; qtot 0.84
    514        CT1     44    ILE     CA    156       0.07     12.011   ; qtot 0.91
    515         HB     44    ILE     HA    156       0.09      1.008   ; qtot 1
    516        CT1     44    ILE     CB    157      -0.09     12.011   ; qtot 0.91
@@ -543,8 +578,9 @@ Protein_D           3
    528         HA     44    ILE    HD3    160       0.09      1.008   ; qtot 1
    529          C     44    ILE      C    161       0.51     12.011   ; qtot 1.51
    530          O     44    ILE      O    161      -0.51     15.999   ; qtot 1
+; residue  45 PHE rtp PHE  q  0.0
    531        NH1     45    PHE      N    162      -0.47     14.007   ; qtot 0.53
-   532          H     45    PHE      H    162       0.31      1.008   ; qtot 0.84
+   532          H     45    PHE     HN    162       0.31      1.008   ; qtot 0.84
    533        CT1     45    PHE     CA    162       0.07     12.011   ; qtot 0.91
    534         HB     45    PHE     HA    162       0.09      1.008   ; qtot 1
    535        CT2     45    PHE     CB    163      -0.18     12.011   ; qtot 0.82
@@ -563,8 +599,9 @@ Protein_D           3
    548         HP     45    PHE    HE2    169      0.115      1.008   ; qtot 1
    549          C     45    PHE      C    170       0.51     12.011   ; qtot 1.51
    550          O     45    PHE      O    170      -0.51     15.999   ; qtot 1
+; residue  46 LEU rtp LEU  q  0.0
    551        NH1     46    LEU      N    171      -0.47     14.007   ; qtot 0.53
-   552          H     46    LEU      H    171       0.31      1.008   ; qtot 0.84
+   552          H     46    LEU     HN    171       0.31      1.008   ; qtot 0.84
    553        CT1     46    LEU     CA    171       0.07     12.011   ; qtot 0.91
    554         HB     46    LEU     HA    171       0.09      1.008   ; qtot 1
    555        CT2     46    LEU     CB    172      -0.18     12.011   ; qtot 0.82
@@ -582,8 +619,9 @@ Protein_D           3
    567         HA     46    LEU   HD23    175       0.09      1.008   ; qtot 1
    568          C     46    LEU      C    176       0.51     12.011   ; qtot 1.51
    569          O     46    LEU      O    176      -0.51     15.999   ; qtot 1
+; residue  47 ALA rtp ALA  q  0.0
    570        NH1     47    ALA      N    177      -0.47     14.007   ; qtot 0.53
-   571          H     47    ALA      H    177       0.31      1.008   ; qtot 0.84
+   571          H     47    ALA     HN    177       0.31      1.008   ; qtot 0.84
    572        CT1     47    ALA     CA    177       0.07     12.011   ; qtot 0.91
    573         HB     47    ALA     HA    177       0.09      1.008   ; qtot 1
    574        CT3     47    ALA     CB    178      -0.27     12.011   ; qtot 0.73
@@ -592,8 +630,9 @@ Protein_D           3
    577         HA     47    ALA    HB3    178       0.09      1.008   ; qtot 1
    578          C     47    ALA      C    179       0.51     12.011   ; qtot 1.51
    579          O     47    ALA      O    179      -0.51     15.999   ; qtot 1
+; residue  48 LEU rtp LEU  q  0.0
    580        NH1     48    LEU      N    180      -0.47     14.007   ; qtot 0.53
-   581          H     48    LEU      H    180       0.31      1.008   ; qtot 0.84
+   581          H     48    LEU     HN    180       0.31      1.008   ; qtot 0.84
    582        CT1     48    LEU     CA    180       0.07     12.011   ; qtot 0.91
    583         HB     48    LEU     HA    180       0.09      1.008   ; qtot 1
    584        CT2     48    LEU     CB    181      -0.18     12.011   ; qtot 0.82
@@ -611,8 +650,9 @@ Protein_D           3
    596         HA     48    LEU   HD23    184       0.09      1.008   ; qtot 1
    597          C     48    LEU      C    185       0.51     12.011   ; qtot 1.51
    598          O     48    LEU      O    185      -0.51     15.999   ; qtot 1
+; residue  49 ALA rtp ALA  q  0.0
    599        NH1     49    ALA      N    186      -0.47     14.007   ; qtot 0.53
-   600          H     49    ALA      H    186       0.31      1.008   ; qtot 0.84
+   600          H     49    ALA     HN    186       0.31      1.008   ; qtot 0.84
    601        CT1     49    ALA     CA    186       0.07     12.011   ; qtot 0.91
    602         HB     49    ALA     HA    186       0.09      1.008   ; qtot 1
    603        CT3     49    ALA     CB    187      -0.27     12.011   ; qtot 0.73
@@ -621,8 +661,9 @@ Protein_D           3
    606         HA     49    ALA    HB3    187       0.09      1.008   ; qtot 1
    607          C     49    ALA      C    188       0.51     12.011   ; qtot 1.51
    608          O     49    ALA      O    188      -0.51     15.999   ; qtot 1
+; residue  50 ASN rtp ASN  q  0.0
    609        NH1     50    ASN      N    189      -0.47     14.007   ; qtot 0.53
-   610          H     50    ASN      H    189       0.31      1.008   ; qtot 0.84
+   610          H     50    ASN     HN    189       0.31      1.008   ; qtot 0.84
    611        CT1     50    ASN     CA    189       0.07     12.011   ; qtot 0.91
    612         HB     50    ASN     HA    189       0.09      1.008   ; qtot 1
    613        CT2     50    ASN     CB    190      -0.18     12.011   ; qtot 0.82
@@ -635,8 +676,9 @@ Protein_D           3
    620          H     50    ASN   HD22    192        0.3      1.008   ; qtot 1
    621          C     50    ASN      C    193       0.51     12.011   ; qtot 1.51
    622          O     50    ASN      O    193      -0.51     15.999   ; qtot 1
+; residue  51 ALA rtp ALA  q -1.0
    623        NH1     51    ALA      N    194      -0.47     14.007   ; qtot 0.53
-   624          H     51    ALA      H    194       0.31      1.008   ; qtot 0.84
+   624          H     51    ALA     HN    194       0.31      1.008   ; qtot 0.84
    625        CT1     51    ALA     CA    194       0.07     12.011   ; qtot 0.91
    626         HB     51    ALA     HA    194       0.09      1.008   ; qtot 1
    627        CT3     51    ALA     CB    195      -0.27     12.011   ; qtot 0.73
