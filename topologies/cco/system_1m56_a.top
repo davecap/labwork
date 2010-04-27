@@ -6,10 +6,10 @@
 ;
 #include "/project/pomes/dacaplan/gromacs/gromacs-git/exec/share/gromacs/top/charmm27.ff/forcefield.itp"
 
-#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/Protein_A_A.itp"
-#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/Protein_B.itp"
-#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/Protein_C.itp"
-#include "/home/dacaplan/projects/labwork/topologies/cco/protein_old/Protein_D.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein/Protein_A_A.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein/Protein_B.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein/Protein_C.itp"
+#include "/home/dacaplan/projects/labwork/topologies/cco/protein/Protein_D.itp"
 #include "/home/dacaplan/projects/labwork/topologies/cco/ions/CU.itp"
 #include "/home/dacaplan/projects/labwork/topologies/cco/ions/CUB_A.itp"
 #include "/home/dacaplan/projects/labwork/topologies/cco/ions/MG.itp"
