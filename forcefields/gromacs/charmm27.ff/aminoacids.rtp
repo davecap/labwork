@@ -2276,9 +2276,9 @@
     C23 C22 C24 C25
 
 ; HSD + HEME A parameters (for cytochrome c oxidase), added by David Caplan
-; HSDH is basically an HSD with HSD:NE2 bonded to the FE of HEME A
+; HDH is basically an HSD with HSD:NE2 bonded to the FE of HEME A
 ; WARNING: this probably won't work as a terminal residue
-[ HSDH ]
+[ HDH ]
  [ atoms ]
 	N	NH1	-0.47   32	
 	HN	H	0.31    32
