@@ -1,0 +1,3 @@
+These topology files contain protein subunits with HEME A and IONS (Cu, Mg, Ca, Fe).
+
+They contain distance restraints to keep the ions in their locations (according to the X-ray structure).
