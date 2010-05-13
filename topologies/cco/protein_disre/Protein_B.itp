@@ -4339,7 +4339,7 @@ Protein_B           3
 [ distance_restraints ]
 ;   ai      aj      type    index   type'   low     up1     up2     fac
 ;CuA1 to CuA2
-  4063    4064    1       1       1       2.45    2.75    2.80    1.0
+  4061    4062    1       1       1       2.45    2.75    2.80    1.0
 ;CYS252:SG to CuA1
   3499    4061    1       1       1       2.20    2.40    2.50    1.0
 ;CYS252:SG to CuA2
