@@ -3729,7 +3729,8 @@ Protein_B           3
   3496        CT2    252   CYS2     CB   1125       -0.1     12.011   ; qtot -8.1
   3497         HA    252   CYS2    HB1   1125       0.09      1.008   ; qtot -8.01
   3498         HA    252   CYS2    HB2   1125       0.09      1.008   ; qtot -7.92
-  3499         SM    252   CYS2     SG   1125      -0.08      32.06   ; qtot -8
+;  3499         SM    252   CYS2     SG   1125      -0.08      32.06   ; qtot -8
+  3499         SM    252   CYS2     SG   1125      -0.57      32.06   ; qtot -8
   3500          C    252   CYS2      C   1126       0.51     12.011   ; qtot -7.49
   3501          O    252   CYS2      O   1126      -0.51     15.999   ; qtot -8
 ; residue 253 SER rtp SER  q  0.0
@@ -3788,7 +3789,8 @@ Protein_B           3
   3551        CT2    256   CYS2     CB   1141       -0.1     12.011   ; qtot -9.1
   3552         HA    256   CYS2    HB1   1141       0.09      1.008   ; qtot -9.01
   3553         HA    256   CYS2    HB2   1141       0.09      1.008   ; qtot -8.92
-  3554         SM    256   CYS2     SG   1141      -0.08      32.06   ; qtot -9
+;  3554         SM    256   CYS2     SG   1141      -0.08      32.06   ; qtot -9
+  3554         SM    256   CYS2     SG   1141      -0.57      32.06   ; qtot -9
   3555          C    256   CYS2      C   1142       0.51     12.011   ; qtot -8.49
   3556          O    256   CYS2      O   1142      -0.51     15.999   ; qtot -9
 ; residue 257 GLY rtp GLY  q  0.0
@@ -4331,10 +4333,10 @@ Protein_B           3
 ; ions
 ; residue   3 CU  rtp CU   q +2.0
 ; CuA1
-  4061         CU    290     CU     CU   1301       1.50     63.546   ; qtot 1.5
+  4061         CU    290     CU     CU   1301       0.75     63.546   ; qtot 1.5
 ; CuA2
 ; residue   4 CU  rtp CU   q +2.0
-  4062         CU    291     CU     CU   1302       1.50     63.546   ; qtot 1.5
+  4062         CU    291     CU     CU   1302       0.75     63.546   ; qtot 1.5
 
 [ distance_restraints ]
 ;   ai      aj      type    index   type'   low     up1     up2     fac
@@ -4349,13 +4351,15 @@ Protein_B           3
 ;CYS256:SG to CuA2
   3554    4062    1       5       1       0.220    0.240    0.3     1.0
 ;HSE217:ND1 to CuA2
-  2941    4062    1       6       1       0.195    0.220    0.3     1.0
+  2941    4062    1       6       1       0.2       0.240    0.3     1.0
 ;HSE260:ND1 to CuA1
-  3601    4061    1       7       1       0.195    0.220    0.3     1.0
+  3601    4061    1       7       1       0.2       0.24    0.3     1.0
 
 [ bonds ]
 ;  ai    aj funct            c0            c1            c2            c3
-;  4061    4062  1            1       0.26   54392.0
+  4061    4062  1            0.26       200000.0
+;  4061    3601  1            0.207       50000.0
+;  4062    2941  1            0.214       50000.0
     1     2     1 
     1     3     1 
     1     4     1 
