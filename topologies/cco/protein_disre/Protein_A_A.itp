@@ -9350,12 +9350,17 @@ Protein_A           3
   8788         HA    560    TRP    HCO   2857        0.1      1.008   ; qtot -2.49
   8789          O    560    TRP      O   2857      -0.51     15.999   ; qtot -3
 ; ions
-; residue   5 CU  rtp CU   q +2.0
-  8790         CU    561     CU     CU   2858     0.0112     63.546   ; qtot 2
 ; residue   6 MG  rtp MG   q +2.0
-  8791         MG    562     MG     MG   2859          2     24.305   ; qtot 2
+  8790         MG    561     MG     MG   2858          2     24.305   ; qtot 2
 ; residue   7 CAL rtp CAL  q +2.0
-  8792        CAL    563    CAL    CAL   2860          2      40.08   ; qtot 2
+  8791        CAL    562    CAL    CAL   2859          2      40.08   ; qtot 2
+; residue   5 CU  rtp CU   q +2.0
+  8792         CU    563     CU     CU   2860      0.3568     63.546   ; qtot 2
+; Cu-OH2 for state A
+  8793          OT    563     SOL   OW   2860     -0.6573     15.9994
+  8794          HT    563     SOL   HW1  2860      0.3644     1.008
+  8795          HT    563     SOL   HW2  2860      0.3644     1.008
+
 
 [ distance_restraints ]
 ;   ai    aj  type    index   type'   low up1 up2 fac
@@ -9364,18 +9369,21 @@ Protein_A           3
 ;HDH419:NE2 <-> HDH419:FE
     6386  6391  1       2       1   0.15 0.25 0.3 1.0   
 ;HSD411:NE2 <-> MG
-    6259  8791  1       3       1   0.15 0.25 0.3 1.0
+    6259  8790  1       3       1   0.15 0.25 0.3 1.0
 ;ASP412:OD2 <-> MG
-    6273  8791  1       4       1   0.15 0.25 0.3 1.0
+    6273  8790  1       4       1   0.15 0.25 0.3 1.0
 ;HSD333:NE2 <-> CuB 5
-    5037  8790  1       5       1   0.15 0.25 0.3 1.0
+    5037  8792  1       5       1   0.20 0.22 0.3 1.0
 ;HSE284:ND1 <-> CuB 5
-    4254  8790  1       5       1   0.15 0.25 0.3 1.0
+    4254  8792  1       5       1   0.20 0.22 0.3 1.0
 ;HSD334:NE2 <-> CuB 5
-    5054  8790  1       5       1   0.15 0.25 0.3 1.0
+    5054  8792  1       5       1   0.20 0.22 0.3 1.0
 
 [ bonds ]
 ;  ai    aj funct            c0            c1            c2            c3
+; Cu-H2O bond
+; TODO: GET parameters from ELISA. These are made up! 
+ 8792  8793     1           0.25    100000.0
     1     2     1 
     1     3     1 
     1     4     1 
