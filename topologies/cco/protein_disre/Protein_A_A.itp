@@ -9357,9 +9357,9 @@ Protein_A           3
 ; residue   5 CU  rtp CU   q +2.0
   8792         CU    563     CU     CU   2860      0.3568     63.546   ; qtot 2
 ; Cu-OH2 for state A
-  8793          OT    563     SOL   OW   2860     -0.6573     15.9994
-  8794          HT    563     SOL   HW1  2860      0.3644     1.008
-  8795          HT    563     SOL   HW2  2860      0.3644     1.008
+;  8793          OT    563     SOL   OW   2860     -0.6573     15.9994
+;  8794          HT    563     SOL   HW1  2860      0.3644     1.008
+;  8795          HT    563     SOL   HW2  2860      0.3644     1.008
 
 
 [ distance_restraints ]
@@ -9383,7 +9383,7 @@ Protein_A           3
 ;  ai    aj funct            c0            c1            c2            c3
 ; Cu-H2O bond
 ; TODO: GET parameters from ELISA. These are made up! 
- 8792  8793     1           0.25    100000.0
+; 8792  8793     1           0.25    100000.0
     1     2     1 
     1     3     1 
     1     4     1 
