@@ -83214,7 +83214,22 @@ Protein_A           3
  8751  8753  8755  8763  8765     1 
 
 ; Include Position restraint file
-#ifdef POSRES
+#ifdef POSRES_PEP
 #include "posre_A.itp"
 #endif
 
+#ifdef POSRES_DISRE
+[ position_restraints ]
+; atom  type      fx      fy      fz
+  1387 1 10000 10000 10000
+  1392 1 10000 10000 10000
+  6386 1 10000 10000 10000
+  6391 1 10000 10000 10000
+  6259 1 10000 10000 10000
+  8790 1 10000 10000 10000
+  6273 1 10000 10000 10000
+  5037 1 10000 10000 10000
+  8792 1 10000 10000 10000
+  4254 1 10000 10000 10000
+  5054 1 10000 10000 10000
+#endif
