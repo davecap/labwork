@@ -83214,8 +83214,8 @@ Protein_A           3
  8751  8753  8755  8763  8765     1 
 
 ; Include Position restraint file
-#ifdef POSRES_PEP
-#include "posre_A.itp"
+#ifdef POSRES_PEPA
+#include "posre_A_A.itp"
 #endif
 
 #ifdef POSRES_DISRE
