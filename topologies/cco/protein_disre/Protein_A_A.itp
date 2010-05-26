@@ -9355,7 +9355,7 @@ Protein_A           3
 ; residue   7 CAL rtp CAL  q +2.0
   8791        CAL    562    CAL    CAL   2859          2      40.08   ; qtot 2
 ; residue   5 CU  rtp CU   q +2.0
-  8792         CU    563     CU     CU   2860      0.3568     63.546   ; qtot 2
+  8792         CU    563     CU     CU   2860      0.0112     63.546   ; qtot 2
 ; Cu-OH2 for state A
 ;  8793          OT    563     SOL   OW   2860     -0.6573     15.9994
 ;  8794          HT    563     SOL   HW1  2860      0.3644     1.008
