@@ -3700,59 +3700,59 @@ CC2    0.0   -0.0640     2.0800 !
 NS1    0.000000  -0.200000     1.850000 !N for deprotonated Schiff's base
 NS2    0.000000  -0.200000     1.850000 !N for protonated Schiff's base
 !lipid section
-HOL      0.0       -0.046     0.2245
-HAL1     0.0       -0.022     1.3200 ! alkane, 3/92
-HAL2     0.0       -0.028     1.3400 ! alkane, yin and mackerell, 4/98
-HAl3     0.0       -0.024     1.3400 ! alkane, yin,adm jr., 4/98
-HBL      0.0       -0.022     1.3200 ! for POPS
-HCL      0.0       -0.046     0.2245 ! ethanolamine
-!HT       0.0       -0.046     0.2245
-HL       0.0       -0.046     0.7    ! polar H on NC4+
-HEL1     0.0       -0.031     1.25   ! alkene, yin,adm jr., 12/95
-HEL2     0.0       -0.026     1.26   ! alkene, yin,adm jr., 12/95
+!HOL      0.0       -0.046     0.2245
+!HAL1     0.0       -0.022     1.3200 ! alkane, 3/92
+!HAL2     0.0       -0.028     1.3400 ! alkane, yin and mackerell, 4/98
+!HAl3     0.0       -0.024     1.3400 ! alkane, yin,adm jr., 4/98
+!HBL      0.0       -0.022     1.3200 ! for POPS
+!HCL      0.0       -0.046     0.2245 ! ethanolamine
+!!HT       0.0       -0.046     0.2245
+!HL       0.0       -0.046     0.7    ! polar H on NC4+
+!HEL1     0.0       -0.031     1.25   ! alkene, yin,adm jr., 12/95
+!HEL2     0.0       -0.026     1.26   ! alkene, yin,adm jr., 12/95
+!!
+!CL       0.0       -0.0700    2.00   ! methyl acetate update
+!CCL      0.0       -0.0700    2.00   ! for POPS
+!CTL1     0.0       -0.0200    2.275 0.0 -0.01 1.9 ! alkane, 3/92
+!CTL2     0.0       -0.0560    2.010 0.0 -0.01 1.9 ! alkane, 4/98, yin, adm jr.
+!CTL3     0.0       -0.0780    2.040 0.0 -0.01 1.9 ! alkane, 4/98, yin, adm jr.
+!CTL5     0.0       -0.0800    2.06  0.0 -0.01 1.9 ! old CTL3
+!                                                 ! maintained for tetramethylammonium
+!CEL1     0.0       -0.068     2.09   ! alkene, yin,adm jr., 12/95
+!CEL2     0.0       -0.064     2.08   ! alkene, yin,adm jr., 12/95
+!!
+!OBL      0.0       -0.12      1.70  0.0 -0.12 1.4
+!OCL      0.0       -0.12      1.70
+!O2L      0.0       -0.12      1.70
+!OHL      0.0       -0.1521    1.77
+!OSL      0.0       -0.1521    1.77
+!!OT       0.0       -0.1521    1.7682
+!!
+!NH3L     0.0       -0.20      1.85  ! ethanolamine
+!NTL      0.0       -0.20      1.85  ! as all other nitogens
+!!
+!SL       0.0       -0.47      2.1   ! methylsulfate
+!PL       0.0       -0.585     2.15  ! ADM Jr.
+!!DUM      0.0       -0.00      0.0   ! dummy atom
 !
-CL       0.0       -0.0700    2.00   ! methyl acetate update
-CCL      0.0       -0.0700    2.00   ! for POPS
-CTL1     0.0       -0.0200    2.275 0.0 -0.01 1.9 ! alkane, 3/92
-CTL2     0.0       -0.0560    2.010 0.0 -0.01 1.9 ! alkane, 4/98, yin, adm jr.
-CTL3     0.0       -0.0780    2.040 0.0 -0.01 1.9 ! alkane, 4/98, yin, adm jr.
-CTL5     0.0       -0.0800    2.06  0.0 -0.01 1.9 ! old CTL3
-                                                 ! maintained for tetramethylammonium
-CEL1     0.0       -0.068     2.09   ! alkene, yin,adm jr., 12/95
-CEL2     0.0       -0.064     2.08   ! alkene, yin,adm jr., 12/95
+!!
+!! ions, note lack of NBFIXes
+!!
+!!SOD    0.0       -0.0469    1.36375   ! sodium
+!                   ! D. Beglovd and B. Roux, dA=-100.8 kcal/mol
+!!POT    0.0       -0.0870    1.76375   ! potassium
+!                   ! D. Beglovd and B. Roux, dA=-82.36+2.8 = -79.56 kca/mol
+!!CLA    0.0       -0.150     2.27      ! chloride
+!                   ! D. Beglovd and B. Roux, dA=-83.87+4.46 = -79.40 kcal/mol
+!!CAL    0.0       -0.120     1.367     ! Calcium
+!                   ! S. Marchand and B. Roux, dA = -384.8 kcal/mol
+!!MG     0.0       -0.0150    1.18500   ! Magnesium
+!                   ! B. Roux dA = -441.65
+!!CES    0.0       -0.1900    2.100
+!                   ! Cesium, so far untested.
+!!ZN     0.0       -0.250000   1.090000  !
+!                   ! RHS March 18, 1990
 !
-OBL      0.0       -0.12      1.70  0.0 -0.12 1.4
-OCL      0.0       -0.12      1.70
-O2L      0.0       -0.12      1.70
-OHL      0.0       -0.1521    1.77
-OSL      0.0       -0.1521    1.77
-!OT       0.0       -0.1521    1.7682
-!
-NH3L     0.0       -0.20      1.85  ! ethanolamine
-NTL      0.0       -0.20      1.85  ! as all other nitogens
-!
-SL       0.0       -0.47      2.1   ! methylsulfate
-PL       0.0       -0.585     2.15  ! ADM Jr.
-!DUM      0.0       -0.00      0.0   ! dummy atom
-
-!
-! ions, note lack of NBFIXes
-!
-!SOD    0.0       -0.0469    1.36375   ! sodium
-                   ! D. Beglovd and B. Roux, dA=-100.8 kcal/mol
-!POT    0.0       -0.0870    1.76375   ! potassium
-                   ! D. Beglovd and B. Roux, dA=-82.36+2.8 = -79.56 kca/mol
-!CLA    0.0       -0.150     2.27      ! chloride
-                   ! D. Beglovd and B. Roux, dA=-83.87+4.46 = -79.40 kcal/mol
-!CAL    0.0       -0.120     1.367     ! Calcium
-                   ! S. Marchand and B. Roux, dA = -384.8 kcal/mol
-!MG     0.0       -0.0150    1.18500   ! Magnesium
-                   ! B. Roux dA = -441.65
-!CES    0.0       -0.1900    2.100
-                   ! Cesium, so far untested.
-!ZN     0.0       -0.250000   1.090000  !
-                   ! RHS March 18, 1990
-
 
 HBOND CUTHB 0.5  ! If you want to do hbond analysis (only), then use
                  ! READ PARAM APPEND CARD
