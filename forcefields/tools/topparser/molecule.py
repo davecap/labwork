@@ -67,7 +67,7 @@ class Atom(object):
         return output
     
     def __repr__(self):
-        return "%s RPR" % (self.symbol)
+        return "%s" % (self.symbol)
             
     def __str__(self):
         return "%s" % (self.symbol)
@@ -84,8 +84,15 @@ class Bond(object):
     atoms = []
     comment = None
     
-    def __init__(self, atom1, atom2, comment=None):
+    # bond types
+    SINGLE = 1
+    DOUBLE = 2
+    TRIPLE = 3
+    AROMATIC = 4
+    
+    def __init__(self, atom1, atom2, kind=1, comment=None):
         self.atoms = [atom1, atom2]
+        self.kind = kind
         self.comment = comment
     
     def gromacs(self):

@@ -78,7 +78,7 @@ class CharmmTopology(Topology):
         
     def process_parsed(self, s, loc, toks):
         # toks contains the parsed token
-        #print toks
+        # print toks
         pass
 
     def repeat(self, element):
@@ -114,12 +114,15 @@ class CharmmTopology(Topology):
         self.current_residue = new_presidue
 
     # ['GROUp', ['ATOM', ['CAD', 'C', '2.0000']]]
+    # or [['ATOM', ['CAD', 'C', '2.0000']]]
     def add_group(self, s, loc, toks):
         if self.current_residue is None:
             raise "Group found without any residue!"
         atoms = []
-        # first element is the "GROUp" label
-        for atom in toks[1:]:
+        # first element may be the "GROUp" label, delete it if it is there
+        if len(toks) > 0 and type(toks[0]) is str:
+            del toks[0]
+        for atom in toks:
             # get all the atom types and create new atom objects
             atom_type = self.find_or_create_atom_type(atom[1][1])
             new_atom = Atom(atom_type, atom[1][0], atom[1][2], comment=None)
@@ -140,6 +143,45 @@ class CharmmTopology(Topology):
             atom2 = self.current_residue.find_or_create_atom(bond[1])
 
             new_bond = Bond(atom1, atom2)
+            self.current_residue.bonds.append(new_bond)
+
+    def add_double_bond(self, s, loc, toks):
+        if self.current_residue is None:
+            raise "Bond found without any residue!"
+
+        # first element is the "DOUBLE" label
+        for bond in toks[1:]:
+            # get all the atom types and create new atom objects
+            atom1 = self.current_residue.find_or_create_atom(bond[0])
+            atom2 = self.current_residue.find_or_create_atom(bond[1])
+
+            new_bond = Bond(atom1, atom2, kind=Bond.DOUBLE)
+            self.current_residue.bonds.append(new_bond)
+
+    def add_triple_bond(self, s, loc, toks):
+        if self.current_residue is None:
+            raise "Bond found without any residue!"
+
+        # first element is the "TRIPLE" label
+        for bond in toks[1:]:
+            # get all the atom types and create new atom objects
+            atom1 = self.current_residue.find_or_create_atom(bond[0])
+            atom2 = self.current_residue.find_or_create_atom(bond[1])
+
+            new_bond = Bond(atom1, atom2, kind=Bond.TRIPLE)
+            self.current_residue.bonds.append(new_bond)
+
+    def add_aromatic_bond(self, s, loc, toks):
+        if self.current_residue is None:
+            raise "Bond found without any residue!"
+
+        # first element is the "TRIPLE" label
+        for bond in toks[1:]:
+            # get all the atom types and create new atom objects
+            atom1 = self.current_residue.find_or_create_atom(bond[0])
+            atom2 = self.current_residue.find_or_create_atom(bond[1])
+
+            new_bond = Bond(atom1, atom2, kind=Bond.AROMATIC)
             self.current_residue.bonds.append(new_bond)
 
     # ['ANGL', ['HCO', 'O', 'CA']]
@@ -201,15 +243,15 @@ class CharmmTopology(Topology):
 
             integer = Word( nums )
             dot = Literal(".")
-            float_val = Combine(Optional("-") + integer + dot + integer)
-            text = ZeroOrMore( Word( printables ) )
+            float_val = Combine(Optional(Literal("-") ^ Literal("+")) + integer + dot + Optional(integer))
 
             name = Word(alphanums)
+            text = OneOrMore(name)
+            
             iupac = Combine(Optional(Literal("-") ^ Literal("+") ^ Literal("*")) + name)
 
             comment = Combine(Literal("!") + SkipTo(Word("\r\n")))
             EOL = (Suppress(comment) | LineEnd().suppress())
-
             bond = Group(iupac + iupac)
             angle = Group(iupac + iupac + iupac)
             dihedral = Group(iupac + iupac + iupac + iupac)
@@ -234,11 +276,16 @@ class CharmmTopology(Topology):
             group_k = CaselessKeyword("GROUp") ^ CaselessKeyword("GROU")
 
             delete_k = CaselessKeyword("DELEte") ^ CaselessKeyword("DELE")
-            patch_k = CaselessKeyword("PATChing") ^ CaselessKeyword("PATC")
-
+            patch_k = CaselessKeyword("PATChing") ^ CaselessKeyword("PATC") ^ CaselessKeyword("PATCH")
+            patch_first_k = CaselessKeyword("FIRSt") ^ CaselessKeyword("FIRS")
+            patch_last_k = CaselessKeyword("LAST")
+            
             mass_k = CaselessKeyword("MASS")
             atom_k = CaselessKeyword("ATOM")
             bond_k = CaselessKeyword("BOND")
+            double_k = CaselessKeyword("DOUBLE")
+            triple_k = CaselessKeyword("TRIPLE")
+            aromatic_k = CaselessKeyword("AROMATIC") 
             cmap_k = CaselessKeyword("CMAP")
 
             #
@@ -254,8 +301,12 @@ class CharmmTopology(Topology):
 
             # One or more header lines starting with *
             header_line = Literal("*").setParseAction(replaceWith("HEAD")) + Group(restOfLine + LineEnd().suppress())
+            
+            # version line
+            version_line = integer + integer + Group(restOfLine + LineEnd().suppress())
+            
             # one or more MASS: atom-type-code atom-type-name mass
-            mass_line = mass_k + Group(integer + name + float_val) + EOL
+            mass_line = mass_k + Group(integer + name + float_val + Optional(name)) + EOL            
 
             # DECLare out-of-residue-name
             decl_line = decl_k + Group(iupac) + EOL
@@ -269,12 +320,21 @@ class CharmmTopology(Topology):
             presidue_line = presidue_k + Group(name + Optional(float_val)) + EOL
 
             #   one or more GROUP
+            # Note: this is annoying because in the official charmm RTFs, some GROUP lines have unmarked comments:
+            #   ie:         GROUP           O1  O2 (-) 
+            #   instead of: GROUP       !   O1  O2 (-)
             group_line = group_k + EOL
+                        
             #       one or more ATOM iupac atom-type-name charge repeat(exclusion-names)
             atom_line = atom_k + Group(iupac + iupac + float_val) + EOL
 
             #   one or more BOND repeat(iupac iupac)
             bond_line = bond_k + self.repeat(bond) + EOL
+            
+            # one or more DOUBLE repeat(iupac iupac)
+            double_line = double_k + self.repeat(bond) + EOL
+            triple_line = triple_k + self.repeat(bond) + EOL
+            aromatic_line = aromatic_k + self.repeat(bond) + EOL
 
             #   one or more ANGLe or THETa repeat(iupac iupac iupac)
             angle_line = angle_k + self.repeat(angle) + EOL
@@ -301,7 +361,7 @@ class CharmmTopology(Topology):
             delete_line = delete_k + Group(iupac + Optional(~LineEnd() + iupac + Optional(~LineEnd() + iupac + Optional(~LineEnd() + iupac)))) + EOL
 
             #  PATChing [ FIRSt { name } ] [ LAST { name } ]
-            patch_line = patch_k + Group(iupac + iupac + iupac + iupac) + EOL
+            patch_line = patch_k + Group(patch_first_k + name + Optional(~LineEnd() + patch_last_k + name)) + EOL
 
             # END
             end_line = CaselessKeyword("END") + LineEnd().suppress()
@@ -313,6 +373,9 @@ class CharmmTopology(Topology):
             group_section = (group_line + OneOrMore(Group(atom_line))).setParseAction(self.add_group)
             property_sections = (angle_line.setParseAction(self.add_angle) \
                                     | bond_line.setParseAction(self.add_bond) \
+                                    | double_line.setParseAction(self.add_double_bond) \
+                                    | triple_line.setParseAction(self.add_triple_bond) \
+                                    | aromatic_line.setParseAction(self.add_aromatic_bond) \
                                     | dihedral_line.setParseAction(self.add_dihedral) \
                                     | improper_line.setParseAction(self.add_improper) \
                                     | cmap_line.setParseAction(self.process_parsed) \
@@ -322,17 +385,21 @@ class CharmmTopology(Topology):
                                     | delete_line \
                                     | patch_line)
 
-            residue_section = (residue_line.setParseAction(self.add_residue) ^ presidue_line.setParseAction(self.add_presidue)) \
+            residue_section = (residue_line.setParseAction(self.add_residue) \
                                 + OneOrMore(Group(group_section)) \
-                                + ZeroOrMore(Group(property_sections))
+                                + ZeroOrMore(Group(property_sections)))
+            
+            patch_residue_section = (presidue_line.setParseAction(self.add_presidue) \
+                                + ZeroOrMore(Group(group_section) | Group(property_sections)) )
+                                            
             optional_section = ZeroOrMore(Group(defaults_line ^ decl_line ^ autogenerate_line))
 
-            self.rtf_bnf = OneOrMore(Group(header_line)) \
+            self.rtf_bnf = OneOrMore(Group(header_line)) + version_line \
                         + OneOrMore(Group(mass_line.setParseAction(self.add_atom_type))) \
                         + optional_section \
-                        + OneOrMore(Group(residue_section)) \
+                        + OneOrMore(Group(residue_section) | Group(patch_residue_section)) \
                         + end_line
-            self.rtf_bnf.ignore(comment_line)
+            self.rtf_bnf.ignore(Combine(Literal("!") + SkipTo(LineEnd())))
         return self.rtf_bnf
     
 

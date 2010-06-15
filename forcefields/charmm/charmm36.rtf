@@ -94,6 +94,7 @@ MASS    58 NY    14.00700 N ! TRP N in pyrrole ring
 MASS    59 NP    14.00700 N ! Proline ring NH2+ (N-terminal)
 MASS    60 NPH   14.00700 N ! heme pyrrole N
 MASS    61 NC    14.00700 N ! N for cyano group (see toppar_all22_prot_pyridines.str)
+MASS 66   OSLP 15.999400 O ! Phosphate oxygen, to avoid conflict with methylacetate type O
 MASS    70 O     15.99900 O ! carbonyl oxygen
 MASS    71 OB    15.99900 O ! carbonyl oxygen in acetic acid
 MASS    72 OC    15.99900 O ! carboxylate oxygen
@@ -3767,7 +3768,7 @@ IC H16X   C315   *C316  H16Z       1.1114  110.45 -120.06  110.62   1.1112
 RESI PALM        -1.00 ! Palmitate
                        ! based on methylsulfate
 
-GROUP                               O1  O2 (-) 
+GROUP                  !                O1  O2 (-) 
 ATOM C1   CL      0.62 !             \\ /
 ATOM O1   OCL    -0.76 !              C1
 ATOM O2   OCL    -0.76 !               |
@@ -4057,7 +4058,7 @@ RESI DHA        -1.00 ! docosahexaenoic acid; combine with PCGL
 !patch est1 L001 2 L001 1
 !patch est2 L001 2 L001 3
 !
-
+GROUP
 ATOM C1   CL     0.62 !      O1  O2 (-) 
 ATOM O1   OCL   -0.76 !       \\ /
 ATOM O2   OCL   -0.76 !        C1
@@ -4211,7 +4212,7 @@ IC H22A C21 *C22 H22B  0.0000  0.00   120.00  0.00  0.0000
 IC H22A C21 *C22 H22C  0.0000  0.00  -120.00  0.00  0.0000 
 
 RESI STEA       -1.00 ! stearoyl acid chain; combine with PCGL for DSPC
-
+GROUP
 ATOM C1   CL     0.62 !      O1  O2 (-)
 ATOM O1   OCL   -0.76 !       \\ /
 ATOM O2   OCL   -0.76 !        C1
@@ -4460,7 +4461,7 @@ RESI POPA        -1.00 ! 1-palmytoil-2-oleoyl-sn-glycero-
 !              CH2 - PO4 - H
 !
 ! Polar Head and glycerol backbone
-GROUP                                   H1
+GROUP                  !                    H1
 ATOM P1   PL      1.50 !                 |
 ATOM O3   O2L    -0.82 !       (-) O3   O1
 ATOM O4   O2L    -0.82 !             \ /
@@ -5497,6 +5498,7 @@ PRES EST1        0.00 !patch to link O1 of PCGL to C1 of PALM
 ! residue 1 is PCGL, residue 2 is PALM
 DELETE ATOM 1H1
 DELETE ATOM 2O2
+GROUP
 ATOM 1C1  CTL2  -0.05 !     1H1A--1C1--1H1B
 ATOM 1H1A HAL2   0.09 !            |
 ATOM 1H1B HAL2   0.09 !            |   
