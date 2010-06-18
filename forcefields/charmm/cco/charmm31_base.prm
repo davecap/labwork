@@ -4119,7 +4119,7 @@ ZN     0.0       -0.250000   1.090000  !
 ! HEME
 CTL4     0.0       -0.0800    2.06  0.0 -0.01 1.9 ! alkane, 3/92
 HAL      0.0       -0.022     1.3200 ! alkane, 3/92
-!CU     0.000000  -0.250000     1.000000 ! ALLOW  ION
+CU     0.000000  -0.250000     1.000000 ! ALLOW  ION
                ! R. Pomes 97-08-05 for cytox, dummy values to refine
 
 HBOND CUTHB 0.5  ! If you want to do hbond analysis (only), then use
