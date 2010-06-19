@@ -407,7 +407,7 @@ OS   CT    340.000     1.4300 ! ALLOW SPO
 OS   CT2   340.000     1.4300 ! ALLOW RBS
                 ! RP 15-1-96
 CTL4  HAL    322.00     1.111   ! alkanes, 3/92
-H    C     330.000     1.1000 ! ALLOW CHO
+H    CC     330.000     1.1000 ! ALLOW CHO
                 ! aldehyde C-terminus (RP 06-8-96)
 NH3  FE    270.200     1.9580 ! ALLOW NCYT
                 ! Heme (6-liganded): N-terminal ligand (RP 01/8/96)
@@ -1254,7 +1254,7 @@ CA   OS   C     40.000    109.60   30.00   2.26510 ! ALLOW  U10
                 ! RP 15-1-96
 C    CT1  CC     52.000   108.0000 ! ALLOW  BCL
                 ! RP 15-1-96
-CT1  C    HA     50.000   117.3000 ! ALLOW   CHO
+CT1  CC    HA     50.000   117.3000 ! ALLOW   CHO
                 ! aldehyde C-terminus (RP 06-8-96), untested
 CT2  CT1  CT2   53.350    114.00    8.00   2.56100 ! ALLOW   BCL
                 ! RP 15-1-96
@@ -2821,7 +2821,8 @@ HA   X    X    CPM    29.4000         0      0.0000 ! ALLOW HEM
                 ! Heme (6-liganded): porphyrin macrocycle (RP 97-05-21)
 CA   X    X    CA     90.0000         0      0.0000 ! ALLOW BCL
                 ! RP 15-1-96
-HA   X    X    C     120.0000         0      0.0000 ! ALLOW   CHO
+HA   X    X    C     120.0000         0      0.0000 ! HEME
+HA   X    X    CC     120.0000         0      0.0000 ! ALLOW   CHO
                 ! Aldehyde C-terminus (RP 06-8-96)
 O    X    X    CC     96.0000         0      0.0000 ! ALLOW  RBS 
                 ! RP 15-1-96
