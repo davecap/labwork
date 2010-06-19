@@ -133,6 +133,9 @@ class Dihedral(object):
     def __init__(self, atom1, atom2, atom3, atom4, comment=None):
         self.atoms = [atom1, atom2, atom3, atom4]
         self.comment = comment
+
+    def atom_types(self):
+        return "(%s, %s, %s, %s)" % (self.atoms[0].atom_type, self.atoms[1].atom_type, self.atoms[2].atom_type, self.atoms[3].atom_type)
     
     def gromacs(self):
         output = '%s %s %s %s' % (self.atoms[0], self.atoms[1], self.atoms[2], self.atoms[3])

@@ -32,8 +32,9 @@ def main():
         topology = CharmmTopology()
         topology.read(args[0])
         topology.summary()
-        gt = GromacsTopology()
-        gt.write(topology, 'test')
+
+        #gt = GromacsTopology()
+        #gt.write(topology, 'test')
         
         #parser = CHARMMRTFParser(args[0])
         #fields = parser.parse()

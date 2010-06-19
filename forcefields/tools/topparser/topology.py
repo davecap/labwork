@@ -44,12 +44,12 @@ class Topology(object):
             # print " Angles:"
             # for b in res.angles:
             #     print b
-            # print " Dihedrals:"
-            # for b in res.dihedrals:
-            #     print b
-            # print " Impropers:"
-            # for b in res.impropers:
-            #     print b
+            #print " Dihedrals:"
+            #for b in res.dihedrals:
+            #    print b.atom_types()
+            print " Impropers:"
+            for b in res.impropers:
+                print b.atom_types()
     
     def read(self, infile):
         pass

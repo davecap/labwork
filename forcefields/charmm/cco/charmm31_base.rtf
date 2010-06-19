@@ -1846,9 +1846,23 @@ IC 1CA  1C   2N   2CA   0.0000  0.0000 180.0000  0.0000  0.0000
 IC 1C   2N   2CA  2C    0.0000  0.0000 180.0000  0.0000  0.0000
 IC 1C   2CA  *2N  2HN   0.0000  0.0000 180.0000  0.0000  0.0000
 
+PRES CTER        -1.00 ! standard C-terminus
+GROUP                  ! use in generate statement
+ATOM C    CC      0.34 !   OT2(-)
+ATOM OT1  OC     -0.67 !  /
+ATOM OT2  OC     -0.67 ! -C
+DELETE ATOM O          !  \\
+BOND C OT2             !   OT1
+DOUBLE  C OT1
+IMPR C CA OT2 OT1
+ACCEPTOR OT1 C   
+ACCEPTOR OT2 C   
+IC N    CA   C    OT2   0.0000  0.0000  180.0000  0.0000  0.0000
+IC OT2  CA   *C   OT1   0.0000  0.0000  180.0000  0.0000  0.0000
+
 PRES CHO          0.00 ! aldehyde c-terminus (RP 06-8-96)
 group                  ! use in generate statement
-atom C    C       0.41 !
+atom C    CC       0.41 !
 atom O    O      -0.51 !
 atom HCO  HA      0.10 !
 BOND HCO C
