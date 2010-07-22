@@ -3,21 +3,62 @@
 
 import optparse
 import numpy
-from MDAnalysis import *
 import numpy.linalg
-from MDAnalysis import collection
 import scipy.stats
+from MDAnalysis import *
+from MDAnalysis import collection
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+from mpl_toolkits.mplot3d import Axes3D
 
 from rmsd import rmsd_trj
 
+#
+# JSON file format
+#
+
+# 'NAMD':
+#   'dt' -> 0.00
+#   'dcdtime' -> 0
+#   'firsttimestep' -> 0
+# 'PDB'
+#   'file' -> "asdf.pdb"
+# 'PSF'
+#   'file' 
+# 'TRJ'
+#   'files' -> ['asdf.dcd',]
+#   'frames' -> (0,1,2,3,4)
+#   'times' -> (10,100,...)
+# 'RMSD'
+#   '<selector i>': [<rmsd values>]
+# 'DIHEDRALS'
+#   '<selector i>': [<dihedral values>]
+# 'DISTANCES'
+#   ...
+#
+
+def get_residues_for_atoms(atoms):
+    # Get all protein segments and residues
+    residues = []
+    last_res = -1
+    last_seg = "NOSEG"
+    for a in atoms.atoms:
+        if last_res == a.resid and a.segment.name == last_seg:
+            continue
+        residues.append(a.residue)
+        last_res = a.resid
+        last_seg = a.segment.name
+    return residues
+
 def main():
     usage = """
-        usage: %prog [options] <PDB file> <PSF file> <DCD file>
+        usage: %prog [options] <PSF file> <PDB file> <DCD file>
     """
     parser = optparse.OptionParser(usage)
     parser.add_option("-s", dest="selection", default="name CA", help="Atom selection [default: %default]")    
+    parser.add_option("-t", dest="first_timestep", default="0", help="Starting timestep [default: %default]")    
+    parser.add_option("-f", dest="dcdtime", default="1", help="DCD output frequency [default: %default]")    
+    parser.add_option("-d", dest="dt", default="0.002", help="Integration Timestep [default: %default]")    
     
     options, args = parser.parse_args()
     
@@ -27,21 +68,68 @@ def main():
     psf_file = args[0]
     pdb_file = args[1]
     dcd_file = args[2]
+    dcdtime = int(options.dcdtime)
+    dt = float(options.dt)
+    first_timestep = int(options.first_timestep)
     
+    if not psf_file.lower().endswith('.psf'):
+        print "Warning: PSF filename does not end in .psf: %s" % psf_file
+    if not pdb_file.lower().endswith('.pdb'):
+        print "Warning: PDB filename does not end in .pdb: %s" % pdb_file
+    if not dcd_file.lower().endswith('.dcd'):
+        print "Warning: DCD filename does not end in .dcd: %s" % dcd_file
+    
+    print "Loading reference system: %s, %s" % (psf_file, pdb_file)
     ref = Universe(psf_file, pdb_file)
+    print "Loading trajectory: %s" % (dcd_file)
     trj = Universe(psf_file, dcd_file)
     
-    #
-    # RMSD of Calphas 
-    #
-       
-    #rmsds_calpha = rmsd_trj(trj, ref, select="name CA")
+    print "Getting all residues in ref..."
+    ref_residues = get_residues_for_atoms(ref.selectAtoms('protein'))
+    print "Found %d protein residues in ref." % len(ref_residues)
+    
+    print "Getting all residues in trj..."
+    trj_residues = get_residues_for_atoms(trj.selectAtoms('protein'))
+    print "Found %d protein residues in ref." % len(trj_residues)
+    
+    num_frames = trj.trajectory.numframes
+    # we have first_timestep, dcdtime and dt
+    # frame i is actually first_timestep + dcdtime*i
+    # frame i is actually (first_timestep + dcdtime*i)*dt
+    frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
+    time_range = frame_range*dt
     
     #
-    # RMSD per residue
+    # RMSD of protein and per residue 
     #
     
-    # TODO
+    # rmsds[0] is for backbone rmsd per frame
+    # rmsds[1...N] is for individual residues corresponding to residues[i+1]
+    rmsds = rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
+    
+    
+    # Make plot with vertical (default) colorbar
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    cax = ax.imshow(rmsds)
+    ax.set_title('Gaussian noise with vertical colorbar')
+
+    # Add colorbar, make sure to specify tick locations to match desired ticklabels
+    cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
+    cbar.ax.set_yticklabels(['< -1', '0', '> 1'])# vertically oriented colorbar
+    
+    heatmap, xedges, yedges = N.histogram2d(x, y, bins=(num_frames, len(ref_residues)+1))
+    extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+
+    P.clf()
+    P.imshow(heatmap, extent=extent)
+    P.show()
+    
+        
+    # fig = plt.figure()
+    # ax = Axes3D(fig)
+    # ax.bar3d(frame_range, range(0,len(rmsds)-1), rmsds[1:])
+    # plt.show()
     
     #
     # DIHEDRALS
@@ -50,61 +138,34 @@ def main():
     # dihedral of residue PEPA 139
     
     #  selection of the atoms involved for the psi for resid '%d' %res
-    chi1_sel = trj.selectAtoms("atom %d N"%res, "atom %d CA"%res, "atom %d C"%res, "atom %d N" % (res+1))
+    #chi1_sel = trj.selectAtoms("atom %d N"%res, "atom %d CA"%res, "atom %d C"%res, "atom %d N" % (res+1))
 
     # definition collecting the timeseries of a dihedral
-    a = collection.addTimeseries(Timeseries.Dihedral(phi_sel))
-    b = collection.addTimeseries(Timeseries.Dihedral(psi_sel))
-
-    # collection of the timeseries data for every 10 steps in the traj
-    data_phi = trj.dcd.correl(a, skip=10)*180./pi
-    data_psi = trj.dcd.correl(b, skip=10)*180./pi
-
-    # finding the avg and stdev for each residue
-    avg_phi = mean(data_phi)
-    stdev_phi = std(data_phi)
-    avg_psi = mean(data_psi)
-    stdev_psi = std(data_psi)
-    phi.append([res,avg_phi,stdev_phi])
-    psi.append([res,avg_psi,stdev_psi])
-
-    # making an array for phi and psi data
-    phi = numpy.array(phi)
-    psi = numpy.array(psi)
-
-    # plotting and saving the dihe for each resid
-    res = range(2, numresidues-1)
-    a = errorbar(phi[:,0], phi[:,1], phi[:,2], fmt='ro', label="phi")
-    b = errorbar(psi[:,0], psi[:,1], psi[:,2], fmt='bs', label="psi")
-    legend((a[0], b[0]), ("phi", "psi"))
-    savefig("backbone_dihedrals.png")
-    
-    # pp = PdfPages('multipage.pdf')
-    # plt.figure(1)
-    # plt.plot(data_table['Area Per Lipid'])
-    # plt.plot([64]*800)
-    # plt.title('Area Per Lipid')
-    # plt.xlabel('frame')
-    # plt.ylabel(r'Area per lipid $\AA$')
-    # pp.savefig()
+    # a = collection.addTimeseries(Timeseries.Dihedral(phi_sel))
+    #     b = collection.addTimeseries(Timeseries.Dihedral(psi_sel))
     # 
-    # plt.figure(2)
-    # plt.title('Bilayer Width')
-    # plt.plot(data_table['Bilayer Width'])
-    # plt.plot([38.3]*800)
-    # plt.xlabel('frame')
-    # plt.ylabel(r'Bilayer width $\AA$')
-    # pp.savefig()
+    #     # collection of the timeseries data for every 10 steps in the traj
+    #     data_phi = trj.dcd.correl(a, skip=10)*180./pi
+    #     data_psi = trj.dcd.correl(b, skip=10)*180./pi
     # 
-    # plt.figure(3)
-    # plt.title('Deuterium Order Parameters')
-    # plt.plot(numpy.arange(1,16), order_param, 'bo')
-    # plt.ylabel(r'$S_{CD}$')
-    # plt.xlabel('tail carbon number')
-    # pp.savefig()
+    #     # finding the avg and stdev for each residue
+    #     avg_phi = mean(data_phi)
+    #     stdev_phi = std(data_phi)
+    #     avg_psi = mean(data_psi)
+    #     stdev_psi = std(data_psi)
+    #     phi.append([res,avg_phi,stdev_phi])
+    #     psi.append([res,avg_psi,stdev_psi])
     # 
-    # pp.close()
-    
+    #     # making an array for phi and psi data
+    #     phi = numpy.array(phi)
+    #     psi = numpy.array(psi)
+    # 
+    #     # plotting and saving the dihe for each resid
+    #     res = range(2, numresidues-1)
+    #     a = errorbar(phi[:,0], phi[:,1], phi[:,2], fmt='ro', label="phi")
+    #     b = errorbar(psi[:,0], psi[:,1], psi[:,2], fmt='bs', label="psi")
+    #     legend((a[0], b[0]), ("phi", "psi"))
+    #     savefig("backbone_dihedrals.png")
     
     
 
