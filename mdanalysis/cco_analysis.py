@@ -6,15 +6,15 @@ import numpy
 import numpy.linalg
 import scipy.stats
 from MDAnalysis import *
-from MDAnalysis import collection
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
-from mpl_toolkits.mplot3d import Axes3D
+from MDAnalysis import collection, SelectionError
+import MDAnalysis.core.rms_fitting
+from MDAnalysis.core.AtomGroup import Residue, AtomGroup
 
-from rmsd import rmsd_trj
+from analysis import *
+from rmsd import RMSD
 
 #
-# JSON file format
+# JSON data store
 #
 
 # 'NAMD':
@@ -36,19 +36,6 @@ from rmsd import rmsd_trj
 # 'DISTANCES'
 #   ...
 #
-
-def get_residues_for_atoms(atoms):
-    # Get all protein segments and residues
-    residues = []
-    last_res = -1
-    last_seg = "NOSEG"
-    for a in atoms.atoms:
-        if last_res == a.resid and a.segment.name == last_seg:
-            continue
-        residues.append(a.residue)
-        last_res = a.resid
-        last_seg = a.segment.name
-    return residues
 
 def main():
     usage = """
@@ -84,20 +71,25 @@ def main():
     print "Loading trajectory: %s" % (dcd_file)
     trj = Universe(psf_file, dcd_file)
     
-    print "Getting all residues in ref..."
-    ref_residues = get_residues_for_atoms(ref.selectAtoms('protein'))
-    print "Found %d protein residues in ref." % len(ref_residues)
-    
-    print "Getting all residues in trj..."
-    trj_residues = get_residues_for_atoms(trj.selectAtoms('protein'))
-    print "Found %d protein residues in ref." % len(trj_residues)
-    
     num_frames = trj.trajectory.numframes
     # we have first_timestep, dcdtime and dt
-    # frame i is actually first_timestep + dcdtime*i
-    # frame i is actually (first_timestep + dcdtime*i)*dt
+    # frame i is first_timestep + dcdtime*i for actual timestep
+    # frame i is (first_timestep + dcdtime*i)*dt for time
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
+    
+    analyses = [RMSD]
+    analyses = [ a() for a in analyses ]
+    
+    for a in analyses:
+        a.prepare(ref, trj)
+        
+    frames = trj.trajectory
+    for ts in frames:
+        for a in analyses:
+            a.process(ts)
+    
+    print a.results()
     
     #
     # RMSD of protein and per residue 
@@ -105,31 +97,7 @@ def main():
     
     # rmsds[0] is for backbone rmsd per frame
     # rmsds[1...N] is for individual residues corresponding to residues[i+1]
-    rmsds = rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
-    
-    
-    # Make plot with vertical (default) colorbar
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    cax = ax.imshow(rmsds)
-    ax.set_title('Gaussian noise with vertical colorbar')
-
-    # Add colorbar, make sure to specify tick locations to match desired ticklabels
-    cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
-    cbar.ax.set_yticklabels(['< -1', '0', '> 1'])# vertically oriented colorbar
-    
-    heatmap, xedges, yedges = N.histogram2d(x, y, bins=(num_frames, len(ref_residues)+1))
-    extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-
-    P.clf()
-    P.imshow(heatmap, extent=extent)
-    P.show()
-    
-        
-    # fig = plt.figure()
-    # ax = Axes3D(fig)
-    # ax.bar3d(frame_range, range(0,len(rmsds)-1), rmsds[1:])
-    # plt.show()
+    # rmsds = rmsd.rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
     
     #
     # DIHEDRALS
