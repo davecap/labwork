@@ -9,6 +9,7 @@ from MDAnalysis import *
 from MDAnalysis import collection, SelectionError
 import MDAnalysis.core.rms_fitting
 from MDAnalysis.core.AtomGroup import Residue, AtomGroup
+from math import pi
 
 from analysis import *
 from rmsd import RMSD
@@ -78,63 +79,51 @@ def main():
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
     
-    analyses = [RMSD]
-    analyses = [ a() for a in analyses ]
+    # analyses = [ RMSD() ]
+    # for a in analyses:
+    #     a.prepare(ref, trj)
+    # frames = trj.trajectory
+    # for ts in frames:
+    #     for a in analyses:
+    #         a.process(ts)
+    ## rmsds[0] is for backbone rmsd per frame
+    ## rmsds[1...N] is for individual residues corresponding to residues[i+1]
+    ## rmsds = rmsd.rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
+    # rmsds = analyses[0].results()
     
-    for a in analyses:
-        a.prepare(ref, trj)
+    timeseries = (
+                    # (name, selection, post_processor, )
+                    (   'DIHE_PEPA_139', 
+                        Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")),
+                        (lambda x: x*180./pi),
+                    ),
+                    (   'DIHE_PEPA_132',
+                        Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")),
+                        (lambda x: x*180./pi),
+                    ),
+                    (   'DIHE_PEPA_286',
+                        Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")),
+                        (lambda x: x*180./pi),
+                    ),
+                    (   'DIST_CUA1_CUA2',
+                        Timeseries.Distance("r", trj.selectAtoms("atom J 1 CU", "atom J 2 CU")),
+                        None,
+                    ),
+                )
+    
+    for ts in timeseries:
+        collection.addTimeseries(ts[1])
         
-    frames = trj.trajectory
-    for ts in frames:
-        for a in analyses:
-            a.process(ts)
+    #data = universe.dcd.correl(collection, stop=5)
+    collection.compute(trj.dcd)
     
-    print a.results()
-    
-    #
-    # RMSD of protein and per residue 
-    #
-    
-    # rmsds[0] is for backbone rmsd per frame
-    # rmsds[1...N] is for individual residues corresponding to residues[i+1]
-    # rmsds = rmsd.rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
-    
-    #
-    # DIHEDRALS
-    #
-    
-    # dihedral of residue PEPA 139
-    
-    #  selection of the atoms involved for the psi for resid '%d' %res
-    #chi1_sel = trj.selectAtoms("atom %d N"%res, "atom %d CA"%res, "atom %d C"%res, "atom %d N" % (res+1))
-
-    # definition collecting the timeseries of a dihedral
-    # a = collection.addTimeseries(Timeseries.Dihedral(phi_sel))
-    #     b = collection.addTimeseries(Timeseries.Dihedral(psi_sel))
-    # 
-    #     # collection of the timeseries data for every 10 steps in the traj
-    #     data_phi = trj.dcd.correl(a, skip=10)*180./pi
-    #     data_psi = trj.dcd.correl(b, skip=10)*180./pi
-    # 
-    #     # finding the avg and stdev for each residue
-    #     avg_phi = mean(data_phi)
-    #     stdev_phi = std(data_phi)
-    #     avg_psi = mean(data_psi)
-    #     stdev_psi = std(data_psi)
-    #     phi.append([res,avg_phi,stdev_phi])
-    #     psi.append([res,avg_psi,stdev_psi])
-    # 
-    #     # making an array for phi and psi data
-    #     phi = numpy.array(phi)
-    #     psi = numpy.array(psi)
-    # 
-    #     # plotting and saving the dihe for each resid
-    #     res = range(2, numresidues-1)
-    #     a = errorbar(phi[:,0], phi[:,1], phi[:,2], fmt='ro', label="phi")
-    #     b = errorbar(psi[:,0], psi[:,1], psi[:,2], fmt='bs', label="psi")
-    #     legend((a[0], b[0]), ("phi", "psi"))
-    #     savefig("backbone_dihedrals.png")
-    
+    for i, ts in enumerate(timeseries):
+        print ts[0]
+        if ts[2]:
+            print ts[2](collection[i][0])
+        else:
+            print collection[i][0]
+            
     
 
 if __name__ == '__main__':
