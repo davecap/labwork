@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 class Analysis(object):
-    """ Base analysis class """
+    """ Base analysis class 
+    """
+    
     def __init__(self):
         raise NotImplementedError()
     

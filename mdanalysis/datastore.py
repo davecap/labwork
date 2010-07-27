@@ -4,20 +4,7 @@ import os
 import inspect
 
 _tables = []
-
-#
-# PyTables table definitions
-#
-
-class ExampleTable(IsDescription):
-     name      = StringCol(16)   # 16-character String
-     signed_64bit  = Int64Col()      # Signed 64-bit integer
-     short_int  = UInt16Col()     # Unsigned short integer
-     unsigned_byte  = UInt8Col()      # unsigned byte
-     integer    = Int32Col()      # 32-bit integer
-     float_sp  = Float32Col()    # float  (single-precision)
-     double_dp    = Float64Col()    # double (double-precision)
-
+    
 #
 # Initialize the table file
 #

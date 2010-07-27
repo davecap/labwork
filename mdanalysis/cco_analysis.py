@@ -14,29 +14,25 @@ from math import pi
 from analysis import *
 from rmsd import RMSD
 
-#
-# JSON data store
-#
+from tables import *
 
-# 'NAMD':
-#   'dt' -> 0.00
-#   'dcdtime' -> 0
-#   'firsttimestep' -> 0
-# 'PDB'
-#   'file' -> "asdf.pdb"
-# 'PSF'
-#   'file' 
-# 'TRJ'
-#   'files' -> ['asdf.dcd',]
-#   'frames' -> (0,1,2,3,4)
-#   'times' -> (10,100,...)
-# 'RMSD'
-#   '<selector i>': [<rmsd values>]
-# 'DIHEDRALS'
-#   '<selector i>': [<dihedral values>]
-# 'DISTANCES'
-#   ...
-#
+# Table definitions
+
+# /meta/trajectories
+
+# class TrajectoryTable(IsDescription):
+#     file_name = StringCol(64)
+#     first_timestep = Int32Col()
+#     frames = Int32Col()
+#     
+
+# Datastore Attributes
+#   TODO: parse NAMD config file on each analysis
+
+#   dt
+#   dcdtime
+#   pdb
+#   psf
 
 def main():
     usage = """
@@ -79,45 +75,52 @@ def main():
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
     
-    # analyses = [ RMSD() ]
-    # for a in analyses:
-    #     a.prepare(ref, trj)
-    # frames = trj.trajectory
-    # for ts in frames:
-    #     for a in analyses:
-    #         a.process(ts)
-    ## rmsds[0] is for backbone rmsd per frame
-    ## rmsds[1...N] is for individual residues corresponding to residues[i+1]
-    ## rmsds = rmsd.rmsd_trj(trj, ref, select=zip(ref_residues, trj_residues))
-    # rmsds = analyses[0].results()
+    analyses = [ RMSD(selection='backbone', name='backbone', group='rmsd') ]
     
+    for a in analyses:
+        a.prepare(ref, trj)
+    frames = trj.trajectory
+    for ts in frames:
+        for a in analyses:
+            a.process(ts)
+    for a in analyses:
+        a.write()
+        
     timeseries = (
                     # (name, selection, post_processor, )
-                    (   'DIHE_PEPA_139', 
+                    (   'PEPA_139',
+                        'dihedrals',
                         Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")),
                         (lambda x: x*180./pi),
                     ),
-                    (   'DIHE_PEPA_132',
+                    (   'PEPA_132',
+                        'dihedrals',
                         Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")),
                         (lambda x: x*180./pi),
                     ),
-                    (   'DIHE_PEPA_286',
+                    (   'PEPA_286',
+                        'dihedrals',
                         Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")),
                         (lambda x: x*180./pi),
                     ),
-                    (   'DIST_CUA1_CUA2',
+                    (   'CUA1_CUA2',
+                        'distances',
                         Timeseries.Distance("r", trj.selectAtoms("atom J 1 CU", "atom J 2 CU")),
                         None,
                     ),
                 )
     
+    # open the datastore
     for ts in timeseries:
+        # validate datastore against all analyses to be done
+        # create dataset if necessary
         collection.addTimeseries(ts[1])
         
     #data = universe.dcd.correl(collection, stop=5)
     collection.compute(trj.dcd)
     
     for i, ts in enumerate(timeseries):
+        # write to the datastore
         print ts[0]
         if ts[2]:
             print ts[2](collection[i][0])
