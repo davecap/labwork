@@ -16,15 +16,6 @@ from rmsd import RMSD
 
 from tables import *
 
-# Table definitions
-
-# /meta/trajectories
-
-# class TrajectoryTable(IsDescription):
-#     file_name = StringCol(64)
-#     first_timestep = Int32Col()
-#     frames = Int32Col()
-#     
 
 # Datastore Attributes
 #   TODO: parse NAMD config file on each analysis
@@ -75,8 +66,35 @@ def main():
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
     
-    analyses = [ RMSD(selection='backbone', name='backbone', group='rmsd') ]
+    analysis = Analysis('some_file.h5')
+    # tbl_metadata = analysis.table('metadata','trajectory')
+    # tbl_metadata.add_metadata(...)
     
+    tbl = analysis.table('protein','dihedrals')
+    # here we will add timeseries analyses
+    #   all timeseries types are Int32Col()
+    tbl.add_timeseries('PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
+    tbl.add_timeseries('PEPA_132', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")), pp=(lambda x: x*180./pi))
+    tbl.add_timeseries('PEPA_286', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")), pp=(lambda x: x*180./pi))
+    
+    tbl2 = analysis.table('protein', 'distances')
+    tbl2.add_timeseries('CUA1_CUA2', Timeseries.Distance("r", trj.selectAtoms("atom J 1 CU", "atom J 2 CU")))
+    
+    tbl3 = analysis.table('protein', 'rmsd')
+    # here we add a sequential analysis
+    #   all sequence types are Int32Col()
+    tbl3.add_to_sequence('backbone', RMSD(ref, trj, selection='backbone'))
+    
+    # set up the tables if necessary
+    analysis.prepare()
+    
+    # run all the analyses
+    analysis.run()
+    # save the data to the database
+    analysis.save()
+    #analysis.summary()
+    analysis.close()
+        
     for a in analyses:
         a.prepare(ref, trj)
     frames = trj.trajectory

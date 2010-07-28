@@ -24,20 +24,15 @@ class FrameData(object):
             self.coordinates = atom_group.coordinates() - self.com
 
 class RMSD(Analysis):
-    table_name = 'RMSD'
     _selection = None
-    _name = None
     _rmsds = []
     
     def _rmsd(self, a,b):
         """Returns RMSD between two coordinate sets a and b."""
         return numpy.sqrt(numpy.sum(numpy.power(a-b,2))/a.shape[0])
     
-    def __init__(self, selection, name):
-        self._selection = selection
-        self._name = name
-    
-    def prepare(self, ref, trj):
+    def __init__(self, ref, trj, selection):
+        self._selection = selection    
         ref_atoms = ref.selectAtoms(self._selection)
         trj_atoms = trj.selectAtoms(self._selection)
         self.fit_ref = FrameData(ref.selectAtoms('backbone'))
@@ -56,6 +51,6 @@ class RMSD(Analysis):
         ts._pos   += self.fit_ref.com
         self._rmsds.append(self._rmsd(self.rmsd_ref.atoms.coordinates(),self.rmsd_trj.atoms.coordinates()))
         # print self._rmsds[-1]
-
+        
     def results(self):
-        return numpy.array(self._rmsds)
+        return self._rmsds

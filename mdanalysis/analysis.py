@@ -96,17 +96,22 @@ class Tabular(object):
             print "No table found for /%s/%s, creating it..." % (self.group, self.name)
             self._table = self._h5f.createTable(group_node, self.name, self.description, self.name)
         
-    def write(self):
+    def write(self, col=None):
         """
         Write the data in _data to the table.
         _data should be a dict with the format:
             _data['<table column name>'] = numpy.array([...])
         """
-        row = self._table
-        for i in range(self._rows):
-            for col in self._data.keys()
+        row = self._table.row
+        if col:
+            for i in range(len(self._data[col])):
                 row[col] = self._data[col][i]
-            row.append()
+                row.append()
+        else:
+            for i in range(self._rows):
+                for col in self._data.keys()
+                    row[col] = self._data[col][i]
+                row.append()
         self._table.flush()
     
     def __repr__(self):
@@ -118,10 +123,7 @@ class SequentialAnalysis(Tabular):
     Puts the results in the _data dictionary.
     """
     
-    def __init__(self):
-        pass
-    
-    def prepare(self, ref, trj):
+    def __init__(self, ref, trj):    
         raise NotImplementedError()
 
     def process(self, frame):
@@ -135,6 +137,13 @@ class CollectionAnalysis(Tabular):
     Performs analysis as part of a Collection of Timeseries objects.
     Puts the results in the _data dictionary.
     """
-
+    
     def __init__(self):
         pass
+    
+    def timeseries(self):
+        # ex: return Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG"))
+        raise NotImplementedError()
+
+    def post_process(self, data):
+        return data
