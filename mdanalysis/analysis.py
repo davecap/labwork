@@ -5,31 +5,52 @@ from tables import *
 import numpy
 import os
 
-class DataStore(object):
+class Analysis(object):
     """
-    DataStore takes a bunch of Tabular objects and writes them to the PyTable file
+        
+    """
+
+class Analysis(object):
+    """
+    
     """
     _filename = None
     _readonly = True
     _title = None
     _h5f = None
     
-    _tables = []
+    _tables = {}
     
     def __init__(self, filename, title="datastore", readonly=True):
         self._filename = filename
         self._title = title
         self._readonly = readonly
         
-        _h5f = self.open_or_create()
+        self._h5f = self.open_or_create()
     
-    def add_table(self, tabular):
-        """
-        Add a table to the DataStore. Create it if necessary and prepare for writing.
-        Pass this function a Tabular object.
-        """
-        new_table = tabular(self._h5f)
-        self._tables.append(new_table)
+    def _add_column(path):
+        # get or create the table
+        #   add the column to the description
+    
+    def add_timeseries(path, timeseries, pp=None):
+        #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
+        split_path = path.split('/')
+ 
+    
+    # def table(self, group, name):
+    #     """
+    #     Add a table to the DataStore. Create it if necessary and prepare for writing.
+    #     Pass this function a Tabular object.
+    #     """
+    #     path = '/%s/%s' % (group, name)
+    #     try:
+    #         return self._tables[path]
+    #     except Exception:
+    #         # table not found
+    #         pass
+    #     
+    #     self._tables[path] = new_table
+    #     return new_table
     
     def write(self):
         for t in self._tables:
@@ -55,8 +76,8 @@ class DataStore(object):
                 mode = "r+"
         return tables.openFile(self._filename, mode=mode, title=self._title)
         
-class Tabular(object):
-    """ Tabular dataset stored with PyTables
+class DataStoreTable(object):
+    """ Dataset stored with PyTables
     """
     
     # PyTables table group, name and description
@@ -117,33 +138,15 @@ class Tabular(object):
     def __repr__(self):
         return '<'+self.__class__.__name__+' '+repr(self.name)+', '+repr(self.id)+', '+repr(self._table_group)+'/'+repr(self._table_name)+'>'
 
-class SequentialAnalysis(Tabular):
+class SequentialAnalysis(object):
     """
     Performs analysis per frame in a trajectory.
     Puts the results in the _data dictionary.
     """
     
-    def __init__(self, ref, trj):    
-        raise NotImplementedError()
-
     def process(self, frame):
         raise NotImplementedError()
 
     def results(self):
         raise NotImplementedError()
-        
-class CollectionAnalysis(Tabular):
-    """
-    Performs analysis as part of a Collection of Timeseries objects.
-    Puts the results in the _data dictionary.
-    """
     
-    def __init__(self):
-        pass
-    
-    def timeseries(self):
-        # ex: return Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG"))
-        raise NotImplementedError()
-
-    def post_process(self, data):
-        return data
