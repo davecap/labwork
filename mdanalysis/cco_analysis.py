@@ -66,7 +66,7 @@ def main():
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
     
-    analysis = Analysis('some_file.h5', trj=trj, ref=ref, readonly=False)
+    analysis = Analysis('some_file.h5', readonly=False)
     
     analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(selection='backbone'))
     analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
@@ -94,7 +94,7 @@ def main():
     analysis.add_timeseries('/protein/distances/GLU254O_CUA1', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 254 O", "atom J 1 CU")))
     analysis.add_timeseries('/protein/distances/E254OE1_MG', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 254 OE1", "atom I 1 MG")))
     
-    analysis.run()
+    analysis.run(trj=trj, ref=ref)
     analysis.save()
     analysis.close()
     

@@ -26,10 +26,8 @@ class Analysis(object):
     #   'path' => (class, post_processor)
     _timeseries = {}
     
-    def __init__(self, filename, trj, ref=None, title="datastore", readonly=True):
+    def __init__(self, filename, title="datastore", readonly=True):
         self._filename = filename
-        self._trj = trj
-        self._ref = ref
         self._title = title
         self._readonly = readonly
         self._h5f = self.open_or_create()
@@ -61,7 +59,10 @@ class Analysis(object):
         col = self.get_column(path)
         self._sequential[path] = (processor, col)
     
-    def run(self):
+    def run(self, trj, ref):
+        self._trj = trj
+        self._ref = ref
+        
         print "Starting timeseries analysis..."
         collection.clear()
         for path, tpl in self._timeseries.items():
@@ -130,20 +131,24 @@ class Analysis(object):
         return tables.openFile(self._filename, mode=mode, title=self._title)
 
 class Column(object):
-    _data = None # data to ve written
+    _data = None # data to be written
     _dirty = False
     path = None
     name = None
     format = None
     
-    def __init__(self, path, name, format):
+    def __init__(self, table, path, name, format):
         # print "Creating Column(%s)" % name
+        self._table = table
         self.path = path
         self.name = name
         self.format = format
         self._data = []
         self._dirty = False
-        
+    
+    def read(self, start=None, stop=None, step=None):
+        return self._table.read(start=start, stop=stop, step=step, field=self.name)
+    
     def load(self, data):
         # print "Loading data:"
         if type(data) is list:
@@ -194,7 +199,7 @@ class Table(object):
     def column(self, name, format):
         # print "Adding column %s to table %s" % (name, self.path)
         if name not in self._columns:
-            self._columns[name] = Column(self.path, name, format)
+            self._columns[name] = Column(self._table, self.path, name, format)
         return self._columns[name]
     
     def setup(self):
