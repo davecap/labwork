@@ -89,13 +89,13 @@ class Analysis(object):
                 tpl[0].prepare(ref=self._ref, trj=self._trj)
             frames = self._trj.trajectory
             print " Processing %d frames..." % frames.numframes
+            ten_percent = int(float(frames.numframes)/10.0)
             for i, f in enumerate(frames):
-                percent_done = float(i)/float(frames.numframes) * 100.00
-                if percent_done % 10.0 == 0.0:
+                if i % ten_percent == 0:
                     print ".",
-                
                 for path, tpl in self._sequential.items():
                     tpl[0].process(f)
+            print " done."
             print " Loading result data..."
             for path, tpl in self._sequential.items():
                 tpl[1].load(tpl[0].results())
@@ -236,15 +236,14 @@ class Table(object):
         
         print "Appending %d rows..." % num_rows
         row = self._table.row
+        ten_percent = int(float(num_rows)/10.0)
         for i in range(num_rows):
-            percent_done = float(i)/float(num_rows) * 100.00
-            if percent_done % 10.0 == 0.0:
+            if i % ten_percent == 0:
                 print ".",
-            
             for col in self._columns.values():
                 row[col.name] = col.next_dirty_row()
             row.append()
-        print "Done."
+        print " Done."
         self._table.flush()
     
     # def __repr__(self):
