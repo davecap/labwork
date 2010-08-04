@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tables import *
+from MDAnalysis import *
+from MDAnalysis import collection, SelectionError
+
+import tables
 import numpy
 import os
 
@@ -23,81 +26,87 @@ class Analysis(object):
     #   'path' => (class, post_processor)
     _timeseries = {}
     
-    def __init__(self, filename, title="datastore", readonly=True):
+    def __init__(self, filename, trj, ref=None, title="datastore", readonly=True):
         self._filename = filename
+        self._trj = trj
+        self._ref = ref
         self._title = title
         self._readonly = readonly
         self._h5f = self.open_or_create()
             
-    # get the table, "create" it if necessary
-    #   create means just create the Table class object, won't create the table until run()
-    def table(path):
-        if path not in self._tables:
-            self._tables[path] = Table(self._h5f, path)
-        return self._tables[path]
-    
-    def column(path, format=Int32col()):
+    def get_column(self, path, format=tables.Float32Col()):
         split_path = path.split('/')
-        col = split_path.pop()
-        group_table = '/'.join(split_path)
-
+        col_name = split_path.pop()
+        table_path = '/'.join(split_path)
+        
+        if table_path not in self._tables.keys():
+            self._tables[table_path] = Table(self._h5f, table_path)
+        
         # add the table if necessary and add the column
-        return self.table(group_table).column(col, format)
+        return self._tables[table_path].column(col_name, format)
     
     #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
-    def add_timeseries(path, timeseries, pp=None):
-        if path in self._timeseries:
+    def add_timeseries(self, path, timeseries, pp=None):
+        if path in self._timeseries.keys():
             raise Exception('Timeseries with path %s already exists in this analysis!' % path)
         
-        col = self.column(path)
-        self._timeseries[path] = (timeseries, col)
+        col = self.get_column(path)
+        self._timeseries[path] = (timeseries, col, pp)
    
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(ref, trj, selection='backbone')) 
-    def add_to_sequence(path, processor):
+    def add_to_sequence(self, path, processor):
         if path in self._sequential:
             raise Exception('Sequential processor with path %s already exists in this analysis!' % path)
         
-        col = self.column(path)
+        col = self.get_column(path)
         self._sequential[path] = (processor, col)
     
-    def run(self, trj):
-        print "Running sequential analyses..."
-        for path, tpl in self._sequential.items():
-            print "Preparing %s" % path
-            tpl[0].prepare()
+    def run(self):
+        print "Starting timeseries analysis..."
+        collection.clear()
+        for path, tpl in self._timeseries.items():
+            print " Adding timeseries: %s" % path
+            collection.addTimeseries(tpl[0])
+        print " Computing..."
         
-        frames = trj.trajectory
-        for ts in frames:
-            for a in analyses:
-                a.process(ts)
-        for path, tpl in self._sequential.items():
-            tpl[1].load(tpl[0].results())
+        collection.compute(self._trj.dcd)
+        print " Done computing."
         
-        # open the datastore
-         for ts in self._timeseries:
-             # validate datastore against all analyses to be done
-             # create dataset if necessary
-             collection.addTimeseries(ts[0])
+        print "Loading data..."
+        for i, path in enumerate(self._timeseries.keys()):
+            print " loading table %s with %d values..." % (path, len(collection[i][0]))
+            # post-process if pp is set
+            if self._timeseries[path][2]:
+                self._timeseries[path][1].load([ self._timeseries[path][2](val) for val in collection[i][0] ])
+            else:
+                self._timeseries[path][1].load(list(collection[i][0]))
+        print "Done timeseries analysis."
         
-         #data = universe.dcd.correl(collection, stop=5)
-         collection.compute(trj.dcd)
-        
-         for i, ts in enumerate(self._timeseries):
-             # write to the datastore
-             ts[1].load(collection[i][0])
+        if len(self._sequential) > 0:
+            print "Running sequential analyses..."
+            for path, tpl in self._sequential.items():
+                print " Preparing %s" % path
+                tpl[0].prepare(ref=self._ref, trj=self._trj)
+            frames = self._trj.trajectory
+            print " Processing %d frames..." % frames.numframes
+            for f in frames:
+                for path, tpl in self._sequential.items():
+                    tpl[0].process(f)
+            print " Loading result data..."
+            for path, tpl in self._sequential.items():
+                tpl[1].load(tpl[0].results())
+            print "Done sequential analysis."
         
     def save(self):
-        #save all the tables/columns
-        pass
-    
-    def close(self):
-        pass
-    
-    def write(self):
-        for t in self._tables:
+        print "Setting up and saving all tables..."
+        for path, t in self._tables.items():
+            print " Table: %s" % path
+            t.setup()
             t.write()
+        print "Done."
     
     def close(self):
+        print "Closing H5 file..."
         self._h5f.flush()
         self._h5f.close()
     
@@ -119,25 +128,38 @@ class Analysis(object):
 
 class Column(object):
     _data = None # data to ve written
-    _rows = 0 # rows to be written
     _dirty = False
     path = None
     name = None
     format = None
     
     def __init__(self, path, name, format):
+        # print "Creating Column(%s)" % name
         self.path = path
         self.name = name
         self.format = format
         self._data = []
         self._dirty = False
-    
+        
     def load(self, data):
-        self._data.append(data)
+        # print "Loading data:"
+        if type(data) is list:
+            self._data += data
+        else:
+            self._data.append(data)
         self._dirty = True
     
-    def save(self):
-        self._dirty = False
+    def dirty_row_count(self):
+        return len(self._data)
+    
+    def next_dirty_row(self):
+        if not self._dirty:
+            raise Exception('Tried to get row from a column without any data!')
+        
+        row = self._data.pop(0)
+        if len(self._data) == 0:
+            self._dirty = False
+        return row
   
 class Table(object):
     """ Dataset stored with PyTables
@@ -154,12 +176,11 @@ class Table(object):
     _columns = {}
     
     def __init__(self, h5f, path):
-        if not h5f or not h5f.isopen():
-            raise Exception('Closed H5 file descriptor passed to Analysis class: %s' % self)
+        # print "Creating Table(%s)" % path
         self._h5f = h5f
         self.path = path
-        else:
-            raise Exception('Too many levels in the table path: %s' % path)
+        self._table = None
+        self._columns = {}
     
     def _description(self):
         desc = {}
@@ -168,7 +189,7 @@ class Table(object):
         return desc
     
     def column(self, name, format):
-        # get column, make the object if necessary
+        # print "Adding column %s to table %s" % (name, self.path)
         if name not in self._columns:
             self._columns[name] = Column(self.path, name, format)
         return self._columns[name]
@@ -180,10 +201,9 @@ class Table(object):
         
         path = []
         node = self._h5f.getNode('/')
-                
         for n in split_path:
             try:
-                print "Looking for node: /%s/%s" % ('/'.join(path), n)                
+                # print "Looking for node: %s/%s" % ('/'.join(path), n)                
                 node = self._h5f.getNode('/%s' % '/'.join(path), n)
                 if n is table_name:
                     # loop through all columns.
@@ -193,10 +213,10 @@ class Table(object):
             except tables.NoSuchNodeError:
                 if n is table_name:
                     # n is the table
-                    print "No table found, creating it..."
-                    node = self._h5f.createTable(node, t, self._description(), expectedrows=100)
+                    # print "No table found, creating it..."
+                    node = self._h5f.createTable(node, n, self._description(), expectedrows=25000)
                 else:
-                    print "No group found, creating it..."
+                    # print "No group found, creating it..."
                     node = self._h5f.createGroup('/%s' % '/'.join(path), n)
             finally:
                 path.append(n)
@@ -204,36 +224,26 @@ class Table(object):
                     self._table = node
         return self._table
         
-    def write(self, data, col=None):
-        """
-        Write the data in _data to the table.
-        _data should be a dict with the format:
-            _data['<table column name>'] = numpy.array([...])
-        """
+    def write(self):
+        num_rows = [ col.dirty_row_count() for col in self._columns.values() ]
+        num_rows = set(num_rows)
+        if len(num_rows) > 1:
+            raise Exception('Inconsistent number of rows to write: %s' % num_rows)
+        num_rows = list(num_rows)[0]
+        
+        print "Appending %d rows..." % num_rows
         row = self._table.row
-        if col:
-            for i in range(len(self._data[col])):
-                row[col] = self._data[col][i]
-                row.append()
-        else:
-            for i in range(self._rows):
-                for col in self._data.keys()
-                    row[col] = self._data[col][i]
-                row.append()
+        for i in range(num_rows):
+            percent_done = int(float(i)/float(num_rows) * 100)
+            if percent_done % 10 == 0:
+                print "%d%%" % percent_done
+            
+            for col in self._columns.values():
+                row[col.name] = col.next_dirty_row()
+            row.append()
+        print "Done."
         self._table.flush()
     
-    def __repr__(self):
-        return '<'+self.__class__.__name__+' '+repr(self.name)+', '+repr(self.id)+', '+repr(self._table_group)+'/'+repr(self._table_name)+'>'
-
-class SequentialAnalysis(object):
-    """
-    Performs analysis per frame in a trajectory.
-    Puts the results in the _data dictionary.
-    """
-    
-    def process(self, frame):
-        raise NotImplementedError()
-
-    def results(self):
-        raise NotImplementedError()
+    # def __repr__(self):
+    #        return '<'+self.__class__.__name__+' '+repr(self.path)+'/'+repr(self.name)+'>'
     

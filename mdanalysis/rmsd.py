@@ -1,6 +1,4 @@
 # RMSD analysis class
-from analysis import Analysis
-
 import numpy
 import numpy.linalg
 from MDAnalysis import *
@@ -23,7 +21,7 @@ class FrameData(object):
             self.com = atom_group.centerOfMass().astype(numpy.float32)
             self.coordinates = atom_group.coordinates() - self.com
 
-class RMSD(Analysis):
+class RMSD(object):
     _selection = None
     _rmsds = []
     
@@ -31,8 +29,10 @@ class RMSD(Analysis):
         """Returns RMSD between two coordinate sets a and b."""
         return numpy.sqrt(numpy.sum(numpy.power(a-b,2))/a.shape[0])
     
-    def __init__(self, ref, trj, selection):
+    def __init__(self, selection):
         self._selection = selection    
+
+    def prepare(self, ref, trj):
         ref_atoms = ref.selectAtoms(self._selection)
         trj_atoms = trj.selectAtoms(self._selection)
         self.fit_ref = FrameData(ref.selectAtoms('backbone'))
