@@ -90,9 +90,10 @@ class Analysis(object):
             frames = self._trj.trajectory
             print " Processing %d frames..." % frames.numframes
             for i, f in enumerate(frames):
-                percent_done = float(i)/float(num_rows) * 100.00
+                percent_done = float(i)/float(frames.numframes) * 100.00
                 if percent_done % 10.0 == 0.0:
                     print ".",
+                
                 for path, tpl in self._sequential.items():
                     tpl[0].process(f)
             print " Loading result data..."
