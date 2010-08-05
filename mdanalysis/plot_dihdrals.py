@@ -27,9 +27,7 @@ def main():
         parser.error("No input file specified")
     
     h5_file = args[0]
-    
-    analysis = Analysis(h5_file, readonly=True)
-    
+        
     # analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(selection='backbone'))
     # analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
     # analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")), pp=(lambda x: x*180./pi))
@@ -57,12 +55,35 @@ def main():
     # analysis.add_timeseries('/protein/distances/E254OE1_MG', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 254 OE1", "atom I 1 MG")))
     # 
     
-    print analysis.get_column('/protein/dihedrals/PEPA_132_CHI1').read()
-    print analysis.get_column('/protein/dihedrals/PEPA_132_CHI2').read()
+    import matplotlib.pyplot as plt
     
-    # tbl_metadata = analysis.table('metadata','trajectory')
-    # tbl_metadata.add_metadata(...)
+    h5f = tables.openFile(h5_file, mode="r")
+    tbl = h5f.getNode('/protein/dihedrals')
+    data_chi1 = tbl.read(field='PEPA_139_CHI1')
+    data_chi2 = tbl.read(field='PEPA_139_CHI2')
     
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.scatter(data_chi1+180, data_chi2+180, alpha=0.75)
+    # ax.set_xlim(0, 360)
+    # ax.set_ylim(0, 360)
+    ax.set_xlabel(r'Chi1')
+    ax.set_ylabel(r'Chi2')
+    ax.set_title('139 Chi1 vs Chi2')
+    ax.grid(True)
+    plt.show()
+    
+    # bins = numpy.arange(-180, 180)
+    # freq, bins = numpy.histogram(data_chi1, bins=bins, range=None, normed=False, weights=None, new=None)
+    # print freq
+    # 
+    # freq, bins = numpy.histogram(data_chi2, bins=bins, range=None, normed=False, weights=None, new=None)
+    # print freq
+    
+    # pylab.plot(.5*(bins[1:]+bins[:-1]), n)
+    # pylab.show()
+    
+    h5f.close()
     
 
 if __name__ == '__main__':

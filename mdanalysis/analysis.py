@@ -137,17 +137,13 @@ class Column(object):
     name = None
     format = None
     
-    def __init__(self, table, path, name, format):
+    def __init__(self, path, name, format):
         # print "Creating Column(%s)" % name
-        self._table = table
         self.path = path
         self.name = name
         self.format = format
         self._data = []
         self._dirty = False
-    
-    def read(self, start=None, stop=None, step=None):
-        return self._table.read(start=start, stop=stop, step=step, field=self.name)
     
     def load(self, data):
         # print "Loading data:"
@@ -199,7 +195,7 @@ class Table(object):
     def column(self, name, format):
         # print "Adding column %s to table %s" % (name, self.path)
         if name not in self._columns:
-            self._columns[name] = Column(self._table, self.path, name, format)
+            self._columns[name] = Column(self.path, name, format)
         return self._columns[name]
     
     def setup(self):
