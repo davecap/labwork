@@ -78,6 +78,13 @@ class Analysis(object):
             print " loading table %s with %d values..." % (path, len(collection[i][0]))
             # post-process if pp is set
             if self._timeseries[path][2]:
+                # print " "
+                # print "DEBUG UNPROCESSED DATA#############"
+                # for val in collection[i][0]: print val
+                # print "DEBUG PROCESSED DATA##############"
+                # for val in collection[i][0]: print self._timeseries[path][2](val)
+                # print "DEBUG END"
+                # print " "
                 self._timeseries[path][1].load([ self._timeseries[path][2](val) for val in collection[i][0] ])
             else:
                 self._timeseries[path][1].load(list(collection[i][0]))

@@ -61,12 +61,12 @@ def main():
     tbl = h5f.getNode('/protein/dihedrals')
     data_chi1 = tbl.read(field='PEPA_139_CHI1')
     data_chi2 = tbl.read(field='PEPA_139_CHI2')
-    
+
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.scatter(data_chi1+180, data_chi2+180, alpha=0.75)
-    # ax.set_xlim(0, 360)
-    # ax.set_ylim(0, 360)
+    ax.scatter(data_chi1, data_chi2, c=range(len(data_chi1)), cmap=plt.cm.Blues, alpha=0.75)
+    ax.set_xlim(-400, 400)
+    ax.set_ylim(-400, 400)
     ax.set_xlabel(r'Chi1')
     ax.set_ylabel(r'Chi2')
     ax.set_title('139 Chi1 vs Chi2')
