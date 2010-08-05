@@ -21,9 +21,7 @@ class Analysis(object):
     _tables = {}
     
     # the following dicts store the actual analyses which are processed
-    #   'path' => (class, post_processor)
     _sequential = {}
-    #   'path' => (class, post_processor)
     _timeseries = {}
     
     def __init__(self, filename, title="datastore", readonly=True):
@@ -43,13 +41,13 @@ class Analysis(object):
         # add the table if necessary and add the column
         return self._tables[table_path].column(col_name, format)
     
-    #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")), pp=(lambda x: x*180./pi))
-    def add_timeseries(self, path, timeseries, pp=None):
+    #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
+    def add_timeseries(self, path, timeseries):
         if path in self._timeseries.keys():
             raise Exception('Timeseries with path %s already exists in this analysis!' % path)
         
         col = self.get_column(path)
-        self._timeseries[path] = (timeseries, col, pp)
+        self._timeseries[path] = (timeseries, col)
    
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(ref, trj, selection='backbone')) 
     def add_to_sequence(self, path, processor):
@@ -76,18 +74,7 @@ class Analysis(object):
         print "Loading data..."
         for i, path in enumerate(self._timeseries.keys()):
             print " loading table %s with %d values..." % (path, len(collection[i][0]))
-            # post-process if pp is set
-            if self._timeseries[path][2]:
-                # print " "
-                # print "DEBUG UNPROCESSED DATA#############"
-                # for val in collection[i][0]: print val
-                # print "DEBUG PROCESSED DATA##############"
-                # for val in collection[i][0]: print self._timeseries[path][2](val)
-                # print "DEBUG END"
-                # print " "
-                self._timeseries[path][1].load([ self._timeseries[path][2](val) for val in collection[i][0] ])
-            else:
-                self._timeseries[path][1].load(list(collection[i][0]))
+            self._timeseries[path][1].load(list(collection[i][0]))
         print "Done timeseries analysis."
         
         if len(self._sequential) > 0:

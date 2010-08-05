@@ -62,14 +62,33 @@ def main():
     data_chi1 = tbl.read(field='PEPA_139_CHI1')
     data_chi2 = tbl.read(field='PEPA_139_CHI2')
 
+    # data in radians
+    data_chi1_deg = []
+    data_chi2_deg = []
+    
+    rad2deg = (lambda x: x*1)
+    # rad2deg = (lambda x: x*180./pi)
+    
+    for rad in zip(data_chi1, data_chi2):
+        deg = rad2deg(rad[0])
+        if deg < 0:
+            deg += 360
+        data_chi1_deg.append(deg)
+        
+        deg = rad2deg(rad[1])
+        if deg < 0:
+            deg += 360
+        data_chi2_deg.append(deg)
+
+    
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.scatter(data_chi1, data_chi2, c=range(len(data_chi1)), cmap=plt.cm.Blues, alpha=0.75)
-    ax.set_xlim(-400, 400)
-    ax.set_ylim(-400, 400)
-    ax.set_xlabel(r'Chi1')
-    ax.set_ylabel(r'Chi2')
-    ax.set_title('139 Chi1 vs Chi2')
+    ax.scatter(data_chi1_deg, data_chi2_deg, c=range(len(data_chi1_deg)), cmap=plt.cm.Blues, alpha=0.75)
+    ax.set_xlim(0, 360)
+    ax.set_ylim(0, 360)
+    ax.set_xlabel(r'PEPA_139_CHI1')
+    ax.set_ylabel(r'PEPA_139_CHI2')
+    ax.set_title('139 Chi1 vs Chi2 ' + '(' + h5_file + ')')
     ax.grid(True)
     plt.show()
     
