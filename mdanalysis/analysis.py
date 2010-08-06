@@ -41,6 +41,19 @@ class Analysis(object):
         # add the table if necessary and add the column
         return self._tables[table_path].column(col_name, format)
     
+    #analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file, 'pdb': pdb_file, 'dcd': dcd_file, 'frames': num_frames, 'firsttimestep': first_timestep, 'dt': dt })
+    def add_metadata(self, path, data):
+        #path is to the table
+        #data has the columns
+        
+        print "Loading metadata..."
+        for k, v in data.items():
+            
+            col_path = '%s/%s' % (path, k)
+            col = self.get_column(col_path, format=tables.StringCol(64))
+            col.load(str(v))
+        print "Done."
+    
     #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
     def add_timeseries(self, path, timeseries):
         if path in self._timeseries.keys():
@@ -84,9 +97,8 @@ class Analysis(object):
                 tpl[0].prepare(ref=self._ref, trj=self._trj)
             frames = self._trj.trajectory
             print " Processing %d frames..." % frames.numframes
-            ten_percent = int(float(frames.numframes)/10.0)
             for i, f in enumerate(frames):
-                if i % ten_percent == 0:
+                if i % 10 == 0:
                     print ".",
                 for path, tpl in self._sequential.items():
                     tpl[0].process(f)
@@ -231,10 +243,9 @@ class Table(object):
         
         print "Appending %d rows..." % num_rows
         row = self._table.row
-        ten_percent = int(float(num_rows)/10.0)
         for i in range(num_rows):
-            if i % ten_percent == 0:
-                print ".",
+            if i % 10 == 0:
+                print '.',
             for col in self._columns.values():
                 row[col.name] = col.next_dirty_row()
             row.append()
