@@ -48,7 +48,6 @@ class Analysis(object):
         
         print "Loading metadata..."
         for k, v in data.items():
-            
             col_path = '%s/%s' % (path, k)
             col = self.get_column(col_path, format=tables.StringCol(64))
             col.load(str(v))

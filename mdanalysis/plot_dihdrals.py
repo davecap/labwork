@@ -39,8 +39,8 @@ def main():
     data_chi1_deg = []
     data_chi2_deg = []
     
-    rad2deg = (lambda x: x*1)
-    # rad2deg = (lambda x: x*180./pi)
+    #rad2deg = (lambda x: x*1)
+    rad2deg = (lambda x: x*180./pi)
     
     for rad in zip(data_chi1, data_chi2):
         deg = rad2deg(rad[0])

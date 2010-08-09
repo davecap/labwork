@@ -56,24 +56,31 @@ def main():
     if not dcd_file.lower().endswith('.dcd'):
         print "Warning: DCD filename does not end in .dcd: %s" % dcd_file
     
+    # check to make sure we haven't analyzed this DCD yet
+    # TODO: run md5 in subprocess...?
+    if os.path.exists(options.h5_filename):
+        h5f = tables.openFile(options.h5_filename, mode="r")
+        tbl = h5f.getNode('/metadata/trajectory')
+        analyzed_dcd_files = tbl.read(field='dcd')
+        h5f.close()
+        if dcd_file.split('/')[-1] in analyzed_dcd_files:
+            print "DCD file %s already analyzed... exiting!" % dcd_file
+            return -1
+    
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
     ref = Universe(psf_file, pdb_file)
+    
     print "Loading trajectory: %s" % (dcd_file)
     trj = Universe(psf_file, dcd_file)
     
     num_frames = trj.trajectory.numframes
-    # we have first_timestep, dcdtime and dt
-    # frame i is first_timestep + dcdtime*i for actual timestep
+    # frame i is first_timestep + dcdtime*i for timestep
     # frame i is (first_timestep + dcdtime*i)*dt for time
     frame_range = numpy.array(range(1,num_frames+1))*dcdtime+first_timestep
     time_range = frame_range*dt
     
-    # TODO: check to see if we have already analyzed the given dcd file
-    #   run md5 in subprocess...
-    
     analysis = Analysis(options.h5_filename, readonly=False)
-    
-    analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file, 'pdb': pdb_file, 'dcd': dcd_file, 'frames': num_frames, 'firsttimestep': first_timestep, 'dt': dt })
+    analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file.split('/')[-1], 'pdb': pdb_file.split('/')[-1], 'dcd': dcd_file.split('/')[-1], 'frames': num_frames, 'firsttimestep': first_timestep, 'dt': dt })
     
     # RMSD
     # this takes too long so I'm disabling it for now
