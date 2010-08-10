@@ -23,11 +23,22 @@ def main():
     
     options, args = parser.parse_args()
     
-    if len(args) < 2:
-        parser.error("No input file specified or path specified")
+    try:
+        h5_file = args[0]
+    except:
+        parser.error("No input file specified")
     
-    h5_file = args[0]
-    path = args[1]
+    try:
+        path = args[1]
+    except:
+        print "No path specified, showing all possible paths..."
+        h5f = tables.openFile(h5_file, mode="r")
+        for g in h5f.root._v_children.keys():
+            for t in h5f.root._v_children[g]._v_children.keys():
+                for c in h5f.root._v_children[g]._v_children[t].description._v_names:
+                    print "/%s/%s/%s" % (g, t, c)
+        h5f.close()
+        parser.error("No path specified")
     
     column = path.split('/')[-1]
     ps = path.split('/')
