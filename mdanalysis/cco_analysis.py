@@ -1,19 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import optparse
-import numpy
-import numpy.linalg
-import scipy.stats
-from math import pi
+# import required modules
+import optparse # command-line parsing
+import numpy # numerical operations
+from tables import * # pytables (database)
+from MDAnalysis import * # analysis of NAMD trajectories
 
-from tables import *
-from MDAnalysis import *
+# my analysis modules (in the same directory as this file)
 from analysis import *
 from rmsd import RMSD
 
-#   TODO: parse NAMD config file on each analysis
-
+# main() isn't special, it is just like any other Python function
 def main():
     usage = """
         usage: %prog [options] <PSF file> <PDB file> <DCD file>
