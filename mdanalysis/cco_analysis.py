@@ -98,6 +98,16 @@ def main():
     analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
     
+    # dihedrals of proprionates from Heme A and Heme A3
+    analysis.add_timeseries('/protein/dihedrals/HEMEA3_PROA_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 419 C1A", "atom PEPA 419 C2A", "atom PEPA 419 CAA", "atom PEPA 419 CBA")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA3_PROA_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 419 C2A", "atom PEPA 419 CAA", "atom PEPA 419 CBA", "atom PEPA 419 CGA")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA3_PROD_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 419 C4D", "atom PEPA 419 C3D", "atom PEPA 419 CAD", "atom PEPA 419 CBD")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA3_PROD_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 419 C3D", "atom PEPA 419 CAD", "atom PEPA 419 CBD", "atom PEPA 419 CGD")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA_PROA_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 102 C1A", "atom PEPA 102 C2A", "atom PEPA 102 CAA", "atom PEPA 102 CBA")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA_PROA_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 102 C2A", "atom PEPA 102 CAA", "atom PEPA 102 CBA", "atom PEPA 102 CGA")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA_PROD_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 102 C4D", "atom PEPA 102 C3D", "atom PEPA 102 CAD", "atom PEPA 102 CBD")))
+    analysis.add_timeseries('/protein/dihedrals/HEMEA_PROD_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 102 C3D", "atom PEPA 102 CAD", "atom PEPA 102 CBD", "atom PEPA 102 CGD")))
+    
     # distances between atoms that are distance restrained
     analysis.add_timeseries('/protein/distances/CUA1_CUA2', Timeseries.Distance("r", trj.selectAtoms("atom J 1 CU", "atom J 2 CU")))
     analysis.add_timeseries('/protein/distances/HDH102NE2_HDH102FE', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 102 NE2", "atom PEPA 102 FE")))
