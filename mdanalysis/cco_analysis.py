@@ -65,9 +65,9 @@ def main():
         # get the list of analyzed dcd files
         analyzed_dcd_files = tbl.read(field='dcd')
         h5f.close()
-        if dcd_file.split('/')[-1] in analyzed_dcd_files:
-            print "DCD file %s already analyzed... exiting!" % dcd_file
-            return -1
+        #if dcd_file.split('/')[-1] in analyzed_dcd_files:
+        #    print "DCD file %s already analyzed... exiting!" % dcd_file
+        #    return -1
     
     # load the PSF and PDB into the analysis system
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
