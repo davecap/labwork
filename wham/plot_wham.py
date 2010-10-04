@@ -5,7 +5,10 @@ import optparse
 from configobj import ConfigObj, flatten_errors
 import tables
 from math import pi
+import matplotlib
+matplotlib.use('ps')
 import matplotlib.pyplot as plt
+
 import numpy
 
 #from pydr import setup_config
@@ -41,8 +44,8 @@ def main():
         if not os.path.exists(h5_file):
             print "H5 file not found... skipping this replica"
             continue
-        coordinate = r_config['coordinate']
-        k = r_config['k']
+        coordinate = float(r_config['coordinate'])
+        k = float(r_config['k'])
         
         h5f = tables.openFile(h5_file, mode="r")
         try:
@@ -75,21 +78,25 @@ def main():
         wham_metadata_file.write('%s %s %s\n' % (data_file_path, coordinate, k))
         
         # generate umbrellas for each coord/k
-        x = arange(coordinate-5,coordinate+5,0.1)
-        y = 0.5*k*(x*x)
+        x = numpy.arange(coordinate-10.0,coordinate+10.1,0.1)
+        y = [ 0.5*k*(i-coordinate)*(i-coordinate) for i in x ]
         plt.plot(x,y)
         # add degree data for each coord
+        #y = [ 0.5*k*(i-coordinate)*(i-coordinate) for i in degrees ]
+        #plt.scatter(degrees, y)
         
     wham_metadata_file.close()
     
     # complete and show the plot
     ax.set_xlim(0, 360)
-    # ax.set_ylim(0, 360)
+    ax.set_ylim(0, 5)
     ax.set_xlabel(r'Coordinate')
     ax.set_ylabel(r'Harmonic Restraint')
     ax.set_title('')
     # ax.grid(True)
-    plt.show()
+    plot_path = os.path.join(project_path, 'wham_plot.ps')
+    plt.savefig(plot_path)
+    #plt.show()
     
 if __name__=='__main__':
     main()
