@@ -5,6 +5,8 @@ import optparse
 from configobj import ConfigObj, flatten_errors
 import tables
 from math import pi
+import matplotlib.pyplot as plt
+import numpy
 
 #from pydr import setup_config
 
@@ -28,6 +30,11 @@ def main():
     if os.path.exists(wham_metadata_filename):
         os.rename(wham_metadata_filename, wham_metadata_filename+'.backup')
     wham_metadata_file = open(wham_metadata_filename, 'w')
+    
+    # setup the plot
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    
     for r_id, r_config in config['replicas'].items():
         print "Extracting data from replica: %s" % r_id
         h5_file = os.path.join(project_path, r_id, 'analysis.h5')
@@ -66,9 +73,23 @@ def main():
             degrees.append(deg)
         f.close()
         wham_metadata_file.write('%s %s %s\n' % (data_file_path, coordinate, k))
+        
+        # generate umbrellas for each coord/k
+        x = arange(coordinate-5,coordinate+5,0.1)
+        y = 0.5*k*(x*x)
+        plt.plot(x,y)
+        # add degree data for each coord
+        
     wham_metadata_file.close()
-
-    # plot
+    
+    # complete and show the plot
+    ax.set_xlim(0, 360)
+    # ax.set_ylim(0, 360)
+    ax.set_xlabel(r'Coordinate')
+    ax.set_ylabel(r'Harmonic Restraint')
+    ax.set_title('')
+    # ax.grid(True)
+    plt.show()
     
 if __name__=='__main__':
     main()
