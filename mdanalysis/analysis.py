@@ -80,7 +80,7 @@ class Analysis(object):
             collection.addTimeseries(tpl[0])
         print " Computing..."
         
-        collection.compute(self._trj.dcd)
+        collection.compute(self._trj.trajectory)
         print " Done computing."
         
         print "Loading data..."
