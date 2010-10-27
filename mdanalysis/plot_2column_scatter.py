@@ -9,60 +9,67 @@ from math import pi
 
 from analysis import *
 import tables
+
+import matplotlib
+matplotlib.use('ps')
 import matplotlib.pyplot as plt
+import matplotlib.font_manager
 
 def main():
     usage = """
-        usage: %prog [options] <H5 File> <path 1> <path 2>
+        usage: %prog [options] <H5 File 1> <H5 File 2> <H5 File N>
     """
     parser = optparse.OptionParser(usage)
+    parser.add_option("-x", dest="x_column", default=None, help="X Column REQUIRED")
+    parser.add_option("-y", dest="y_column", default=None, help="Y Column REQUIRED")
     
     options, args = parser.parse_args()
     
-    try:
-        h5_file = args[0]
-    except:
-        parser.error("No input file specified")
+    if not args:
+        parser.error("No input file(s) specified")
     
-    try:
-        path1 = args[1]
-        path2 = args[2]
-    except:
+    if not options.x_column or options.y_column:        
         print "Two paths are required! showing all possible paths..."
-        h5f = tables.openFile(h5_file, mode="r")
+        h5f = tables.openFile(args[0], mode="r")
         for g in h5f.root._v_children.keys():
             for t in h5f.root._v_children[g]._v_children.keys():
                 for c in h5f.root._v_children[g]._v_children[t].description._v_names:
                     print "/%s/%s/%s" % (g, t, c)
         h5f.close()
-        parser.error("No path(s) specified")
+        parser.error("X and Y paths are required.")
     
-    column1 = path1.split('/')[-1]
-    ps1 = path1.split('/')
+    column1 = options.x_column.split('/')[-1]
+    ps1 = options.x_column.split('/')
     ps1.pop()
     table1 = '/'.join(ps1)
-    
-    column2 = path2.split('/')[-1]
-    ps2 = path2.split('/')
+
+    column2 = options.y_column.split('/')[-1]
+    ps2 = options.y_column.split('/')
     ps2.pop()
     table2 = '/'.join(ps2)
     
-    h5f = tables.openFile(h5_file, mode="r")
-    data1 = h5f.getNode(table1).read(field=column1)
-    data2 = h5f.getNode(table2).read(field=column2)
+    data1 = []
+    data2 = []
     
-    h5f.close()
+    while args:
+        h5_file = args.pop()
+        h5f = tables.openFile(h5_file, mode="r")
+        data1.append(h5f.getNode(table1).read(field=column1))
+        data2.append(h5f.getNode(table2).read(field=column2))
+        h5f.close()
     
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.scatter(data1, data2, c=range(len(data1)), cmap=plt.cm.Blues, alpha=0.75)
+    # ax.scatter(data1, data2, c=range(len(data1)), cmap=plt.cm.Blues, alpha=0.75)
+    ax.scatter(data1, data2)
+    
     # ax.set_xlim(0, 360)
     # ax.set_ylim(0, 360)
     ax.set_xlabel(column1)
     ax.set_ylabel(column2)
-    ax.set_title(column1 + ' vs ' + column2 + ' (' + h5_file + ')')
+    ax.set_title(column1 + ' vs ' + column2)
     ax.grid(True)
-    plt.show()
+    plt.savefig(column1 + ' vs ' + column2 + '.eps')
     
     # bins = numpy.arange(-180, 180)
     # freq, bins = numpy.histogram(data_chi1, bins=bins, range=None, normed=False, weights=None, new=None)
@@ -72,10 +79,7 @@ def main():
     # print freq
     
     # pylab.plot(.5*(bins[1:]+bins[:-1]), n)
-    # pylab.show()
-    
-    h5f.close()
-    
+    # pylab.show()    
 
 if __name__ == '__main__':
     main()
