@@ -3,7 +3,7 @@
 Hydrogen Bond analysis --- :mod:`MDAnalysis.analysis.hbonds`
 ===================================================================
 
-:Author: David Caplan, Grace Li
+:Author: David Caplan
 :Year: 2010
 :Copyright: GNU Public License v3
 
@@ -18,16 +18,17 @@ Options:
   - donor-acceptor distance (A): 3.0
   - Angle cutoff (degrees): 120.0
 
-Returns hydrogen bond data:
-    frame  selection1 selection2  num_hbonds
+Returns hydrogen bond data per frame:
+    results[ [ <donor index>, <acceptor index>, <donor string>, <acceptor string>, <distance>, <angle> ], [frame 1], [frame 2] ... ]
+
 
 Example
 -------
 
 TODO
 
-  import MDAnalysis.analysis.hbonds
   import MDAnalysis
+  import hbonds
   
   u = MDAnalysis.Universe(PSF, PDB, permissive=True)
   h = MDAnalysis.analysis.hbonds.HydrogenBondAnalysis(u, 'protein', 'resname TIP3', distance=3.0, angle=120.0)
@@ -100,8 +101,6 @@ class HydrogenBondAnalysis(object):
           *angle*
             Angle cutoff for hydrogen bonds
             
-        TODO: description
-
         The timeseries accessible as the attribute :attr:`HydrogenBondAnalysis.timeseries`.
         """
 
