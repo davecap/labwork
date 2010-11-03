@@ -62,23 +62,26 @@ class HydrogenBondAnalysis(object):
 
     The analysis of the trajectory is performed with the
     :meth:`HydrogenBondAnalysis.run` method. The result is stored in
-    :attr:`HydrogenBondAnalysis.timeseries`. It is a numpy array which
-    contains the frame number at index 0, selection1 and selection2,
-    and the total number of hydrogen bonds ::
-
-        frame  selection1 selection2  num_hbonds
-
+    :attr:`HydrogenBondAnalysis.timeseries`. It is an array of one element per frame.
+    Each frame (element) is an array of D-H-A tuples (donor, hydrogen, acceptor) for
+    the hydrogen bonds found.
+    
+    The criteria for hydrogen bonds can be set by the DA_distance and HA_distance and angle.
+    The DA_distance is the cutoff between donors and acceptors. 
+    The HA_distance is the cutoff between hydrogens and acceptors.
+    The angle is the D-H-A angle cutoff.
+    All three must be satisfied to count as an h-bond.
 
     Donors: NH of the main chain, water-H1/H2, ARG NE, ASN ND2, HIS NE2, SER OG, TYR OH, ARG NH1, CYS SG, HIS ND1, THR OG1, ARG NH2, GLN NE2, LYS NZ, TRP NE1
     Acceptors: CO main chain, water-OH2, ASN OD1, GLN OE1, MET SD, ASP OD1, GLU OE1, SER OG, ASP OD2, GLU OE2, THR OG1,CYH SG, HIS ND1, TYR OH.
 
     """
     
-    donors = ('NH', 'OH2', 'NE', 'ND2', 'NE2', 'OG', 'OH', 'NH1', 'SG', 'ND1', 'OG1', 'NH2', 'NE2', 'NZ', 'NE1', )
-    acceptors = ('CO', 'OH2', 'OD1', 'OE1', 'SD', 'OD1', 'OE1', 'OG', 'OD2', 'OE2', 'OG1', 'SG', 'ND1', 'OH', )
+    donors = ('OW', 'NH', 'OH2', 'NE', 'ND2', 'NE2', 'OG', 'OH', 'NH1', 'SG', 'ND1', 'OG1', 'NH2', 'NE2', 'NZ', 'NE1', )
+    acceptors = ('OW', 'CO', 'OH2', 'OD1', 'OE1', 'SD', 'OD1', 'OE1', 'OG', 'OD2', 'OE2', 'OG1', 'SG', 'ND1', 'OH', )
     
     def __init__(self, universe, selection1='protein', selection2='all', selection1_type='both',
-                update_selection1=False, update_selection2=False, filter_first=True, distance=3.0, angle=120.0):
+                update_selections=False, DA_distance=3.5, HA_distance=2.5, angle=120.0):
         """Calculate hydrogen bonds between two selections in a universe.
 
         :Arguments:
@@ -90,14 +93,12 @@ class HydrogenBondAnalysis(object):
             Selection string for second selection
           *selection1_type*
             Selection 1 can be 'donor', 'acceptor' or 'both'
-          *update_selection1*
-            Update selection 1 at each frame?
-          *update_selection2*
-            Update selection 2 at each frame?
-          *filter_first*
-            Filter selection 2 first to only atoms 3*distance away
-          *distance*
-            Distance cutoff for hydrogen bonds
+          *update_selections*
+            Update selections at each frame?
+          *DA_distance*
+            Distance cutoff for Donor <-> Acceptor
+          *HA_distance*
+            Distance cutoff for Hydrogen <-> Acceptor
           *angle*
             Angle cutoff for hydrogen bonds
             
@@ -108,10 +109,9 @@ class HydrogenBondAnalysis(object):
         self.selection1 = selection1
         self.selection2 = selection2
         self.selection1_type = selection1_type
-        self.update_selection1 = update_selection1
-        self.update_selection2 = update_selection2
-        self.filter_first = filter_first
-        self.distance = distance
+        self.update_selections = update_selections
+        self.DA_distance = DA_distance
+        self.HA_distance = HA_distance
         self.angle = angle
         
         if not (self.selection1 and self.selection2):
@@ -120,115 +120,94 @@ class HydrogenBondAnalysis(object):
             raise Exception('HydrogenBondAnalysis: Invalid selection type %s' % self.selection1_type)
 
         self.timeseries = None  # final result
-        
-        self._update_selection_1()
-        self._update_selection_2()
+        self._update_selections()
+        self._hydrogens = {}
 
     def _get_bonded_hydrogens(self, atom):
-        hydrogens = []
-        for i in range(3):
-            try:
-                next_atom = self.u.atoms[atom.number+1+i]
-            except:
-                break
-            else:
-                if next_atom.name.startswith('H'):
-                    hydrogens.append(next_atom)
-        return hydrogens
+        try:
+            return self._hydrogens[atom]
+        except:
+            hydrogens = []
+            for i in range(3):
+                try:
+                    next_atom = self.u.atoms[atom.number+1+i]
+                except:
+                    break
+                else:
+                    if next_atom.name.startswith('H'):
+                        hydrogens.append(next_atom)
+            self._hydrogens[atom] = hydrogens
+            return hydrogens
 
-    def _update_selection_1(self):
+    def _update_selections(self):
+        """ Get all pairs of donors and acceptors between selections 1 and 2 """
         self._s1 = self.u.selectAtoms(self.selection1)
-        logger.debug("Size of selection 1: %d atoms" % len(self._s1))
+        self._s2 = self.u.selectAtoms(self.selection2)        
         if self.selection1_type in ('donor', 'both'):
-            self._s1_donors = self._s1.selectAtoms(' or '.join([ 'name %s' % i for i in self.donors ]))
-            self._s1_donors_h = {}
-            for i,d in enumerate(self._s1_donors):
-                tmp = self._get_bonded_hydrogens(d)
-                if tmp:
-                    self._s1_donors_h[i] = tmp
-            logger.debug("Selection 1 donors: %d" % len(self._s1_donors))
-            logger.debug("Selection 1 donor hydrogens: %d" % len(self._s1_donors_h.keys()))
+            # selection 1 is donor
+            # get all donor atoms within selection 1
+            self._s1_donor_atoms = self._s1.selectAtoms(' or '.join([ 'name %s' % i for i in self.donors ]))
+            # get all acceptor atoms within the selection 2
+            self._s2_acceptor_atoms = self._s2.selectAtoms(' or '.join([ 'name %s' % i for i in self.acceptors ]))
+        else:
+            self._s1_donor_atoms = []
+            
         if self.selection1_type in ('acceptor', 'both'):
-            self._s1_acceptors = self._s1.selectAtoms(' or '.join([ 'name %s' % i for i in self.acceptors ]))
-            logger.debug("Selection 1 acceptors: %d" % len(self._s1_acceptors))
-
-    def _update_selection_2(self):
-        self._s2 = self.u.selectAtoms(self.selection2)
-        if self.filter_first:
-            logger.debug("Size of selection 2 before filtering: %d atoms" % len(self._s2))
-            ns_selection_2 = NS.AtomNeighborSearch(self._s2)
-            self._s2 = ns_selection_2.search_list(self._s1, 3.*self.distance)
-        logger.debug("Size of selection 2: %d atoms" % len(self._s2))
-        
-        if self.selection1_type in ('donor', 'both'):
-            self._s2_acceptors = self._s2.selectAtoms(' or '.join([ 'name %s' % i for i in self.acceptors ]))
-            logger.debug("Selection 2 acceptors: %d" % len(self._s2_acceptors))
-        if self.selection1_type in ('acceptor', 'both'):
-            self._s2_donors = self._s2.selectAtoms(' or '.join([ 'name %s' % i for i in self.donors ]))
-            self._s2_donors_h = {}
-            for i,d in enumerate(self._s2_donors):
-                tmp = self._get_bonded_hydrogens(d)
-                if tmp:
-                    self._s2_donors_h[i] = tmp
-            logger.debug("Selection 2 donors: %d" % len(self._s2_donors))
-            logger.debug("Selection 2 donor hydrogens: %d" % len(self._s2_donors_h.keys()))   
-
+            # selection 1 is acceptor
+            # get all acceptor atoms within selection 1
+            self._s1_acceptor_atoms = self._s1.selectAtoms(' or '.join([ 'name %s' % i for i in self.acceptors ]))
+            # get all donor atoms within selection 2
+            self._s2_donor_atoms = self._s2.selectAtoms(' or '.join([ 'name %s' % i for i in self.donors ]))
+        else:
+            self._s1_acceptor_atoms = []
+            
     def run(self):
         """Analyze trajectory and produce timeseries.
         """
         self.timeseries = []
-        
+        self.u.trajectory.rewind()
         for ts in self.u.trajectory:
             frame_results = []
-            
             frame = ts.frame
             logger.debug("Analyzing frame %d" % frame)
-            if self.update_selection1:
-                self._update_selection_1()
-            if self.update_selection2:
-                self._update_selection_2()
             
-            if self.selection1_type in ('donor', 'both'):
-                logger.debug("Selection 1 Donors <-> Acceptors")
-                ns_acceptors = NS.AtomNeighborSearch(self._s2_acceptors)
-                for i,donor_h_set in self._s1_donors_h.items():
-                    d = self._s1_donors[i]
-                    for h in donor_h_set:
-                        res = ns_acceptors.search_list(AtomGroup([h]), self.distance)
-                        for a in res:
-                            angle = self.calc_angle(d,h,a)
-                            dist = self.calc_eucl_distance(h,a)
-                            if angle >= self.angle and dist <= self.distance:
-                                logger.debug("S1-D: %s <-> S2-A: %s %fA, %f DEG" % (h.number, a.number, dist, angle))
-                                frame_results.append([h.number+1, a.number+1, '%s%s:%s' % (h.resname, repr(h.resid), h.name), '%s%s:%s' % (a.resname, repr(a.resid), a.name), dist, angle])                                
-            if self.selection1_type in ('acceptor', 'both'):
-                logger.debug("Selection 1 Acceptors <-> Donors")
-                ns_acceptors = NS.AtomNeighborSearch(self._s1_acceptors)
-                for i,donor_h_set in self._s2_donors_h.items():
-                    d = self._s2_donors[i]
-                    for h in donor_h_set:
-                        res = ns_acceptors.search_list(AtomGroup([h]), self.distance)
-                        for a in res:
-                            angle = self.calc_angle(d,h,a)
-                            dist = self.calc_eucl_distance(h,a)
-                            if angle >= self.angle and dist <= self.distance:
-                                logger.debug("S1-A: %s <-> S2-D: %s %fA, %f DEG" % (a.number+1, h.number, dist, angle))
-                                frame_results.append([h.number+1, a.number+1, '%s%s:%s' % (h.resname, repr(h.resid), h.name), '%s%s:%s' % (a.resname, repr(a.resid), a.name), dist, angle])                                
+            # calculate donor/acceptor pairs
+            pairs = {} # NOTE: atom pairs are stored as tuple keys to avoid duplicates
+            for d in self._s1_donor_atoms:
+                # search for S2 acceptors within <distance> of donor d
+                self._s2_acceptor_atoms_ns = NS.AtomNeighborSearch(self._s2_acceptor_atoms)
+                for a in self._s2_acceptor_atoms_ns.search(d.pos, self.DA_distance):
+                    if d != a:
+                        pairs.update({(d,a): True})
+            for a in self._s1_acceptor_atoms:
+                # search for S2 donors within <distance> of acceptor a
+                self._s2_donor_atoms_ns = NS.AtomNeighborSearch(self._s2_donor_atoms)
+                for d in self._s2_donor_atoms_ns.search(a.pos, self.DA_distance):
+                    if d != a:
+                        pairs.update({(d,a): True})
+            
+            logger.debug("Got %d D/A pairs" % len(pairs.keys()))
+            for (d,a) in pairs.keys():
+                # get hydrogen atoms for the donor
+                hydrogens = self._get_bonded_hydrogens(d)
+                for h in hydrogens:
+                    # measure the D-H-A angle and H-A distance
+                    if self.calc_angle(d,h,a) >= self.angle and self.calc_eucl_distance(h,a) <= self.HA_distance:
+                        frame_results.append((d,h,a))
             self.timeseries.append(frame_results)
         return self.timeseries
-        
-    def calc_angle(self, d, h, a):
+    
+    def calc_angle(self, v1, v0, v2):
         """Calculate the angle (in degrees) between two atoms
         """
-        v1 = h.pos-d.pos
-        v2 = h.pos-a.pos
+        v1 = v0.pos-v1.pos
+        v2 = v0.pos-v2.pos
         v1 /= numpy.linalg.norm(v1)
         v2 /= numpy.linalg.norm(v2)
 
         if v1.tolist() == v2.tolist():
             return 0.0
         return numpy.arccos(numpy.dot(v1, v2) / (numpy.linalg.norm(v1)*numpy.linalg.norm(v2))) * 180 / numpy.pi
-
 
     def calc_eucl_distance(self, a1, a2):
         """Calculate the Euclidean distance between two atoms.
