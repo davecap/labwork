@@ -10,6 +10,7 @@ from MDAnalysis import * # analysis of NAMD trajectories
 # my analysis modules (in the same directory as this file)
 from analysis import *
 from rmsd import RMSD
+from hbonds import HydrogenBondAnalysis
 
 # main() isn't special, it is just like any other Python function
 def main():
@@ -90,6 +91,26 @@ def main():
     # this takes too long so I'm disabling it for now
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(selection='backbone'))
     
+    # HBONDS: 139, 207, 286 <-> water/protein
+    analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_132_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 132', 'protein'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_139_WATER', HydrogenBondAnalysis('segid PEPA and resid 139', 'resname TIP3'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_139_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 139', 'protein'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_207_WATER', HydrogenBondAnalysis('segid PEPA and resid 207', 'resname TIP3'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_207_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 207', 'protein'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_286_WATER', HydrogenBondAnalysis('segid PEPA and resid 286', 'resname TIP3'))
+    analysis.add_to_sequence('/protein/hbonds/PEPA_286_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 286', 'protein'))
+    
+    # HEME A and A3 <-> water/protein
+    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_WATER', HydrogenBondAnalysis('atom PEPA 419 O1A or atom PEPA 419 O2A', 'resname TIP3', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_PROTEIN', HydrogenBondAnalysis('atom PEPA 419 O1A or atom PEPA 419 O2A', 'protein', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_WATER', HydrogenBondAnalysis('atom PEPA 419 O1D or atom PEPA 419 O2D', 'resname TIP3', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_PROTEIN', HydrogenBondAnalysis('atom PEPA 419 O1D or atom PEPA 419 O2D', 'protein', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_WATER', HydrogenBondAnalysis('atom PEPA 102 O1A or atom PEPA 102 O2A', 'resname TIP3', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_PROTEIN', HydrogenBondAnalysis('atom PEPA 102 O1A or atom PEPA 102 O2A', 'protein', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_WATER', HydrogenBondAnalysis('atom PEPA 102 O1D or atom PEPA 102 O2D', 'resname TIP3', selection1_type='acceptor'))
+    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_PROTEIN', HydrogenBondAnalysis('atom PEPA 102 O1D or atom PEPA 102 O2D', 'protein', selection1_type='acceptor'))
+    
     # dihedrals of 132, 139, 286
     analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
@@ -135,6 +156,10 @@ def main():
     analysis.add_timeseries('/protein/distances/HDH419O1A_ASPP407OD1', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 419 O1A", "atom PEPA 407 OD1")))
     analysis.add_timeseries('/protein/distances/HDH419O2A_ASPP407HD2', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 419 O2A", "atom PEPA 407 HD2")))
     analysis.add_timeseries('/protein/distances/HDH419O2A_ASPP407OD1', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 419 O2A", "atom PEPA 407 OD1")))
+    
+    # add a new set of dihedrals (N207)
+    analysis.add_timeseries('/protein/dihedrals2/PEPA_207_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 N", "atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG")))
+    analysis.add_timeseries('/protein/dihedrals2/PEPA_207_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG", "atom PEPA 207 OD1")))    
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()

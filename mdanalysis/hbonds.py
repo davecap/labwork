@@ -31,8 +31,8 @@ TODO
   import hbonds
   
   u = MDAnalysis.Universe(PSF, PDB, permissive=True)
-  h = MDAnalysis.analysis.hbonds.HydrogenBondAnalysis(u, 'protein', 'resname TIP3', distance=3.0, angle=120.0)
-  results = h.run()
+  h = MDAnalysis.analysis.hbonds.HydrogenBondAnalysis('protein', 'resname TIP3', distance=3.0, angle=120.0)
+  results = h.run(u)
 
 Classes
 -------
@@ -73,20 +73,17 @@ class HydrogenBondAnalysis(object):
     All three must be satisfied to count as an h-bond.
 
     Donors: NH of the main chain, water-H1/H2, ARG NE, ASN ND2, HIS NE2, SER OG, TYR OH, ARG NH1, CYS SG, HIS ND1, THR OG1, ARG NH2, GLN NE2, LYS NZ, TRP NE1
-    Acceptors: CO main chain, water-OH2, ASN OD1, GLN OE1, MET SD, ASP OD1, GLU OE1, SER OG, ASP OD2, GLU OE2, THR OG1,CYH SG, HIS ND1, TYR OH.
+    Acceptors: CO main chain, water-OH2, GLN OE1, MET SD, ASP OD1, GLU OE1, SER OG, ASP OD2, GLU OE2, THR OG1,CYH SG, HIS ND1, TYR OH.
 
     """
     
-    donors = ('OW', 'NH', 'OH2', 'NE', 'ND2', 'NE2', 'OG', 'OH', 'NH1', 'SG', 'ND1', 'OG1', 'NH2', 'NE2', 'NZ', 'NE1', )
-    acceptors = ('OW', 'CO', 'OH2', 'OD1', 'OE1', 'SD', 'OD1', 'OE1', 'OG', 'OD2', 'OE2', 'OG1', 'SG', 'ND1', 'OH', )
+    donors = ('OD1', 'OD2', 'OW', 'OE1', 'OE2', 'NH', 'OH2', 'NE', 'ND2', 'NE2', 'OG', 'OH', 'NH1', 'SG', 'ND1', 'OG1', 'NH2', 'NE2', 'NZ', 'NE1', )
+    acceptors = ('O1A', 'O2A', 'O1D', 'O2D', 'OW', 'OE1', 'OE2', 'CO', 'OH2', 'OD1', 'OE1', 'SD', 'OE1', 'OG', 'OD2', 'OE2', 'OG1', 'SG', 'ND1', 'OH', )
     
-    def __init__(self, universe, selection1='protein', selection2='all', selection1_type='both',
-                update_selections=False, DA_distance=3.5, HA_distance=2.5, angle=120.0):
-        """Calculate hydrogen bonds between two selections in a universe.
+    def __init__(self, selection1='protein', selection2='all', selection1_type='both', update_selections=False, DA_distance=3.3, HA_distance=2.5, angle=140.0):
+        """Calculate hydrogen bonds between two selections.
 
         :Arguments:
-          *universe*
-            Universe object
           *selection1*
             Selection string for first selection
           *selection2*
@@ -105,7 +102,6 @@ class HydrogenBondAnalysis(object):
         The timeseries accessible as the attribute :attr:`HydrogenBondAnalysis.timeseries`.
         """
 
-        self.u = universe
         self.selection1 = selection1
         self.selection2 = selection2
         self.selection1_type = selection1_type
@@ -119,9 +115,54 @@ class HydrogenBondAnalysis(object):
         elif self.selection1_type not in ('both', 'donor', 'acceptor'):
             raise Exception('HydrogenBondAnalysis: Invalid selection type %s' % self.selection1_type)
 
-        self.timeseries = None  # final result
+    def run(self, trj):
+        """ Analyze trajectory and produce timeseries. """
+        self.timeseries = []
+        self.prepare(trj=trj)
+        for ts in self.u.trajectory:
+            logger.debug("Analyzing frame %d" % ts.frame)
+            self.process(ts.frame)
+        return self.timeseries
+
+    def prepare(self, ref=None, trj=None):
+        """ Prepare the trajectory (trj is a Universe object). No reference object is needed. """
+        self.u = trj
+        self.u.trajectory.rewind()
         self._update_selections()
+        self.timeseries = []  # final result
         self._hydrogens = {}
+
+    def process(self, frame):
+        """ Process a single trajectory frame """
+        frame_results = []
+        # calculate donor/acceptor pairs
+        pairs = {} # NOTE: atom pairs are stored as tuple keys to avoid duplicates
+        for d in self._s1_donor_atoms:
+            # search for S2 acceptors within <distance> of donor d
+            self._s2_acceptor_atoms_ns = NS.AtomNeighborSearch(self._s2_acceptor_atoms)
+            for a in self._s2_acceptor_atoms_ns.search(d.pos, self.DA_distance):
+                if d != a:
+                    pairs.update({(d,a): True})
+        for a in self._s1_acceptor_atoms:
+            # search for S2 donors within <distance> of acceptor a
+            self._s2_donor_atoms_ns = NS.AtomNeighborSearch(self._s2_donor_atoms)
+            for d in self._s2_donor_atoms_ns.search(a.pos, self.DA_distance):
+                if d != a:
+                    pairs.update({(d,a): True})
+
+        logger.debug("Got %d D/A pairs" % len(pairs.keys()))
+        for (d,a) in pairs.keys():
+            # get hydrogen atoms for the donor
+            hydrogens = self._get_bonded_hydrogens(d)
+            for h in hydrogens:
+                # measure the D-H-A angle and H-A distance
+                if self._calc_angle(d,h,a) >= self.angle and self._calc_eucl_distance(h,a) <= self.HA_distance:
+                    frame_results.append((d,h,a))
+        self.timeseries.append(frame_results)
+
+    def results(self):
+        """ Returns an array containing the total count of hbonds per frame """
+        return [ len(f) for f in self.timeseries ]
 
     def _get_bonded_hydrogens(self, atom):
         try:
@@ -160,44 +201,8 @@ class HydrogenBondAnalysis(object):
             self._s2_donor_atoms = self._s2.selectAtoms(' or '.join([ 'name %s' % i for i in self.donors ]))
         else:
             self._s1_acceptor_atoms = []
-            
-    def run(self):
-        """Analyze trajectory and produce timeseries.
-        """
-        self.timeseries = []
-        self.u.trajectory.rewind()
-        for ts in self.u.trajectory:
-            frame_results = []
-            frame = ts.frame
-            logger.debug("Analyzing frame %d" % frame)
-            
-            # calculate donor/acceptor pairs
-            pairs = {} # NOTE: atom pairs are stored as tuple keys to avoid duplicates
-            for d in self._s1_donor_atoms:
-                # search for S2 acceptors within <distance> of donor d
-                self._s2_acceptor_atoms_ns = NS.AtomNeighborSearch(self._s2_acceptor_atoms)
-                for a in self._s2_acceptor_atoms_ns.search(d.pos, self.DA_distance):
-                    if d != a:
-                        pairs.update({(d,a): True})
-            for a in self._s1_acceptor_atoms:
-                # search for S2 donors within <distance> of acceptor a
-                self._s2_donor_atoms_ns = NS.AtomNeighborSearch(self._s2_donor_atoms)
-                for d in self._s2_donor_atoms_ns.search(a.pos, self.DA_distance):
-                    if d != a:
-                        pairs.update({(d,a): True})
-            
-            logger.debug("Got %d D/A pairs" % len(pairs.keys()))
-            for (d,a) in pairs.keys():
-                # get hydrogen atoms for the donor
-                hydrogens = self._get_bonded_hydrogens(d)
-                for h in hydrogens:
-                    # measure the D-H-A angle and H-A distance
-                    if self.calc_angle(d,h,a) >= self.angle and self.calc_eucl_distance(h,a) <= self.HA_distance:
-                        frame_results.append((d,h,a))
-            self.timeseries.append(frame_results)
-        return self.timeseries
     
-    def calc_angle(self, v1, v0, v2):
+    def _calc_angle(self, v1, v0, v2):
         """Calculate the angle (in degrees) between two atoms
         """
         v1 = v0.pos-v1.pos
@@ -209,10 +214,16 @@ class HydrogenBondAnalysis(object):
             return 0.0
         return numpy.arccos(numpy.dot(v1, v2) / (numpy.linalg.norm(v1)*numpy.linalg.norm(v2))) * 180 / numpy.pi
 
-    def calc_eucl_distance(self, a1, a2):
+    def _calc_eucl_distance(self, a1, a2):
         """Calculate the Euclidean distance between two atoms.
         """
         v1 = a1.pos
         v2 = a2.pos
         return numpy.sqrt((v1[0] - v2[0]) ** 2 + (v1[1] - v2[1]) ** 2 + (v1[2] - v2[2]) ** 2)
 
+# TODO: add this once hbonds is integrated into MDAnalysis
+# if __name__=='__main__':
+#   import optparse
+#     u = MDAnalysis.Universe(PSF, PDB, permissive=True)
+#     h = MDAnalysis.analysis.hbonds.HydrogenBondAnalysis(u, 'protein', 'resname TIP3', distance=3.0, angle=120.0)
+#     results = h.run()
