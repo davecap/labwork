@@ -11,6 +11,7 @@ from MDAnalysis import * # analysis of NAMD trajectories
 from analysis import *
 from rmsd import RMSD
 from hbonds import HydrogenBondAnalysis
+from nearby import NearbyCountAnalysis
 
 # main() isn't special, it is just like any other Python function
 def main():
@@ -91,6 +92,13 @@ def main():
     # this takes too long so I'm disabling it for now
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(selection='backbone'))
     
+    # Nov. 8, 2010: saw that there is a potassium ion coordinated by N139D and D132
+    # Count potassium ions near 132 and 139    
+    analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT'))
+    analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT'))
+    analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT'))
+    analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT'))
+        
     # HBONDS: 139, 207, 286 <-> water/protein
     analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
     analysis.add_to_sequence('/protein/hbonds/PEPA_132_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 132', 'protein'))

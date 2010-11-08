@@ -51,10 +51,18 @@ def main():
     tbl = h5f.getNode(table)
     data = tbl.read(field=column)
     h5f.close()
+
+    rad2deg = (lambda x: x*180./pi)
+    data_deg = []
+    for rad in data:
+        deg = rad2deg(rad)
+        if deg < 0:
+            deg += 360
+        data_deg.append(deg)
     
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(data)
+    ax.plot(data_deg)
     ax.set_xlabel(r'Frame')
     ax.set_ylabel(column)
     ax.set_title(path)
