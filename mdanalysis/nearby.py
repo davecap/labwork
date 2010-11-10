@@ -58,8 +58,8 @@ class NearbyCountAnalysis(object):
         self._s2_ns = NS.AtomNeighborSearch(self._s2)
         res = self._s2_ns.search_list(self._s1, self.cutoff)
         logger.debug("Got %d nearby" % len(res))
-        print res
         self.timeseries.append(res)
+        return res
 
     def results(self):
         """ Returns an array containing the total count of hbonds per frame """
