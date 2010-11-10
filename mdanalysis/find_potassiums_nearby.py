@@ -33,14 +33,14 @@ def main():
     
     # load the PSF and PDB into the analysis system
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
-    ref = Universe(psf_file, pdb_file)
+    ref = Universe(psf_file, pdb_file, permissive=True)
         
     n = NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=3.5)
     n1 = NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=3.5)
 
     for dcd_file in args[2:]:
         print "Loading trajectory: %s" % (dcd_file)
-        trj = Universe(psf_file, dcd_file)
+        trj = Universe(psf_file, dcd_file, permissive=True)
         n.prepare(trj=trj)
         n1.prepare(trj=trj)
 

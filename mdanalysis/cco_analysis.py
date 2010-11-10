@@ -73,7 +73,7 @@ def main():
     
     # load the PSF and PDB into the analysis system
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
-    ref = Universe(psf_file, pdb_file)
+    ref = Universe(psf_file, pdb_file, permissive=True)
     print "Loading trajectory: %s" % (dcd_file)
     trj = Universe(psf_file, dcd_file)
     
