@@ -125,7 +125,6 @@ def main():
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG", "atom PEPA 132 OD1")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
-    analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
     
     # dihedrals of proprionates from Heme A and Heme A3
     analysis.add_timeseries('/protein/dihedrals/HEMEA3_PROA_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 419 C1A", "atom PEPA 419 C2A", "atom PEPA 419 CAA", "atom PEPA 419 CBA")))
@@ -168,6 +167,9 @@ def main():
     # add a new set of dihedrals (N207)
     analysis.add_timeseries('/protein/dihedrals2/PEPA_207_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 N", "atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG")))
     analysis.add_timeseries('/protein/dihedrals2/PEPA_207_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG", "atom PEPA 207 OD1")))    
+    
+    # Nov 9 2010, fixed wrong atoms for CHI2 of 286
+    analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()
