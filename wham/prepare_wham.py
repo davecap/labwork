@@ -85,7 +85,7 @@ def main():
         h5f.close()
         
         # extract a subset of the data
-        sample_size = int(round(float(options.percent)/100.0 * float(len(field_data))))
+        sample_size = int(round(float(options.percent)/100.0 * float(len(field_data)-options.start_index)))
         sys.stderr.write("data/sample: %d/%d\n" % (len(field_data), sample_size))
         
         if options.random:

@@ -73,7 +73,7 @@ def main():
     
     # load the PSF and PDB into the analysis system
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
-    ref = Universe(psf_file, pdb_file)
+    ref = Universe(psf_file, pdb_file, permissive=True)
     print "Loading trajectory: %s" % (dcd_file)
     trj = Universe(psf_file, dcd_file)
     
@@ -94,10 +94,10 @@ def main():
     
     # Nov. 8, 2010: saw that there is a potassium ion coordinated by N139D and D132
     # Count potassium ions near 132 and 139    
-    analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=3.5))
-    analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=3.5))
-    analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT', cutoff=3.5))
-    analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT', cutoff=3.5))
+    analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT', cutoff=4.0))
         
     # HBONDS: 139, 207, 286 <-> water/protein
     analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
