@@ -42,31 +42,31 @@ class Analysis(object):
         return self._tables[table_path].column(col_name, format)
     
     #analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file, 'pdb': pdb_file, 'dcd': dcd_file, 'frames': num_frames, 'firsttimestep': first_timestep, 'dt': dt })
-    def add_metadata(self, path, data):
+    def add_metadata(self, path, data, format=tables.StringCol(64)):
         #path is to the table
         #data has the columns
         
         print "Loading metadata..."
         for k, v in data.items():
             col_path = '%s/%s' % (path, k)
-            col = self.get_column(col_path, format=tables.StringCol(64))
+            col = self.get_column(col_path, format)
             col.load(str(v))
         print "Done."
     
     #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
-    def add_timeseries(self, path, timeseries):
+    def add_timeseries(self, path, timeseries, format=tables.Float32Col()):
         if path in self._timeseries.keys():
             raise Exception('Timeseries with path %s already exists in this analysis!' % path)
         
-        col = self.get_column(path)
+        col = self.get_column(path, format)
         self._timeseries[path] = (timeseries, col)
    
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(ref, trj, selection='backbone')) 
-    def add_to_sequence(self, path, processor):
+    def add_to_sequence(self, path, processor, format=tables.Float32Col()):
         if path in self._sequential:
             raise Exception('Sequential processor with path %s already exists in this analysis!' % path)
         
-        col = self.get_column(path)
+        col = self.get_column(path, format)
         self._sequential[path] = (processor, col)
     
     def run(self, trj, ref):
@@ -78,8 +78,8 @@ class Analysis(object):
         for path, tpl in self._timeseries.items():
             print " Adding timeseries: %s" % path
             collection.addTimeseries(tpl[0])
+            
         print " Computing..."
-        
         collection.compute(self._trj.trajectory)
         print " Done computing."
         
@@ -187,9 +187,10 @@ class Table(object):
     def __init__(self, h5f, path):
         # print "Creating Table(%s)" % path
         self._h5f = h5f
-        self.path = path
         self._table = None
         self._columns = {}
+        self.path = path
+        self.name = self.path.split('/')[-1]
     
     def _description(self):
         desc = {}
@@ -204,33 +205,47 @@ class Table(object):
         return self._columns[name]
     
     def setup(self):
+        print "Setting up table at: %s" % self.path
         split_path = self.path.split('/')
-        table_name = split_path[-1]
-        self.name = table_name
-        
-        path = []
+        # traverse the path
         node = self._h5f.getNode('/')
-        for n in split_path:
+        for n in split_path[1:]:
+            parent = node._v_pathname
+            path = (parent+'/'+n).replace('//','/')
             try:
-                # print "Looking for node: %s/%s" % ('/'.join(path), n)                
-                node = self._h5f.getNode('/%s' % '/'.join(path), n)
-                if n is table_name:
-                    # loop through all columns.
-                    #   if col exists, do nothing
-                    #   if it doesn't, add it to the table
-                    print "WARNING: adding new columns to tables not yet supported"
+                # try to get the node
+                node = self._h5f.getNode(path)
             except tables.NoSuchNodeError:
-                if n is table_name:
-                    # n is the table
-                    # print "No table found, creating it..."
+                if path == self.path:
+                    # we are at the table but it doesn't exist yet so create it
                     node = self._h5f.createTable(node, n, self._description(), expectedrows=25000)
+                    print "Created table: %s" % path
                 else:
-                    # print "No group found, creating it..."
-                    node = self._h5f.createGroup('/%s' % '/'.join(path), n)
-            finally:
-                path.append(n)
-                if n is table_name:
-                    self._table = node
+                    # we are at a group that doesn't exist yet
+                    node = self._h5f.createGroup(node, n)
+                    print "Created group: %s" % path
+            else:
+                # if we find the node but the descriptions differ (column(s) added or removed)
+                if path == self.path and set(node.description._v_colObjects.keys()) != set(self._description().keys()):
+                    print "Column(s) modified for table: %s" % self.path
+                    copy_node = self._h5f.createTable(node._v_parent, self.name+'_COPY', self._description(), expectedrows=25000)
+                    node.attrs._f_copy(copy_node)
+                    for i in xrange(node.nrows):
+                        copy_node.row.append()
+                    copy_node.flush()
+                    # copy the data from the old table
+                    for col in node.description._v_colObjects:
+                        # only if the col is in the new table
+                        if col in self._description():
+                            getattr(copy_node.cols, col)[:] = getattr(node.cols, col)[:]
+                    copy_node.flush()
+                    node.remove()
+                    copy_node.move(parent, self.name)
+                    node = copy_node
+                    print "Table %s updated with new column(s)." % self.path
+        
+        # node should now be the table object
+        self._table = node
         return self._table
         
     def write(self):

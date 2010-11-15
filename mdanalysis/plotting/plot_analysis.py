@@ -12,9 +12,13 @@ import tables
 
 import os
 import matplotlib
-matplotlib.use('ps')
+#matplotlib.use('ps')
 import matplotlib.pyplot as plt
 import matplotlib.font_manager
+
+params = {  'font.size': 8,
+            'figure.figsize': (8,6)}
+matplotlib.rcParams.update(params)
 
 def rad2deg(rad):
     deg = rad*180./pi
@@ -104,7 +108,8 @@ def main():
         # plot the current dataset
         ax.errorbar(data['x'], data['y'], yerr=data['yerr'], fmt='o', label=config['title'])
     ax.legend()
-    plt.savefig(h5_field + '.eps')
+    #plt.show()
+    plt.savefig('_'.join(options.x_column.split('/')[1:]) + '.png')
     
 
 if __name__ == '__main__':

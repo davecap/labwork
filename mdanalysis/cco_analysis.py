@@ -58,18 +58,18 @@ def main():
     elif not dcd_file.lower().endswith('.dcd'):
         print "Warning: DCD filename does not end in .dcd: %s" % dcd_file    
 
-    # check to make sure we haven't analyzed this DCD yet
-    if os.path.exists(options.h5_filename):
-        # open the HDF5 database
-        h5f = tables.openFile(options.h5_filename, mode="r")
-        # get the metadata table
-        tbl = h5f.getNode('/metadata/trajectory')
-        # get the list of analyzed dcd files
-        analyzed_dcd_files = tbl.read(field='dcd')
-        h5f.close()
-        #if dcd_file.split('/')[-1] in analyzed_dcd_files:
-        #    print "DCD file %s already analyzed... exiting!" % dcd_file
-        #    return -1
+    # # check to make sure we haven't analyzed this DCD yet
+    # if os.path.exists(options.h5_filename):
+    #     # open the HDF5 database
+    #     h5f = tables.openFile(options.h5_filename, mode="r")
+    #     # get the metadata table
+    #     tbl = h5f.getNode('/metadata/trajectory')
+    #     # get the list of analyzed dcd files
+    #     analyzed_dcd_files = tbl.read(field='dcd')
+    #     h5f.close()
+    #     if dcd_file.split('/')[-1] in analyzed_dcd_files:
+    #        print "DCD file %s already analyzed... exiting!" % dcd_file
+    #        return -1
     
     # load the PSF and PDB into the analysis system
     print "Loading reference system: %s, %s" % (psf_file, pdb_file)
@@ -170,6 +170,10 @@ def main():
     
     # Nov 9 2010, fixed wrong atoms for CHI2 of 286
     analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
+    
+    #analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI3', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
+    #analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI4', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_286_PROTEIN_NEW', HydrogenBondAnalysis('segid PEPA and resid 286', 'protein'))
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()
