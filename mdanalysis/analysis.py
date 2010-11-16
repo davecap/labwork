@@ -228,6 +228,7 @@ class Table(object):
                 # if we find the node but the descriptions differ (column(s) added or removed)
                 if path == self.path and set(node.description._v_colObjects.keys()) != set(self._description().keys()):
                     print "Column(s) modified for table: %s" % self.path
+                    print set(node.description._v_colObjects.keys()) ^ set(self._description().keys())
                     copy_node = self._h5f.createTable(node._v_parent, self.name+'_COPY', self._description(), expectedrows=25000)
                     node.attrs._f_copy(copy_node)
                     for i in xrange(node.nrows):

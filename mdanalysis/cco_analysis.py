@@ -171,10 +171,6 @@ def main():
     # Nov 9 2010, fixed wrong atoms for CHI2 of 286
     analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
     
-    #analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI3', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
-    #analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI4', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
-    #analysis.add_to_sequence('/protein/hbonds/PEPA_286_PROTEIN_NEW', HydrogenBondAnalysis('segid PEPA and resid 286', 'protein'))
-    
     analysis.run(trj=trj, ref=ref)
     analysis.save()
     analysis.close()    
