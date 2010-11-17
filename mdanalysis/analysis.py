@@ -8,6 +8,8 @@ import tables
 import numpy
 import os
 
+from nearby import NearbyListAnalysis
+
 def main():
     from MDAnalysis.tests.datafiles import PSF,DCD
     print "Loading reference system: %s, %s" % (PSF, DCD)
@@ -29,7 +31,7 @@ def main():
     analysis.add_timeseries('/timeseries/com/COM_ALL2', Timeseries.CenterOfMass(ref.atoms))
     
     # Test sequence
-    # analysis.add_to_sequence('/sequence/table1/COL1', TestSequenceAnalysis(5))
+    # analysis.add_to_sequence('/sequence/nearby_list', NearbyListAnalysis(), format=tables.Float32Atom(shape=()), array=True)
     # analysis.add_to_sequence('/sequence/table1/COL2', TestSequenceAnalysis(5))
     # analysis.add_to_sequence('/sequence/table2/COL1', TestSequenceAnalysis(10))
     # analysis.add_to_sequence('/sequence/table2/COL2', TestSequenceAnalysis(10))
@@ -37,8 +39,6 @@ def main():
     analysis.run(trj=trj, ref=ref)
     analysis.save()
     analysis.close()
-
-
 
 def split_path(path):
     split_path = path.split('/')
@@ -227,7 +227,8 @@ class Array(Column):
             except tables.NoSuchNodeError:
                 if path == self.full_path:
                     # we are at the array but it doesn't exist yet so create it
-                    node = self._h5f.createEArray(node, self.name, self.format, (len(self._data[0]), ), expectedrows=25000)
+                    # node = self._h5f.createEArray(node, self.name, self.format, (len(self._data[0]), ), expectedrows=25000)
+                    node = self._h5f.createVLArray(node, self.name, self.format, filters=tables.Filters(1))
                     print "Created array: %s" % path
                 else:
                     # we are at a group that doesn't exist yet
