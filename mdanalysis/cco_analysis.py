@@ -13,7 +13,6 @@ from rmsd import RMSD
 from hbonds import HydrogenBondAnalysis
 from nearby import NearbyCountAnalysis
 
-# main() isn't special, it is just like any other Python function
 def main():
     usage = """
         usage: %prog [options] <PSF file> <PDB file> <DCD file>
@@ -93,7 +92,7 @@ def main():
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(selection='backbone'))
     
     # Nov. 8, 2010: saw that there is a potassium ion coordinated by N139D and D132
-    # Count potassium ions near 132 and 139    
+    # Count potassium ions near 132 and 139
     analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=4.0))
     analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=4.0))
     analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT', cutoff=4.0))
