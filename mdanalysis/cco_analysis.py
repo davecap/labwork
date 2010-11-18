@@ -12,6 +12,7 @@ from analysis import *
 from rmsd import RMSD
 from hbonds import HydrogenBondAnalysis
 from nearby import NearbyCountAnalysis
+from cylindersearch import CylinderSearch
 
 def main():
     usage = """
@@ -169,6 +170,11 @@ def main():
     
     # Nov 9 2010, fixed wrong atoms for CHI2 of 286
     analysis.add_timeseries('/protein/dihedrals3/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
+    
+    # Nov 18, 2010, cylinder search for water and potassium
+    a = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
+    b = 'segid PEPA and resid 286 and ( name CA or name CB or name N )'
+    analysis.add_to_sequence('/protein/cylinder/132_286_TIP3_POT', CylinderSearch(a, b, 'resname TIP3 or resname POT', extension=5.0, radius=10.0))
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()

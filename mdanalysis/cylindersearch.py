@@ -16,32 +16,35 @@ class CylinderSearch(object):
     """ Count nearby residues of a given type from a given residue selection
     """
     
-    def __init__(self, a, b, selection, radius=10.0, extension=0.0, level='R'):
+    def __init__(self, a, b, search, radius=10.0, extension=0.0, level='R', update_selections=True):
         """Calculate hydrogen bonds between two selections.
 
         :Arguments:
           *a*
-            Coordinates of point A of the cylinder core
+            Selection for point A of cylinder core
           *b*
-            Coordinates of point B of the cylinder core
-          *selection*
-            Selection string to search for within the cylinder
+            Selection for point B of cylinder core
+          *search*
+            Selection for searchable residues/atoms within the cylinder
           *radius*
             Radius of the cylinder
           *extension*
             Extension of the cylinder to search on either side of the two points
           *level*
             R or A (Residue or Atom) for searching. Residues' center of mass are used to calculate distances.
+          *update_selections*
+            Update selections for points A and B at each frame
             
         The timeseries accessible as the attribute :attr:`CylinderSearch.timeseries`.
         """
 
-        self.a = numpy.array(a)
-        self.b = numpy.array(b)
-        self.selection = selection
+        self.selection_a = a
+        self.selection_b = b
+        self.selection_search = search
         self.radius = radius
         self.extension = extension
         self.level = level
+        self.update_selections = update_selections
         self.height = norm(b-a)
         self.vector = b-a
 
@@ -58,12 +61,17 @@ class CylinderSearch(object):
         """ Prepare the trajectory (trj is a Universe object). No reference object is needed. """
         self.u = trj
         self.u.trajectory.rewind()
-        selection = self.u.selectAtoms(self.selection)
-        self.ns = NS.AtomNeighborSearch(selection)
+        self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
+        self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
+        self.ns = NS.AtomNeighborSearch(self.u.selectAtoms(self.selection_search))
         self.timeseries = []  # final result
 
     def process(self, frame):
         """ Process a single trajectory frame """
+        if self.update_selections:
+            self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
+            self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
+        
         res = []
         # find all selection within r of A and B
         near_a = set(self.ns.search(self.a, self.height+self.extension, level=self.level))
