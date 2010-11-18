@@ -32,9 +32,6 @@ def main():
     
     # Test sequence
     # analysis.add_to_sequence('/sequence/nearby_list', NearbyListAnalysis(), format=tables.Float32Atom(shape=()), array=True)
-    # analysis.add_to_sequence('/sequence/table1/COL2', TestSequenceAnalysis(5))
-    # analysis.add_to_sequence('/sequence/table2/COL1', TestSequenceAnalysis(10))
-    # analysis.add_to_sequence('/sequence/table2/COL2', TestSequenceAnalysis(10))
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()
