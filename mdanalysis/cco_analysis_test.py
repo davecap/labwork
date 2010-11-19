@@ -92,8 +92,6 @@ def main():
     a = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
     b = 'segid PEPA and resid 286 and ( name CA or name CB or name N )'
     analysis.add_to_sequence('/protein/cylinder/C132_286_TIP3_POT', CylinderSearch(a, b, 'resname TIP3 or resname POT', extension=5.0, radius=10.0), array=True)
-    analysis.add_to_sequence('/protein/cylinder/C132_286_TIP3', CylinderSearch(a, b, 'resname TIP3', extension=5.0, radius=10.0), array=True)
-    analysis.add_to_sequence('/protein/cylinder/C132_286_POT', CylinderSearch(a, b, 'resname POT', extension=5.0, radius=10.0), array=True)
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()

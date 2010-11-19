@@ -59,21 +59,26 @@ class CylinderSearch(object):
         """ Prepare the trajectory (trj is a Universe object). No reference object is needed. """
         self.u = trj
         self.u.trajectory.rewind()
-        self._update_selections()
-        self.ns = NS.AtomNeighborSearch(self.u.selectAtoms(self.selection_search))
+        self.a_atomgroup = self.u.selectAtoms(self.selection_a)
+        self.b_atomgroup = self.u.selectAtoms(self.selection_b)
+        self.search_atomgroup = self.u.selectAtoms(self.selection_search)
         self.timeseries = []  # final result
 
     def process(self, frame):
         """ Process a single trajectory frame """
-        if self.update_selections:
-            self._update_selections()
+        # atomgroup coordinates should update every frame
+        self.a = self.a_atomgroup.centerOfMass()
+        self.b = self.b_atomgroup.centerOfMass()
+        self.midpoint = (self.a+self.b)/2.0
+        self.height = norm(self.b-self.a)
+        self.vector = self.b-self.a
+        self.search_radius = self.height/2.0 + self.extension
         
-        res = []
         # find all selection within r of A and B
-        near_a = set(self.ns.search(self.a, self.height+self.extension, level=self.level))
-        near_b = set(self.ns.search(self.b, self.height+self.extension, level=self.level))
-        near_both = near_a & near_b
-        for r in near_both:
+        self.ns = NS.AtomNeighborSearch(self.search_atomgroup)
+        near = set(self.ns.search(self.midpoint, self.search_radius, level=self.level))
+        res = []
+        for r in near:
             if self.level == 'R':
                 point = r.centerOfMass() # center of mass of the found residue
                 name = '%s:%s' % (r.name, r.id)
@@ -93,12 +98,6 @@ class CylinderSearch(object):
     def results(self):
         """ Returns an array containing the total count of hbonds per frame """
         return self.timeseries
-        
-    def _update_selections(self):
-        self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
-        self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
-        self.height = norm(self.b-self.a)
-        self.vector = self.b-self.a
 
     def _point_distance(self, point):
         return norm(numpy.cross(point-self.a, point-self.b))/self.height
