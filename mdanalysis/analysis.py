@@ -62,16 +62,16 @@ class Analysis(object):
         self._readonly = readonly
         self._h5f = self.open_or_create()
 
-    def get_or_create_node(self, path, format, array=False):
-        if array:
-            if path not in self._nodes:
-                self._nodes[path] = Array(self._h5f, path, format)
-            return self._nodes[path]
-        else:
-            (table_path, col_name) = split_path(path)
-            if table_path not in self._nodes:
-                self._nodes[table_path] = Table(self._h5f, table_path)
-            return self._nodes[table_path].column(col_name, format)
+    def get_or_create_array(self, path):
+        if path not in self._nodes:
+            self._nodes[path] = Array(self._h5f, path)
+        return self._nodes[path]
+            
+    def get_or_create_column(self, path, format):
+        (table_path, col_name) = split_path(path)
+        if table_path not in self._nodes:
+            self._nodes[table_path] = Table(self._h5f, table_path)
+        return self._nodes[table_path].column(col_name, format)
     
     #analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file, 'pdb': pdb_file, 'dcd': dcd_file, 'frames': num_frames, 'firsttimestep': first_timestep, 'dt': dt })
     def add_metadata(self, path, data, format=tables.StringCol(64)):
@@ -81,45 +81,49 @@ class Analysis(object):
         print "Loading metadata..."
         for k, v in data.items():
             col_path = '%s/%s' % (path, k)
-            col = self.get_or_create_node(col_path, format, array=False)
+            col = self.get_or_create_column(col_path, format)
             col.load(str(v))
         print "Done."
     
     #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
-    def add_timeseries(self, path, timeseries, format=tables.Float32Col(), array=False):
+    def add_timeseries(self, path, timeseries, format=None):
         if path in self._timeseries:
             raise Exception('Timeseries with path %s already exists in this analysis!' % path)
         else:
-            node = self.get_or_create_node(path, format, array)
-            self._timeseries[path] = (timeseries, node)
+            col = self.get_or_create_column(path, format)
+            self._timeseries[path] = (timeseries, col)
    
     #analysis.add_to_sequence('/protein/rmsd/backbone', RMSD(ref, trj, selection='backbone')) 
     def add_to_sequence(self, path, processor, format=tables.Float32Col(), array=False):
         if path in self._sequential:
             raise Exception('Sequential processor with path %s already exists in this analysis!' % path)
         else:
-            node = self.get_or_create_node(path, format, array)
+            if array:
+                node = self.get_or_create_array(path)
+            else:
+                node = self.get_or_create_column(path, format)
             self._sequential[path] = (processor, node)
     
     def run(self, trj, ref):
         self._trj = trj
         self._ref = ref
         
-        print "Starting timeseries analysis..."
-        collection.clear()
-        for path, tpl in self._timeseries.items():
-            print " Adding timeseries: %s" % path
-            collection.addTimeseries(tpl[0])
+        if len(self._timeseries) > 0:
+            print "Starting timeseries analysis..."
+            collection.clear()
+            for path, tpl in self._timeseries.items():
+                print " Adding timeseries: %s" % path
+                collection.addTimeseries(tpl[0])
             
-        print " Computing..."
-        collection.compute(self._trj.trajectory)
-        print " Done computing."
+            print " Computing..."
+            collection.compute(self._trj.trajectory)
+            print " Done computing."
         
-        print "Loading data..."
-        for i, path in enumerate(self._timeseries.keys()):
-            print " loading table %s with %d values..." % (path, len(collection[i][0]))
-            self._timeseries[path][1].load(list(collection[i][0]))
-        print "Done timeseries analysis."
+            print "Loading data..."
+            for i, path in enumerate(self._timeseries.keys()):
+                print " loading table %s with %d values..." % (path, len(collection[i][0]))
+                self._timeseries[path][1].load(list(collection[i][0]))
+            print "Done timeseries analysis."
         
         if len(self._sequential) > 0:
             print "Running sequential analyses..."
@@ -129,7 +133,7 @@ class Analysis(object):
             frames = self._trj.trajectory
             print " Processing %d frames..." % frames.numframes
             for i, f in enumerate(frames):
-                if i % 10 == 0:
+                if i % len(frames)/10 == 0:
                     print ".",
                 for path, tpl in self._sequential.items():
                     tpl[0].process(f)
@@ -204,7 +208,7 @@ class Column(object):
 class Array(Column):
     """ Array inherits from Column because it's basically a table with a single column """
     
-    def __init__(self, h5f, full_path, format):
+    def __init__(self, h5f, full_path, format=tables.ObjectAtom()):
         self._h5f = h5f
         self.full_path = full_path
         (path, name) = split_path(self.full_path)

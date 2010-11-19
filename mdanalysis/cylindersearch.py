@@ -45,8 +45,6 @@ class CylinderSearch(object):
         self.extension = extension
         self.level = level
         self.update_selections = update_selections
-        self.height = norm(b-a)
-        self.vector = b-a
 
     def run(self, trj):
         """ Analyze trajectory and produce timeseries. """
@@ -61,16 +59,14 @@ class CylinderSearch(object):
         """ Prepare the trajectory (trj is a Universe object). No reference object is needed. """
         self.u = trj
         self.u.trajectory.rewind()
-        self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
-        self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
+        self._update_selections()
         self.ns = NS.AtomNeighborSearch(self.u.selectAtoms(self.selection_search))
         self.timeseries = []  # final result
 
     def process(self, frame):
         """ Process a single trajectory frame """
         if self.update_selections:
-            self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
-            self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
+            self._update_selections()
         
         res = []
         # find all selection within r of A and B
@@ -92,11 +88,17 @@ class CylinderSearch(object):
                 if distance_to_b > self.height:
                     cylinder_offset = -1*cylinder_offset
                 res.append((name, cylinder_offset))
-        self.timeseries.append(res)
+        self.timeseries.append(numpy.array(res))
 
     def results(self):
         """ Returns an array containing the total count of hbonds per frame """
         return self.timeseries
+        
+    def _update_selections(self):
+        self.a = self.u.selectAtoms(self.selection_a).centerOfMass()
+        self.b = self.u.selectAtoms(self.selection_b).centerOfMass()
+        self.height = norm(self.b-self.a)
+        self.vector = self.b-self.a
 
     def _point_distance(self, point):
         return norm(numpy.cross(point-self.a, point-self.b))/self.height
