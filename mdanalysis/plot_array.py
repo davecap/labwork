@@ -61,7 +61,9 @@ def main():
     fig = plt.figure()
     ax = fig.add_subplot(111)
     for n, p in positions.items():
-        ax.hist(p, bins=200, label=n)
+        (hist, bin_edges) = numpy.histogram(p, bins=80)
+        # bins = ax.hist(p, bins=60, label=n)
+        ax.plot(bin_edges[:-1], hist, label=n)
     ax.legend()
     ax.set_xlabel(r'Distance along cylinder')
     ax.set_ylabel('Frequency')

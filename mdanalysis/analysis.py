@@ -86,7 +86,7 @@ class Analysis(object):
         print "Done."
     
     #analysis.add_timeseries('/protein/dihedrals/PEPA_139', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
-    def add_timeseries(self, path, timeseries, format=None):
+    def add_timeseries(self, path, timeseries, format=tables.Float32Col()):
         if path in self._timeseries:
             raise Exception('Timeseries with path %s already exists in this analysis!' % path)
         else:

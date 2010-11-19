@@ -45,7 +45,7 @@ class CylinderSearch(object):
         self.extension = extension
         self.level = level
         self.update_selections = update_selections
-
+    
     def run(self, trj):
         """ Analyze trajectory and produce timeseries. """
         self.timeseries = []

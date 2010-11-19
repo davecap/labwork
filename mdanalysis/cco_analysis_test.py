@@ -89,9 +89,24 @@ def main():
     analysis.add_metadata('/metadata/trajectory', { 'psf': psf_file.split('/')[-1], 'pdb': pdb_file.split('/')[-1], 'dcd': dcd_file.split('/')[-1], 'frames': num_frames, 'firsttimestep': options.first_timestep, 'dt': options.dt })
     
     # Nov 18, 2010, cylinder search for water and potassium
-    a = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
-    b = 'segid PEPA and resid 286 and ( name CA or name CB or name N )'
-    analysis.add_to_sequence('/protein/cylinder/C132_286_TIP3_POT', CylinderSearch(a, b, 'resname TIP3 or resname POT', extension=5.0, radius=10.0), array=True)
+    r132 = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
+    r139 = 'segid PEPA and resid 139 and ( name CA or name CB or name N )'
+    r286 = 'segid PEPA and resid 286 and ( name CA or name CB or name N )'
+    r312 = 'segid PEPA and resid 312 and ( name CA or name CB or name N )'
+    r481 = 'segid PEPA and resid 481 and ( name CA or name CB or name N )'
+    rHA3FE = 'atom PEPA 419 FE'
+    
+    # D-channel
+    analysis.add_to_sequence('/protein/cylinder_132_286/TIP3_POT', CylinderSearch(r132, r286, 'resname TIP3 or resname POT', extension=5.0, radius=10.0), array=True)
+    analysis.add_to_sequence('/protein/cylinder_132_139/TIP3_POT', CylinderSearch(r132, r139, 'resname TIP3 or resname POT', extension=1.0, radius=5.0), array=True)
+    analysis.add_to_sequence('/protein/cylinder_139_286/TIP3_POT', CylinderSearch(r139, r286, 'resname TIP3 or resname POT', extension=1.0, radius=5.0), array=True)
+    
+    # GLY312 (entrance to K-channel) to FE of Heme A3 (K-channel)
+    analysis.add_to_sequence('/protein/cylinder_312_HA3FE/TIP3_POT', CylinderSearch(r312, rHA3FE, 'resname TIP3 or resname POT', extension=1.0, radius=5.0), array=True)
+    
+    # Active site (286 to 481)
+    analysis.add_to_sequence('/protein/cylinder_286_481/TIP3', CylinderSearch(r286, r481, 'resname TIP3', extension=1.0, radius=5.0), array=True)
+    
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()
