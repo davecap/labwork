@@ -4029,10 +4029,10 @@ CES      0.0     -0.1900    2.100
                    ! Cesium, so far untested.
 ZN     0.000000  -0.250000     1.090000 ! ALLOW  ION
                 ! RHS March 18, 1990
-FE     0.010000   0.000000     0.650000 ! ALLOW HEM
+!FE     0.010000   0.000000     0.650000 ! ALLOW HEM
                 ! Heme (6-liganded): Iron atom (KK 05/13/91)
-!FE     0.0000     -0.0200      1.4443  ! FE (II) CHARMM FORUMS
-!FE     0.0000     -0.0115      1.4411  ! FE (III) CHARMM FORUMS
+!FE     0.0000     -0.0200      1.4443  ! FE (II) CHARMM Johan Bredenberg & Lennart Nilson
+FE     0.0000     -0.0115      1.4411  ! FE (III) CHARMM Johan Bredenberg & Lennart Nilson
 HE     0.000000  -0.021270     1.4800   !
                 ! helium, experimental pot. energy surface, adm jr., 12/95
 NE     0.000000  -0.086000     1.5300
