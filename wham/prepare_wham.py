@@ -82,6 +82,7 @@ def main():
             continue
         
         field_data = tbl.read(field=_h5_field)
+        print field_data
         h5f.close()
         
         # extract a subset of the data
