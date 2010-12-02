@@ -121,26 +121,25 @@ def main():
             continue
         config = ConfigObj(arg)
         lengths = []
+
+        
         # extract data from data files for each replica (coordinate)
         for (coord,rows) in extract(config, options.x_column):
             positions = []
             pot_positions = []
-                
-            # TIP3 + POT distributions
             
+            # TIP3 + POT distributions
             for r in rows:
-                positions += [ float(i[1]) for i in r if 'TIP3' in i[0] and float(i[1]) >= 0 ]         
+                positions += [ float(i[1]) for i in r if 'TIP3' in i[0] and float(i[1]) >= 0 ]   
                 pot_positions += [ float(i[1]) for i in r if 'POT' in i[0] and float(i[1]) >= 0 ]                
             try:
                 (hist, bin_edges) = numpy.histogram(positions, bins=100, normed=True)
                 ax.scatter([ float(coord) for i in hist ], bin_edges[:-1], c=hist, cmap=cmap, s=20, marker='o', edgecolors="none")
-                #ax.plot(bin_edges[:-1], hist, label=coord)
             except:
                  print "No data to plot for %s" % arg
             try:
                 (hist, bin_edges) = numpy.histogram(pot_positions, bins=100, normed=True)
                 ax.scatter([ float(coord) for i in hist ], bin_edges[:-1], c=hist, s=20, marker='o', cmap=pot_cmap, alpha=0.15, edgecolors="none")
-                # ax.plot(bin_edges[:-1], hist, label=config['title'])
             except:
                 print "No data to plot for %s" % arg
             
@@ -148,20 +147,21 @@ def main():
             #if len(rows) > 0:
             #    lengths += map(water_wire_length, rows)
             #    # (hist, bin_edges) = numpy.histogram(map(water_wire_length, rows), bins=30, normed=True)
-        #(hist, bin_edges) = numpy.histogram(lengths, bins=50, normed=True)
-        #ax.plot(bin_edges[:-1], hist, label=config['title'])
+        
+        # (hist, bin_edges) = numpy.histogram(positions, bins=200, normed=True)
+        #  ax.plot(bin_edges[:-1], hist, label=config['title'])
 
-    # ax.legend()
-    
-    ax.set_xlabel(r'Chi1 of 139')
-    # ax.set_ylabel('Water wire length distribution')
-    ax.set_title(config['title']+' TIP3/POT distribution along cylinder vs Chi1 of residue 139')
+    ax.legend()
     
     #ax.set_xlabel(r'Distance along cylinder for TIP3 ' + options.x_column)
-    # ax.set_ylabel('Probability density of potassium')
-    # ax.set_ylabel(r'Probability of > 15 A water wire from 132 to 286')    
-    ax.set_ylim(0, 35)
-    ax.set_xlim(0,360)
+    #ax.set_ylabel('Probability density of TIP3')
+    
+    ax.set_xlabel(r'Chi1 of 139')
+    ax.set_ylabel('Distance along cylinder for TIP3')
+    ax.set_title(config['title']+' TIP3/POT distribution along cylinder vs Chi1 of residue 139')
+    
+    #ax.set_ylim(0, 35)
+    #ax.set_xlim(0,35)
     plt.show()
     
     #
