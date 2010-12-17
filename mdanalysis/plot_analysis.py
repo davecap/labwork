@@ -38,7 +38,7 @@ def main():
     parser = optparse.OptionParser(usage)
     parser.add_option("-x", dest="x_column", default=None, help="X Column REQUIRED")    
     # parser.add_option("-y", dest="y_column", default=None, help="Y Column REQUIRED")
-    options, args = parser.parse_args()    
+    options, args = parser.parse_args()
     
     _h5_filename = 'analysis.h5'
     

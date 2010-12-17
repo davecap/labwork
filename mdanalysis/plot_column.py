@@ -35,8 +35,11 @@ def main():
         h5f = tables.openFile(h5_file, mode="r")
         for g in h5f.root._v_children.keys():
             for t in h5f.root._v_children[g]._v_children.keys():
-                for c in h5f.root._v_children[g]._v_children[t].description._v_names:
-                    print "/%s/%s/%s" % (g, t, c)
+                try:
+                    for c in h5f.root._v_children[g]._v_children[t].description._v_names:
+                        print "/%s/%s/%s" % (g, t, c)
+                except:
+                    print "/%s/%s" % (g, t)
         h5f.close()
         parser.error("No path specified")
     
