@@ -44,23 +44,20 @@ def split_path(path):
     return (leaf_path, leaf)
 
 class Analysis(object):
-    _filename = None
-    _readonly = True
-    _title = None
-    _h5f = None
-    
-    # nodes holds all Table and Array objects which take care of table creation and writing
-    _nodes = {}
-    
-    # the following dicts store the actual analyses which are processed
-    _sequential = {}
-    _timeseries = {}
     
     def __init__(self, filename, title="datastore", readonly=True):
         self._filename = filename
         self._title = title
         self._readonly = readonly
         self._h5f = self.open_or_create()
+        self.reset()
+
+    def reset(self):
+        # nodes holds all Table and Array objects which take care of table creation and writing
+        self._nodes = {}
+        # the following dicts store the actual analyses which are processed
+        self._sequential = {}
+        self._timeseries = {}
 
     def get_or_create_array(self, path):
         if path not in self._nodes:

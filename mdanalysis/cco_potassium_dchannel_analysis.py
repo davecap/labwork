@@ -80,37 +80,44 @@ def main():
         #analysis.add_to_sequence('/protein/rmsd/backbone_PEPA', RMSD(selection='backbone and segname PEPA'))
     
         # coordinates of POT and CA of 132 and 139 and 286
-        analysis.add_timeseries('/protein/coords/PEPA139CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPA 139 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA139CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPA 139 CA")))
         analysis.add_timeseries('/protein/coords/PEPA139CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 139 CA")))
-        
-        analysis.add_timeseries('/protein/coords/PEPA132CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPA 132 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA132CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPA 132 CA")))
         analysis.add_timeseries('/protein/coords/PEPA132CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 132 CA")))
-        
-        analysis.add_timeseries('/protein/coords/PEPA207CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPA 207 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA207CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPA 207 CA")))
         analysis.add_timeseries('/protein/coords/PEPA207CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 207 CA")))
-        
-        analysis.add_timeseries('/protein/coords/PEPA286CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPA 286 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA286CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPA 286 CA")))
         analysis.add_timeseries('/protein/coords/PEPA286CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 286 CA")))
-        
         analysis.add_timeseries('/protein/distances/PEPA139CA_PEPA132CA', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 132 CA")))
         analysis.add_timeseries('/protein/distances/PEPA139CA_PEPA286CA', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 286 CA")))
         analysis.add_timeseries('/protein/distances/PEPA132CA_PEPA286CA', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 132 CA", "atom PEPA 286 CA")))
+        
+        # N139D POT 4845
+        analysis.add_timeseries('/protein/coords/POT4845_z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4845 POT")))
+        analysis.add_timeseries('/protein/distances/PEPA286CA_POT4845', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 286 CA", "atom POT 4845 POT")))
+        
+        # WT POT 4712
+        analysis.add_timeseries('/protein/coords/POT4712_z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4712 POT")))
+        analysis.add_timeseries('/protein/distances/PEPA286CA_POT4712', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 286 CA", "atom POT 4712 POT")))
 
-        analysis.add_timeseries('/protein/coords/PEPC7CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPC 7 CA")))
-        analysis.add_timeseries('/protein/coords/PEPC7CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPC 7 CA")))
-        analysis.add_timeseries('/protein/coords/PEPC7CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPC 7 CA")))
+        # D132N: 4772
+        analysis.add_timeseries('/protein/coords/POT4772_z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4772 POT")))
+        analysis.add_timeseries('/protein/distances/PEPA286CA_POT4772', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 286 CA", "atom POT 4772 POT")))
         
-        analysis.add_timeseries('/protein/coords/PEPC10CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPC 10 CA")))
-        analysis.add_timeseries('/protein/coords/PEPC10CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPC 10 CA")))
-        analysis.add_timeseries('/protein/coords/PEPC10CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPC 10 CA")))
-        
-        analysis.add_timeseries('/protein/coords/PEPA549CA_x', Timeseries.Atom("x", trj.selectAtoms("atom PEPA 549 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA549CA_y', Timeseries.Atom("y", trj.selectAtoms("atom PEPA 549 CA")))
-        analysis.add_timeseries('/protein/coords/PEPA549CA_z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 549 CA")))
+        # DM: 4717
+        analysis.add_timeseries('/protein/coords/POT4717_z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4717 POT")))
+        analysis.add_timeseries('/protein/distances/PEPA286CA_POT4717', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 286 CA", "atom POT 4717 POT")))
+
+        # dihedrals
+        analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG", "atom PEPA 132 OD1")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG", "atom PEPA 286 CD")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_207_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 N", "atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_207_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 207 CA", "atom PEPA 207 CB", "atom PEPA 207 CG", "atom PEPA 207 OD1")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_121_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 121 N", "atom PEPA 121 CA", "atom PEPA 121 CB", "atom PEPA 121 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_121_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 121 CA", "atom PEPA 121 CB", "atom PEPA 121 CG", "atom PEPA 121 OD1")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_133_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 133 N", "atom PEPA 133 CA", "atom PEPA 133 CB", "atom PEPA 133 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_133_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 133 CA", "atom PEPA 133 CB", "atom PEPA 133 CG", "atom PEPA 133 SD")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_133_CHI3', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 133 CB", "atom PEPA 133 CG", "atom PEPA 133 SD", "atom PEPA 133 CE")))
 
         analysis.run(trj=trj, ref=ref)
         analysis.save()
