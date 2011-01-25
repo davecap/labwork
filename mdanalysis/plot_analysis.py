@@ -74,7 +74,7 @@ def main():
     # set up the plot
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.set_xlabel(r'Chi1 of Residue 139')
+    ax.set_xlabel(r'Reaction Coordinate')
     ax.set_ylabel(ps1[-1])
     ax.set_title(options.x_column)
     
