@@ -102,8 +102,8 @@ def main():
     # HBONDS: 139, 207, 286 <-> water/protein
     analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
     analysis.add_to_sequence('/protein/hbonds/PEPA_132_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 132', 'protein'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_139_WATER', HydrogenBondAnalysis('segid PEPA and resid 139', 'resname TIP3'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_139_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 139', 'protein'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_139_WATER', HydrogenBondAnalysis('segid PEPA and resid 139', 'resname TIP3'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_139_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 139', 'protein'))
     analysis.add_to_sequence('/protein/hbonds/PEPA_207_WATER', HydrogenBondAnalysis('segid PEPA and resid 207', 'resname TIP3'))
     analysis.add_to_sequence('/protein/hbonds/PEPA_207_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 207', 'protein'))
     analysis.add_to_sequence('/protein/hbonds/PEPA_286_WATER', HydrogenBondAnalysis('segid PEPA and resid 286', 'resname TIP3'))
@@ -120,8 +120,8 @@ def main():
     analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_PROTEIN', HydrogenBondAnalysis('atom PEPA 102 O1D or atom PEPA 102 O2D', 'protein', selection1_type='acceptor'))
     
     # dihedrals of 132, 139, 286
-    analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
-    analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
+    #analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
+    #analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG", "atom PEPA 132 OD1")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
@@ -173,7 +173,8 @@ def main():
     
     # Nov 18, 2010, cylinder search for water and potassium
     r132 = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
-    r139 = 'segid PEPA and resid 139 and ( name CA or name CB or name N )'
+    #r139 = 'segid PEPA and resid 139 and ( name CA or name CB or name N )'
+    r139 = 'segid PEPA and resid 139 and ( name CA or name N )'
     r286 = 'segid PEPA and resid 286 and ( name CA or name CB or name N )'
     r312 = 'segid PEPA and resid 312 and ( name CA or name CB or name N )'
     r481 = 'segid PEPA and resid 481 and ( name CA or name CB or name N )'
