@@ -3,7 +3,6 @@
 import os
 import optparse
 from configobj import ConfigObj, flatten_errors
-from string import Template
 import subprocess
 
 VMD_PATH = "vmd"
@@ -56,14 +55,10 @@ def VMD_filter_pdb(pdb_file, selection="protein", output_prefix="filtered"):
     quit
     """ % (selection, output_pdb)
     
-    command = "vmd -dispdev none -pdb %s" % (pdb_file)
-    # t = Template(tcl_template)
-    # tcl = t.substitute({ 'selection': selection, 'output_file': output_file })    
+    command = "vmd -dispdev none -pdb %s" % (pdb_file)   
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
-        
 
-      
 if __name__=='__main__':
     main()
 
