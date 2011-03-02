@@ -29,7 +29,7 @@ def main():
             parser.error("PSF file required (-p) if using a DCD trajectory file")
         VMD_filter_dcd(psf_file=options.psf_file, dcd_file=args[0], selection=options.selection, output_prefix=options.output_prefix)   
     elif args[0].lower().endswith('.pdb'):
-        VMD_filter_pdb(args[0], selection=options.selection, output_prefix=options.output_prefix)
+        VMD_filter_pdb(args[0], psf_file=options.psf_file, selection=options.selection, output_prefix=options.output_prefix)
     else:
         parser.error("Invalid input file, must be a PDB or DCD file")
 
@@ -47,7 +47,7 @@ def VMD_filter_dcd(psf_file, dcd_file, selection="protein", output_prefix="filte
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
  
-def VMD_filter_pdb(pdb_file, selection="protein", output_prefix="filtered"):
+def VMD_filter_pdb(pdb_file, psf_file=None, selection="protein", output_prefix="filtered"):
     output_psf = "%s.psf" % output_prefix
     output_pdb = "%s.pdb" % output_prefix
     
@@ -57,7 +57,10 @@ def VMD_filter_pdb(pdb_file, selection="protein", output_prefix="filtered"):
     quit
     """ % (selection, output_psf, output_pdb)
     
-    command = "vmd -dispdev none -pdb %s" % (pdb_file)   
+    if psf_file:
+        command = "vmd -dispdev none -psf %s -pdb %s" % (psf_file, pdb_file)   
+    else:
+        command = "vmd -dispdev none -pdb %s" % (pdb_file)   
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
     print stdoutdata
