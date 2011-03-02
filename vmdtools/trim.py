@@ -48,16 +48,20 @@ def VMD_filter_dcd(psf_file, dcd_file, selection="protein", output_prefix="filte
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
  
 def VMD_filter_pdb(pdb_file, selection="protein", output_prefix="filtered"):
+    output_psf = "%s.psf" % output_prefix
     output_pdb = "%s.pdb" % output_prefix
     
-    tcl_template = """set A [atomselect top "%s"]
+    tcl = """set A [atomselect top "%s"]
+    $A writepsf %s
     $A writepdb %s
     quit
-    """ % (selection, output_pdb)
+    """ % (selection, output_psf, output_pdb)
     
     command = "vmd -dispdev none -pdb %s" % (pdb_file)   
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
+    print stdoutdata
+    print stderrdata
 
 if __name__=='__main__':
     main()
