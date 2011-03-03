@@ -1,0 +1,6 @@
+Workflow: Starting structure prep:
+    - initial structure (input files: PDB, PSF)
+    - remove ions with VMD
+    - output PSF and PDB (intermediate output files)
+    - brief minimization (100 steps)
+    - brief equilibration (100 steps)
