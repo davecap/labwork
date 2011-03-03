@@ -6,7 +6,7 @@ import subprocess
 
 def main():    
     usage = """
-        usage: %prog [options] <PSF> <PDB/DCD>
+        usage: %prog [options] <PSF> <COOR>
     """
     
     parser = optparse.OptionParser(usage)
@@ -18,15 +18,14 @@ def main():
         parser.error("Input file %s not found!" % args[0])
 
     psf = args[0]
-    pdb = args[1]
+    coor = args[1]
     
-    tcl = """set A [atomselect top "all and not (name POT and resid > 4719) and not (name CLA)"]
-$A writepsf md.psf
+    tcl = """set A [atomselect top "all"]
 $A writepdb md.pdb
 quit
     """
 
-    command = "vmd -dispdev none -psf %s -pdb %s" % (psf, pdb)
+    command = "vmd -dispdev none -psf %s -namdbin %s" % (psf, coor)
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
 

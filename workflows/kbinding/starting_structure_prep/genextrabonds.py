@@ -2,10 +2,7 @@
 
 import os
 import optparse
-#from configobj import ConfigObj, flatten_errors
 import subprocess
-
-VMD_PATH = "vmd"
 
 TCL = """
 set H102NE2 [[atomselect top "segname PEPA and resid 102 and name NE2"] get index]
