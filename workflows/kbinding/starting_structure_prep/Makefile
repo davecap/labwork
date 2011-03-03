@@ -8,11 +8,11 @@ extrabonds: md.psf md.pdb
 
 # run the minimization and equilibration
 md.dcd: extrabonds md.psf md.pdb
-	mpirun -np 8 ~/bin/namd2 md.conf >> md.log
+	mpirun -np 8 ~/bin/namd2 namd2.conf >> md.log
 
 # extract last frame from DCD
 final.pdb: md.dcd md.psf
-	catdcd -o final.pdb -otype pdb -stype pdb -s md.pdb -first 20 -last 20 md.dcd 2>&1 >> /dev/null
+	catdcd -o final.pdb -otype pdb -stype pdb -s md.pdb -first 1 -last 1 md.dcd 2>&1 >> /dev/null
 
 clean:
 	rm -rf extrabonds
