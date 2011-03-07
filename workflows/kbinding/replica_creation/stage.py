@@ -56,8 +56,8 @@ def main():
     # Align using the VMD TCL script
     tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and backbone", target_selection="segname POT and resid 4712", output_pdb=output_pdb)
     (stderr, stdout) = run_VMD(tcl)
-    print stderr
-    print stdout
+    #print stderr
+    #print stdout
                     
 if __name__ == "__main__":
     main()
