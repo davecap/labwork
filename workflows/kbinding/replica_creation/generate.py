@@ -42,11 +42,11 @@ def main():
         
         # Create the new replica with the same parameters but set the PDB path
         r = output_ensemble.add_replica(name='%d'%i, **t.parameters)
-        r.parameters['template'] = r.parameters['coordinates']
+        r.parameters['template'] = os.path.abspath(os.path.join(template_path, r.parameters['coordinates']))
         r.parameters['coordinates'] = 'pdbs/%d.pdb'%i
         output_ensemble.save()
 
-    sys.stderr.write("Created %d replicas from starting structure %s" % (i+1, starting_pdb))
+    sys.stderr.write("Created %d replicas from starting structure %s\n" % (i+1, starting_pdb))
                     
 if __name__ == "__main__":
     main()
