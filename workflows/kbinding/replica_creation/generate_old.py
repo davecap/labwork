@@ -3,6 +3,7 @@ import sys
 import os
 
 import umbrellas
+import stage
 
 def main():    
     usage = """
@@ -28,8 +29,6 @@ def main():
     if not os.path.exists(output_pdb_path):
         sys.stderr.write("Creating output PDB path: %s\n" % output_pdb_path)
         os.mkdir(output_pdb_path)
-
-    output_ensemble.config['starting_structure'] = starting_pdb
         
     # for each template replica
     #   align a with starting structure
@@ -40,9 +39,12 @@ def main():
         template_psf = os.path.join(output_path, template_ensemble.config['psf'])
         output_pdb = os.path.join(output_pdb_path,'%d.pdb'%i)
         
+        # Align using the VMD TCL script
+        tcl = stage.pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and backbone", target_selection="protein and backbone", output_pdb=output_pdb)
+        stage.run_VMD(tcl)
+        
         # Create the new replica with the same parameters but set the PDB path
         r = output_ensemble.add_replica(name='%d'%i, **t.parameters)
-        r.parameters['template'] = r.parameters['coordinates']
         r.parameters['coordinates'] = 'pdbs/%d.pdb'%i
         output_ensemble.save()
 
@@ -50,8 +52,3 @@ def main():
                     
 if __name__ == "__main__":
     main()
-
-
-
-
-
