@@ -2,10 +2,7 @@
 
 import os
 import optparse
-#from configobj import ConfigObj, flatten_errors
 import subprocess
-
-VMD_PATH = "vmd"
 
 def main():    
     usage = """
@@ -38,9 +35,9 @@ set k4712 [atomselect top "segname POT and resid 4712"]
 
 set num_steps [molinfo 0 get numframes]
 for {set frame 0} {$frame < $num_steps} {incr frame} {
-    set e286caz [$e286ca get {z}]
-    set k4712z [$k4712 get {z}]
-    puts "PARSE [ expr $k4712z-$e286caz ]"
+    $e286ca frame $frame
+    $k4712 frame $frame
+    puts "PARSE [ expr [ $k4712 get {z}]-[ $e286ca get {z} ]]"
 }
 quit
     """
@@ -51,7 +48,6 @@ quit
         command = "vmd -dispdev none -psf %s -pdb %s" % (psf_file, pdb_file)
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
-    
     #print stdoutdata
     #print stderrdata
     for line in stdoutdata.split('\n'):
