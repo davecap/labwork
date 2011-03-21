@@ -15,6 +15,21 @@ from threading import Thread
 q = Queue()
 outfile_q = Queue()
 
+def combine_metadatas(wham_dicts):
+    # make a single metadatafile containing all the intermediate files
+    (fd, fpath) = tempfile.mkstemp()
+    sys.stderr.write("Combined metadatafile: %s\n" % fpath)
+    outfile = open(fpath, 'w')
+    for md in wham_dicts:
+        sys.stderr.write("  Combining %s...\n" % md['metafilepath'])
+        mfile = open(md['metafilepath'])
+        outfile.write(mfile.read())
+        mfile.close()
+    outfile.close()
+    combined_dict = wham_dicts[0]
+    combined_dict.update({'metafilepath':fpath})
+    return combined_dict
+
 def worker():
     while True:
         item = q.get()
@@ -30,6 +45,33 @@ def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
     outfile_q.put(outfile)
+
+def process_pmf(filename):
+    x = []
+    y = []
+    infile = open(filename, 'r')
+    while infile:
+        line = infile.readline().strip()
+        if len(line) == 0:
+            break
+        elif line.startswith('#'):
+            continue
+        split_line = [ s.strip() for s in line.split('\t') ]
+        if len(split_line) > 3 and split_line[1] != 'inf':
+            x.append(float(split_line[0]))
+            y.append(float(split_line[1]))
+        else:
+            x.append(float(split_line[0]))
+            y.append(None)
+    return (x,y)
+    
+def get_max_bin(pmf):
+    maxdG = max(pmf[1])
+    return pmf[0][pmf[1].index(maxdG)]
+
+def get_min_bin(pmf):
+    mindG = min(pmf[1])
+    return pmf[0][pmf[1].index(mindG)]
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, random=False):
     config = ConfigObj(config_file)
@@ -111,11 +153,14 @@ def main():
     parser.add_option("--combined", dest="combined", default=False, action="store_true", help="Combine all data [default: %default]")
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
-    parser.add_option("-t", "--threads", dest="worker_threads", default=2, help="Number of WHAM threads to use [default: %default]")
+    parser.add_option("-t", "--threads", dest="worker_threads", default=1, help="Number of WHAM threads to use [default: %default]")
     
     (options, args) = parser.parse_args()
     
-    wham_dicts = []
+    for config_file in args:
+        if not os.path.exists(config_file):
+            raise Exception("Config file not found at %s\n" % config_file)
+    
     
     # start the wham threads
     sys.stderr.write("Starting %d worker threads...\n" % options.worker_threads)
@@ -125,15 +170,69 @@ def main():
         t.start()
     
     if options.convergence:
+        # 1) calculate blocks of data in sequential order for each config file
+        # 2) calculate the PMFs from each block
+        # 3) find the max dG and min dG for the first PMF
+        # 4) plot the max dG and min dG for each PMF
         raise Exception("Convergence not implemented yet")
     elif options.error:
-        raise Exception("Error analysis not implemented yet")
+        # 1) calculate random blocks of data for each config file
+        # 2) calculate PMFs for each block
+        # 3) plot each PMF, get max/min values per bin, stdev per bin
+        
+        # note: ALWAYS COMBINES INPUT CONFIG FILES
+        
+        i=0
+        nblocks = 2
+        
+        defaults = {'min':-48, 'max':0, 'bins':100}
+        
+        while i < nblocks:
+            wham_dicts = []
+            for config_file in args:
+                sys.stderr.write("Processing config file: %s\n" % config_file)                
+                md = process_config(config_file, percent=20, random=True)
+                md.update(defaults)
+                wham_dicts.append(md)
+            combined_dict = combine_metadatas(wham_dicts)
+            q.put(combined_dict)
+            i += 1
+                
+        # Wait for wham to finish
+        sys.stderr.write("Waiting for WHAM to complete\n")
+        q.join()
+        
+        # process the PMFs
+        error_data = {}
+        try:
+            outfile = outfile_q.get_nowait()
+            while True:
+                pmf = process_pmf(outfile)
+                for x,y in zip(pmf):
+                    if x not in error_data:
+                        error_data[x] = [y]
+                    else:
+                        error_data[x].append(y)
+                outfile_q.task_done()
+                outfile = outfile_q.get_nowait()
+        except:
+            pass
+            
+        # now we have the combined PMF data
+        (fd, fpath) = tempfile.mkstemp()
+        outfile = open(fpath, 'w')
+        sys.stderr.write("Writing errors\n")
+        outfile.write('BIN,SEM,STDEV,MIN,MAX')
+        
+        for key in sorted(error_data.keys()):
+            d = numpy.array(error_data[key])
+            outfile.write('%f,%f,%f,%f,%f\n' % (key,numpy.sem(d),numpy.std(d),d.min(),d.max()))
+        outfile.close()
+        sys.stderr.write(fpath+"\n")
+        
     else:
+        wham_dicts = []
         for config_file in args:
-            if not os.path.exists(config_file):
-                sys.stderr.write("Config file not found at %s\n" % config_file)
-                continue
-
             sys.stderr.write("Processing config file: %s\n" % config_file)
             wham_dict = process_config(config_file)
             wham_dicts.append(wham_dict)
@@ -143,34 +242,22 @@ def main():
                 q.put(wham_dict)
         
         if options.combined:
-            # make a single metadatafile containing all the intermediate files
-            (fd, fpath) = tempfile.mkstemp()
-            sys.stderr.write("Combined metadatafile: %s\n" % fpath)
-            outfile = open(fpath, 'w')
-            for md in wham_dicts:
-                sys.stderr.write("  Combining %s...\n" % md['metafilepath'])
-                mfile = open(md['metafilepath'])
-                outfile.write(mfile.read())
-                mfile.close()
-            outfile.close()
-            
-            combined_dict = wham_dicts[0]
-            combined_dict.update({'metafilepath':fpath})
+            combined_dict = combine_metadatas(wham_dicts)
             q.put(combined_dict)
             
-    # Wait for wham to finish
-    sys.stderr.write("Waiting for WHAM to complete\n")
-    q.join() 
+        # Wait for wham to finish
+        sys.stderr.write("Waiting for WHAM to complete\n")
+        q.join() 
     
-    try:
-        outfile = outfile_q.get_nowait()
-        while True:
-            print outfile
-            outfile_q.task_done()
+        try:
             outfile = outfile_q.get_nowait()
-    except:
-        # queue empty
-        pass
+            while True:
+                print outfile
+                outfile_q.task_done()
+                outfile = outfile_q.get_nowait()
+        except:
+            # queue empty
+            pass
 
 
 if __name__=='__main__':
