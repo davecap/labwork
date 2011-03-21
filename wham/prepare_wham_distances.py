@@ -16,6 +16,8 @@ q = Queue()
 outfile_q = Queue()
 
 def combine_metadatas(wham_dicts):
+    if len(wham_dicts) == 1:
+        return wham_dicts[0]
     # make a single metadatafile containing all the intermediate files
     (fd, fpath) = tempfile.mkstemp()
     sys.stderr.write("Combined metadatafile: %s\n" % fpath)
@@ -41,6 +43,7 @@ def worker():
 
 def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     outfile = "%s_wham.out" % metafilepath
+    sys.stderr.write("Running WHAM: %s -> %s\n" % (metafilepath, outfile))
     command = "wham %f %f %d %f %f 0 %s %s" % (min, max, bins, tol, temp, metafilepath, outfile)
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
@@ -60,9 +63,6 @@ def process_pmf(filename):
         if len(split_line) > 3 and split_line[1] != 'inf':
             x.append(float(split_line[0]))
             y.append(float(split_line[1]))
-        else:
-            x.append(float(split_line[0]))
-            y.append(None)
     return (x,y)
     
 def get_max_bin(pmf):
@@ -73,7 +73,7 @@ def get_min_bin(pmf):
     mindG = min(pmf[1])
     return pmf[0][pmf[1].index(mindG)]
 
-def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, random=False):
+def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
     config = ConfigObj(config_file)
     project_path = os.path.abspath(os.path.dirname(config.filename))
 
@@ -98,7 +98,7 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
     wham_metadata_file.write('# Config: %s\n' % config_file)
     wham_metadata_file.write('# Output Dir: %s\n' % output_dir)
     wham_metadata_file.write('# Percent Data Used: %s%%\n' % str(percent))
-    wham_metadata_file.write('# Random Selection: %s\n' % str(random))
+    wham_metadata_file.write('# Random Selection: %s\n' % str(randomize))
     
     # loop through replicas in the config file
     for r_id, r_config in config['replicas'].items():
@@ -125,8 +125,8 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
             sys.stderr.write("\n%s: Sample too small... skipping!\n" % r_id)
             continue
         
-        if random:
-            final_sample = random.sample(sample, sample_size)
+        if randomize:
+            final_sample = random.sample(field_data, sample_size)
         else:
             final_sample = sample[:sample_size]
 
@@ -153,7 +153,7 @@ def main():
     parser.add_option("--combined", dest="combined", default=False, action="store_true", help="Combine all data [default: %default]")
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
-    parser.add_option("-t", "--threads", dest="worker_threads", default=1, help="Number of WHAM threads to use [default: %default]")
+    parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     
     (options, args) = parser.parse_args()
     
@@ -183,7 +183,7 @@ def main():
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
         i=0
-        nblocks = 2
+        nblocks = 20
         
         defaults = {'min':-48, 'max':0, 'bins':100}
         
@@ -191,7 +191,7 @@ def main():
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
-                md = process_config(config_file, percent=20, random=True)
+                md = process_config(config_file, percent=25, randomize=True)
                 md.update(defaults)
                 wham_dicts.append(md)
             combined_dict = combine_metadatas(wham_dicts)
@@ -204,31 +204,35 @@ def main():
         
         # process the PMFs
         error_data = {}
-        try:
-            outfile = outfile_q.get_nowait()
-            while True:
-                pmf = process_pmf(outfile)
-                for x,y in zip(pmf):
-                    if x not in error_data:
-                        error_data[x] = [y]
-                    else:
-                        error_data[x].append(y)
-                outfile_q.task_done()
+        outfile = outfile_q.get_nowait()
+        while True:
+            sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
+            (xdata,ydata) = process_pmf(outfile)
+            for x,y in zip(xdata,ydata):
+                if x not in error_data:
+                    error_data[x] = [y]
+                else:
+                    error_data[x].append(y)
+            outfile_q.task_done()
+            try:
                 outfile = outfile_q.get_nowait()
-        except:
-            pass
-            
+            except:
+                sys.stderr.write("All outfiles processed...\n")
+                break
+
         # now we have the combined PMF data
         (fd, fpath) = tempfile.mkstemp()
         outfile = open(fpath, 'w')
         sys.stderr.write("Writing errors\n")
-        outfile.write('BIN,SEM,STDEV,MIN,MAX')
+        outfile.write('BIN,MEAN,SEM,STDEV,MIN,MAX\n')
         
         for key in sorted(error_data.keys()):
             d = numpy.array(error_data[key])
-            outfile.write('%f,%f,%f,%f,%f\n' % (key,numpy.sem(d),numpy.std(d),d.min(),d.max()))
+            sys.stderr.write("%0.2f,%d " % (key, d.size))
+            sem = numpy.std(d, ddof=1)/numpy.sqrt(d.size)
+            outfile.write('%f,%f,%f,%f,%f,%f\n' % (key,d.mean(),sem,numpy.std(d),d.min(),d.max()))
         outfile.close()
-        sys.stderr.write(fpath+"\n")
+        sys.stderr.write("\n"+fpath+"\n")
         
     else:
         wham_dicts = []
