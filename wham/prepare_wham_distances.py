@@ -7,25 +7,29 @@ import numpy
 from configobj import ConfigObj
 import tempfile
 import random
+import subprocess
 
-from Queue import Queue, Thread
+from Queue import Queue
+from threading import Thread
 
 q = Queue()
+outfile_q = Queue()
 
 def worker():
     while True:
         item = q.get()
-        print "Running: "+str(item)
-        # run_wham(**item)
+        try:
+            run_wham(**item)
+        except Exception, e:
+            sys.stderr.write("\nException while running WHAM: %s\n" % e)
         q.task_done()
 
-def run_wham(min=0,max=100,bins=100,metafilepath='',tol=0.0001, temp=315.0):
-    pass
-    # outfile = "%s_wham.out" % metafilepath
-    # command = "wham %f %f %d %f %f 0 %s %s_wham.out" % (min, max, bins, tol, temp, metafilepath, metafilepath)
-    # p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # (stdoutdata, stderrdata) = p.communicate()
-    # return outfile
+def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
+    outfile = "%s_wham.out" % metafilepath
+    command = "wham %f %f %d %f %f 0 %s %s" % (min, max, bins, tol, temp, metafilepath, outfile)
+    p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    (stdoutdata, stderrdata) = p.communicate()
+    outfile_q.put(outfile)
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, random=False):
     config = ConfigObj(config_file)
@@ -56,7 +60,7 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
     
     # loop through replicas in the config file
     for r_id, r_config in config['replicas'].items():
-        sys.stderr.write("Extracting data from replica: %s ... " % r_id)
+        sys.stderr.write("%s " % r_id)
         
         data_file = os.path.join(project_path, r_id, 'distances')
         if not os.path.exists(data_file):
@@ -73,10 +77,10 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
         
         # determine the sample size (percent * sample)
         sample_size = int(round(float(percent)/100.0 * float(len(sample))))
-        #sys.stderr.write("data/sample: %d/%d\n" % (len(field_data), sample_size))
+        sys.stderr.write("[%d/%d] " % (len(field_data), sample_size))
 
         if sample_size < 30:
-            sys.stderr.write("%s: Sample too small... skipping!\n" % r_id)
+            sys.stderr.write("\n%s: Sample too small... skipping!\n" % r_id)
             continue
         
         if random:
@@ -92,6 +96,7 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
         wham_metadata_file.write('%s %s %s\n' % (data_file_path, r_config['coordinate'], str(float(r_config['force']))))
     
     wham_metadata_file.close()
+    sys.stderr.write('Done processing config.\n')
     return {'min':int(data_min), 'max':int(data_max), 'bins': len(config['replicas'].items())*2, 'metafilepath':os.path.join(output_dir, metadata_filename), 'tol':0.0001, 'temp':315.0}
 
 def main():    
@@ -113,7 +118,7 @@ def main():
     wham_dicts = []
     
     # start the wham threads
-    sys.stderr.write("Starting %d worker threads..." % options.worker_threads)
+    sys.stderr.write("Starting %d worker threads...\n" % options.worker_threads)
     for i in range(options.worker_threads):
         t = Thread(target=worker)
         t.daemon = True
@@ -126,10 +131,10 @@ def main():
     else:
         for config_file in args:
             if not os.path.exists(config_file):
-                sys.stderr.write("Config file not found at %s" % config_file)
+                sys.stderr.write("Config file not found at %s\n" % config_file)
                 continue
 
-            sys.stderr.write("Processing config file: %s" % config_file)
+            sys.stderr.write("Processing config file: %s\n" % config_file)
             wham_dict = process_config(config_file)
             wham_dicts.append(wham_dict)
             
@@ -154,8 +159,19 @@ def main():
             q.put(combined_dict)
             
     # Wait for wham to finish
-    sys.stderr.write("Waiting for WHAM to complete")
+    sys.stderr.write("Waiting for WHAM to complete\n")
     q.join() 
+    
+    try:
+        outfile = outfile_q.get_nowait()
+        while True:
+            print outfile
+            outfile_q.task_done()
+            outfile = outfile_q.get_nowait()
+    except:
+        # queue empty
+        pass
+
 
 if __name__=='__main__':
     main()

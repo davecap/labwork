@@ -65,8 +65,7 @@ quit
     for line in stdoutdata.split('\n'):
         if line.startswith('PARSE'):
             line_parts = line.split(' ')
-            for d in line_parts[1:]:
-                print d
+            print ' '.join(line_parts[1:])
  
 if __name__=='__main__':
     main()
