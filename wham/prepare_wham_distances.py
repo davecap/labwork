@@ -96,15 +96,13 @@ def dG_bind(pmf, imin=0, imax=1):
         if x > imax:
             break
         elif x > imin and dG_prev is not None:
-            # e^{-kB*[(dG+dGprev)/2.0]}*(x-x_prev)
-            # Note: Beta is negative
-            s += numpy.exp(-Beta*(dG+dG_prev)/2.0)*(x-x_prev)
+            # e^{-B*[(dG+dGprev)/2.0]}*(x-x_prev)
+            s += numpy.exp((-1.0/Beta)*(dG+dG_prev)/2.0)*(x-x_prev)
         dG_prev = dG
         x_prev = x
     
-    dGbind = (-1.0/Beta)*numpy.log(s)
+    dGbind = (-1.0*Beta)*numpy.log(s)
     return dGbind
-    
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
     config = ConfigObj(config_file)
