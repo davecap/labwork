@@ -48,9 +48,6 @@ def worker():
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
     config = ConfigObj(config_file)
     project_path = os.path.abspath(os.path.dirname(config.filename))
-
-    data_min = None
-    data_max = None
     
     if output_dir is None:
         # use a temp dir
@@ -83,11 +80,8 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
         else:
             field_data = numpy.genfromtxt(data_file)
 
-        data_min = min(field_data.min(), data_min) if data_min else field_data.min()
-        data_max = max(field_data.max(), data_max) if data_max else field_data.max()
-        
         # first, slice the data
-        sample = field_data[start_index:end_index] if end_index else field_data[start_index:] 
+        sample = field_data[start_index:end_index] if end_index else field_data[start_index:]
         
         # determine the sample size (percent * sample)
         sample_size = int(round(float(percent)/100.0 * float(len(sample))))
@@ -160,9 +154,10 @@ def main():
         
         
         # store the max N for each config file
-        max_n = {}
+        deltaGbind = {}
         # store the current block index for each config file
         current_block = {}
+        
         
         
         raise Exception("Convergence not implemented yet")
@@ -212,7 +207,6 @@ def main():
         outfile = open(fpath, 'w')
         sys.stderr.write("Writing errors\n")
         outfile.write('BIN,MEAN,SEM,STDEV,MIN,MAX\n')
-        
         for key in sorted(error_data.keys()):
             d = numpy.array(error_data[key])
             sys.stderr.write("%0.2f,%d " % (key, d.size))
