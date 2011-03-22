@@ -63,7 +63,7 @@ def process_pmf(filename):
         if len(split_line) > 3 and split_line[1] != 'inf':
             x.append(float(split_line[0]))
             y.append(float(split_line[1]))
-    return (x,y)
+    return zip(x,y)
     
 def get_max_bin(pmf):
     maxdG = max(pmf[1])
@@ -72,6 +72,29 @@ def get_max_bin(pmf):
 def get_min_bin(pmf):
     mindG = min(pmf[1])
     return pmf[0][pmf[1].index(mindG)]
+    
+def dG_bind(pmf, imin=0, imax=1):
+    """ Calculate the relative binding free energy for a PMF given bounds """
+    # dGbind = -(1/kB)
+    kB = 0.00198721 # kcal/mol/K
+    t = 315.0 # K
+    Beta = kB*t
+    
+    x_prev = None
+    dG_prev = None
+    s = 0.0
+    for x,dG in pmf:
+        if x > imax:
+            break
+        elif x > imin and dG_prev is not None:
+            # e^{-kB*[(dG+dGprev)/2.0]}*(x-x_prev)
+            # Note: Beta is negative
+            s += numpy.exp(-Beta*(dG+dG_prev)/2.0)*(x-x_prev)
+        dG_prev = dG
+        x_prev = x
+    dGbind = (-1.0/Beta)*numpy.log(s)
+    return dGbind
+    
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
     config = ConfigObj(config_file)
@@ -181,7 +204,7 @@ def main():
         # 1) calculate blocks of data in sequential order for each config file
         #       block size is 10% of the max n
         # 2) calculate the PMFs from each block
-        # 3) calculate some value from each PMF
+        # 3) calculate some value from each PMF (dG_bind)
         # 4) print <block>,<value> to plot
         
         
@@ -222,8 +245,9 @@ def main():
         outfile = outfile_q.get_nowait()
         while True:
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
-            (xdata,ydata) = process_pmf(outfile)
-            for x,y in zip(xdata,ydata):
+            pmf = process_pmf(outfile)
+            print dG_bind(pmf, imin=-35.0, imax=-20.0)
+            for x,y in pmf:
                 if x not in error_data:
                     error_data[x] = [y]
                 else:
