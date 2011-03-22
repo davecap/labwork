@@ -255,7 +255,11 @@ def main():
         while True:
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile)
-            print dG_bind(pmf, imin=-35.0, imax=-20.0, shift=-1.0*calculate_pmf_shift(pmf))
+            shift = -1.0*calculate_pmf_shift(pmf)
+            for i in range(1,10):
+                print dG_bind(pmf, imin=-40.0+i, imax=-15.0, shift=shift)
+            for i in range(1,10):
+                print dG_bind(pmf, imin=-35, imax=-15.0-i, shift=shift)
             
             for x,y in pmf:
                 if x not in error_data:
