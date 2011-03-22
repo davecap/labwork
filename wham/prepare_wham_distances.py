@@ -194,16 +194,12 @@ def main():
         outfile = outfile_q.get_nowait()
         while True:
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
-            pmf = process_pmf(outfile, shift=options.autoshift)
-            
-            print dG_bind(pmf, imin=-31.0, imax=-21.0)
-            
+            pmf = process_pmf(outfile, shift=options.autoshift)            
             for x,y in pmf:
                 if x not in error_data:
                     error_data[x] = [y]
                 else:
                     error_data[x].append(y)
-            
             outfile_q.task_done()
             try:
                 outfile = outfile_q.get_nowait()
