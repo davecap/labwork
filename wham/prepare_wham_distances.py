@@ -49,6 +49,7 @@ def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
     outfile_q.put(outfile)
+    sys.stderr.write("\tDone running WHAM -> %s\n" % (outfile))
 
 def process_pmf(filename):
     x = []
@@ -74,7 +75,11 @@ def get_min_bin(pmf):
     mindG = min(pmf[1])
     return pmf[0][pmf[1].index(mindG)]
     
-def dG_bind(pmf, imin=0, imax=1):
+def calculate_pmf_shift(pmf, n=10):
+    """ Calculate the PMF shift by averaging the first 10 bins (bulk water dG) """
+    return numpy.array(pmf)[0:n,1].mean()
+        
+def dG_bind(pmf, imin=0, imax=1, shift=0.0):
     """ Calculate the relative binding free energy for a PMF given bounds """
     # dGbind = -(1/kB)
     kB = 0.00198721 # kcal/mol/K
@@ -84,7 +89,10 @@ def dG_bind(pmf, imin=0, imax=1):
     x_prev = None
     dG_prev = None
     s = 0.0
+    
     for x,dG in pmf:
+        dG = dG+shift
+        
         if x > imax:
             break
         elif x > imin and dG_prev is not None:
@@ -93,6 +101,7 @@ def dG_bind(pmf, imin=0, imax=1):
             s += numpy.exp(-Beta*(dG+dG_prev)/2.0)*(x-x_prev)
         dG_prev = dG
         x_prev = x
+    
     dGbind = (-1.0/Beta)*numpy.log(s)
     return dGbind
     
@@ -177,6 +186,7 @@ def main():
     parser.add_option("--combined", dest="combined", default=False, action="store_true", help="Combine all data [default: %default]")
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
+    parser.add_option("--error-blocks", dest="error_blocks", type="int", default=20, help="Number of blocks to sample for error [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     parser.add_option("--wham-min", dest="wham_min", type="float", default=-48, help="Minimum bin value for WHAM [default: %default]")
     parser.add_option("--wham-max", dest="wham_max", type="float", default=0, help="Maximum bin value for WHAM [default: %default]")
@@ -223,10 +233,8 @@ def main():
         # 2) calculate PMFs for each block
         # 3) plot each PMF, get max/min values per bin, stdev per bin
         
-        i=0
-        nblocks=20
-        
-        while i < nblocks:
+        i=0        
+        while i < options.error_blocks:
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
@@ -247,7 +255,8 @@ def main():
         while True:
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile)
-            print dG_bind(pmf, imin=-35.0, imax=-20.0)
+            print dG_bind(pmf, imin=-35.0, imax=-20.0, shift=-1.0*calculate_pmf_shift(pmf))
+            
             for x,y in pmf:
                 if x not in error_data:
                     error_data[x] = [y]
