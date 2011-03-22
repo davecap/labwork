@@ -9,7 +9,6 @@ def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     sys.stderr.write("\t%s\n" % (command))
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
-    outfile_q.put(outfile)
     sys.stderr.write("\tDone running WHAM -> %s\n" % (outfile))
 
 def process_pmf(filename, shift=False):

@@ -39,9 +39,10 @@ def worker():
     while True:
         item = q.get()
         try:
-            run_wham(**item)
+            outfile = run_wham(**item)
         except Exception, e:
             sys.stderr.write("\nException while running WHAM: %s\n" % e)
+        outfile_q.put(outfile)
         q.task_done()
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
