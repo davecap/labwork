@@ -139,7 +139,7 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
     
     wham_metadata_file.close()
     sys.stderr.write('Done processing config.\n')
-    return {'min':int(data_min), 'max':int(data_max), 'bins': len(config['replicas'].items())*2, 'metafilepath':os.path.join(output_dir, metadata_filename), 'tol':0.0001, 'temp':315.0}
+    return {'metafilepath':os.path.join(output_dir, metadata_filename)}
 
 def main():    
     usage = """
@@ -154,6 +154,11 @@ def main():
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
+    parser.add_option("--wham-min", dest="wham_min", type="float", default=-48, help="Minimum bin value for WHAM [default: %default]")
+    parser.add_option("--wham-max", dest="wham_max", type="float", default=0, help="Maximum bin value for WHAM [default: %default]")
+    parser.add_option("--wham-bins", dest="wham_bins", type="int", default=0, help="Number of bins for WHAM [default: %default]")
+    parser.add_option("--wham-tol", dest="wham_tol", type="float", default=0.0001, help="Tolerance for WHAM [default: %default]")
+    parser.add_option("--wham-temp", dest="wham_temp", type="float", default=315.0, help="Temperature for WHAM [default: %default]")
     
     (options, args) = parser.parse_args()
     
@@ -161,38 +166,48 @@ def main():
         if not os.path.exists(config_file):
             raise Exception("Config file not found at %s\n" % config_file)
     
-    
     # start the wham threads
     sys.stderr.write("Starting %d worker threads...\n" % options.worker_threads)
     for i in range(options.worker_threads):
         t = Thread(target=worker)
         t.daemon = True
         t.start()
+            
+    wham_defaults = {'min':options.wham_min, 'max':options.wham_max, 'bins':options.wham_bins, 'tol':options.wham_tol, 'temp':options.wham_temp}
     
     if options.convergence:
+        # note: ALWAYS COMBINES INPUT CONFIG FILES
+        
         # 1) calculate blocks of data in sequential order for each config file
+        #       block size is 10% of the max n
         # 2) calculate the PMFs from each block
-        # 3) find the max dG and min dG for the first PMF
-        # 4) plot the max dG and min dG for each PMF
+        # 3) calculate some value from each PMF
+        # 4) print <block>,<value> to plot
+        
+        
+        # store the max N for each config file
+        max_n = {}
+        # store the current block index for each config file
+        current_block = {}
+        
+        
         raise Exception("Convergence not implemented yet")
     elif options.error:
+        # note: ALWAYS COMBINES INPUT CONFIG FILES
+        
         # 1) calculate random blocks of data for each config file
         # 2) calculate PMFs for each block
         # 3) plot each PMF, get max/min values per bin, stdev per bin
         
-        # note: ALWAYS COMBINES INPUT CONFIG FILES
-        
         i=0
-        nblocks = 20
-        
-        defaults = {'min':-48, 'max':0, 'bins':100}
+        nblocks=20
         
         while i < nblocks:
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
                 md = process_config(config_file, percent=25, randomize=True)
-                md.update(defaults)
+                md.update(wham_defaults)
                 wham_dicts.append(md)
             combined_dict = combine_metadatas(wham_dicts)
             q.put(combined_dict)
@@ -235,10 +250,13 @@ def main():
         sys.stderr.write("\n"+fpath+"\n")
         
     else:
+        # standard procedure
+        # TODO: remove combined option?
         wham_dicts = []
         for config_file in args:
             sys.stderr.write("Processing config file: %s\n" % config_file)
             wham_dict = process_config(config_file)
+            wham_dict.update(wham_defaults)
             wham_dicts.append(wham_dict)
             
             if not options.combined:
