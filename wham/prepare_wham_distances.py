@@ -45,7 +45,7 @@ def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     outfile = "%s_wham.out" % metafilepath
     sys.stderr.write("Running WHAM: %s -> %s\n" % (metafilepath, outfile))
     command = "wham %f %f %d %f %f 0 %s %s" % (min, max, bins, tol, temp, metafilepath, outfile)
-    sys.stderr.write("\t%s" % (command))
+    sys.stderr.write("\t%s\n" % (command))
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate()
     outfile_q.put(outfile)
@@ -180,7 +180,7 @@ def main():
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     parser.add_option("--wham-min", dest="wham_min", type="float", default=-48, help="Minimum bin value for WHAM [default: %default]")
     parser.add_option("--wham-max", dest="wham_max", type="float", default=0, help="Maximum bin value for WHAM [default: %default]")
-    parser.add_option("--wham-bins", dest="wham_bins", type="int", default=0, help="Number of bins for WHAM [default: %default]")
+    parser.add_option("--wham-bins", dest="wham_bins", type="int", default=200, help="Number of bins for WHAM [default: %default]")
     parser.add_option("--wham-tol", dest="wham_tol", type="float", default=0.0001, help="Tolerance for WHAM [default: %default]")
     parser.add_option("--wham-temp", dest="wham_temp", type="float", default=315.0, help="Temperature for WHAM [default: %default]")
     
