@@ -51,7 +51,7 @@ def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
     outfile_q.put(outfile)
     sys.stderr.write("\tDone running WHAM -> %s\n" % (outfile))
 
-def process_pmf(filename):
+def process_pmf(filename, shift=False):
     x = []
     y = []
     infile = open(filename, 'r')
@@ -65,6 +65,12 @@ def process_pmf(filename):
         if len(split_line) > 3 and split_line[1] != 'inf':
             x.append(float(split_line[0]))
             y.append(float(split_line[1]))
+    
+    if shift:
+        # Calculate the PMF shift by averaging the first 10 bins (bulk water dG)
+        s = 1.0*numpy.array(y)[0:10].mean()
+        y = [ (i-s) for i in y ]
+    
     return zip(x,y)
     
 def get_max_bin(pmf):
@@ -74,12 +80,8 @@ def get_max_bin(pmf):
 def get_min_bin(pmf):
     mindG = min(pmf[1])
     return pmf[0][pmf[1].index(mindG)]
-    
-def calculate_pmf_shift(pmf, n=10):
-    """ Calculate the PMF shift by averaging the first 10 bins (bulk water dG) """
-    return numpy.array(pmf)[0:n,1].mean()
         
-def dG_bind(pmf, imin=0, imax=1, shift=0.0):
+def dG_bind(pmf, imin=0, imax=1):
     """ Calculate the relative binding free energy for a PMF given bounds """
     # dGbind = -(1/kB)
     kB = 0.00198721 # kcal/mol/K
@@ -91,8 +93,6 @@ def dG_bind(pmf, imin=0, imax=1, shift=0.0):
     s = 0.0
     
     for x,dG in pmf:
-        dG = dG+shift
-        
         if x > imax:
             break
         elif x > imin and dG_prev is not None:
@@ -185,6 +185,7 @@ def main():
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
     parser.add_option("--combined", dest="combined", default=False, action="store_true", help="Combine all data [default: %default]")
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
+    parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
     parser.add_option("--error-blocks", dest="error_blocks", type="int", default=20, help="Number of blocks to sample for error [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
@@ -254,17 +255,16 @@ def main():
         outfile = outfile_q.get_nowait()
         while True:
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
-            pmf = process_pmf(outfile)
-            shift = -1.0*calculate_pmf_shift(pmf)
-            print dG_bind(pmf, imin=-35, imax=-20.0, shift=shift)
-            print dG_bind(pmf, imin=-45, imax=-20.0, shift=shift)
-            print dG_bind(pmf, imin=-45, imax=-17.0, shift=shift)
+            pmf = process_pmf(outfile, shift=options.autoshift)
+            
+            print dG_bind(pmf, imin=-31.0, imax=-21.0)
             
             for x,y in pmf:
                 if x not in error_data:
                     error_data[x] = [y]
                 else:
                     error_data[x].append(y)
+            
             outfile_q.task_done()
             try:
                 outfile = outfile_q.get_nowait()
