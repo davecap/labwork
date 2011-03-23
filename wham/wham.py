@@ -7,7 +7,6 @@ import numpy
 from configobj import ConfigObj
 import tempfile
 import random
-import subprocess
 import datetime
 
 from Queue import Queue
@@ -43,7 +42,8 @@ def worker():
             outfile = run_wham(**item)
         except Exception, e:
             sys.stderr.write("\nException while running WHAM: %s\n" % e)
-        outfile_q.put(outfile)
+        item.update({'outfile':outfile})
+        outfile_q.put(item)
         q.task_done()
         
 def write_datasets(datasets, output_dir=None, header={}):
@@ -253,32 +253,29 @@ def main():
             
             if not done:
                 metadata_file = write_datasets(datasets)
-                wham_dict = wham_defaults
-                wham_dicts.update('metafilepath': metadata_file)
-                q.put(combined_dict)
+                wham_dict = wham_defaults.copy()
+                wham_dict.update({'metafilepath': metadata_file, 'start_index':start_index, 'end_index':end_index})
+                q.put(wham_dict)
         
         sys.stderr.write("Waiting for WHAM to complete\n")
         q.join()
         
-        # process the PMFs
-        deltaGbind = {}
-        
-        outfile = outfile_q.get_nowait()
+        # process the PMFs        
+        item = outfile_q.get_nowait()
         while True:
+            outfile = item['outfile']
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile, shift=options.autoshift)
             correction = dG_bind(pmf, imin=0, imax=10)
 
-            print dG_bind(pmf, imin=35, imax=25)-correction
+            print "%d-%d -> %0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=35, imax=25)-correction)
             
             outfile_q.task_done()
             try:
-                outfile = outfile_q.get_nowait()
+                item = outfile_q.get_nowait()
             except:
                 sys.stderr.write("All outfiles processed...\n")
                 break
-        
-        
         
     elif options.error:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
@@ -305,8 +302,10 @@ def main():
         
         # process the PMFs
         error_data = {}
-        outfile = outfile_q.get_nowait()
+        item = outfile_q.get_nowait()
         while True:
+            outfile = item['outfile']
+            
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile, shift=options.autoshift)            
             for x,y in pmf:
@@ -316,7 +315,7 @@ def main():
                     error_data[x].append(y)
             outfile_q.task_done()
             try:
-                outfile = outfile_q.get_nowait()
+                item = outfile_q.get_nowait()
             except:
                 sys.stderr.write("All outfiles processed...\n")
                 break
