@@ -8,6 +8,7 @@ from configobj import ConfigObj
 import tempfile
 import random
 import subprocess
+import datetime
 
 from Queue import Queue
 from threading import Thread
@@ -44,6 +45,84 @@ def worker():
             sys.stderr.write("\nException while running WHAM: %s\n" % e)
         outfile_q.put(outfile)
         q.task_done()
+        
+def write_datasets(datasets, output_dir=None, header={}):
+    if type(datasets) == type(dict()):
+        datasets = [datasets]
+    
+    if output_dir is None:
+        # use a temp dir
+        output_dir = tempfile.mkdtemp()
+        sys.stderr.write("Creating temporary dir at %s\n" % output_dir)
+    elif not os.path.exists(output_dir):
+        sys.stderr.write("Creating output dir: %s" % output_dir)
+        os.mkdir(output_dir)
+    
+    metadata_path = os.path.join(output_dir, 'metadata')    
+    metadata_file = open(metadata_path, 'w')
+    metadata_file.write('# WHAM metadata file generated from Python\n')
+    metadata_file.write('# %s\n' % datetime.datetime.now().isoformat())
+    for k,v in header:
+        metadata_file.write('# %s: %s\n' % (k,v))
+    
+    keys = []
+    for dataset in datasets:
+        for k,v in dataset:
+            if k in keys:
+                sys.stderr.write('\nWARNING: Key for dataset %s is not unique... modifying name.\n' % k)
+                k = k+'_'
+            keys.append(k)
+            data_file_path = os.path.join(output_dir, 'data_%s' % k)
+            f = open(data_file_path, 'w')
+            for d in v['data']:
+                f.write('0.0    %f\n' % d)
+            f.close()
+            metadata_file.write('%s %s %s\n' % (data_file_path, v['coordinate'], v['force']))
+    return metadata_path    
+
+def process_config2(config_file, output_dir=None, start_index=0, end_index=None, percent=100, randomize=False):
+    config = ConfigObj(config_file)
+    project_path = os.path.abspath(os.path.dirname(config.filename))
+    headers = { 'Project Path': project_path,
+                'Percent Data Used': '%s%%' % str(percent),
+                'Random Selection': str(randomize),
+                'Config': config_file}
+
+    dataset = {}
+    prefix = config['title']
+
+    # loop through replicas in the config file
+    for r_id, r_config in config['replicas'].items():
+        sys.stderr.write("%s " % r_id)
+
+        data_file = os.path.join(project_path, r_id, 'distances')
+        
+        if not os.path.exists(data_file):
+            sys.stderr.write("Data file not found... skipping this replica\n")
+            continue
+        else:
+            field_data = numpy.genfromtxt(data_file)
+
+        # first, slice the data
+        sample = field_data[start_index:end_index] if end_index else field_data[start_index:]
+
+        # determine the sample size (percent * sample)
+        sample_size = int(round(float(percent)/100.0 * float(len(sample))))
+        sys.stderr.write("[%d/%d] " % (len(field_data), sample_size))
+
+        if sample_size < 30:
+            sys.stderr.write("\n%s: Sample too small... skipping!\n" % r_id)
+            continue
+
+        if randomize:
+            final_sample = random.sample(field_data, sample_size)
+        else:
+            final_sample = sample[:sample_size]
+
+        dataset[prefix+r_id] = {'data': numpy.array(final_sample), 'coordinate': r_config['coordinate'], 'force': r_config['force']}
+        
+    sys.stderr.write('Done processing config.\n')
+    return dataset
 
 def process_config(config_file, start_index=0, end_index=None, output_dir=None, metadata_filename="wham_metadata", percent=100, randomize=False):
     config = ConfigObj(config_file)
@@ -68,6 +147,8 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
     wham_metadata_file.write('# Output Dir: %s\n' % output_dir)
     wham_metadata_file.write('# Percent Data Used: %s%%\n' % str(percent))
     wham_metadata_file.write('# Random Selection: %s\n' % str(randomize))
+    
+    dataset = {}
     
     # loop through replicas in the config file
     for r_id, r_config in config['replicas'].items():
@@ -96,6 +177,8 @@ def process_config(config_file, start_index=0, end_index=None, output_dir=None, 
         else:
             final_sample = sample[:sample_size]
 
+        dataset[r_id] = {'data': numpy.array(final_sample), 'coordinate': r_config['coordinate'], 'force': r_config['force']}
+        
         data_file_path = os.path.join(output_dir, 'wham_data_%s' % r_id)
         f = open(data_file_path, 'w')
         for d in final_sample:
