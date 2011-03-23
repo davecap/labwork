@@ -58,7 +58,7 @@ def write_datasets(datasets, output_dir=None, header={}):
         sys.stderr.write("Creating output dir: %s" % output_dir)
         os.mkdir(output_dir)
     
-    metadata_path = os.path.join(output_dir, 'metadata')    
+    metadata_path = os.path.join(output_dir, 'metadata')
     metadata_file = open(metadata_path, 'w')
     metadata_file.write('# WHAM metadata file generated from Python\n')
     metadata_file.write('# %s\n' % datetime.datetime.now().isoformat())
@@ -83,10 +83,6 @@ def write_datasets(datasets, output_dir=None, header={}):
 def process_config2(config_file, output_dir=None, start_index=0, end_index=None, percent=100, randomize=False):
     config = ConfigObj(config_file)
     project_path = os.path.abspath(os.path.dirname(config.filename))
-    headers = { 'Project Path': project_path,
-                'Percent Data Used': '%s%%' % str(percent),
-                'Random Selection': str(randomize),
-                'Config': config_file}
 
     dataset = {}
     prefix = config['title']
@@ -103,16 +99,20 @@ def process_config2(config_file, output_dir=None, start_index=0, end_index=None,
         else:
             field_data = numpy.genfromtxt(data_file)
 
+        if len(field_data) < 50:
+            sys.stderr.write("\n%s: Sample too small... skipping!\n" % r_id)
+            continue
+
         # first, slice the data
         sample = field_data[start_index:end_index] if end_index else field_data[start_index:]
+        
+        if end_index is not None and len(sample) < (end_index-start_index):
+            sys.stderr.write("\nNot enough samples (%d) for start/end (%d/%d) index slice\n" % (len(sample), end_index-start_index))
+            return False
 
         # determine the sample size (percent * sample)
         sample_size = int(round(float(percent)/100.0 * float(len(sample))))
         sys.stderr.write("[%d/%d] " % (len(field_data), sample_size))
-
-        if sample_size < 30:
-            sys.stderr.write("\n%s: Sample too small... skipping!\n" % r_id)
-            continue
 
         if randomize:
             final_sample = random.sample(field_data, sample_size)
@@ -235,15 +235,51 @@ def main():
         # 3) calculate some value from each PMF (dG_bind)
         # 4) print <block>,<value> to plot
         
+        block_size = 50
+        start_index = 0
+        done = False
+        while not done:
+            end_index = start_index+block_size
+            sys.stderr.write("Extracting block from %d to %d...\n" % (start_index, end_index))
+            
+            datasets = []
+            for config_file in args:
+                dataset = process_config2(config_file, start_index=start_index, end_index=start_index+block_size)
+                if dataset:
+                    datasets.append(datasets)
+                else:
+                    done = True
+                    break
+            
+            if not done:
+                metadata_file = write_datasets(datasets)
+                wham_dict = wham_defaults
+                wham_dicts.update('metafilepath': metadata_file)
+                q.put(combined_dict)
         
-        # store the max N for each config file
+        sys.stderr.write("Waiting for WHAM to complete\n")
+        q.join()
+        
+        # process the PMFs
         deltaGbind = {}
-        # store the current block index for each config file
-        current_block = {}
+        
+        outfile = outfile_q.get_nowait()
+        while True:
+            sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
+            pmf = process_pmf(outfile, shift=options.autoshift)
+            correction = dG_bind(pmf, imin=0, imax=10)
+
+            print dG_bind(pmf, imin=35, imax=25)-correction
+            
+            outfile_q.task_done()
+            try:
+                outfile = outfile_q.get_nowait()
+            except:
+                sys.stderr.write("All outfiles processed...\n")
+                break
         
         
         
-        raise Exception("Convergence not implemented yet")
     elif options.error:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
