@@ -206,6 +206,7 @@ def main():
     parser.add_option("--wham-bins", dest="wham_bins", type="int", default=200, help="Number of bins for WHAM [default: %default]")
     parser.add_option("--wham-tol", dest="wham_tol", type="float", default=0.0001, help="Tolerance for WHAM [default: %default]")
     parser.add_option("--wham-temp", dest="wham_temp", type="float", default=315.0, help="Temperature for WHAM [default: %default]")
+    parser.add_option("--start-index", dest="start_index", type="int", default=0, help="Start index for data selection [default: %default]")
     
     (options, args) = parser.parse_args()
     
@@ -286,7 +287,7 @@ def main():
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
-                md = process_config(config_file, percent=25, randomize=True)
+                md = process_config(config_file, percent=25, randomize=True, start_index=options.start_index)
                 md.update(wham_defaults)
                 wham_dicts.append(md)
             combined_dict = combine_metadatas(wham_dicts)
@@ -336,7 +337,7 @@ def main():
         wham_dicts = []
         for config_file in args:
             sys.stderr.write("Processing config file: %s\n" % config_file)
-            wham_dict = process_config(config_file)
+            wham_dict = process_config(config_file, start_index=options.start_index)
             wham_dict.update(wham_defaults)
             wham_dicts.append(wham_dict)
         
