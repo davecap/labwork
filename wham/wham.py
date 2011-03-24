@@ -42,14 +42,11 @@ def worker():
             outfile = run_wham(**item)
         except Exception, e:
             sys.stderr.write("\nException while running WHAM: %s\n" % e)
-        item.update({'outfile':outfile})
+        item['outfile'] = outfile
         outfile_q.put(item)
         q.task_done()
         
 def write_datasets(datasets, output_dir=None, header={}):
-    if type(datasets) == type(dict()):
-        datasets = [datasets]
-    
     if output_dir is None:
         # use a temp dir
         output_dir = tempfile.mkdtemp()
@@ -62,12 +59,12 @@ def write_datasets(datasets, output_dir=None, header={}):
     metadata_file = open(metadata_path, 'w')
     metadata_file.write('# WHAM metadata file generated from Python\n')
     metadata_file.write('# %s\n' % datetime.datetime.now().isoformat())
-    for k,v in header:
+    for k,v in header.items():
         metadata_file.write('# %s: %s\n' % (k,v))
     
     keys = []
     for dataset in datasets:
-        for k,v in dataset:
+        for k,v in dataset.items():
             if k in keys:
                 sys.stderr.write('\nWARNING: Key for dataset %s is not unique... modifying name.\n' % k)
                 k = k+'_'
@@ -107,7 +104,7 @@ def process_config2(config_file, output_dir=None, start_index=0, end_index=None,
         sample = field_data[start_index:end_index] if end_index else field_data[start_index:]
         
         if end_index is not None and len(sample) < (end_index-start_index):
-            sys.stderr.write("\nNot enough samples (%d) for start/end (%d/%d) index slice\n" % (len(sample), end_index-start_index))
+            sys.stderr.write("\nNot enough samples (%d) for start/end (%d) index slice\n" % (len(sample), end_index-start_index))
             return False
 
         # determine the sample size (percent * sample)
@@ -235,7 +232,7 @@ def main():
         # 3) calculate some value from each PMF (dG_bind)
         # 4) print <block>,<value> to plot
         
-        block_size = 50
+        block_size = 200 
         start_index = 0
         done = False
         while not done:
@@ -245,17 +242,19 @@ def main():
             datasets = []
             for config_file in args:
                 dataset = process_config2(config_file, start_index=start_index, end_index=start_index+block_size)
-                if dataset:
-                    datasets.append(datasets)
-                else:
+                # TODO: this is bad
+                if not dataset:
                     done = True
                     break
-            
+                else:
+                    datasets.append(dataset)
+
             if not done:
                 metadata_file = write_datasets(datasets)
                 wham_dict = wham_defaults.copy()
                 wham_dict.update({'metafilepath': metadata_file, 'start_index':start_index, 'end_index':end_index})
                 q.put(wham_dict)
+                start_index += block_size
         
         sys.stderr.write("Waiting for WHAM to complete\n")
         q.join()
