@@ -15,10 +15,10 @@ def main():
     """
     
     parser = optparse.OptionParser(usage)
-    parser.add_option("-bm", "--bound-min", dest="bound_min", type="float", default=35, help="Lower bound for binding [default: %default]")
-    parser.add_option("-bx", "--bound-max", dest="bound_max", type="float", default=25, help="Upper bound for binding [default: %default]")
-    parser.add_option("-um", "--unbound-min", dest="unbound_min", type="float", default=0, help="Lower bound for standard state [default: %default]")
-    parser.add_option("-ux", "--unbound-max", dest="unbound_max", type="float", default=10, help="Upper bound for standard state [default: %default]")
+    parser.add_option("--bmin", dest="bound_min", type="float", default=-35, help="Lower bound for binding [default: %default]")
+    parser.add_option("--bmax", dest="bound_max", type="float", default=-25, help="Upper bound for binding [default: %default]")
+    parser.add_option("--umin", dest="unbound_min", type="float", default=-45, help="Lower bound for standard state [default: %default]")
+    parser.add_option("--umax", dest="unbound_max", type="float", default=-35, help="Upper bound for standard state [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
     parser.add_option("-s", "--std", dest="standard", default=True, action="store_false", help="Do standard state correction [default: %default]")
     
