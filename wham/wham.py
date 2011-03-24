@@ -196,7 +196,6 @@ def main():
     
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
-    parser.add_option("--combined", dest="combined", default=False, action="store_true", help="Combine all data [default: %default]")
     parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
     parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
@@ -340,14 +339,9 @@ def main():
             wham_dict = process_config(config_file)
             wham_dict.update(wham_defaults)
             wham_dicts.append(wham_dict)
-            
-            if not options.combined:
-                # run it right away
-                q.put(wham_dict)
         
-        if options.combined:
-            combined_dict = combine_metadatas(wham_dicts)
-            q.put(combined_dict)
+        combined_dict = combine_metadatas(wham_dicts)
+        q.put(combined_dict)
             
         # Wait for wham to finish
         sys.stderr.write("Waiting for WHAM to complete\n")
