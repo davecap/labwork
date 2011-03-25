@@ -265,8 +265,9 @@ def main():
             outfile = item['outfile']
             sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile, shift=options.autoshift)
-            correction = dG_bind(pmf, imin=-45, imax=-35)
-            print "%d-%d -> %0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=35, imax=25)-correction)
+            # correction = dG_bind(pmf, imin=-32, imax=-22)
+            correction = 0.0
+            print "%d-%d -> %0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
             
             outfile_q.task_done()
             try:
