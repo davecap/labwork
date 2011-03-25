@@ -196,10 +196,9 @@ def main():
     
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
-    parser.add_option("--convergence", dest="convergence", default=False, action="store_true", help="Analyze convergence [default: %default]")
+    parser.add_option("--convergence", dest="convergence", default=0, help="Analyze convergence over specified block size [default: %default]")    
+    parser.add_option("--error", dest="error", default=0, help="Analyze error by block averaging [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
-    parser.add_option("--error", dest="error", default=False, action="store_true", help="Analyze error [default: %default]")
-    parser.add_option("--error-blocks", dest="error_blocks", type="int", default=20, help="Number of blocks to sample for error [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     parser.add_option("--wham-min", dest="wham_min", type="float", default=-48, help="Minimum bin value for WHAM [default: %default]")
     parser.add_option("--wham-max", dest="wham_max", type="float", default=0, help="Maximum bin value for WHAM [default: %default]")
@@ -223,7 +222,7 @@ def main():
             
     wham_defaults = {'min':options.wham_min, 'max':options.wham_max, 'bins':options.wham_bins, 'tol':options.wham_tol, 'temp':options.wham_temp}
     
-    if options.convergence:
+    if options.convergence > 0:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
         # 1) calculate blocks of data in sequential order for each config file
@@ -232,7 +231,7 @@ def main():
         # 3) calculate some value from each PMF (dG_bind)
         # 4) print <block>,<value> to plot
         
-        block_size = 200 
+        block_size = options.convergence
         start_index = 0
         done = False
         while not done:
@@ -276,7 +275,7 @@ def main():
                 sys.stderr.write("All outfiles processed...\n")
                 break
         
-    elif options.error:
+    elif options.error > 0:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
         # 1) calculate random blocks of data for each config file
@@ -284,7 +283,7 @@ def main():
         # 3) plot each PMF, get max/min values per bin, stdev per bin
         
         i=0        
-        while i < options.error_blocks:
+        while i < options.error:
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
