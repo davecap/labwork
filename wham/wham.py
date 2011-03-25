@@ -260,20 +260,23 @@ def main():
         
         # process the PMFs        
         item = outfile_q.get_nowait()
+        results = {}
         while True:
             outfile = item['outfile']
-            sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
+            #sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile, shift=options.autoshift)
             # correction = dG_bind(pmf, imin=-32, imax=-22)
             correction = 0.0
-            print "%d-%d -> %0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
-            
+            # print "%d,%0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
+            results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-22)-correction
             outfile_q.task_done()
             try:
                 item = outfile_q.get_nowait()
             except:
                 sys.stderr.write("All outfiles processed...\n")
                 break
+        for k in sorted(results.keys()):
+            print "%d,%0.5f" % (k,results[k])
         
     elif options.error > 0:
         # note: ALWAYS COMBINES INPUT CONFIG FILES

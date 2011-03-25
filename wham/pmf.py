@@ -30,7 +30,7 @@ def process_pmf(filename, shift=False):
     if shift:
         # Calculate the PMF shift by averaging the first 10 bins (bulk water dG)
         s = 1.0*numpy.array(y)[0:10].mean()
-        sys.stderr.write("PMF shift by %0.2f\n" % s)
+        #sys.stderr.write("PMF shift by %0.2f\n" % s)
         y = [ (i-s) for i in y ]
     
     return zip(x,y)
