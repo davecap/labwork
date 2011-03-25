@@ -196,8 +196,8 @@ def main():
     
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
-    parser.add_option("--convergence", dest="convergence", default=0, help="Analyze convergence over specified block size [default: %default]")    
-    parser.add_option("--error", dest="error", default=0, help="Analyze error by block averaging [default: %default]")
+    parser.add_option("--convergence", dest="convergence", type="int", default=0, help="Analyze convergence over specified block size [default: %default]")    
+    parser.add_option("--error", dest="error", type="int", default=0, help="Analyze error by block averaging [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     parser.add_option("--wham-min", dest="wham_min", type="float", default=-48, help="Minimum bin value for WHAM [default: %default]")
