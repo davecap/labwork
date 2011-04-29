@@ -2,7 +2,7 @@ import sys
 import numpy
 import subprocess
 
-def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001, **kwargs):
+def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001,**kwargs):
     outfile = "%s_wham.out" % metafilepath
     sys.stderr.write("Running WHAM: %s -> %s\n" % (metafilepath, outfile))
     command = "wham %f %f %d %f %f 0 %s %s" % (min, max, bins, tol, temp, metafilepath, outfile)
