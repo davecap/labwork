@@ -270,7 +270,9 @@ def main():
             # correction = dG_bind(pmf, imin=-32, imax=-22)
             correction = 0.0
             # print "%d,%0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
-            results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-22)-correction
+            results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-19)-correction
+            #results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-22)-correction
+            
             outfile_q.task_done()
             try:
                 item = outfile_q.get_nowait()
