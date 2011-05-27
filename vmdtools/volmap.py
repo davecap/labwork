@@ -14,7 +14,6 @@ def main():
     """
     
     parser = optparse.OptionParser(usage)
-    parser.add_option("-o", "--output-prefix", dest="output_prefix", default="filtered", help="Output file prefix [default: %default]")
     parser.add_option("-s", "--pdb", dest="pdb_file", default=None, help="PDB file [default: %default]")
     parser.add_option("-p", "--psf", dest="psf_file", default=None, help="PSF structure file for DCDs [default: %default]")
     
@@ -28,43 +27,44 @@ def main():
     if args[0].lower().endswith('.dcd'):
         if options.psf_file is None:
             parser.error("PSF file required (-p) if using a DCD trajectory file")
-        VMD_analyze_dcd(pdb_file=options.pdb_file, psf_file=options.psf_file, dcd_files=args, output_prefix=options.output_prefix)   
+        VMD_analyze_dcd(pdb_file=options.pdb_file, psf_file=options.psf_file, dcd_file=args[0])   
 
-def VMD_analyze_dcd(pdb_file, psf_file, dcd_files, output_prefix="filtered"):
-    output_psf = "%s.psf" % output_prefix
-    output_dcd = "%s.dcd" % output_prefix
-        
+def VMD_analyze_dcd(pdb_file, psf_file, dcd_file):
     tcl = """
-source bigdcd.tcl
-proc myrmsd { frame } {
-    global ref sel all
-    $all move [measure fit $sel $ref]
-    puts "RMSD $frame,[measure rmsd $sel $ref]"
-}
 set mol [mol new %s type psf waitfor all]
 set all [atomselect $mol all]
 set ref [atomselect $mol "name CA" frame 0]
 set sel [atomselect $mol "name CA"]
+set wat [atomselect $mol "(resname TIP3 and name OH2) and within 5 of protein"]
 mol addfile %s type pdb waitfor all
-bigdcd myrmsd %s
-bigdcd_wait
+mol addfile %s type dcd waitfor all
+
+set num_steps [molinfo 0 get numframes]
+for {set frame 0} {$frame < $num_steps} {incr frame} {
+    $all frame $frame
+    $sel frame $frame
+    $ref frame $frame
+    $all move [measure fit $sel $ref]
+}
+
+volmap density $wat -res 0.5 -weight mass -allframes -combine avg -mol top -checkpoint 0 -o %s_volmap.dx
 quit
-    """ % (psf_file, pdb_file,' '.join(dcd_files))
+    """ % (psf_file, pdb_file, dcd_file, dcd_file)
     sys.stderr.write(tcl+'\n')
 
     command = "vmd -dispdev none"
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
 
-    sys.stderr.write(stderrdata+'\n')
-    #print stdoutdata
-    #print stderrdata
+    #sys.stderr.write(stderrdata+'\n')
+    print stdoutdata
+    print stderrdata
 
-    for line in stdoutdata.split('\n'):                                                                                                                                                                                            
-        if line.startswith('RMSD'):                                                                                                                                                                                           
-            line_parts = line.split(' ')                                                                                                                                                                                           
-            for d in line_parts[1:]:                                                                                                                                                                                               
-                print d    
+    # for line in stdoutdata.split('\n'):                                                                                                                                                                                            
+    #     if line.startswith('RMSD'):                                                                                                                                                                                           
+    #         line_parts = line.split(' ')                                                                                                                                                                                           
+    #         for d in line_parts[1:]:                                                                                                                                                                                               
+    #             print d    
     
 if __name__=='__main__':
     main()
