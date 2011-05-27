@@ -21,7 +21,7 @@ def main():
     coor = args[1]
     
     tcl = """set A [atomselect top "all"]
-$A writepdb md.pdb
+$A writepdb coor_md.pdb
 quit
     """
 
