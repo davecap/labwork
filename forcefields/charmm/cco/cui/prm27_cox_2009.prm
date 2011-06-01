@@ -1,0 +1,203 @@
+* PARM
+*
+
+read para card append
+* additional parameters for heme
+* Note: majority of heme parameters are in the protein
+* parameter file
+*
+
+BONDS
+!from 3point calc: xavier@dali:~/CcO/SmallModels/FE/HARM
+OF   FE    410.311     1.618 ! ALLOW HEM
+                ! Heme (6-liganded): O2 ligand (KK 05/13/91)
+OF   HF    450.000     0.9572 ! ALLOW   WAT
+                ! FROM TIPS3P GEOM
+CPB  CA    450.000     1.3800 ! from cpb ce1
+CA   O     620.000     1.2300 ! from O C
+CPB  CT1   230.000     1.4900 ! ct2 cpb
+!Tyr244-his240 crosslink (from ct2-ca)
+CA   NR2   230.000     1.4900
+!copper (from heme: NPH  FE. averaged computed distance)
+CU   NR2   270.2        2.10
+!cu-Ne in his240
+CU   NR1   270.2        2.10
+CU   OZ    250.0        1.90
+OZ   HZ    450.0        0.97
+
+!neo 
+CT1 QQ 0.0 1.090
+CT2 QQ 0.0 1.090
+CT1 QQH 0.0 1.090
+CT2 QQH 0.0 1.090
+NR2 QQH 0.0 1.090
+CA QQH 0.0 1.090
+
+!protonated propionate
+OC   H     545.000     0.9600 ! ALLOW   ALC ARO
+                ! EMB 11/21/89 methanol vib fit
+
+ANGLES
+!from 3point calc: xavier@dali:~/CcO/SmallModels/FE/HARM
+!the data is given in degrees but the constants are in kcal/(mol*rad**2)
+OF   FE   NPH    59.10     93.1600 ! ALLOW HEM
+                ! Heme (6-liganded): ligand links (KK 05/13/91)
+HF   OF   FE     65.000   108.0000 ! ALLOW   ALC ARO
+                ! JES 8/25/89 phenol *NEO from tyrosine*
+HF   OF   HF     55.000   104.5200 ! ALLOW WAT
+                ! TIP3P GEOMETRY, ADM JR.
+! from CPM  CPA  CPB
+CPB  CPB  CA     61.600   124.0700 
+CPA  CPB  CA     61.600   124.0700
+! from CT3  CPB  CPA to emulate farnesyl
+CPB  CPB  CT1    65.000   126.7400
+CPA  CPB  CT1    65.000   126.7400
+! from O    C    CT1
+CPB  CA   O      80.000   121.0000
+!the following two are invented
+CPB  CA   HA     80.000   121.0000
+O    CA   HA     80.000   121.0000
+! from OH1  CT1  CT1
+CPB  CT1  OH1    75.700   110.1000 
+! from HA   CT3  CPB
+CPB  CT1  HA     50.000   109.5000
+! from CT2  CT2  CPB
+CPB  CT1  CT2    70.000   113.0000
+OH1  CT1  CT2    75.700   110.1000
+CT2  CT2  CE1    70.000   113.0000
+! from CE2  CE1  CT2
+CT3  CE1  CT2    48.00    126.00
+CT3  CE1  CT3    48.00    126.00
+!Tyr244-his240 crosslink. from CT2  CPH1 CPH1
+CPH2 NR2  CA     45.800   130.0000
+NR2  CA   CA     45.800   130.0000
+CPH1 NR2  CA     45.800   130.0000
+!copper
+!these angles can be very different, so lets apply very soft pot.
+! unless you design different atom types for his 242, 290 and 291
+CPH2 NR2  CU       2.00  124.0
+CPH1 NR2  CU       2.00  124.0
+!NR2  CU   NR2      2.00  109.0
+!NR2  CU   OZ       2.00  109.0
+NR2  CU   NR2     42.00  109.0 !tetrahedral copper
+NR2  CU   OZ      42.00  109.0 !tetrahedral copper
+!from H    OH1  CT1
+CU   OZ   HZ      57.500   106.0000
+!cu-Ne in his240
+CPH1 NR1  CU       2.00  124.0
+CPH2 NR1  CU       2.00  124.0
+NR1  CU   NR2     42.00  109.0 !tetrahedral copper
+NR1  CU   OZ      42.00  109.0 !tetrahedral copper
+!link
+!xpr: reverse order in glu needs the CA-H par
+!QQH  CT1  CT2  0.0 109.0
+!link
+QQ   CT2  C    0.0 109.0
+QQH  CT2  CT1  0.0 109.0 !caused warning... HA
+QQH  CT2  CT2  0.0 109.0 !caused warning... HA
+QQH  CT1  CT2  0.0 109.0 !caused warning... HA
+QQH  NR2  CA   0.0 109.0 !caused warning... HA
+
+!protonated propionate
+H    OC   CC     55.000   115.0000 ! ALLOW   ALC ARO PEP POL
+                ! adm jr. 5/02/91, acetic acid pure solvent
+
+
+DIHEDRALS
+X    FE   NR2  X        0.0500  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): from param19.inp
+X    OF   FE   X        0.0000  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): from ./original.par*.prm
+CPB  CPB  CA   O       0.00   1 180.00
+CPB  CPB  CA   HA      0.00   1 180.00
+CPA  CPB  CA   O       0.00   1 180.00
+CPA  CPB  CA   HA      0.00   1 180.00
+!
+CPB  CPB  CT1  OH1     0.00   1 180.00
+CPB  CPB  CT1  HA      0.00   1 180.00
+CPB  CPB  CT1  CT2     0.00   1 180.00
+CPA  CPB  CT1  OH1     0.00   1 180.00
+CPA  CPB  CT1  HA      0.00   1 180.00
+CPA  CPB  CT1  CT2     0.00   1 180.00
+CT2  CT2  CE1  HE1     0.00   1 180.00
+HA   CT2  CE1  CE1     0.00   1 180.00
+CE1  CE1  CT2  HA      0.00   1 180.00
+CE1  CE1  CT2  CT2     0.00   1 180.00
+CT3  CE1  CT2  HA      0.00   1 180.00
+CT3  CE1  CT2  CT2     0.00   1 180.00
+HA   CT3  CE1  CT2     0.00   1 180.00
+CT3  CE1  CT3  HA      0.00   1 180.00
+HA   CT3  CE1  CT3     0.00   1 180.00                                      
+!Tyr244-his240 crosslink
+!the following two dihedrals should force the tyrCE(ca) to be in the Imdz plane
+!from: CT2  CA   CA   CA       3.1000  2   180.00 ! ALLOW   ARO ! JES 8/25/89 toluene and ethylbenzene
+NR1  CPH2 NR2  CA       3.10   2 180.00
+CPH1 CPH1 NR2  CA       3.10   2 180.00
+CPH2 NR2  CA   CA       0.00   1 180.00
+HR1  CPH2 NR2  CA       0.00   1 180.00
+NR2  CA   CA   CA       3.10   2 180.00
+NR2  CA   CA   OH1      0.00   1 180.00
+NR2  CA   CA   HP       0.00   1 180.00
+CPH1 NR2  CA   CA       0.00   1 180.00
+HR3  CPH1 NR2  CA       0.00   1 180.00
+!copper
+CPH1 CPH1 NR2  CU        0.00   1 180.00
+CPH1 NR2  CU   OZ        0.00   1 180.00
+CPH2 NR2  CU   OZ        0.00   1 180.00
+HR1  CPH2 NR2  CU        0.00   1 180.00
+HR3  CPH1 NR2  CU        0.00   1 180.00
+NR1  CPH2 NR2  CU        0.00   1 180.00
+NR2  CU   NR2  CPH1      0.00   1 180.00
+NR2  CU   NR2  CPH2      0.00   1 180.00
+NR2  CU   OZ   HZ        0.00   1 180.00
+!cu-Ne his240
+CT2  CPH1 NR1  CU        0.00   1 180.00
+NR1  CU   NR2  CPH2      0.00   1 180.00
+NR1  CU   NR2  CPH1      0.00   1 180.00
+NR1  CU   OZ   HZ        0.00   1 180.00
+CPH1 NR1  CU   NR2       0.00   1 180.00
+CPH1 NR1  CU   OZ        0.00   1 180.00
+CPH2 NR1  CU   NR2       0.00   1 180.00
+CPH2 NR1  CU   OZ        0.00   1 180.00
+HR1  CPH2 NR1  CU        0.00   1 180.00
+NR2  CPH2 NR1  CU        0.00   1 180.00
+CPH1 CPH1 NR1  CU        0.00   1 180.00
+
+!protonated propionate
+!X    CC   O2D  X        2.0500  2   180.00 ! ALLOW   PEP POL ARO ALC
+!                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+!protonated HEM3
+H    OC   CC   OC        2.0500  2   0.00 ! ALLOW   PEP POL ARO ALC
+                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+H    OC   CC   CT2       2.0500  2   180.00 ! ALLOW   PEP POL ARO ALC
+                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+
+
+IMPROPER
+CPB  CPB  CPA  CA     0.0     0     0.00 
+CA   CPB  O    HA     0.0     0     0.00
+CE1  CE2  CPB  HE1    0.0     0     0.00
+CE2  CE1  HE2  HE2    0.0     0     0.00
+CE1  CE1  CT3  CT3    0.0     0     0.00
+CE1  CE1  HE1  CT2    0.0     0     0.00
+CE1  CE1  CT2  CT3    0.0     0     0.00
+CE1  CT2  HE1  CE1    0.0     0     0.00
+CPH2 NR3  NR3  HR2    0.0     0     0.00
+CPH1 CPH1 NR3  HR1    0.0     0     0.00
+CPH1 NR3  CPH1 HR1    0.0     0     0.00
+
+NONBONDED nbxmod  5 atom cdiel shift vatom vdistance vswitch -
+cutnb 14.0 ctofnb 12.0 ctonnb 10.0 eps 1.0 e14fac 1.0 wmin 1.5
+CU             0.00000  -0.331867 0.227909
+OZ             0.00000  -0.201016 1.659440
+HZ             0.00000  -0.088043 0.223907
+FE             0.00000  -0.495601 1.581938
+OF             0.00000  -0.260191 1.618953
+HF             0.00000  -0.046000 0.224500 ! HT nonbond parameters
+!NEO added link atom definations
+QQ        0.00000   0.00000   1.32000
+QQH       0.00000   0.00000   1.32000
+
+end
+
+return

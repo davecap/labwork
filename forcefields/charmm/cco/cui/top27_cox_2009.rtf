@@ -1,0 +1,1670 @@
+* TOP
+*
+
+read rtf card append
+* Topology for heme and related compounds and patches
+*
+31  1
+!XPR
+RESI HEM3        -2.00 
+GROUP   
+ATOM OO   OF   	 -0.50 
+ATOM FE   FE      0.61 
+ATOM NA   NPH    -0.13 
+ATOM NB   NPH    -0.08 
+ATOM NC   NPH    -0.07 
+ATOM ND   NPH    -0.12 
+ATOM C1A  CPA     0.33 
+ATOM C2A  CPB    -0.30 
+ATOM C3A  CPB    -0.31 
+ATOM C4A  CPA     0.28 
+ATOM C1B  CPA     0.24 
+ATOM C2B  CPB    -0.28 
+ATOM C3B  CPB    -0.29 
+ATOM C4B  CPA     0.25 
+ATOM C1C  CPA     0.24 
+ATOM C2C  CPB    -0.28 
+ATOM C3C  CPB    -0.27 
+ATOM C4C  CPA     0.22 
+ATOM C1D  CPA     0.27 
+ATOM C2D  CPB    -0.31 
+ATOM C3D  CPB    -0.30 
+ATOM C4D  CPA     0.33 
+!artificially withdrawing -1.49 charge from   
+ATOM CHA  CPM    -0.10 !7 C 	 bridge C     
+ATOM HA   HA      0.18 !34 H 	              
+ATOM CHB  CPM    -0.07 !8 C 	              
+ATOM HB   HA      0.19 !35 H 	              
+ATOM CHC  CPM    -0.02 !9 C 	             
+ATOM HC   HA      0.17 !32 H 	             
+ATOM CHD  CPM    -0.07 !10 C 	             
+ATOM HD   HA      0.19 !33 H 	            
+! ---> until here QM model ESP charges      
+! aldehid group (invented charges)          
+GROUP                                       
+ATOM CMA  CA      0.50                     
+ATOM OMA  O      -0.59                     
+ATOM HMA1 HA      0.09                     
+! propionate A (from Glu)                  
+GROUP                                     
+ATOM CAA  CT2    -0.18                    
+ATOM HAA1 HA      0.09                   
+ATOM HAA2 HA      0.09                  
+ATOM CBA  CT2    -0.28                  
+ATOM HBA1 HA      0.09                        
+ATOM HBA2 HA      0.09                        
+ATOM CGA  CC      0.62                        
+ATOM O1A  OC     -0.76                        
+ATOM O2A  OC     -0.76                        
+! methyl (std charges)                        
+GROUP                                         
+ATOM CMB  CT3    -0.27                        
+ATOM HMB1 HA      0.09                        
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76 
+! distal Histidine not included in heme A
+BOND OO FE
+BOND FE  NA    FE  NB    FE  NC    FE  ND   
+!ring  A
+BOND C1A C2A   C2A C3A   C3A C4A   C4A  NA   NA  C1A   C2A CAA    
+!prop A
+BOND CAA CBA   CBA CGA   CGA O1A   CGA O2A   
+BOND CAA HAA1  CAA HAA2  CBA HBA1  CBA HBA2   
+!res A
+BOND C3A CMA   CMA OMA   CMA HMA1
+!bridge A-B
+BOND CHB C4A   CHB C1B   CHB HB    
+!
+!ring B
+BOND C1B C2B   C2B C3B   C3B C4B   NB  C1B   NB  C4B   C3B C11  
+!res B
+BOND C2B CMB   CMB HMB1  CMB HMB2  CMB HMB3
+!bridge B-C
+BOND CHC C4B   CHC C1C   CHC HC    
+!
+!ring C
+BOND C1C C2C   C2C C3C   C3C C4C   NC  C1C   NC  C4C   C2C CMC   
+!methyl C
+BOND CMC HMC1  CMC HMC2  CMC HMC3   
+!res C
+BOND C3C CAC   CAC CBC   CAC HAC   CBC HBC1  CBC HBC2
+!bridge C-D
+BOND CHD C4C   CHD C1D   CHD HD   
+!
+!ring D
+BOND C1D C2D   C2D C3D   C3D C4D   ND  C1D   ND  C4D    C3D CAD   
+!res D
+BOND C2D CMD   CMD HMD1  CMD HMD2  CMD HMD3   
+!prop D
+BOND CAD CBD   CBD CGD   CGD O1D   CGD O2D   
+BOND CAD HAD1  CAD HAD2  CBD HBD1  CBD HBD2   
+!bridge D-A
+BOND CHA C4D   CHA C1A   CHA HA    
+!<-- added
+BOND C11 O11   C11 H11A  O11 H11B
+BOND C11 C12   C12 H12A  C12 H12B
+BOND C12 C13   C13 H13A  C13 H13B
+BOND C13 C14   C14 H14A
+BOND C14 C15   C15 C26
+BOND C26 H26A  C26 H26B  C26 H26C
+BOND C15 C16   C16 H16A  C16 H16B
+BOND C16 C17   C17 H17A  C17 H17B
+BOND C17 C18   C18 H18A
+BOND C18 C19   C19 C27   
+BOND C27 H27A  C27 H27B  C27 H27C
+BOND C19 C20   C20 H20A  C20 H20B
+BOND C20 C21   C21 H21A  C21 H21B
+BOND C21 C22   C22 H22A  
+BOND C22 C23   C23 C25   C23 C24
+BOND C24 H24A  C24 H24B  C24 H24C
+BOND C25 H25A  C25 H25B  C25 H25C
+!
+IMPR C2A C1A C3A CAA  C3A C2A C4A CMA  C2B C1B C3B CMB   
+!IMPR C3B C2B C4B CAB
+IMPR C2C C1C C3C CMC  C3C C2C C4C CAC   
+IMPR C2D C1D C3D CMD  C3D C2D C4D CAD  O1A CBA O2A CGA   
+IMPR O1D CBD O2D CGD   
+IMPR C4A NA C1A C2A  C1A NA C4A C3A   
+IMPR C4B NB C1B C2B  C1B NB C4B C3B   
+IMPR C4C NC C1C C2C  C1C NC C4C C3C   
+IMPR C4D ND C1D C2D  C1D ND C4D C3D   
+IMPR NA C1A C2A C3A  NA C4A C3A C2A   
+IMPR NB C1B C2B C3B  NB C4B C3B C2B   
+IMPR NC C1C C2C C3C  NC C4C C3C C2C   
+IMPR ND C1D C2D C3D  ND C4D C3D C2D   
+IMPR NA C1A CHA C4D  NA C4A CHB C1B   
+IMPR NB C1B CHB C4A  NB C4B CHC C1C   
+IMPR NC C1C CHC C4B  NC C4C CHD C1D   
+IMPR ND C1D CHD C4C  ND C4D CHA C1A   
+IMPR CHA C1A C4D HA   
+IMPR CHB C1B C4A HB   
+IMPR CHC C1C C4B HC   
+IMPR CHD C1D C4C HD   
+IMPR C1A C2A CHA NA  C4A C3A CHB NA   
+IMPR C1B C2B CHB NB  C4B C3B CHC NB   
+IMPR C1C C2C CHC NC  C4C C3C CHD NC   
+IMPR C1D C2D CHD ND  C4D C3D CHA ND   
+IMPR NA C1A C4A FE   
+IMPR NB C1B C4B FE   
+IMPR NC C1C C4C FE   
+IMPR ND C1D C4D FE   
+!IMPR CAB CBB C3B HAB  HAB CAB CBB HBB2  CAB CBB HBB2 HBB1   
+!<-- added
+IMPR CMA C3A OMA HMA1 
+IMPR CAC CBC C3C HAC  CBC CAC HBC2 HBC1   
+!<-- added
+IMPR C23 C22 C24 C25  C22 C23 H22A C21
+IMPR C19 C18 C20 C27  C18 C17 H18A C19
+IMPR C15 C14 C16 C26  C14 C13 H14A C15
+!ACCEPTOR NA   
+!ACCEPTOR O1A    ! CGA
+!ACCEPTOR O2A    ! CGA
+!ACCEPTOR NB   
+!ACCEPTOR NC   
+!ACCEPTOR ND   
+!ACCEPTOR O1D    ! CGD
+!ACCEPTOR O2D    ! CGD
+PATCHING FIRS NONE LAST NONE   
+
+RESI HEMA        -2.00 
+GROUP   
+! <--- 
+!
+ATOM FE   FE      0.24 !
+ATOM NA   NPH    -0.18 !
+ATOM NB   NPH    -0.18 !
+ATOM NC   NPH    -0.18 !
+ATOM ND   NPH    -0.18 !
+ATOM C1A  CPA     0.12 !
+ATOM C2A  CPB    -0.06 !
+ATOM C3A  CPB    -0.06 !
+ATOM C4A  CPA     0.12 !
+ATOM C1B  CPA     0.12 !
+ATOM C2B  CPB    -0.06 !
+ATOM C3B  CPB    -0.06 !
+ATOM C4B  CPA     0.12 !
+ATOM C1C  CPA     0.12 !
+ATOM C2C  CPB    -0.06 !
+ATOM C3C  CPB    -0.06 !
+ATOM C4C  CPA     0.12 !
+ATOM C1D  CPA     0.12 !
+ATOM C2D  CPB    -0.06 !
+ATOM C3D  CPB    -0.06 !
+ATOM C4D  CPA     0.12 !
+GROUP                  !
+ATOM CHA  CPM    -0.10 !
+ATOM HA   HA      0.10 !
+GROUP                  !
+ATOM CHB  CPM    -0.10 !
+ATOM HB   HA      0.10 !
+GROUP                  !
+ATOM CHC  CPM    -0.10 !
+ATOM HC   HA      0.10 !
+GROUP                  !
+ATOM CHD  CPM    -0.10 !
+ATOM HD   HA      0.10 !
+! ---> until here QM model ESP charges
+! aldehid group (invented charges)
+GROUP
+ATOM CMA  CA      0.50 
+ATOM OMA  O      -0.59 
+ATOM HMA1 HA      0.09 
+! propionate A (from Glu)
+GROUP
+ATOM CAA  CT2    -0.18  
+ATOM HAA1 HA      0.09  
+ATOM HAA2 HA      0.09  
+ATOM CBA  CT2    -0.28 
+ATOM HBA1 HA      0.09 
+ATOM HBA2 HA      0.09 
+ATOM CGA  CC      0.62 
+ATOM O1A  OC     -0.76 
+ATOM O2A  OC     -0.76 
+! methyl (std charges)
+GROUP
+ATOM CMB  CT3    -0.27 
+ATOM HMB1 HA      0.09
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76 
+! distal Histidine not included in heme A
+BOND FE  NA    FE  NB    FE  NC    FE  ND   
+!ring  A
+BOND C1A C2A   C2A C3A   C3A C4A   C4A  NA   NA  C1A   C2A CAA    
+!prop A
+BOND CAA CBA   CBA CGA   CGA O1A   CGA O2A   
+BOND CAA HAA1  CAA HAA2  CBA HBA1  CBA HBA2   
+!res A
+BOND C3A CMA   CMA OMA   CMA HMA1
+!bridge A-B
+BOND CHB C4A   CHB C1B   CHB HB    
+!
+!ring B
+BOND C1B C2B   C2B C3B   C3B C4B   NB  C1B   NB  C4B   C3B C11  
+!res B
+BOND C2B CMB   CMB HMB1  CMB HMB2  CMB HMB3
+!bridge B-C
+BOND CHC C4B   CHC C1C   CHC HC    
+!
+!ring C
+BOND C1C C2C   C2C C3C   C3C C4C   NC  C1C   NC  C4C   C2C CMC   
+!methyl C
+BOND CMC HMC1  CMC HMC2  CMC HMC3   
+!res C
+BOND C3C CAC   CAC CBC   CAC HAC   CBC HBC1  CBC HBC2
+!bridge C-D
+BOND CHD C4C   CHD C1D   CHD HD   
+!
+!ring D
+BOND C1D C2D   C2D C3D   C3D C4D   ND  C1D   ND  C4D    C3D CAD   
+!res D
+BOND C2D CMD   CMD HMD1  CMD HMD2  CMD HMD3   
+!prop D
+BOND CAD CBD   CBD CGD   CGD O1D   CGD O2D   
+BOND CAD HAD1  CAD HAD2  CBD HBD1  CBD HBD2   
+!bridge D-A
+BOND CHA C4D   CHA C1A   CHA HA    
+!<-- added
+BOND C11 O11   C11 H11A  O11 H11B
+BOND C11 C12   C12 H12A  C12 H12B
+BOND C12 C13   C13 H13A  C13 H13B
+BOND C13 C14   C14 H14A
+BOND C14 C15   C15 C26
+BOND C26 H26A  C26 H26B  C26 H26C
+BOND C15 C16   C16 H16A  C16 H16B
+BOND C16 C17   C17 H17A  C17 H17B
+BOND C17 C18   C18 H18A
+BOND C18 C19   C19 C27   
+BOND C27 H27A  C27 H27B  C27 H27C
+BOND C19 C20   C20 H20A  C20 H20B
+BOND C20 C21   C21 H21A  C21 H21B
+BOND C21 C22   C22 H22A  
+BOND C22 C23   C23 C25   C23 C24
+BOND C24 H24A  C24 H24B  C24 H24C
+BOND C25 H25A  C25 H25B  C25 H25C
+!
+IMPR C2A C1A C3A CAA  C3A C2A C4A CMA  C2B C1B C3B CMB   
+!IMPR C3B C2B C4B CAB
+IMPR C2C C1C C3C CMC  C3C C2C C4C CAC   
+IMPR C2D C1D C3D CMD  C3D C2D C4D CAD  O1A CBA O2A CGA   
+IMPR O1D CBD O2D CGD   
+IMPR C4A NA C1A C2A  C1A NA C4A C3A   
+IMPR C4B NB C1B C2B  C1B NB C4B C3B   
+IMPR C4C NC C1C C2C  C1C NC C4C C3C   
+IMPR C4D ND C1D C2D  C1D ND C4D C3D   
+IMPR NA C1A C2A C3A  NA C4A C3A C2A   
+IMPR NB C1B C2B C3B  NB C4B C3B C2B   
+IMPR NC C1C C2C C3C  NC C4C C3C C2C   
+IMPR ND C1D C2D C3D  ND C4D C3D C2D   
+IMPR NA C1A CHA C4D  NA C4A CHB C1B   
+IMPR NB C1B CHB C4A  NB C4B CHC C1C   
+IMPR NC C1C CHC C4B  NC C4C CHD C1D   
+IMPR ND C1D CHD C4C  ND C4D CHA C1A   
+IMPR CHA C1A C4D HA   
+IMPR CHB C1B C4A HB   
+IMPR CHC C1C C4B HC   
+IMPR CHD C1D C4C HD   
+IMPR C1A C2A CHA NA  C4A C3A CHB NA   
+IMPR C1B C2B CHB NB  C4B C3B CHC NB   
+IMPR C1C C2C CHC NC  C4C C3C CHD NC   
+IMPR C1D C2D CHD ND  C4D C3D CHA ND   
+IMPR NA C1A C4A FE   
+IMPR NB C1B C4B FE   
+IMPR NC C1C C4C FE   
+IMPR ND C1D C4D FE   
+!IMPR CAB CBB C3B HAB  HAB CAB CBB HBB2  CAB CBB HBB2 HBB1   
+!<-- added
+IMPR CMA C3A OMA HMA1 
+IMPR CAC CBC C3C HAC  CBC CAC HBC2 HBC1   
+!<-- added
+IMPR C23 C22 C24 C25  C22 C23 H22A C21
+IMPR C19 C18 C20 C27  C18 C17 H18A C19
+IMPR C15 C14 C16 C26  C14 C13 H14A C15
+!ACCEPTOR NA   
+!ACCEPTOR O1A    ! CGA
+!ACCEPTOR O2A    ! CGA
+!ACCEPTOR NB   
+!ACCEPTOR NC   
+!ACCEPTOR ND   
+!ACCEPTOR O1D    ! CGD
+!ACCEPTOR O2D    ! CGD
+PATCHING FIRS NONE LAST NONE   
+!NEO
+
+PRES HEM3E        -2.00
+GROUP
+ATOM FE   FE      0.24 !
+ATOM NA   NPH    -0.18 !
+ATOM NB   NPH    -0.18 !
+ATOM NC   NPH    -0.18 !
+ATOM ND   NPH    -0.18 !
+ATOM C1A  CPA     0.12 !
+ATOM C2A  CPB    -0.06 !
+ATOM C3A  CPB    -0.06 !
+ATOM C4A  CPA     0.12 !
+ATOM C1B  CPA     0.12 !
+ATOM C2B  CPB    -0.06 !
+ATOM C3B  CPB    -0.06 !
+ATOM C4B  CPA     0.12 !
+ATOM C1C  CPA     0.12 !
+ATOM C2C  CPB    -0.06 !
+ATOM C3C  CPB    -0.06 !
+ATOM C4C  CPA     0.12 !
+ATOM C1D  CPA     0.12 !
+ATOM C2D  CPB    -0.06 !
+ATOM C3D  CPB    -0.06 !
+ATOM C4D  CPA     0.12 !
+GROUP                  !
+ATOM CHA  CPM    -0.10 !
+ATOM HA   HA      0.10 !
+GROUP                  !
+ATOM CHB  CPM    -0.10 !
+ATOM HB   HA      0.10 !
+GROUP                  !
+ATOM CHC  CPM    -0.10 !
+ATOM HC   HA      0.10 !
+GROUP                  !
+ATOM CHD  CPM    -0.10 !
+ATOM HD   HA      0.10 !
+! aldehid group (invented charges)      
+GROUP                                   
+ATOM CMA  CA      0.50                        
+ATOM OMA  O      -0.59                        
+ATOM HMA1 HA      0.09                        
+! propionate A (from Glu)                     
+GROUP                                         
+ATOM CAA  CT2    -0.18                        
+ATOM HAA1 HA      0.09                        
+ATOM HAA2 HA      0.09                        
+ATOM CBA  CT2    -0.28                       
+ATOM HBA1 HA      0.09                        
+ATOM HBA2 HA      0.09                        
+ATOM CGA  CC      0.62                        
+ATOM O1A  OC     -0.76                        
+ATOM O2A  OC     -0.76                        
+! methyl (std charges)                        
+GROUP                                         
+ATOM CMB  CT3    -0.27                        
+ATOM HMB1 HA      0.09                        
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76 
+
+PRES HEMAE        -1.00 
+GROUP   
+ATOM FE   FE      0.60 !
+ATOM NA   NPH    -0.24 !
+ATOM NB   NPH    -0.24 !
+ATOM NC   NPH    -0.24 !
+ATOM ND   NPH    -0.24 !
+ATOM C1A  CPA     0.20 !
+ATOM C2A  CPB    -0.06 !
+ATOM C3A  CPB    -0.06 !
+ATOM C4A  CPA     0.20 !
+ATOM C1B  CPA     0.20 !
+ATOM C2B  CPB    -0.06 !
+ATOM C3B  CPB    -0.06 !
+ATOM C4B  CPA     0.20 !
+ATOM C1C  CPA     0.20 !
+ATOM C2C  CPB    -0.06 !
+ATOM C3C  CPB    -0.06 !
+ATOM C4C  CPA     0.20 !
+ATOM C1D  CPA     0.20 !
+ATOM C2D  CPB    -0.06 !
+ATOM C3D  CPB    -0.06 !
+ATOM C4D  CPA     0.20 !
+GROUP                  !
+ATOM CHA  CPM    -0.07 !
+ATOM HA   HA      0.13 !
+GROUP                  !
+ATOM CHB  CPM    -0.07 !
+ATOM HB   HA      0.13 !
+GROUP                  !
+ATOM CHC  CPM    -0.07 !
+ATOM HC   HA      0.13 !
+GROUP                  !
+ATOM CHD  CPM    -0.07 !
+ATOM HD   HA      0.13 !
+! aldehid group (invented charges)
+GROUP
+ATOM CMA  CA      0.50 
+ATOM OMA  O      -0.59 
+ATOM HMA1 HA      0.09 
+! propionate A (from Glu)
+GROUP
+ATOM CAA  CT2    -0.18  
+ATOM HAA1 HA      0.09  
+ATOM HAA2 HA      0.09  
+ATOM CBA  CT2    -0.28 
+ATOM HBA1 HA      0.09 
+ATOM HBA2 HA      0.09 
+ATOM CGA  CC      0.62 
+ATOM O1A  OC     -0.76 
+ATOM O2A  OC     -0.76 
+! methyl (std charges)
+GROUP
+ATOM CMB  CT3    -0.27 
+ATOM HMB1 HA      0.09
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76 
+
+PRES HEM3F        -2.00 
+GROUP   
+ATOM OO   OF   	 -0.50 
+ATOM FE   FE      0.61 
+ATOM NA   NPH    -0.13 
+ATOM NB   NPH    -0.08 
+ATOM NC   NPH    -0.07 
+ATOM ND   NPH    -0.12 
+ATOM C1A  CPA     0.33 
+ATOM C2A  CPB    -0.30 
+ATOM C3A  CPB    -0.31 
+ATOM C4A  CPA     0.28 
+ATOM C1B  CPA     0.24 
+ATOM C2B  CPB    -0.28 
+ATOM C3B  CPB    -0.29 
+ATOM C4B  CPA     0.25 
+ATOM C1C  CPA     0.24 
+ATOM C2C  CPB    -0.28 
+ATOM C3C  CPB    -0.27 
+ATOM C4C  CPA     0.22 
+ATOM C1D  CPA     0.27 
+ATOM C2D  CPB    -0.31 
+ATOM C3D  CPB    -0.30 
+ATOM C4D  CPA     0.33 
+ATOM CHA  CPM    -0.10 
+ATOM HA   HA      0.18 
+ATOM CHB  CPM    -0.07 
+ATOM HB   HA      0.19
+ATOM CHC  CPM    -0.02 
+ATOM HC   HA      0.17 
+ATOM CHD  CPM    -0.07 
+ATOM HD   HA      0.19
+! aldehid group (invented charges)
+GROUP
+ATOM CMA  CA      0.50 
+ATOM OMA  O      -0.59 
+ATOM HMA1 HA      0.09 
+! propionate A (from Glu)
+GROUP
+ATOM CAA  CT2    -0.18  
+ATOM HAA1 HA      0.09  
+ATOM HAA2 HA      0.09  
+ATOM CBA  CT2    -0.28 
+ATOM HBA1 HA      0.09 
+ATOM HBA2 HA      0.09 
+ATOM CGA  CC      0.62 
+ATOM O1A  OC     -0.76 
+ATOM O2A  OC     -0.76 
+! methyl (std charges)
+GROUP
+ATOM CMB  CT3    -0.27 
+ATOM HMB1 HA      0.09
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76 
+
+PRES HSN      -1.00 ! patch for negative histidine (proton taken from HSD) His240
+DELETE ATOM HD1
+GROUP
+ATOM CB   CT2    -0.09
+ATOM HB1  HA      0.09
+ATOM HB2  HA      0.09
+ATOM ND1  NR1    -1.04  !TODO the charge should be shared in the group
+ATOM CG   CPH1   -0.05
+
+PRES CYD         -1.00 ! PATCH FOR CYSTINE coordinated to CUA
+DELETE ATOM HG1
+GROUP
+ATOM CB   CT2    -0.11 
+ATOM HB1  HA      0.09  
+ATOM HB2  HA      0.09  
+ATOM SG   S      -1.07 !NEED TO SPREAD CHARGES OVER WHOLE GROUP 
+! could not figure out arbitarily how to distribute the charge on S so kept as it is
+!ATOM SG   S      -1.07 !NEED TO SPREAD CHARGES OVER WHOLE GROUP 
+!ATOM SG   S      -0.23  
+!ATOM HG1  HS      0.16
+
+PRES TYHI     0.00
+DELETE ATOM 1HE2
+GROUP
+ATOM 1CE2 CA 0.00
+!it is ne24 for oum ne2 for plain hsd
+BOND 1CE2 2NE24 
+
+PRES PHEM         0.00 ! Patch for HEME to His link.
+                       ! Patch residues must be 1-HIS, and 2-HEME.
+                       ! do NOT use AUTOgenerate ANGLes DIHEdrals after this patch
+DELETE ANGLE 2NA 2FE 2NC  2NB 2FE 2ND
+BOND 1NE2 2FE
+ANGLE 1CD2 1NE2 2FE  1CE1 1NE2 2FE  1NE2 2FE 2NA  1NE2 2FE 2NB
+ANGLE 1NE2 2FE  2NC  1NE2 2FE  2ND
+DIHE 1CD2  1NE2  2FE  2NA
+IC 1CD2 1NE2 2FE  2NA   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CE1 1NE2 2FE  2NA   0.0000  0.0000    0.0000  0.0000  0.0000
+
+!for second distal his on hemeA the angle has already been removed
+PRES PHE2         0.00 ! Patch for HEME to His link.
+                       ! Patch residues must be 1-HIS, and 2-HEME.
+                       ! do NOT use AUTOgenerate ANGLes DIHEdrals after this patch
+!DELETE ANGLE 2NA 2FE 2NC  2NB 2FE 2ND
+BOND 1NE2 2FE
+ANGLE 1CD2 1NE2 2FE  1CE1 1NE2 2FE  1NE2 2FE 2NA  1NE2 2FE 2NB
+ANGLE 1NE2 2FE  2NC  1NE2 2FE  2ND
+DIHE 1CD2  1NE2  2FE  2NA
+IC 1CD2 1NE2 2FE  2NA   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CD2 1NE2 2FE  2NB   0.0000  0.0000    0.0000  0.0000  0.0000
+IC 1CE1 1NE2 2FE  2NA   0.0000  0.0000    0.0000  0.0000  0.0000
+
+RESI OUM          0.00
+! <- ESP charges: the sum is -.03 not 0.00... (changing by 0.01 the CH3 of CB4)
+! His 240
+!ATOM CB4  CT2    -0.35 !1, C
+!
+!  change this charge!!
+ATOM CB4  CT2    0.09 !1, C
+ATOM HB14 HA      0.15 !23, H
+ATOM HB24 HA      0.12 !24, H
+!ATOM HB34 HA      0.13 !25, H
+ATOM ND14 NR1     0.04 !3, N
+ATOM CG4   CPH1   0.12 !2, C
+ATOM CE14 CPH2   -0.12 !5, C
+ATOM HE14 HR1     0.17 !27, H
+!ATOM CM4  CT3    -0.31 !7, C
+!ATOM HM14 HA      0.14 !39, H
+!ATOM HM24 HA      0.12 !40, H
+!ATOM HM34 HA      0.13 !41, H
+ATOM NE24 NR2     0.21 !6, N
+ATOM CD24 CPH1   -0.38 !4, C
+ATOM HD24 HR3     0.22 !26, H
+!
+ATOM CB0  CT2    -0.44 !8, C
+ATOM HB10 HA      0.17 !21, H
+ATOM HB20 HA      0.12 !31, H
+!ATOM HB30 HA      0.11 !32, H
+ATOM ND10 NR1    -0.33 !10, N
+ATOM HD10 H       0.34 !29, H
+ATOM CG0  CPH1    0.30 !9, C
+ATOM CE10 CPH2    0.02 !12, C
+ATOM HE10 HR1     0.08 !28, H
+ATOM NE20 NR2    -0.14 !13, N
+ATOM CD20 CPH1   -0.28 !11, C
+ATOM HD20 HR3     0.20 !30, H
+!
+ATOM CB1  CT2    -0.63 !14, C
+ATOM HB11 HA      0.16 !22, H
+ATOM HB21 HA      0.14 !37, H
+!ATOM HB31 HA      0.12 !38, H
+ATOM ND11 NR1    -0.77 !16, N
+ATOM CG1  CPH1    0.74 !15, C
+ATOM CE11 CPH2    0.29 !18, C
+ATOM HE11 HR1     0.06 !35, H
+ATOM NE21 NR2    -0.24 !19, N
+ATOM CD21 CPH1   -0.58 !17, C
+ATOM HD21 HR3     0.20 !36, H
+!
+ATOM CU   CU      0.49 !20, Cu
+ATOM OH2  OZ     -0.87 !33, O
+ATOM H1   HZ      0.35 !34, H
+!
+BOND CB4  HB14  CB4  HB24  ! CB4 HB34
+BOND CB4  CG4
+BOND CG4  ND14  CG4  CD24
+BOND ND14 CE14  CE14 HE14
+BOND CE14 NE24
+!BOND CM4  NE24
+!BOND CM4  HM14  CM4  HM24  CM4 HM34
+BOND NE24 CD24  CD24 HD24
+!
+BOND CB0  HB10  CB0  HB20  ! CB0 HB30
+BOND CB0  CG0
+BOND CG0  ND10  CG0  CD20
+BOND ND10 CE10  ND10 HD10  CE10 HE10
+BOND CE10 NE20
+BOND NE20 CD20  CD20 HD20
+!
+BOND CB1  HB11  CB1  HB21  ! CB1 HB31
+BOND CB1  CG1
+BOND CG1  ND11  CG1  CD21
+BOND ND11 CE11  CE11 HE11
+BOND CE11 NE21
+BOND NE21 CD21  CD21 HD21
+BOND CU   ND14  CU   NE20  CU   NE21
+BOND CU   OH2
+BOND OH2  H1
+PATCHING FIRS NONE LAST NONE
+
+PRES OP2U          0.00
+ATOM CB4  CT2    0.09 !1, C
+ATOM HB14 HA      0.15 !23, H
+ATOM HB24 HA      0.12 !24, H
+ATOM ND14 NR1     0.04 !3, N
+ATOM CG4   CPH1   0.12 !2, C
+ATOM CE14 CPH2   -0.12 !5, C
+ATOM HE14 HR1     0.17 !27, H
+ATOM NE24 NR2     0.21 !6, N
+ATOM CD24 CPH1   -0.38 !4, C
+ATOM HD24 HR3     0.22 !26, H
+!
+ATOM CB0  CT2    -0.44 !8, C
+ATOM HB10 HA      0.17 !21, H
+ATOM HB20 HA      0.12 !31, H
+ATOM ND10 NR1    -0.33 !10, N
+ATOM HD10 H       0.34 !29, H
+ATOM CG0  CPH1    0.30 !9, C
+ATOM CE10 CPH2    0.02 !12, C
+ATOM HE10 HR1     0.08 !28, H
+ATOM NE20 NR2    -0.14 !13, N
+ATOM CD20 CPH1   -0.28 !11, C
+ATOM HD20 HR3     0.20 !30, H
+!
+ATOM CB1  CT2    -0.63 !14, C
+ATOM HB11 HA      0.16 !22, H
+ATOM HB21 HA      0.14 !37, H
+ATOM ND11 NR1    -0.77 !16, N
+ATOM CG1  CPH1    0.74 !15, C
+ATOM CE11 CPH2    0.29 !18, C
+ATOM HE11 HR1     0.06 !35, H
+ATOM NE21 NR2    -0.24 !19, N
+ATOM CD21 CPH1   -0.58 !17, C
+ATOM HD21 HR3     0.20 !36, H
+!
+ATOM CU   CU      0.49 !20, Cu
+ATOM OH2  OZ     -0.87 !33, O
+ATOM H1   HZ      0.35 !34, H
+
+PRES OPM          1.00
+!  change this charge!!
+ATOM CB4  CT2    -0.25 !1, C
+ATOM HB14 HA      0.19 !23, H
+ATOM HB24 HA      0.19 !24, H
+!ATOM HB34 HA      0.04 !25, H
+ATOM ND14 NR1    -0.26 !3, N
+ATOM CG4   CPH1   0.23 !2, C
+ATOM CE14 CPH2   -0.12 !5, C
+ATOM HE14 HR1     0.17 !27, H
+!ATOM CM4  CT3    -0.39 !7, C
+!ATOM HM14 HA      0.17 !39, H
+!ATOM HM24 HA      0.15 !40, H
+!ATOM HM34 HA      0.16 !41, H
+ATOM NE24 NR2     0.29 !6, N
+ATOM CD24 CPH1   -0.39 !4, C
+ATOM HD24 HR3     0.23 !26, H
+!
+ATOM CB0  CT2    -0.42 !8, C
+ATOM HB10 HA      0.20 !21, H
+ATOM HB20 HA      0.20 !31, H
+!ATOM HB30 HA      0.17 !32, H
+ATOM ND10 NR1    -0.25 !10, N
+ATOM HD10 H       0.34 !29, H
+ATOM CG0  CPH1    0.25 !9, C
+ATOM CE10 CPH2   -0.01 !12, C
+ATOM HE10 HR1     0.13 !28, H
+ATOM NE20 NR2    -0.15 !13, N
+ATOM CD20 CPH1   -0.24 !11, C
+ATOM HD20 HR3     0.20 !30, H
+!
+ATOM CB1  CT2    -0.40 !14, C
+ATOM HB11 HA      0.20 !22, H
+ATOM HB21 HA      0.20 !37, H
+!ATOM HB31 HA      0.15 !38, H
+ATOM ND11 NR1    -0.26 !16, N
+ATOM HD11 H       0.34
+ATOM CG1  CPH1    0.29 !15, C
+ATOM CE11 CPH2   -0.09 !18, C
+ATOM HE11 HR1     0.24 !35, H
+ATOM NE21 NR2     0.01 !19, N
+ATOM CD21 CPH1   -0.37 !17, C
+ATOM HD21 HR3     0.20 !36, H
+!
+ATOM CU   CU      0.60 !20, Cu
+ATOM OH2  OZ     -0.89 !33, O
+ATOM H1   HZ      0.40 !34, H
+!
+
+PRES OUM1         0.00
+!!patch to be applied on His240,
+DELETE ATOM 1CB 
+DELETE ATOM 1HB1
+DELETE ATOM 1HB2
+DELETE ATOM 1ND1
+DELETE ATOM 1HD1
+DELETE ATOM 1CG 
+DELETE ATOM 1CE1
+DELETE ATOM 1HE1
+DELETE ATOM 1NE2
+DELETE ATOM 1CD2
+DELETE ATOM 1HD2
+BOND 1CA 2CB4
+
+PRES OUM2         0.00
+!!patch to be applied on His240,
+DELETE ATOM 1CB 
+DELETE ATOM 1HB1
+DELETE ATOM 1HB2
+DELETE ATOM 1ND1
+DELETE ATOM 1HD1
+DELETE ATOM 1CG 
+DELETE ATOM 1CE1
+DELETE ATOM 1HE1
+DELETE ATOM 1NE2
+DELETE ATOM 1CD2
+DELETE ATOM 1HD2
+BOND 1CA 2CB0
+
+PRES OUM3         0.00
+!!patch to be applied on His240,
+DELETE ATOM 1CB 
+DELETE ATOM 1HB1
+DELETE ATOM 1HB2
+DELETE ATOM 1ND1
+DELETE ATOM 1HD1
+DELETE ATOM 1CG 
+DELETE ATOM 1CE1
+DELETE ATOM 1HE1
+DELETE ATOM 1NE2
+DELETE ATOM 1CD2
+DELETE ATOM 1HD2
+BOND 1CA 2CB1
+
+RESI CU2       2.00 ! 
+GROUP   
+ATOM CU   CU   2.00
+PATCHING FIRST NONE LAST NONE   
+
+RESI CU1       1.00 ! 
+GROUP   
+ATOM CU   CU   1.00
+PATCHING FIRST NONE LAST NONE   
+
+PRES HEDI   0.00
+DELETE DIHED 1NA 1FE 1NC 1C1C
+DELETE DIHED 1NA 1FE 1NC 1C4C
+DELETE DIHED 1NB 1FE 1ND 1C1D
+DELETE DIHED 1NB 1FE 1ND 1C4D
+DELETE DIHED 1NC 1FE 1NA 1C1A
+DELETE DIHED 1NC 1FE 1NA 1C4A
+DELETE DIHED 1ND 1FE 1NB 1C1B
+DELETE DIHED 1ND 1FE 1NB 1C4B
+
+PRES H3ONAT      1.00
+GROUP
+ATOM OH2  OT     -0.38
+GROUP
+ATOM H1   HT      0.46
+GROUP
+ATOM H2   HT      0.46
+GROUP
+ATOM H3   HT      0.46
+BOND OH2 H3   H1 H3   H2 H3      ! the bonds are needed for shake
+ANGLE H1 OH2 H3  H2 OH2 H3    ! required
+DONOR H3 OH2
+DONOR H2 OH2
+DONOR H1 OH2
+IC  H1 H2 *OH2 H3  0.98 113.4 131.0 113.4 0.98
+
+PRES H3ON      1.00
+GROUP
+ATOM OH2  OT     -0.38
+ATOM H1   HT      0.46
+ATOM H2   HT      0.46
+ATOM H3   HT      0.46
+BOND OH2 H3   H1 H3   H2 H3      ! the bonds are needed for shake
+ANGLE H1 OH2 H3  H2 OH2 H3    ! required
+DONOR H3 OH2
+DONOR H2 OH2
+DONOR H1 OH2
+IC  H1 H2 *OH2 H3  0.98 113.4 131.0 113.4 0.98
+
+!protonate OUM to OPM (ND of His291). Wrong charge!!
+PRES OU2P  1.00
+ATOM  HD11 H   1.00
+BOND  1HD11 1ND11
+ANGLE 1HD11 1ND11 1CE11
+ANGLE 1HD11 1ND11 1CG1
+DIHED 1HD11 1ND11 1CE11 1HE11
+DIHED 1HD11 1ND11 1CE11 1NE21
+DIHED 1HD11 1ND11 1CG1  1CB1
+DIHED 1HD11 1ND11 1CG1  1CD21
+IC CE11  CG1   *ND11 HD11   1.3549 107.0300 -174.6500 126.2600  1.0005
+
+PRES HE2P  1.00
+ATOM  HD1 H   1.00
+BOND  HD1 ND1
+ANGLE HD1 ND1 CE1
+ANGLE HD1 ND1 CG
+DIHED HD1 ND1 CE1 HE1
+DIHED HD1 ND1 CE1 NE2
+DIHED HD1 ND1 CG  CB
+DIHED HD1 ND1 CG  CD2
+IC CE1  CG   *ND1 HD1   1.3549 107.0300 -174.6500 126.2600  1.0005
+
+PRES CRGHD2P          1.00  ! Protonated His
+GROUP
+ATOM N    NH1    -0.47  !     |          HD1    HE1
+ATOM HN   H       0.31  !  HN-N           |     /
+ATOM CA   CT1     0.07  !     |   HB1    ND1--CE1
+ATOM HA   HB      0.09  !     |   |     /      ||
+GROUP                   !  HA-CA--CB--CG       ||
+ATOM CB   CT2    -0.05  !     |   |     \\     ||
+ATOM HB1  HA      0.09  !     |   HB2    CD2--NE2(+)
+ATOM HB2  HA      0.09  !   O=C           |     \
+ATOM CD2  CPH1    0.19  !     |          HD2    HE2
+ATOM HD2  HR1     0.13
+ATOM CG   CPH1    0.19
+GROUP
+ATOM NE2  NR3    -0.51
+ATOM HE2  H       0.44
+ATOM ND1  NR3    -0.51
+ATOM HD1  H       0.44
+ATOM CE1  CPH2    0.32
+ATOM HE1  HR2     0.18
+GROUP
+ATOM C    C       0.51
+ATOM O    O      -0.51
+
+PRES CHSD2P          1.00  ! Protonated His
+GROUP
+ATOM N    NH1    -0.47  !     |          HD1    HE1
+ATOM HN   H       0.31  !  HN-N           |     /
+ATOM CA   CT1     0.07  !     |   HB1    ND1--CE1
+ATOM HA   HB      0.09  !     |   |     /      ||
+GROUP                   !  HA-CA--CB--CG       ||
+ATOM CB   CT2    -0.05  !     |   |     \\     ||
+ATOM HB1  HA      0.09  !     |   HB2    CD2--NE2(+)
+ATOM HB2  HA      0.09  !   O=C           |     \
+ATOM CD2  CPH1    0.19  !     |          HD2    HE2
+ATOM HD2  HR1     0.13
+ATOM CG   CPH1    0.19 
+GROUP
+ATOM NE2  NR3    -0.51
+ATOM HE2  H       0.44
+ATOM ND1  NR3    -0.51
+ATOM HD1  H       0.44
+ATOM CE1  CPH2    0.32
+ATOM HE1  HR2     0.18
+GROUP    
+ATOM C    C       0.51  
+ATOM O    O      -0.51
+BOND NE2 HE2 
+DONOR HE2 NE2
+IMPR ND1 CG  CE1 HD1  ND1 CE1 CG  HD1
+IMPR NE2 CD2 CE1 HE2  NE2 CE1 CD2 HE2
+IC CE1  CD2  *NE2 HE2   1.3256 108.8200 -172.9400 125.5200  1.0020
+IC NE2  ND1  *CE1 HE1   1.3256 108.5000  178.3900 125.7600  1.0799
+IC CE1  CG   *ND1 HD1   1.3262 108.9000  171.4900 126.0900  1.0018
+IC NE2  CG   *CD2 HD2   1.3727 106.9300 -174.4900 128.4100  1.0867
+
+PRES HISX  0.0
+DELE ATOM C
+DELE ATOM O
+DELE ATOM N
+DELE ATOM HN
+DELE ATOM CA
+DELE ATOM HA
+ATOM HB3 HA  0.0
+BOND CB HB3
+ANGLE HB3 CB HB2 HB3 CB HB1 HB3 CB CG
+DIHED HB3 CB CG  ND1
+DIHED HB3 CB CG  CD2
+!IC CG   HB3  *CB  HB2    1.1168 114.1800 -121.5100 108.9700  1.1132
+!IC HB3   CB   CG   ND1   1.1533 114.1800   90.0000 122.9400  1.3718
+
+PRES D2N          0.0
+DELE ATOM OD2
+GROUP
+ATOM ND2  NH2    -0.62
+ATOM HD21 H       0.32
+ATOM HD22 H       0.30
+GROUP
+ATOM CB   CT2    -0.18
+ATOM HB1  HA      0.09
+ATOM HB2  HA      0.09
+GROUP                 
+ATOM CG   CC      0.55
+ATOM OD1  O      -0.55
+IC OD1  CB   *CG  ND2   1.2323 122.5600 -179.1900 116.1500  1.3521
+IC CB   CG   ND2  HD21  1.5319 116.1500 -179.2600 117.3500  0.9963
+IC HD21 CG   *ND2 HD22  0.9963 117.3500  178.0200 120.0500  0.9951
+
+PRES N2D         -1.0
+DELE ATOM ND2 
+DELE ATOM HD21
+DELE ATOM HD22
+GROUP                 
+ATOM CB   CT2    -0.28
+ATOM HB1  HA      0.09
+ATOM HB2  HA      0.09
+ATOM CG   CC      0.62
+ATOM OD1  OC     -0.76
+ATOM OD2  OC     -0.76
+IC OD1  CB   *CG  OD2   1.2565 117.9900 -170.2300 117.7000  1.2541
+
+PRES GLUO         0.0
+GROUP                  ! via acetic acid, use in a patch statement and
+                       ! follow with AUTOgenerate ANGLes DIHEdrals command
+ATOM CG   CT2    -0.21 !
+ATOM HG1  HA      0.09 ! HG1    OE1
+ATOM HG2  HA      0.09 !  |    //
+ATOM CD   CD      0.75 ! -CG--CD
+ATOM OE1  OB     -0.55 !  |     \
+ATOM OE2  OH1    -0.61 ! HG2     OE2-HE2
+GROUP
+ATOM HE2  H       0.44 !
+
+PRES AQAT         0.0
+GROUP
+ATOM OH2  OT     -0.834
+GROUP
+ATOM H1   HT      0.417
+GROUP
+ATOM H2   HT      0.417
+
+!bond between ne2 and cm in 242
+PRES H240         0.0
+BOND  CM NE2
+
+PRES H3OS 1.0 ! for O state charges Alexi convention
+ATOM OH2  OF     -0.44 !39 O      -0.439740
+ATOM H1   HF      0.34 !48 H       0.340275
+ATOM H2   HF      0.34 !49 H       0.336918
+ATOM FE   FE     -0.10 !6 Fe      -0.096639
+ATOM NA   NPH    -0.10 !11 N      -0.096384
+ATOM NB   NPH     0.09 !16 N       0.088766
+ATOM NC   NPH     0.03 !21 N       0.033799
+ATOM ND   NPH    -0.02 !26 N      -0.016708
+ATOM C1A  CPA     0.26 !12 C       0.259611
+ATOM C2A  CPB    -0.22 !13 C      -0.217576
+ATOM C3A  CPB    -0.09 !14 C      -0.089114
+ATOM C4A  CPA     0.12 !15 C       0.117119
+ATOM C1B  CPA    -0.06 !17 C      -0.058209
+ATOM C2B  CPB    -0.35 !18 C      -0.347948
+ATOM C3B  CPB    -0.24 !19 C      -0.239295
+ATOM C4B  CPA     0.15 !20 C       0.148580
+ATOM C1C  CPA     0.44 !22 C       0.438245
+ATOM C2C  CPB    -0.15 !23 C      -0.149327
+ATOM C3C  CPB    -0.14 !24 C      -0.140831
+ATOM C4C  CPA     0.17 !25 C       0.174014
+ATOM C1D  CPA     0.21 !27 C       0.209893
+ATOM C2D  CPB    -0.18 !28 C      -0.180160
+ATOM C3D  CPB    -0.16 !29 C      -0.159489
+ATOM C4D  CPA     0.31 !30 C       0.313134
+ATOM CHA  CPM    -0.26 !7 C      bridge C
+ATOM HA   HA      0.36 !34 H
+ATOM CHB  CPM    -0.13 !8 C
+ATOM HB   HA      0.36 !35 H
+ATOM CHC  CPM    -0.17 !9 C
+ATOM HC   HA      0.35 !32 H
+ATOM CHD  CPM    -0.06 !10 C
+ATOM HD   HA      0.34 !33 H
+BOND OH2 FE
+BOND OH2 H1 OH2 H2
+ANGLE H1 OH2 H2
+ANGLE H1 OH2 FE
+DIHEH H1 OH2 FE ND
+DIHEH H2 OH2 FE NB
+IC H1  OH2  FE   ND   0.0000  0.0000  0.0000  0.0000  0.0000
+
+PRES HEMAR        -2.00 
+GROUP   
+! <--- 
+!
+ATOM FE   FE      0.24 !
+ATOM NA   NPH    -0.18 !
+ATOM NB   NPH    -0.18 !
+ATOM NC   NPH    -0.18 !
+ATOM ND   NPH    -0.18 !
+ATOM C1A  CPA     0.12 !
+ATOM C2A  CPB    -0.06 !
+ATOM C3A  CPB    -0.06 !
+ATOM C4A  CPA     0.12 !
+ATOM C1B  CPA     0.12 !
+ATOM C2B  CPB    -0.06 !
+ATOM C3B  CPB    -0.06 !
+ATOM C4B  CPA     0.12 !
+ATOM C1C  CPA     0.12 !
+ATOM C2C  CPB    -0.06 !
+ATOM C3C  CPB    -0.06 !
+ATOM C4C  CPA     0.12 !
+ATOM C1D  CPA     0.12 !
+ATOM C2D  CPB    -0.06 !
+ATOM C3D  CPB    -0.06 !
+ATOM C4D  CPA     0.12 !
+GROUP                  !
+ATOM CHA  CPM    -0.10 !
+ATOM HA   HA      0.10 !
+GROUP                  !
+ATOM CHB  CPM    -0.10 !
+ATOM HB   HA      0.10 !
+GROUP                  !
+ATOM CHC  CPM    -0.10 !
+ATOM HC   HA      0.10 !
+GROUP                  !
+ATOM CHD  CPM    -0.10 !
+ATOM HD   HA      0.10 !
+! ---> until here QM model ESP charges
+! aldehid group (invented charges)
+GROUP
+ATOM CMA  CA      0.50 
+ATOM OMA  O      -0.59 
+ATOM HMA1 HA      0.09 
+! propionate A (from Glu)
+GROUP
+ATOM CAA  CT2    -0.18  
+ATOM HAA1 HA      0.09  
+ATOM HAA2 HA      0.09  
+ATOM CBA  CT2    -0.28 
+ATOM HBA1 HA      0.09 
+ATOM HBA2 HA      0.09 
+ATOM CGA  CC      0.62 
+ATOM O1A  OC     -0.76 
+ATOM O2A  OC     -0.76 
+! methyl (std charges)
+GROUP
+ATOM CMB  CT3    -0.27 
+ATOM HMB1 HA      0.09
+ATOM HMB2 HA      0.09
+ATOM HMB3 HA      0.09
+!<-- added farnesyl gro
+! OH charges from glycerolphosphorylcholine
+GROUP
+ATOM C11   CT1    0.14
+ATOM O11   OH1   -0.66
+ATOM H11A  HA     0.43
+ATOM H11B  H      0.09
+!alkenes have std charges
+GROUP
+ATOM C12   CT2   -0.18 
+ATOM H12A  HA     0.09 
+ATOM H12B  HA     0.09 
+GROUP
+ATOM C13   CT2   -0.18
+ATOM H13A  HA     0.09 
+ATOM H13B  HA     0.09 
+ATOM C14   CE1   -0.15 
+ATOM H14A  HE1    0.15 
+GROUP
+ATOM C15   CE1   -0.15 
+ATOM C26   CT3   -0.21 
+ATOM H26A  HA     0.12 
+ATOM H26B  HA     0.12 
+ATOM H26C  HA     0.12 
+GROUP
+ATOM C16   CT2   -0.18
+ATOM H16A  HA     0.09 
+ATOM H16B  HA     0.09 
+GROUP
+ATOM C17   CT2   -0.18
+ATOM H17A  HA     0.09 
+ATOM H17B  HA     0.09 
+GROUP
+ATOM C18   CE1   -0.15 
+ATOM H18A  HE1    0.15 
+ATOM C19   CE1   -0.15 
+ATOM C27   CT3   -0.21 
+ATOM H27A  HA     0.12 
+ATOM H27B  HA     0.12 
+ATOM H27C  HA     0.12 
+GROUP
+ATOM C20   CT2   -0.18
+ATOM H20A  HA     0.09 
+ATOM H20B  HA     0.09 
+GROUP
+ATOM C21   CT2   -0.18
+ATOM H21A  HA     0.09 
+ATOM H21B  HA     0.09 
+!
+ATOM C22   CE1   -0.15 
+ATOM H22A  HE1    0.15 
+!
+GROUP
+ATOM C23   CE1   -0.15 
+ATOM C24   CT3   -0.21 
+ATOM H24A  HA     0.12 
+ATOM H24B  HA     0.12 
+ATOM H24C  HA     0.12 
+!
+GROUP
+ATOM C25   CT3   -0.27 
+ATOM H25A  HA     0.09 
+ATOM H25B  HA     0.09 
+ATOM H25C  HA     0.09 
+GROUP
+!methyl group on C ring
+ATOM CMC  CT3    -0.27
+ATOM HMC1 HA      0.09
+ATOM HMC2 HA      0.09
+ATOM HMC3 HA      0.09
+!alkene group on C ring            
+GROUP
+ATOM CAC  CE1    -0.15    
+ATOM HAC  HE1     0.15
+!
+GROUP
+ATOM CBC  CE2    -0.42
+ATOM HBC1 HE2     0.21
+ATOM HBC2 HE2     0.21
+!methyl group on D ring
+GROUP
+ATOM CMD  CT3    -0.27 
+ATOM HMD1 HA      0.09
+ATOM HMD2 HA      0.09
+ATOM HMD3 HA      0.09
+! propionate D (from Glu)
+GROUP
+ATOM CAD  CT2    -0.18 
+ATOM HAD1 HA      0.09 
+ATOM HAD2 HA      0.09 
+ATOM CBD  CT2    -0.28  
+ATOM HBD1 HA      0.09  
+ATOM HBD2 HA      0.09  
+ATOM CGD  CC      0.62  
+ATOM O1D  OC     -0.76  
+ATOM O2D  OC     -0.76
+
+! all cooked up charge!!
+PRES HEM3H  0.0
+ATOM CAD  CT2    -0.18 ! +.03
+ATOM HAD1 HA      0.09 ! +.03
+ATOM HAD2 HA      0.09 ! +.03
+ATOM CBD  CT2    -0.18 ! +.03
+ATOM HBD1 HA      0.09 ! +.03
+ATOM HBD2 HA      0.09 ! +.03
+ATOM CGD  CC      0.65 ! +.02
+ATOM O1D  OC     -0.56 ! +.21
+ATOM O2D  OC     -0.56 ! +.15
+ATOM H2D  H       0.47
+BOND O2D H2D
+ANGLE H2D O2D CGD
+DIHEH H2D O2D CGD O1D
+DIHEH H2D O2D CGD CBD
+DONOR H2D O2D
+IC H2D  O2D  CGD   O1D   0.0000  0.0000  0.0000  0.0000  0.0000
+PATCHING FIRST NONE LAST NONE
+
+
+end
+return
+ 
