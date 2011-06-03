@@ -37,12 +37,12 @@
 !
 !PROTEINS
 !
-!MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.;
-!Evanseck, J.D.; Field, M.J.; Fischer, S.; Gao, J.; Guo, H.; Ha, S.;
-!Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos,
-!C.; Michnick, S.; Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III,
-!W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub, J.;
-!Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom
+!MacKerell, Jr., A. D.! Bashford, D.! Bellott, M.! Dunbrack Jr., R.L.!
+!Evanseck, J.D.! Field, M.J.! Fischer, S.! Gao, J.! Guo, H.! Ha, S.!
+!Joseph-McCarthy, D.! Kuchnir, L.! Kuczera, K.! Lau, F.T.K.! Mattos,
+!C.! Michnick, S.! Ngo, T.! Nguyen, D.T.! Prodhom, B.! Reiher, III,
+!W.E.! Roux, B.! Schlenkrich, M.! Smith, J.C.! Stote, R.! Straub, J.!
+!Watanabe, M.! Wiorkiewicz-Kuczera, J.! Yin, D.! Karplus, M.  All-atom
 !empirical potential for molecular modeling and dynamics Studies of
 !proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616.
 !
@@ -117,8 +117,8 @@ MASS     7 HR1    1.00800 H ! his he1, (+) his HG,HD2
 MASS     8 HR2    1.00800 H ! (+) his HE1
 MASS     9 HR3    1.00800 H ! neutral his HG, HD2
 MASS    10 HS     1.00800 H ! thiol hydrogen
-MASS    11 HE1    1.00800 H ! for alkene; RHC=CR
-MASS    12 HE2    1.00800 H ! for alkene; H2C=CR
+MASS    11 HE1    1.00800 H ! for alkene! RHC=CR
+MASS    12 HE2    1.00800 H ! for alkene! H2C=CR
 MASS    20 C     12.01100 C ! carbonyl C, peptide backbone
 MASS    21 CA    12.01100 C ! aromatic C
 MASS    22 CT1   12.01100 C ! aliphatic sp3 C for CH
@@ -138,8 +138,8 @@ MASS    35 CPB   12.01100 C ! heme beta-C
 MASS    36 CPM   12.01100 C ! heme meso-C
 MASS    37 CM    12.01100 C ! heme CO carbon
 MASS    38 CS    12.01100 C ! thiolate carbon
-MASS    39 CE1   12.01100 C ! for alkene; RHC=CR
-MASS    40 CE2   12.01100 C ! for alkene; H2C=CR
+MASS    39 CE1   12.01100 C ! for alkene! RHC=CR
+MASS    40 CE2   12.01100 C ! for alkene! H2C=CR
 MASS    50 N     14.00700 N ! proline N
 MASS    51 NR1   14.00700 N ! neutral his protonated ring nitrogen
 MASS    52 NR2   14.00700 N ! neutral his unprotonated ring nitrogen
@@ -177,15 +177,15 @@ MASS 104    HOL   1.008000 H ! Nucleic acid phosphate hydroxyl proton
 MASS 105    HAL1  1.008000 H ! alphatic proton
 MASS 106    HAL2  1.008000 H ! alphatic proton
 MASS 107    HAL3  1.008000 H ! alphatic proton
-MASS 108    HEL1  1.008000 H ! for alkene; RHC=CR
-MASS 109    HEL2  1.008000 H ! for alkene; H2C=CR
+MASS 108    HEL1  1.008000 H ! for alkene! RHC=CR
+MASS 109    HEL2  1.008000 H ! for alkene! H2C=CR
 MASS 120   CL   12.011000 C ! carbonyl C (acetic acid/methyl acetate)
 MASS 121   CTL1 12.011000 C ! sp3 carbon with 1 H  (-CH1-)
 MASS 122   CTL2 12.011000 C ! carbon of methylene group (-CH2-)
 MASS 123   CTL3 12.011000 C ! carbon of methyl group (-CH3)
 MASS 124   CTL5 12.011000 C ! carbon of methyl group (-CH3) for tetramethylammonium
-MASS 125   CEL1 12.011000 C ! for alkene; RHC=CR
-MASS 126   CEL2 12.011000 C ! for alkene; H2C=CR
+MASS 125   CEL1 12.011000 C ! for alkene! RHC=CR
+MASS 126   CEL2 12.011000 C ! for alkene! H2C=CR
 MASS 140   NTL  14.007000 N ! ammonium nitrogen
 MASS 141   NH3L 14.007000 N ! nitrogen phosphatidylethanolamine
 MASS 160   OBL  15.999400 O ! acetic acid carboxyl oxygen (e. to protein OB)
@@ -225,6 +225,9 @@ RESI CU2         2.00 ! Copper 2
 GROUP
 ATOM CU   CU      2.00
 PATCHING FIRST NONE LAST NONE
+
+! Note: This is the base topology for HEME a and a3
+!   Charges are overridden using patches found below
 
 RESI HEM2        -2.00 ! Heme a: formyl, vinyl and pseudo-farnesyl ligands Dec98 ljl
 GROUP   
@@ -483,803 +486,101 @@ ic c2a  c3a  cma  oma   1.2     120.0     180.0    120.0     1.2
 IC C3A  HMA  *CMA OMA   1.0016 122.600  180.0000  0.0000  0.0000
 PATCHING FIRS NONE LAST NONE   
 
-PRES A_2        -2.00   ! reduced bis-His heme a, a(II), JCC 29: 753-767, 2008 
-GROUP                   ! 1-HEM2, 2-His from helix2, 3-His from helix10 
-ATOM 1FE   FE      0.453177 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.193871 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.130794 !          CGA                   CGD
-ATOM 1NC   NPH     0.037444 !           |                     |
-ATOM 1ND   NPH    -0.088647 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.252893 !           |          |          |
-ATOM 1C2A  CPB    -0.329135 !   HAA1--CAA-HAA2   _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.077919 !           |       /     \       |
-ATOM 1C4A  CPA     0.083872 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA    -0.030776 !           |     |         |     |
-ATOM 1C2B  CPB     0.013352 ! HMA\      |     |         |     |      /HMD1
-ATOM 1C3B  CPB    -0.212802 !     CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.164828 ! OMA//      \   / \       / \   /       \HMD3
-ATOM 1C1C  CPA    -0.070178 !             C4A   \     /   C1D
-ATOM 1C2C  CPB    -0.028876 !            /       \   /       \
-ATOM 1C3C  CPB     0.040331 !     HB--CHB        FE         CHD--HD
-ATOM 1C4C  CPA    -0.148123 !            \       /   \       /
-ATOM 1C1D  CPA    -0.125223 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.037051 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.398646 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.260825 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.370461 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.194490 !           |       \_CHC_/       |
-ATOM 1CHB  CPM    -0.239630 !         C11-H11      |        CMC--HMC3
-ATOM 1HB   HA      0.242652 !         /   \        HC       /  |
-ATOM 1CHC  CPM    -0.220415 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1HC   HA      0.221753 !    H122 |  H121
-ATOM 1CHD  CPM    -0.089060 !         |
-!                           !    H131-C13-132    
-ATOM 1HD   HA      0.148476
-ATOM 1CMA  CF1     0.469853 ! 
-ATOM 1HMA  HF1    -0.002951 ! 
-ATOM 1OMA  OF1    -0.563374 ! 
-ATOM 1CAA  CT2     0.441606
-ATOM 1HAA1 HA     -0.100316
-ATOM 1HAA2 HA     -0.088752
-ATOM 1CBA  CT2    -0.063242 
-ATOM 1HBA1 HA     -0.037050
-ATOM 1HBA2 HA     -0.019986
-ATOM 1CGA  CC      0.955634
-ATOM 1O1A  OC     -0.870375
-ATOM 1O2A  OC     -0.881478
-ATOM 1CMB  CT3     0.011113
-ATOM 1HMB1 HA      0.007297
-ATOM 1HMB2 HA      0.007297
-ATOM 1HMB3 HA      0.007297
-ATOM 1C11  CTL1    0.466164 ! 
-ATOM 1H11  HAL1   -0.048283
-ATOM 1O11  OH1    -0.739688
-ATOM 1HO11 H       0.376514
-ATOM 1C12  CTL2    0.112980
-ATOM 1H121 HAL2   -0.030536
-ATOM 1H122 HAL2   -0.079185
-ATOM 1CMC  CT3     0.140107
-ATOM 1HMC1 HA     -0.030677
-ATOM 1HMC2 HA     -0.030677
-ATOM 1HMC3 HA     -0.030677
-ATOM 1CAC  C      -0.000443
-ATOM 1HAC  HA      0.073838
-ATOM 1CBC  C      -0.406212
-ATOM 1HBC1 HA      0.177597
-ATOM 1HBC2 HA      0.117568
-ATOM 1CMD  CT3     0.122507
-ATOM 1HMD1 HA     -0.036585
-ATOM 1HMD2 HA     -0.036585
-ATOM 1HMD3 HA     -0.036585
-ATOM 1CAD  CT2     0.452410
-ATOM 1HAD1 HA     -0.116659
-ATOM 1HAD2 HA     -0.130761
-ATOM 1CBD  CT2    -0.022567
-ATOM 1HBD1 HA     -0.022788
-ATOM 1HBD2 HA     -0.022756
-ATOM 1CGD  CC      0.994842
-ATOM 1O1D  OC     -0.961829 
-ATOM 1O2D  OC     -0.997367
-! 2:His from helix 2
-ATOM 2CB   CT2    -0.084616
-ATOM 2HB1  HA      0.037126
-ATOM 2HB2  HA      0.027353
-ATOM 2ND1  NR1    -0.127148
-ATOM 2HD1  H       0.241669
-ATOM 2CG   CPH1    0.037965
-ATOM 2CE1  CPH2   -0.003375
-ATOM 2HE1  HR1     0.111018
-ATOM 2NE2  NR2    -0.116884
-ATOM 2CD2  CPH1   -0.179332
-ATOM 2HD2  HR3     0.103677
-! 3: His from helix 10
-ATOM 3CB   CT2    -0.073009
-ATOM 3HB1  HA      0.002089
-ATOM 3HB2  HA      0.050030
-ATOM 3ND1  NR1    -0.303700
-ATOM 3HD1  H       0.271367
-ATOM 3CG   CPH1    0.141720
-ATOM 3CE1  CPH2    0.040957
-ATOM 3HE1  HR1     0.078559
-ATOM 3NE2  NR2    -0.104721
-ATOM 3CD2  CPH1   -0.202459
-ATOM 3HD2  HR3     0.128886
-
-PRES A_3        -1.00   ! oxidized bis-His heme a, a(III), JCC 29: 753-767, 2008
-GROUP                   ! 1-HEM2, 2-His from helix2, 3-His from helix10
-ATOM 1FE   FE      0.778222 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.249127 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.169838 !          CGA                   CGD
-ATOM 1NC   NPH    -0.039521 !           |                     |
-ATOM 1ND   NPH    -0.143477 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.238936 !           |          |          |
-ATOM 1C2A  CPB    -0.256705 !    HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.085029 !           |       /     \       |
-ATOM 1C4A  CPA     0.101947 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.008845 !           |     |         |     |
-ATOM 1C2B  CPB    -0.000943 ! HMA\      |     |         |     |      /HMD1
-ATOM 1C3B  CPB    -0.214476 !     CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.181777 ! OMA//      \   / \       / \   /       \HMD3
-ATOM 1C1C  CPA    -0.019919 !             C4A   \     /   C1D
-ATOM 1C2C  CPB    -0.014699 !            /       \   /       \
-ATOM 1C3C  CPB     0.080393 !       HB--CHB        FE         CHD--HD
-ATOM 1C4C  CPA    -0.106922 !            \       /   \       /
-ATOM 1C1D  CPA    -0.128353 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.103545 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.408200 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.291250 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.342842 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.201479 !           |       \_CHC_/       |
-!                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.227820 !         /   \        HC      /  |
-ATOM 1HB   HA      0.242327 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.215072 !    H122 |  H121
-ATOM 1HC   HA      0.212529 !         |
-!                           !    H131-C13-132
-ATOM 1CHD  CPM    -0.068815 !         |
-ATOM 1HD   HA      0.148050
-ATOM 1CMA  CF1     0.476726 ! 
-ATOM 1HMA  HF1     0.013607 ! 
-ATOM 1OMA  OF1    -0.527422 ! 
-ATOM 1CAA  CT2     0.356009
-ATOM 1HAA1 HA     -0.074180
-ATOM 1HAA2 HA     -0.070087
-ATOM 1CBA  CT2    -0.046411
-ATOM 1HBA1 HA     -0.030250	
-ATOM 1HBA2 HA     -0.012919
-ATOM 1CGA  CC      0.888384
-ATOM 1O1A  OC     -0.806893
-ATOM 1O2A  OC     -0.832404
-ATOM 1CMB  CT3    -0.003550
-ATOM 1HMB1 HA      0.025612
-ATOM 1HMB2 HA      0.025612
-ATOM 1HMB3 HA      0.025612
-ATOM 1C11  CTL1    0.497123   
-ATOM 1H11  HAL1   -0.045297
-ATOM 1O11  OH1    -0.716443
-ATOM 1HO11 H       0.374818
-ATOM 1C12  CTL2    0.121046
-ATOM 1H121 HAL2   -0.029124
-ATOM 1H122 HAL2   -0.069910
-ATOM 1CMC  CT3     0.029261
-ATOM 1HMC1 HA      0.012178
-ATOM 1HMC2 HA      0.012178
-ATOM 1HMC3 HA      0.012178
-ATOM 1CAC  C      -0.064729
-ATOM 1HAC  HA      0.096512
-ATOM 1CBC  C      -0.323814
-ATOM 1HBC1 HA      0.167980
-ATOM 1HBC2 HA      0.127561
-ATOM 1CMD  CT3     0.061869
-ATOM 1HMD1 HA     -0.011822
-ATOM 1HMD2 HA     -0.011822
-ATOM 1HMD3 HA     -0.011822
-ATOM 1CAD  CT2     0.434510
-ATOM 1HAD1 HA     -0.105090
-ATOM 1HAD2 HA     -0.118424
-ATOM 1CBD  CT2    -0.025311
-ATOM 1HBD1 HA     -0.005552
-ATOM 1HBD2 HA     -0.025869
-ATOM 1CGD  CC      0.936745
-ATOM 1O1D  OC     -0.924212
-ATOM 1O2D  OC     -0.940464
-! 2His, igen på samma sida som prop.
-ATOM 2CB   CT2    -0.053083 
-ATOM 2HB1  HA      0.053204
-ATOM 2HB2  HA      0.039276
-ATOM 2ND1  NR1    -0.071126
-ATOM 2HD1  H       0.252946
-ATOM 2CG   CPH1    0.007802
-ATOM 2CE1  CPH2    0.002151
-ATOM 2HE1  HR1     0.117962
-ATOM 2NE2  NR2    -0.180600
-ATOM 2CD2  CPH1   -0.133675
-ATOM 2HD2  HR3     0.107146
-! O 3His på motsatt sida.
-ATOM 3CB   CT2    -0.107833
-ATOM 3HB1  HA      0.030135
-ATOM 3HB2  HA      0.067846
-ATOM 3ND1  NR1    -0.245140
-ATOM 3HD1  H       0.267809
-ATOM 3CG   CPH1    0.182791
-ATOM 3CE1  CPH2    0.074443
-ATOM 3HE1  HR1     0.075806
-ATOM 3NE2  NR2    -0.176663
-ATOM 3CD2  CPH1   -0.210554
-ATOM 3HD2  HR3     0.140115
-
-PRES A3_2       -2.00   ! reduced high spin heme a3, a3(II), JCC 29: 753-767, 2008
-GROUP                   ! 1-HEM2, 2-His from helix10
-ATOM 1FE   FE      0.339528 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.210589 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.208045 !          CGA                   CGD
-ATOM 1NC   NPH    -0.063930 !           |                     |
-ATOM 1ND   NPH    -0.194729 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.239908 !           |          |          |
-ATOM 1C2A  CPB    -0.224377 !    HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.125897 !           |       /     \       |
-ATOM 1C4A  CPA     0.149879 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.086966 !           |     |         |     |
-ATOM 1C2B  CPB    -0.098903 ! HMA\      |     |         |     |      /HMD1
-ATOM 1C3B  CPB    -0.057349 !     CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.099954 ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.074816 !             C4A   \     /   C1D
-ATOM 1C2C  CPB    -0.001140 !            /       \   /       \
-ATOM 1C3C  CPB     0.001141 !      HB--CHB        FE         CHD--HD
-ATOM 1C4C  CPA    -0.007123 !            \       /   \       /
-ATOM 1C1D  CPA     0.038006 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.031342 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.442699 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.249869 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.414769 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.296797 !           |       \_CHC_/       |
-!                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.289404 !         /   \        HC       /  |
-ATOM 1HB   HA      0.250794 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.207276 !    H122 |  H121
-ATOM 1HC   HA      0.232944 !         |
-ATOM 1CHD  CPM    -0.224258 !         |
-ATOM 1HD   HA      0.157312
-ATOM 1CMA  CF1     0.467048 ! 
-ATOM 1HMA  HF1    -0.018995 ! 
-ATOM 1OMA  OF1    -0.569286 ! 
-ATOM 1CAA  CT2     0.336162
-ATOM 1HAA1 HA     -0.078441
-ATOM 1HAA2 HA     -0.045946 
-ATOM 1CBA  CT2    -0.003058
-ATOM 1HBA1 HA     -0.066267
-ATOM 1HBA2 HA     -0.031357
-ATOM 1CGA  CC      1.052550
-ATOM 1O1A  OC     -1.037730
-ATOM 1O2A  OC     -0.894904
-ATOM 1CMB  CT3     0.072375
-ATOM 1HMB1 HA     -0.007057 
-ATOM 1HMB2 HA     -0.007057
-ATOM 1HMB3 HA     -0.007057
-ATOM 1C11  CTL1    0.356112   
-ATOM 1H11  HAL1   -0.025638
-ATOM 1O11  OH1    -0.696155
-ATOM 1HO11 H       0.361047
-ATOM 1C12  CTL2    0.142780
-ATOM 1H121 HAL2   -0.079162
-ATOM 1H122 HAL2   -0.053019
-ATOM 1CMC  CT3     0.170425
-ATOM 1HMC1 HA     -0.038431
-ATOM 1HMC2 HA     -0.038431
-ATOM 1HMC3 HA     -0.038431
-ATOM 1CAC  C      -0.018838
-ATOM 1HAC  HA      0.095100
-ATOM 1CBC  C      -0.404402 
-ATOM 1HBC1 HA      0.179897
-ATOM 1HBC2 HA      0.116987
-ATOM 1CMD  CT3     0.165280
-ATOM 1HMD1 HA     -0.048723
-ATOM 1HMD2 HA     -0.048723
-ATOM 1HMD3 HA     -0.048723
-ATOM 1CAD  CT2     0.762840
-ATOM 1HAD1 HA     -0.200615         
-ATOM 1HAD2 HA     -0.253105
-ATOM 1CBD  CT2     0.031709
-ATOM 1HBD1 HA     -0.059794
-ATOM 1HBD2 HA     -0.112805
-ATOM 1CGD  CC      0.918199
-ATOM 1O1D  OC     -0.855214
-ATOM 1O2D  OC     -0.903623
-! His:
-ATOM 2CB   CT2    -0.034832
-ATOM 2HB1  HA      0.024531
-ATOM 2HB2  HA     -0.007559
-ATOM 2ND1  NR1    -0.057454
-ATOM 2HD1  H       0.228585
-ATOM 2CG   CPH1   -0.073480
-ATOM 2CE1  CPH2   -0.051404
-ATOM 2HE1  HR1     0.158649
-ATOM 2NE2  NR2    -0.037012
-ATOM 2CD2  CPH1   -0.155806
-ATOM 2HD2  HR3     0.139122
-
-PRES A3_3       -1.00   ! oxidized high spin heme a3, a3(III), JCC 29: 753-767, 2008
-GROUP                   ! 1-HEM2, 2-His from helix10
-ATOM 1FE   FE      0.419869 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.219469 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.183615 !          CGA                   CGD
-ATOM 1NC   NPH    -0.084605 !           |                     |
-ATOM 1ND   NPH    -0.130311 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.225901 !           |          |          |
-ATOM 1C2A  CPB    -0.181128 !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.138998 !          |       /     \       |
-ATOM 1C4A  CPA     0.187588 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.077864 !           |     |         |     |
-ATOM 1C2B  CPB    -0.020621 ! HMA\      |     |         |     |     /HMD1
-ATOM 1C3B  CPB    -0.156038 !    CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.176098 ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.055871 !             C4A   \     /   C1D
-ATOM 1C2C  CPB     0.036689 !            /       \   /      \
-ATOM 1C3C  CPB     0.024208 !     HB--CHB        FE         CHD--HD
-ATOM 1C4C  CPA     0.034225 !            \       /   \       /
-ATOM 1C1D  CPA    -0.016543 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.084380 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.399751 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.230958 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.354586 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.302044 !           |       \_CHC_/       |
-!                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.280337 !         /   \        HC       /  |
-ATOM 1HB   HA      0.250300 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.217276 !    H122 |  H121
-ATOM 1HC   HA      0.235798 !         |
-ATOM 1CHD  CPM    -0.192174 !         |
-ATOM 1HD   HA      0.164644
-ATOM 1CMA  CF1     0.487995
-ATOM 1HMA  HF1    -0.008537
-ATOM 1OMA  OF1    -0.534291 
-ATOM 1CAA  CT2     0.274002
-ATOM 1HAA1 HA     -0.041463
-ATOM 1HAA2 HA     -0.030292
-ATOM 1CBA  CT2     0.004102
-ATOM 1HBA1 HA     -0.061198
-ATOM 1HBA2 HA     -0.021988
-ATOM 1CGA  CC      0.973022
-ATOM 1O1A  OC     -0.966667
-ATOM 1O2A  OC     -0.842988
-ATOM 1CMB  CT3     0.003838
-ATOM 1HMB1 HA      0.022725
-ATOM 1HMB2 HA      0.022725
-ATOM 1HMB3 HA      0.022725
-ATOM 1C11  CTL1    0.424064   
-ATOM 1H11  HAL1   -0.023002
-ATOM 1O11  OH1    -0.670747
-ATOM 1HO11 H       0.362730
-ATOM 1C12  CTL2    0.113543
-ATOM 1H121 HAL2   -0.058602
-ATOM 1H122 HAL2   -0.034951
-ATOM 1CMC  CT3     0.089784
-ATOM 1HMC1 HA     -0.004579
-ATOM 1HMC2 HA     -0.004579
-ATOM 1HMC3 HA     -0.004579
-ATOM 1CAC  C      -0.075911
-ATOM 1HAC  HA      0.112788
-ATOM 1CBC  C      -0.319985
-ATOM 1HBC1 HA      0.173766
-ATOM 1HBC2 HA      0.125484
-ATOM 1CMD  CT3     0.109748
-ATOM 1HMD1 HA     -0.020462
-ATOM 1HMD2 HA     -0.020462
-ATOM 1HMD3 HA     -0.020462
-ATOM 1CAD  CT2     0.721993
-ATOM 1HAD1 HA     -0.186159
-ATOM 1HAD2 HA     -0.225846
-ATOM 1CBD  CT2    -0.043687
-ATOM 1HBD1 HA     -0.036694
-ATOM 1HBD2 HA     -0.074298
-ATOM 1CGD  CC      0.940250
-ATOM 1O1D  OC     -0.842489
-ATOM 1O2D  OC     -0.883641
-! HIS:
-ATOM 2CB   CT2    -0.062619
-ATOM 2HB1  HA      0.043809
-ATOM 2HB2  HA      0.018892
-ATOM 2ND1  NR1    -0.083171
-ATOM 2HD1  H       0.268076
-ATOM 2CG   CPH1    0.008897
-ATOM 2CE1  CPH2   -0.071387
-ATOM 2HE1  HR1     0.163464
-ATOM 2NE2  NR2     0.040565
-ATOM 2CD2  CPH1   -0.217869
-ATOM 2HD2  HR3     0.145375
-
-PRES A3WR        -2.00       ! ferrous-aquo high spin heme a3, a3(II)-H2O, JCC 29: 753-767, 2008
-GROUP                        ! 1-HEM2, 2-axial His ligand (376 in bovine)
-ATOM 1FE   FE      0.562354  !       O2A   O1A             O2D  O1D
-
-ATOM 1NA   NPH    -0.227819  !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.183393  !          CGA                   CGD
-ATOM 1NC   NPH    -0.055938  !           |                     |
-ATOM 1ND   NPH    -0.204499  !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.286502  !           |          |          |
-ATOM 1C2A  CPB    -0.287744  !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.121796  !          |       /     \       |
-ATOM 1C4A  CPA     0.157870  !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.056486  !           |     |         |     |
-ATOM 1C2B  CPB    -0.073136  ! HMA\      |     |         |     |     /HMD1
-ATOM 1C3B  CPB    -0.071486  !    CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.098912  ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.154956  !             C4A   \     /   C1D
-ATOM 1C2C  CPB    -0.022362  !            /       \   /      \
-ATOM 1C3C  CPB     0.099120  !     HB--CHB          FE---HOH  CHD--HD
-ATOM 1C4C  CPA    -0.054786  !            \       /   \       /
-ATOM 1C1D  CPA    -0.007508  !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.029890  !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.455470  !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.240659  !HMB3/      |     |         |     |     \\  /HBC1
-                             !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.448344  !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.303394  !           |       \_CHC_/       |
-                             !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.269985  !         /   \        HC       /  |
-ATOM 1HB   HA      0.247727  !        C12   O11          HMC1  HMC2
-                             !                 !       / | \     \HO11
-ATOM 1CHC  CPM    -0.175516  !    H122 |  H121
-ATOM 1HC   HA      0.234606  !         |
-ATOM 1CHD  CPM    -0.298164  !         |
-ATOM 1HD   HA      0.198205 
-ATOM 1OH2  OW     -0.834000  ! aquo O
-ATOM 1HO1  H       0.417000  ! aquo H
-ATOM 1HO2  H       0.417000  ! aquo H
-ATOM 1CMA  CF1     0.456650  !
-ATOM 1HMA  HF1    -0.024130  !
-ATOM 1OMA  OF1    -0.569268  !
-ATOM 1CAA  CT2     0.366914 
-ATOM 1HAA1 HA     -0.057269 
-ATOM 1HAA2 HA     -0.057269 
-ATOM 1CBA  CT2     0.071825 
-ATOM 1HBA1 HA     -0.059291 
-ATOM 1HBA2 HA     -0.059291 
-ATOM 1CGA  CC      0.981017 
-ATOM 1O1A  OC     -0.980563 
-ATOM 1O2A  OC     -0.945459 
-ATOM 1CMB  CT3     0.053008 
-ATOM 1HMB1 HA     -0.001662 
-ATOM 1HMB2 HA     -0.001662 
-ATOM 1HMB3 HA     -0.001662 
-ATOM 1C11  CTL1    0.324268   
-ATOM 1H11  HAL1   -0.016382 
-ATOM 1O11  OH1    -0.684415 
-ATOM 1HO11 H       0.351977 
-ATOM 1C12  CTL2    0.165110 
-ATOM 1H121 HAL2   -0.071556 
-ATOM 1H122 HAL2   -0.071556 
-ATOM 1CMC  CT3     0.176049 
-ATOM 1HMC1 HA     -0.030772 
-ATOM 1HMC2 HA     -0.030772 
-ATOM 1HMC3 HA     -0.030772 
-ATOM 1CAC  C      -0.071707 
-ATOM 1HAC  HA      0.078118 
-ATOM 1CBC  C      -0.397196 
-ATOM 1HBC1 HA      0.147425 
-ATOM 1HBC2 HA      0.147425 
-ATOM 1CMD  CT3     0.130088 
-ATOM 1HMD1 HA     -0.033986 
-ATOM 1HMD2 HA     -0.033986 
-ATOM 1HMD3 HA     -0.033986 
-ATOM 1CAD  CT2     0.783605 
-ATOM 1HAD1 HA     -0.217672 
-ATOM 1HAD2 HA     -0.217672 
-ATOM 1CBD  CT2    -0.063406 
-ATOM 1HBD1 HA     -0.050667 
-ATOM 1HBD2 HA     -0.050667 
-ATOM 1CGD  CC      0.908917 
-ATOM 1O1D  OC     -0.836399 
-ATOM 1O2D  OC     -0.896318 
-! HIS: axial ligand
-ATOM 2CB   CT2    -0.064036 
-ATOM 2HB1  HA      0.020461 
-ATOM 2HB2  HA      0.020461 
-ATOM 2ND1  NR1    -0.055693 
-ATOM 2HD1  H       0.229659 
-ATOM 2CG   CPH1   -0.045279 
-ATOM 2CE1  CPH2   -0.068680 
-ATOM 2HE1  HR1     0.152891 
-ATOM 2NE2  NR2    -0.093105 
-ATOM 2CD2  CPH1   -0.179295 
-ATOM 2HD2  HR3     0.134810 
-!BOND 1FE   1OH1
-!BOND 1O1   1H
-!DELETE ANGLE 1NA 1FE 1NC   1NB 1FE 1ND
-!ANGLE 1OH1 1FE 1NA    1OH1 1FE 1NB
-!ANGLE 1OH1 1FE 1NC    1OH1 1FE 1ND
-!ANGLE 1HO1 1OH1 1FE
-!DIHE  1OH1 1FE  1NA  1C1A
-!DIHE  1HO1 1OH1 1FE  1NA
-!IC    1OH1 1FE  1NA  1C1A   1.6300   94.0000  -89.0000  0.0000  0.0000
-!IC    1HO1 1OH1 1FE  1NA    0.97    107.00     45.000   0.000   0.000
-
-PRES A3OH       -2.00   ! ferric-hydroxy high-spin heme a3, a3(III)-OH, JCC 29: 753-767, 2008
-GROUP                   ! 1-HEM2, 2-axial His ligand (376 in bovine)
-ATOM 1FE   FE      1.101819 !       O2A   O1A             O2D  O1D
-
-ATOM 1NA   NPH    -0.214473 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.140159 !          CGA                   CGD
-ATOM 1NC   NPH    -0.088208 !           |                     |
-ATOM 1ND   NPH    -0.217223 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.239837 !           |          |          |
-ATOM 1C2A  CPB    -0.253267 !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.118372 !          |       /     \       |
-ATOM 1C4A  CPA     0.126686 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA    -0.014598 !           |     |         |     |
-ATOM 1C2B  CPB    -0.023039 ! HMA\      |     |         |     |     /HMD1
-ATOM 1C3B  CPB    -0.085069 !    CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.134314 ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.028297 !             C4A   \     /   C1D
-ATOM 1C2C  CPB     0.008879 !            /       \   /      \
-ATOM 1C3C  CPB     0.025139 !     HB--CHB          FE---O    CHD--HD
-ATOM 1C4C  CPA     0.016383 !            \       /   \       /
-ATOM 1C1D  CPA     0.011862 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.089802 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.517744 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.305094 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.459922 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.310567 !           |       \_CHC_/       |
-!                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.260677 !         /   \        HC       /  |
-ATOM 1HB   HA      0.251349 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.250120 !    H122 |  H121
-ATOM 1HC   HA      0.244899 !         |
-ATOM 1CHD  CPM    -0.256201 !         |
-ATOM 1HD   HA      0.160005
-ATOM 1OH1  OW     -0.845208 ! hydroxy O
-ATOM 1HO1  H       0.326167 ! hydroxy H
-ATOM 1CMA  CF1     0.479090 !
-ATOM 1HMA  HF1    -0.024072 !
-ATOM 1OMA  OF1    -0.572214 !
-ATOM 1CAA  CT2     0.358638
-ATOM 1HAA1 HA     -0.066770
-ATOM 1HAA2 HA     -0.056765
-ATOM 1CBA  CT2     0.024441
-ATOM 1HBA1 HA     -0.061821
-ATOM 1HBA2 HA     -0.040552
-ATOM 1CGA  CC      0.973875
-ATOM 1O1A  OC     -0.986635
-ATOM 1O2A  OC     -0.882504
-ATOM 1CMB  CT3     0.023073
-ATOM 1HMB1 HA      0.005664
-ATOM 1HMB2 HA      0.005664
-ATOM 1HMB3 HA      0.005664
-ATOM 1C11  CTL1    0.337157  
-ATOM 1H11  HAL1   -0.016539
-ATOM 1O11  OH1    -0.704756
-ATOM 1HO11 H       0.376059
-ATOM 1C12  CTL2    0.153992
-ATOM 1H121 HAL2   -0.092527
-ATOM 1H122 HAL2   -0.048676
-ATOM 1CMC  CT3     0.089884
-ATOM 1HMC1 HA     -0.016415
-ATOM 1HMC2 HA     -0.016415
-ATOM 1HMC3 HA     -0.016415
-ATOM 1CAC  C      -0.060649
-ATOM 1HAC  HA      0.111678
-ATOM 1CBC  C      -0.384396
-ATOM 1HBC1 HA      0.175932
-ATOM 1HBC2 HA      0.113791
-ATOM 1CMD  CT3     0.100705
-ATOM 1HMD1 HA     -0.030884
-ATOM 1HMD2 HA     -0.030884
-ATOM 1HMD3 HA     -0.030884
-ATOM 1CAD  CT2     0.815495
-ATOM 1HAD1 HA     -0.215529
-ATOM 1HAD2 HA     -0.249648
-ATOM 1CBD  CT2    -0.041229
-ATOM 1HBD1 HA     -0.045211
-ATOM 1HBD2 HA     -0.067849
-ATOM 1CGD  CC      0.910943
-ATOM 1O1D  OC     -0.846748
-ATOM 1O2D  OC     -0.900027
-! HIS: axial ligand
-ATOM 2CB   CT2    -0.081114
-ATOM 2HB1  HA      0.039607
-ATOM 2HB2  HA      0.001320
-ATOM 2ND1  NR1    -0.038088
-ATOM 2HD1  H       0.209198
-ATOM 2CG   CPH1   -0.080642
-ATOM 2CE1  CPH2    0.083318
-ATOM 2HE1  HR1     0.096488
-ATOM 2NE2  NR2    -0.453527
-ATOM 2CD2  CPH1   -0.002324
-ATOM 2HD2  HR3     0.090808
-BOND 1FE   1OH1
-BOND 1OH1   1HO1
-!DELETE ANGLE 1NA 1FE 1NC   1NB 1FE 1ND
-ANGLE 1OH1 1FE 1NA    1OH1 1FE 1NB
-ANGLE 1OH1 1FE 1NC    1OH1 1FE 1ND
-ANGLE 1HO1 1OH1 1FE
-!DIHE  1OH1 1FE  1NA  1C1A
-!DIHE  1HO1 1OH1 1FE  1NA
-!IC    1OH1 1FE  1NA  1C1A   1.6300   94.0000  -89.0000  0.0000  0.0000
-!IC    1HO1 1OH1 1FE  1NA    0.97    107.00     45.000   0.000   0.000
-
-PRES A3F3       -3.00   ! ferric-oxo high-spin heme a3, a3(III)-O, JCC 29: 753-767, 2008
-GROUP                   ! 1-HEM2, 2-axial His ligand (376 in bovine)
-ATOM 1FE   FE      1.144780 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.186282 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.179150 !          CGA                   CGD
-ATOM 1NC   NPH    -0.036836 !           |                     |
-ATOM 1ND   NPH    -0.204094 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.206205 !           |          |          |
-ATOM 1C2A  CPB    -0.316239 !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.195988 !          |       /     \       |
-ATOM 1C4A  CPA     0.192877 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.042154 !           |     |         |     |
-ATOM 1C2B  CPB    -0.080357 ! HMA\      |     |         |     |     /HMD1
-ATOM 1C3B  CPB    -0.025204 !    CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.068961 ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.149640 !             C4A   \     /   C1D
-ATOM 1C2C  CPB    -0.021429 !            /       \   /      \
-ATOM 1C3C  CPB    -0.015147 !     HB--CHB          FE---O    CHD--HD
-ATOM 1C4C  CPA     0.016560 !            \       /   \       /
-ATOM 1C1D  CPA     0.038614 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.050579 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.509350 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.266453 !HMB3/      |     |         |     |     \\  /HBC1
-!                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.440010 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.266273 !           |       \_CHC_/       |
-!                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.374861 !         /   \        HC       /  |
-ATOM 1HB   HA      0.276547 !        C12   O11          HMC1  HMC2
-!                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.239270 !    H122 |  H121
-ATOM 1HC   HA      0.272021 !         |
-ATOM 1CHD  CPM    -0.352276 !         |
-ATOM 1HD   HA      0.169583
-ATOM 1O1   OM     -0.648355 ! ferryl O
-ATOM 1CMA  CF1     0.484923 !
-ATOM 1HMA  HF1    -0.059174 !
-ATOM 1OMA  OF1    -0.657112 !
-ATOM 1CAA  CT2     0.456102
-ATOM 1HAA1 HA     -0.100867
-ATOM 1HAA2 HA     -0.087964
-ATOM 1CBA  CT2     0.025138
-ATOM 1HBA1 HA     -0.079573
-ATOM 1HBA2 HA     -0.040218
-ATOM 1CGA  CC      1.027410
-ATOM 1O1A  OC     -1.081965
-ATOM 1O2A  OC     -0.904159
-ATOM 1CMB  CT3     0.115575
-ATOM 1HMB1 HA     -0.029474
-ATOM 1HMB2 HA     -0.029474
-ATOM 1HMB3 HA     -0.029474
-ATOM 1C11  CTL1    0.270725
-ATOM 1H11  HAL1   -0.009043
-ATOM 1O11  OH1    -0.727450
-ATOM 1HO11 H       0.372170
-ATOM 1C12  CTL2    0.195809
-ATOM 1H121 HAL2   -0.114443 
-ATOM 1H122 HAL2   -0.075108
-ATOM 1CMC  CT3     0.253519
-ATOM 1HMC1 HA     -0.076099
-ATOM 1HMC2 HA     -0.076099
-ATOM 1HMC3 HA     -0.076099
-ATOM 1CAC  C      -0.004277
-ATOM 1HAC  HA      0.092870
-ATOM 1CBC  C      -0.500630
-ATOM 1HBC1 HA      0.194041
-ATOM 1HBC2 HA      0.106144
-ATOM 1CMD  CT3     0.163986
-ATOM 1HMD1 HA     -0.057240
-ATOM 1HMD2 HA     -0.057240
-ATOM 1HMD3 HA     -0.057240
-ATOM 1CAD  CT2     0.818783
-ATOM 1HAD1 HA     -0.222485
-ATOM 1HAD2 HA     -0.247607
-ATOM 1CBD  CT2    -0.015461
-ATOM 1HBD1 HA     -0.051646
-ATOM 1HBD2 HA     -0.090258
-ATOM 1CGD  CC      0.925590
-ATOM 1O1D  OC     -0.865636
-ATOM 1O2D  OC     -0.932518
-! HIS: axial ligand
-ATOM 2CB   CT2    -0.092991 
-ATOM 2HB1  HA      0.035048
-ATOM 2HB2  HA     -0.002974
-ATOM 2ND1  NR1    -0.058786
-ATOM 2HD1  H       0.201006
-ATOM 2CG   CPH1   -0.116116
-ATOM 2CE1  CPH2    0.085957
-ATOM 2HE1  HR1     0.111136
-ATOM 2NE2  NR2    -0.466796
-ATOM 2CD2  CPH1    0.047365
-ATOM 2HD2  HR3     0.073280
-!BOND 1FE   1O1
-!DELETE ANGLE 1NA 1FE 1NC   1NB 1FE 1ND
-!ANGLE 1O1 1FE 1NA    1O1 1FE 1NB
-!ANGLE 1O1 1FE 1NC    1O1 1FE 1ND
-!DIHE  1O1 1FE 1NA  1C1A
-!IC    1O1 1FE 1NA  1C1A   1.6300   94.0000  -89.0000  0.0000  0.0000
-
 
 PRES A3F4       -2.00   ! ferryl high spin heme a3, a3(IV)=O, JCC 29: 753-767, 2008
 GROUP                   ! 1-HEM2, 2-axial His ligand (376 in bovine)
-ATOM 1FE   FE      1.157018 !       O2A   O1A             O2D  O1D
-ATOM 1NA   NPH    -0.221764 !         \\ //                 \\ //
-ATOM 1NB   NPH    -0.205858 !          CGA                   CGD
-ATOM 1NC   NPH    -0.075696 !           |                     |
-ATOM 1ND   NPH    -0.187197 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
-ATOM 1C1A  CPA     0.248276 !           |          |          |
-ATOM 1C2A  CPB    -0.202515 !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
-ATOM 1C3A  CPB    -0.179068 !          |       /     \       |
-ATOM 1C4A  CPA     0.179009 !          C2A---C1A       C4D---C3D
-ATOM 1C1B  CPA     0.052572 !           |     |         |     |
-ATOM 1C2B  CPB    -0.047214 ! HMA\      |     |         |     |     /HMD1
-ATOM 1C3B  CPB    -0.077214 !    CMA--C3A    NA       ND    C2D--CMD-HMD2
-ATOM 1C4B  CPA     0.135079 ! OMA//      \   / \       / \   /      \HMD3
-ATOM 1C1C  CPA    -0.104236 !             C4A   \     /   C1D
-ATOM 1C2C  CPB     0.019403 !            /       \   /      \
-ATOM 1C3C  CPB     0.073339 !     HB--CHB         FE===O     CHD--HD
-ATOM 1C4C  CPA    -0.002813 !            \       /   \       /
-ATOM 1C1D  CPA     0.012703 !             C1B   /     \   C4C        HAC
-ATOM 1C2D  CPB     0.068632 !HMB1\       /   \ /       \ /   \       /
-ATOM 1C3D  CPB    -0.469209 !HMB2-CMB--C2B    NB       NC    C3C--CAC
-ATOM 1C4D  CPA     0.297433 !HMB3/      |     |         |     |     \\  /HBC1
+ATOM 1FE   FE      0.61 !       O2A   O1A             O2D  O1D
+ATOM 1NA   NPH    -0.13 !         \\ //                 \\ //
+ATOM 1NB   NPH    -0.08 !          CGA                   CGD
+ATOM 1NC   NPH    -0.07 !           |                     |
+ATOM 1ND   NPH    -0.12 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
+ATOM 1C1A  CPA     0.33 !           |          |          |
+ATOM 1C2A  CPB    -0.30 !   HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
+ATOM 1C3A  CPB    -0.31 !          |       /     \       |
+ATOM 1C4A  CPA     0.28 !          C2A---C1A       C4D---C3D
+ATOM 1C1B  CPA     0.24 !           |     |         |     |
+ATOM 1C2B  CPB    -0.28 ! HMA\      |     |         |     |     /HMD1
+ATOM 1C3B  CPB    -0.29 !    CMA--C3A    NA       ND    C2D--CMD-HMD2
+ATOM 1C4B  CPA     0.25 ! OMA//      \   / \       / \   /      \HMD3
+ATOM 1C1C  CPA     0.24 !             C4A   \     /   C1D
+ATOM 1C2C  CPB    -0.28 !            /       \   /      \
+ATOM 1C3C  CPB    -0.27 !     HB--CHB         FE===O     CHD--HD
+ATOM 1C4C  CPA     0.22 !            \       /   \       /
+ATOM 1C1D  CPA     0.27 !             C1B   /     \   C4C        HAC
+ATOM 1C2D  CPB    -0.31 !HMB1\       /   \ /       \ /   \       /
+ATOM 1C3D  CPB     0.33 !HMB2-CMB--C2B    NB       NC    C3C--CAC
+ATOM 1C4D  CPA     0.33 !HMB3/      |     |         |     |     \\  /HBC1
 !                           !           |     |         |     |      CBC
-ATOM 1CHA  CPM    -0.452381 !          C3B---C4B       C1C---C2C        \HBC2
-ATOM 1HA   HA      0.304813 !           |       \_CHC_/       |
+ATOM 1CHA  CPM    -0.10 !          C3B---C4B       C1C---C2C        \HBC2
+ATOM 1HA   HA      0.18 !           |       \_CHC_/       |
 !                           !         C11-H11      |        CMC--HMC3
-ATOM 1CHB  CPM    -0.290681 !         /   \        HC       /  |
-ATOM 1HB   HA      0.255793 !        C12   O11          HMC1  HMC2
+ATOM 1CHB  CPM    -0.07 !         /   \        HC       /  |
+ATOM 1HB   HA      0.19 !        C12   O11          HMC1  HMC2
 !                           !       / | \     \HO11
-ATOM 1CHC  CPM    -0.209768 !    H122 |  H121
-ATOM 1HC   HA      0.243160 !         |
-ATOM 1CHD  CPM    -0.250131 !         |
-ATOM 1HD   HA      0.166027
-ATOM 1O1   OM     -0.607809 ! ferryl =O
+ATOM 1CHC  CPM    -0.02 !    H122 |  H121
+ATOM 1HC   HA      0.17 !         |
+ATOM 1CHD  CPM    -0.07 !         |
+ATOM 1HD   HA      0.19
+ATOM 1O1   OM     -0.50 ! ferryl =O
 !                           !
-ATOM 1CMA  CF1     0.520719 !
-ATOM 1HMA  HF1    -0.036624 !
-ATOM 1OMA  OF1    -0.580305 !
-ATOM 1CAA  CT2     0.328274
-ATOM 1HAA1 HA     -0.054476
-ATOM 1HAA2 HA     -0.054476
-ATOM 1CBA  CT2     0.016217
-ATOM 1HBA1 HA     -0.050619
-ATOM 1HBA2 HA     -0.050619
-ATOM 1CGA  CC      0.994638
-ATOM 1O1A  OC     -1.008239
-ATOM 1O2A  OC     -0.877384
-ATOM 1CMB  CT3     0.017066
-ATOM 1HMB1 HA      0.006639
-ATOM 1HMB2 HA      0.006639
-ATOM 1HMB3 HA      0.006639
-ATOM 1C11  CTL1    0.319335  
-ATOM 1H11  HAL1   -0.010417
-ATOM 1O11  OH1    -0.684392
-ATOM 1HO11 H       0.362906
-ATOM 1C12  CTL2    0.154465
-ATOM 1H121 HAL2   -0.070746
-ATOM 1H122 HAL2   -0.070746
-ATOM 1CMC  CT3     0.105511 
-ATOM 1HMC1 HA     -0.015388
-ATOM 1HMC2 HA     -0.015388
-ATOM 1HMC3 HA     -0.015388
-ATOM 1CAC  C      -0.089173
-ATOM 1HAC  HA      0.099155
-ATOM 1CBC  C      -0.371187
-ATOM 1HBC1 HA      0.140441
-ATOM 1HBC2 HA      0.140441
-ATOM 1CMD  CT3     0.085913
-ATOM 1HMD1 HA     -0.025849
-ATOM 1HMD2 HA     -0.025849
-ATOM 1HMD3 HA     -0.025849
-ATOM 1CAD  CT2     0.787134
-ATOM 1HAD1 HA     -0.229716
-ATOM 1HAD2 HA     -0.229716
-ATOM 1CBD  CT2    -0.059714
-ATOM 1HBD1 HA     -0.043728
-ATOM 1HBD2 HA     -0.043728
-ATOM 1CGD  CC      0.944889
-ATOM 1O1D  OC     -0.861247
-ATOM 1O2D  OC     -0.908697
+ATOM 1CMA  CF1     0.50 !
+ATOM 1HMA  HF1     0.09 !
+ATOM 1OMA  OF1    -0.59 !
+ATOM 1CAA  CT2    -0.18
+ATOM 1HAA1 HA      0.09
+ATOM 1HAA2 HA      0.09
+ATOM 1CBA  CT2    -0.28
+ATOM 1HBA1 HA      0.09
+ATOM 1HBA2 HA      0.09
+ATOM 1CGA  CC      0.62
+ATOM 1O1A  OC     -0.76
+ATOM 1O2A  OC     -0.76
+ATOM 1CMB  CT3    -0.27
+ATOM 1HMB1 HA      0.09
+ATOM 1HMB2 HA      0.09
+ATOM 1HMB3 HA      0.09
+ATOM 1C11  CTL1    0.14  ! Charges from in Thr
+ATOM 1H11  HAL1    0.09
+ATOM 1O11  OH1    -0.66
+ATOM 1HO11 H       0.43
+
+ATOM 1C12  CTL2   -0.18
+ATOM 1H121 HAL2    0.09
+ATOM 1H122 HAL2    0.09
+ATOM 1CMC  CT3    -0.27
+ATOM 1HMC1 HA      0.09
+ATOM 1HMC2 HA      0.09
+ATOM 1HMC3 HA      0.09
+ATOM 1CAC  C      -0.15
+ATOM 1HAC  HA      0.15
+ATOM 1CBC  C      -0.42
+ATOM 1HBC1 HA      0.21
+ATOM 1HBC2 HA      0.21
+ATOM 1CMD  CT3    -0.27
+ATOM 1HMD1 HA      0.09
+ATOM 1HMD2 HA      0.09
+ATOM 1HMD3 HA      0.09
+ATOM 1CAD  CT2    -0.18
+ATOM 1HAD1 HA      0.09
+ATOM 1HAD2 HA      0.09
+ATOM 1CBD  CT2    -0.28
+ATOM 1HBD1 HA      0.09
+ATOM 1HBD2 HA      0.09
+ATOM 1CGD  CC      0.62
+ATOM 1O1D  OC     -0.76 
+ATOM 1O2D  OC     -0.76
 ! HIS: axial ligand
-ATOM 2CB   CT2    -0.115424
-ATOM 2HB1  HA      0.029053
-ATOM 2HB2  HA      0.029053
-ATOM 2ND1  NR1    -0.060068
-ATOM 2HD1  H       0.215068
-ATOM 2CG   CPH1   -0.034135
-ATOM 2CE1  CPH2    0.064432
-ATOM 2HE1  HR1     0.112405
-ATOM 2NE2  NR2    -0.445476
-ATOM 2CD2  CPH1   -0.033263
-ATOM 2HD2  HR3     0.081291
+!ATOM 2CB   CT2    -0.115424
+!ATOM 2HB1  HA      0.029053
+!ATOM 2HB2  HA      0.029053
+!ATOM 2ND1  NR1    -0.060068
+!ATOM 2HD1  H       0.215068
+!ATOM 2CG   CPH1   -0.034135
+!ATOM 2CE1  CPH2    0.064432
+!ATOM 2HE1  HR1     0.112405
+!ATOM 2NE2  NR2    -0.445476
+!ATOM 2CD2  CPH1   -0.033263
+!ATOM 2HD2  HR3     0.081291
 BOND 1FE   1O1
 DELETE ANGLE 1NA 1FE 1NC   1NB 1FE 1ND
 ANGLE 1O1 1FE 1NA    1O1 1FE 1NB
@@ -1287,6 +588,216 @@ ANGLE 1O1 1FE 1NC    1O1 1FE 1ND
 DIHE  1O1 1FE 1NA  1C1A
 IC    1O1 1FE 1NA  1C1A   1.6300   94.0000  -89.0000  0.0000  0.0000
 
+
+PRES A_2        -2.00   ! Heme a, a(II), Cui 2009
+GROUP                   ! 1-HEM2, 2-His from helix2, 3-His from helix10 
+ATOM 1FE   FE      0.24 !       O2A   O1A             O2D  O1D
+ATOM 1NA   NPH    -0.18 !         \\ //                 \\ //
+ATOM 1NB   NPH    -0.18 !          CGA                   CGD
+ATOM 1NC   NPH     0.18 !           |                     |
+ATOM 1ND   NPH    -0.18 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
+ATOM 1C1A  CPA     0.12 !           |          |          |
+ATOM 1C2A  CPB    -0.06 !   HAA1--CAA-HAA2   _CHA_ HAD1--CAD--HAD2
+ATOM 1C3A  CPB    -0.06 !           |       /     \       |
+ATOM 1C4A  CPA     0.12 !          C2A---C1A       C4D---C3D
+ATOM 1C1B  CPA     0.12 !           |     |         |     |
+ATOM 1C2B  CPB    -0.06 ! HMA\      |     |         |     |      /HMD1
+ATOM 1C3B  CPB    -0.06 !     CMA--C3A    NA       ND    C2D--CMD-HMD2
+ATOM 1C4B  CPA     0.12 ! OMA//      \   / \       / \   /       \HMD3
+ATOM 1C1C  CPA     0.12 !             C4A   \     /   C1D
+ATOM 1C2C  CPB    -0.06 !            /       \   /       \
+ATOM 1C3C  CPB     0.06 !     HB--CHB        FE         CHD--HD
+ATOM 1C4C  CPA     0.12 !            \       /   \       /
+ATOM 1C1D  CPA     0.12 !             C1B   /     \   C4C        HAC
+ATOM 1C2D  CPB    -0.06 !HMB1\       /   \ /       \ /   \       /
+ATOM 1C3D  CPB    -0.06 !HMB2-CMB--C2B    NB       NC    C3C--CAC
+ATOM 1C4D  CPA     0.12 !HMB3/      |     |         |     |     \\  /HBC1
+!                           !           |     |         |     |      CBC
+ATOM 1CHA  CPM    -0.10 !          C3B---C4B       C1C---C2C        \HBC2
+ATOM 1HA   HA      0.10 !           |       \_CHC_/       |
+ATOM 1CHB  CPM    -0.10 !         C11-H11      |        CMC--HMC3
+ATOM 1HB   HA      0.10 !         /   \        HC       /  |
+ATOM 1CHC  CPM    -0.10 !        C12   O11          HMC1  HMC2
+!                           !       / | \     \HO11
+ATOM 1HC   HA      0.10 !        H122 |  H121
+ATOM 1CHD  CPM    -0.10 !         |
+!                           !    H131-C13-132    
+ATOM 1HD   HA      0.10
+ATOM 1CMA  CF1     0.50 ! 
+ATOM 1HMA  HF1    -0.09 ! 
+ATOM 1OMA  OF1    -0.59 ! 
+ATOM 1CAA  CT2    -0.18
+ATOM 1HAA1 HA      0.09
+ATOM 1HAA2 HA      0.09
+ATOM 1CBA  CT2    -0.28 
+ATOM 1HBA1 HA      0.09
+ATOM 1HBA2 HA      0.09
+ATOM 1CGA  CC      0.62
+ATOM 1O1A  OC     -0.76
+ATOM 1O2A  OC     -0.76
+ATOM 1CMB  CT3    -0.27
+ATOM 1HMB1 HA      0.09
+ATOM 1HMB2 HA      0.09
+ATOM 1HMB3 HA      0.09
+ATOM 1C11  CTL1    0.14  ! Charges from in Thr
+ATOM 1H11  HAL1    0.09
+ATOM 1O11  OH1    -0.66
+ATOM 1HO11 H       0.43
+ATOM 1C12  CTL2   -0.18
+ATOM 1H121 HAL2    0.09
+ATOM 1H122 HAL2    0.09
+ATOM 1CMC  CT3    -0.27
+ATOM 1HMC1 HA      0.09
+ATOM 1HMC2 HA      0.09
+ATOM 1HMC3 HA      0.09
+ATOM 1CAC  C      -0.15
+ATOM 1HAC  HA      0.15
+ATOM 1CBC  C      -0.42
+ATOM 1HBC1 HA      0.21
+ATOM 1HBC2 HA      0.21
+ATOM 1CMD  CT3    -0.27
+ATOM 1HMD1 HA      0.09
+ATOM 1HMD2 HA      0.09
+ATOM 1HMD3 HA      0.09
+ATOM 1CAD  CT2    -0.18
+ATOM 1HAD1 HA      0.09
+ATOM 1HAD2 HA      0.09
+ATOM 1CBD  CT2    -0.28
+ATOM 1HBD1 HA      0.09
+ATOM 1HBD2 HA      0.09
+ATOM 1CGD  CC      0.62
+ATOM 1O1D  OC     -0.76 
+ATOM 1O2D  OC     -0.76
+!
+! 2:His from helix 2
+!ATOM 2CB   CT2    -0.084616
+!ATOM 2HB1  HA      0.037126
+!ATOM 2HB2  HA      0.027353
+!ATOM 2ND1  NR1    -0.127148
+!ATOM 2HD1  H       0.241669
+!ATOM 2CG   CPH1    0.037965
+!ATOM 2CE1  CPH2   -0.003375
+!ATOM 2HE1  HR1     0.111018
+!ATOM 2NE2  NR2    -0.116884
+!ATOM 2CD2  CPH1   -0.179332
+!ATOM 2HD2  HR3     0.103677
+!! 3: His from helix 10
+!ATOM 3CB   CT2    -0.073009
+!ATOM 3HB1  HA      0.002089
+!ATOM 3HB2  HA      0.050030
+!ATOM 3ND1  NR1    -0.303700
+!ATOM 3HD1  H       0.271367
+!ATOM 3CG   CPH1    0.141720
+!ATOM 3CE1  CPH2    0.040957
+!ATOM 3HE1  HR1     0.078559
+!ATOM 3NE2  NR2    -0.104721
+!ATOM 3CD2  CPH1   -0.202459
+!ATOM 3HD2  HR3     0.128886
+
+PRES A_3        -1.00   ! oxidized bis-His heme a, a(III), JCC 29: 753-767, 2008
+GROUP                   ! 1-HEM2, 2-His from helix2, 3-His from helix10
+ATOM 1FE   FE      0.60 !       O2A   O1A             O2D  O1D
+ATOM 1NA   NPH    -0.24 !         \\ //                 \\ //
+ATOM 1NB   NPH    -0.24 !          CGA                   CGD
+ATOM 1NC   NPH    -0.24 !           |                     |
+ATOM 1ND   NPH    -0.24 !    HBA1--CBA--HBA2  HA   HBD1--CBD--HBD2
+ATOM 1C1A  CPA     0.20 !           |          |          |
+ATOM 1C2A  CPB    -0.06 !    HAA1--CAA-HAA2  _CHA_ HAD1--CAD--HAD2
+ATOM 1C3A  CPB    -0.06 !           |       /     \       |
+ATOM 1C4A  CPA     0.20 !          C2A---C1A       C4D---C3D
+ATOM 1C1B  CPA     0.20 !           |     |         |     |
+ATOM 1C2B  CPB    -0.06 ! HMA\      |     |         |     |      /HMD1
+ATOM 1C3B  CPB    -0.06 !     CMA--C3A    NA       ND    C2D--CMD-HMD2
+ATOM 1C4B  CPA     0.20 ! OMA//      \   / \       / \   /       \HMD3
+ATOM 1C1C  CPA     0.20 !             C4A   \     /   C1D
+ATOM 1C2C  CPB    -0.06 !            /       \   /       \
+ATOM 1C3C  CPB    -0.06 !       HB--CHB        FE         CHD--HD
+ATOM 1C4C  CPA     0.20 !            \       /   \       /
+ATOM 1C1D  CPA     0.20 !             C1B   /     \   C4C        HAC
+ATOM 1C2D  CPB    -0.06 !HMB1\       /   \ /       \ /   \       /
+ATOM 1C3D  CPB    -0.06 !HMB2-CMB--C2B    NB       NC    C3C--CAC
+ATOM 1C4D  CPA     0.20 !HMB3/      |     |         |     |     \\  /HBC1
+!                           !           |     |         |     |      CBC
+ATOM 1CHA  CPM    -0.07 !          C3B---C4B       C1C---C2C        \HBC2
+ATOM 1HA   HA      0.13 !           |       \_CHC_/       |
+!                           !         C11-H11      |        CMC--HMC3
+ATOM 1CHB  CPM    -0.07 !         /   \        HC      /  |
+ATOM 1HB   HA      0.13 !        C12   O11          HMC1  HMC2
+!                           !       / | \     \HO11
+ATOM 1CHC  CPM    -0.07 !    H122 |  H121
+ATOM 1HC   HA      0.13 !         |
+!                           !    H131-C13-132
+ATOM 1CHD  CPM    -0.07 !         |
+ATOM 1HD   HA      0.13
+ATOM 1CMA  CF1     0.50 ! 
+ATOM 1HMA  HF1     0.09 ! 
+ATOM 1OMA  OF1    -0.59 ! 
+ATOM 1CAA  CT2    -0.18
+ATOM 1HAA1 HA      0.09
+ATOM 1HAA2 HA      0.09
+ATOM 1CBA  CT2    -0.28
+ATOM 1HBA1 HA      0.09	
+ATOM 1HBA2 HA      0.09
+ATOM 1CGA  CC      0.62
+ATOM 1O1A  OC     -0.76
+ATOM 1O2A  OC     -0.76
+ATOM 1CMB  CT3    -0.27
+ATOM 1HMB1 HA      0.09
+ATOM 1HMB2 HA      0.09
+ATOM 1HMB3 HA      0.09
+ATOM 1C11  CTL1    0.14
+ATOM 1H11  HAL1    0.09
+ATOM 1O11  OH1    -0.66
+ATOM 1HO11 H       0.43
+ATOM 1C12  CTL2   -0.18
+ATOM 1H121 HAL2    0.09
+ATOM 1H122 HAL2    0.09
+ATOM 1CMC  CT3    -0.27
+ATOM 1HMC1 HA      0.09
+ATOM 1HMC2 HA      0.09
+ATOM 1HMC3 HA      0.09
+ATOM 1CAC  C      -0.15
+ATOM 1HAC  HA      0.15
+ATOM 1CBC  C      -0.42
+ATOM 1HBC1 HA      0.21
+ATOM 1HBC2 HA      0.21
+ATOM 1CMD  CT3    -0.27
+ATOM 1HMD1 HA      0.09
+ATOM 1HMD2 HA      0.09
+ATOM 1HMD3 HA      0.09
+ATOM 1CAD  CT2    -0.18
+ATOM 1HAD1 HA      0.09
+ATOM 1HAD2 HA      0.09
+ATOM 1CBD  CT2    -0.28
+ATOM 1HBD1 HA      0.09
+ATOM 1HBD2 HA      0.09
+ATOM 1CGD  CC      0.62
+ATOM 1O1D  OC     -0.76
+ATOM 1O2D  OC     -0.76
+!! 2His, igen på samma sida som prop.
+!ATOM 2CB   CT2    -0.053083 
+!ATOM 2HB1  HA      0.053204
+!ATOM 2HB2  HA      0.039276
+!ATOM 2ND1  NR1    -0.071126
+!ATOM 2HD1  H       0.252946
+!ATOM 2CG   CPH1    0.007802
+!ATOM 2CE1  CPH2    0.002151
+!ATOM 2HE1  HR1     0.117962
+!ATOM 2NE2  NR2    -0.180600
+!ATOM 2CD2  CPH1   -0.133675
+!ATOM 2HD2  HR3     0.107146
+!! O 3His på motsatt sida.
+!ATOM 3CB   CT2    -0.107833
+!ATOM 3HB1  HA      0.030135
+!ATOM 3HB2  HA      0.067846
+!ATOM 3ND1  NR1    -0.245140
+!ATOM 3HD1  H       0.267809
+!ATOM 3CG   CPH1    0.182791
+!ATOM 3CE1  CPH2    0.074443
+!ATOM 3HE1  HR1     0.075806
+!ATOM 3NE2  NR2    -0.176663
+!ATOM 3CD2  CPH1   -0.210554
+!ATOM 3HD2  HR3     0.140115
 
 PRES CUAR         0.00  ! Copper A center, reduced, formally CuICuI
 GROUP                   ! residues 1:CuA, 2:CuA, 3:HSE161, 4:CYS196, 5:GLU198
@@ -1399,869 +910,91 @@ ATOM 8HE3  HA     0.002882
 delete atom 4HG1
 delete atom 6HG1
 
-PRES CUXR               ! patch for the CuB center, reduced + OH
-GROUP                   ! residues 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(I)-OH, J. Comput. Chem. 29: 753-767, 2008
-ATOM 1CB   CT2     0.121812 
-ATOM 1HB1  HA     -0.037004 
-ATOM 1HB2  HA     -0.037004 
-ATOM 1CG   CPH1   -0.026825 
-ATOM 1ND1  NR2     0.123095 
-ATOM 1CE1  CPH2   -0.094232 
-ATOM 1HE1  HR1     0.192341 
-ATOM 1NE2  NR1     0.200104 
-ATOM 1CD2  CPH1   -0.381150 
-ATOM 1HD2  HR3     0.142372 
-! Tyr 244
-ATOM 2CB   CT2     0.028357 
-ATOM 2HB1  HA     -0.004488 
-ATOM 2HB2  HA     -0.004488 
-ATOM 2CG   CA      0.068999 
-ATOM 2CD1  CA     -0.139642 
-ATOM 2HD1  HP      0.136034 
-ATOM 2CE1  CA     -0.307952 
-ATOM 2HE1  HP      0.139686 
-ATOM 2CZ   CA      0.366281 
-ATOM 2OH   OH1    -0.660877 
-ATOM 2HH   H       0.446731 
-ATOM 2CD2  CA     -0.322377 
-ATOM 2HD2  HP      0.214656 
-ATOM 2CE2  CA      0.085950
-! HSD 290
-ATOM 3CB   CT2     0.053354 
-ATOM 3HB1  HA      0.011071 
-ATOM 3HB2  HA      0.011071 
-ATOM 3CG   CPH1    0.042284 
-ATOM 3ND1  NR1    -0.184440 
-ATOM 3HD1  H       0.260882 
-ATOM 3CE1  CPH2   -0.092020 
-ATOM 3HE1  HR1     0.111508 
-ATOM 3NE2  NR2     0.002642 
-ATOM 3CD2  CPH1   -0.192733 
-ATOM 3HD2  HR3     0.180291 
-! HSD 291
-ATOM 4CB   CT2     0.115995 
-ATOM 4HB1  HA     -0.001756 
-ATOM 4HB2  HA     -0.001756 
-ATOM 4CG   CPH1   -0.012658 
-ATOM 4ND1  NR1    -0.192886 
-ATOM 4HD1  H       0.284569 
-ATOM 4CE1  CPH2   -0.115159 
-ATOM 4HE1  HR1     0.173998 
-ATOM 4NE2  NR2     0.153335 
-ATOM 4CD2  CPH1   -0.266686 
-ATOM 4HD2  HR3     0.113090 
-!
-ATOM 5CU   CU     -0.074135 
-ATOM 5OH1  OW     -0.950555 
-ATOM 5H1   H       0.320315 
-!
-delete atom 1HE2
-delete atom 2HE2
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH1               ! the water bound to Cu
-BOND 5OH1 5H1   
-ANGLE 5OH1 5CU  4NE2   5OH1 5CU  3NE2    5OH1 5CU 1ND1
-ANGLE 5H1  5OH1 5CU  
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH1
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH1   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH1  5H1    2.00    91.0 -124.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH1   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
-PRES CUWR         1.000 ! patch for the CuB center, reduced, H2O on copper
-GROUP                   ! residues in order 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu 
-! HSE 240               ! a water molecule is bound to the Cu, and treated as a part of it
-ATOM 1CB   CT2    -0.056997  ! it not read in in sequence, but created in the patch
-ATOM 1HB1  HA      0.038572  ! for minimal changes to the structure file
-ATOM 1HB2  HA      0.038572  ! CuB(I)-H2O, J. Comput. Chem. 29: 753-767, 2008
-ATOM 1CG   CPH1    0.080968
-ATOM 1ND1  NR2    -0.204623
-ATOM 1CE1  CPH2    0.014468
-ATOM 1HE1  HR1     0.140865
-ATOM 1NE2  NR1     0.215733
-ATOM 1CD2  CPH1   -0.301877
-ATOM 1HD2  HR3     0.153143
-! Tyr244
-ATOM 2CB   CT2    -0.008469
-ATOM 2HB1  HA      0.016882
-ATOM 2HB2  HA      0.016882
-ATOM 2CG   CA      0.173192 
-ATOM 2CD1  CA     -0.171274
-ATOM 2HD1  HP      0.154238
-ATOM 2CE1  CA     -0.277178
-ATOM 2HE1  HP      0.151479
-ATOM 2CZ   CA      0.352013
-ATOM 2OH   OH1    -0.641635
-ATOM 2HH   H       0.445060
-ATOM 2CD2  CA     -0.429176
-ATOM 2HD2  HP      0.304086
-ATOM 2CE2  CA      0.050735
-! HSD 290
-ATOM 3CB   CT2    -0.025115
-ATOM 3HB1  HA      0.050166
-ATOM 3HB2  HA      0.050166
-ATOM 3CG   CPH1    0.123459
-ATOM 3ND1  NR1    -0.169606
-ATOM 3HD1  H       0.275791
-ATOM 3CE1  CPH2   -0.085097
-ATOM 3HE1  HR1     0.137100
-ATOM 3NE2  NR2    -0.032064
-ATOM 3CD2  CPH1   -0.254171
-ATOM 3HD2  HR3     0.205897
-! HSD 291
-ATOM 4CB   CT2    -0.028157
-ATOM 4HB1  HA      0.049938
-ATOM 4HB2  HA      0.049938 
-ATOM 4CG   CPH1    0.103071
-ATOM 4ND1  NR1    -0.181260
-ATOM 4HD1  H       0.301043
-ATOM 4CE1  CPH2   -0.033808
-ATOM 4HE1  HR1     0.148192
-ATOM 4NE2  NR2    -0.118304
-ATOM 4CD2  CPH1   -0.186031
-ATOM 4HD2  HR3     0.128371
-!
-ATOM 5CU   CU      0.157334
-ATOM 5OH2  OW     -0.650946
-ATOM 5HO1  H       0.364217
-ATOM 5HO2  H       0.364217
-delete atom 1HE2
-delete atom 2HE2
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1  
-BOND 1NE2 2CE2		     ! histidine-tyrosine  crosslink
-BOND 5CU  5OH2  	     ! the water bound to Cu
-BOND 5OH2 5HO1    5OH2 5HO2  !   5HO1 5HO2    ! the last bond is needed for shake
-ANGLE 5OH2 5CU  4NE2   5OH2 5CU  3NE2    5OH2 5CU 1ND1
-ANGLE 5HO1 5OH2 5HO2
-ANGLE 5HO1 5OH2 5CU    5HO2 5OH2 5CU
-!  other new angles 
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH2
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH2   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH2  5HO1   2.00    91.0 -124.0   118.0     0.97
-IC 4NE2  5CU   5OH2  5HO2   2.00    91.0  104.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH2   0.00     0.0 -130.0     0.0     2.0 
-auto angles dihe
-
-PRES CUBR         1.000 ! patch for the CuB center, reduced, no waters
-GROUP                   ! residues in order 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(I)-nolig, J. Comput. Chem. 29: 753-767, 2008
-ATOM 1CB   CT2    -0.062677  
-ATOM 1HB1  HA      0.044331 
-ATOM 1HB2  HA      0.044331
-ATOM 1CG   CPH1    0.144691
-ATOM 1ND1  NR2    -0.199479
-ATOM 1CE1  CPH2   -0.041408
-ATOM 1HE1  HR1     0.175045
-ATOM 1NE2  NR1     0.265531
-ATOM 1CD2  CPH1   -0.376057
-ATOM 1HD2  HR3     0.175899
-! Tyr244
-ATOM 2CB   CT2    -0.073749
-ATOM 2HB1  HA      0.037987
-ATOM 2HB2  HA      0.037987
-ATOM 2CG   CA      0.215531
-ATOM 2CD1  CA     -0.177986
-ATOM 2HD1  HP      0.155537
-ATOM 2CE1  CA     -0.273274
-ATOM 2HE1  HP      0.150902
-ATOM 2CZ   CA      0.354164
-ATOM 2OH   OH1    -0.641996
-ATOM 2HH   H       0.445482
-ATOM 2CD2  CA     -0.457611
-ATOM 2HD2  HP      0.310846
-ATOM 2CE2  CA      0.050571
-! HSD 290
-ATOM 3CB   CT2    -0.058290
-ATOM 3HB1  HA      0.057919
-ATOM 3HB2  HA      0.057919
-ATOM 3CG   CPH1    0.182936
-ATOM 3ND1  NR1    -0.210768
-ATOM 3HD1  H       0.284910
-ATOM 3CE1  CPH2   -0.030867
-ATOM 3HE1  HR1     0.128014
-ATOM 3NE2  NR2    -0.042226
-ATOM 3CD2  CPH1   -0.293823
-ATOM 3HD2  HR3     0.216876
-! HSD 291
-ATOM 4CB   CT2     0.083196
-ATOM 4HB1  HA      0.026129
-ATOM 4HB2  HA      0.026129
-ATOM 4CG   CPH1    0.035644
-ATOM 4ND1  NR1    -0.133763
-ATOM 4HD1  H       0.294066
-ATOM 4CE1  CPH2   -0.081495
-ATOM 4HE1  HR1     0.173640
-ATOM 4NE2  NR2    -0.025591
-ATOM 4CD2  CPH1   -0.205805
-ATOM 4HD2  HR3     0.150183
-!
-ATOM 5CU   CU      0.060469
-delete atom 1HE2
-delete atom 2HE2
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-auto angles dihe
-
-PRES CUWO         2.000 ! patch for the CuB center, oxidized 
-GROUP                   ! residues in order 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(II)-H2O, J. Comput. Chem. 29: 753-767, 2008
-ATOM 1CB   CT2     0.000400
-ATOM 1HB1  HA      0.043491
-ATOM 1HB2  HA      0.043491
-ATOM 1CG   CPH1    0.151422
-ATOM 1ND1  NR2    -0.195678
-ATOM 1CE1  CPH2   -0.087016
-ATOM 1HE1  HR1     0.178757
-ATOM 1NE2  NR1     0.266417
-ATOM 1CD2  CPH1   -0.305841
-ATOM 1HD2  HR3     0.174311
-! Tyr240
-ATOM 2CB   CT2    -0.050699
-ATOM 2HB1  HA      0.049186
-ATOM 2HB2  HA      0.049186
-ATOM 2CG   CA      0.310375
-ATOM 2CD1  CA     -0.228351
-ATOM 2HD1  HP      0.178964
-ATOM 2CE1  CA     -0.213572
-ATOM 2HE1  HP      0.155401
-ATOM 2CZ   CA      0.329443
-ATOM 2OH   OH1    -0.629461
-ATOM 2HH   H       0.452305
-ATOM 2CD2  CA     -0.594870
-ATOM 2HD2  HP      0.441216
-ATOM 2CE2  CA      0.080645
-! HSD 290
-ATOM 3CB   CT2    -0.025832
-ATOM 3HB1  HA      0.069137
-ATOM 3HB2  HA      0.069137
-ATOM 3CG   CPH1    0.191248
-ATOM 3ND1  NR1    -0.178940
-ATOM 3HD1  H       0.305197
-ATOM 3CE1  CPH2   -0.011391
-ATOM 3HE1  HR1     0.106046
-ATOM 3NE2  NR2    -0.083867
-ATOM 3CD2  CPH1   -0.262563
-ATOM 3HD2  HR3     0.233845
-! HSD 291
-ATOM 4CB   CT2    -0.014070
-ATOM 4HB1  HA      0.065283
-ATOM 4HB2  HA      0.065283
-ATOM 4CG   CPH1    0.226477
-ATOM 4ND1  NR1    -0.263976
-ATOM 4HD1  H       0.344898
-ATOM 4CE1  CPH2    0.002071
-ATOM 4HE1  HR1     0.167473
-ATOM 4NE2  NR2    -0.031355
-ATOM 4CD2  CPH1   -0.294647
-ATOM 4HD2  HR3     0.156332
-!
-ATOM 5CU   CU      0.398074
-ATOM 5OH2  OW     -0.658316
-ATOM 5HO1  H       0.412467
-ATOM 5HO2  H       0.412467
-!
-delete atom 1HE2
-delete atom 2HE2
-!
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH2               ! the water bound to Cu
-BOND 5OH2 5HO1    5OH2 5HO2  !   5HO1 5HO2    ! the last bond is needed for shake
-ANGLE 5OH2 5CU  4NE2   5OH2 5CU  3NE2    5OH2 5CU 1ND1
-ANGLE 5HO1 5OH2 5HO2
-ANGLE 5HO1 5OH2 5CU    5HO2 5OH2 5CU
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH2
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH2   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH2  5HO1   2.00    91.0 -124.0   118.0     0.97
-IC 4NE2  5CU   5OH2  5HO2   2.00    91.0  104.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH2   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
 PRES CUBX         1.000 ! patch for the CuB center, oxidized + OH 
-GROUP                   ! residues 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(II)-OH, J. Comput. Chem. 29: 753-767, 2008 (CUXO in Table 1)
-ATOM 1CB   CT2     0.060190
-ATOM 1HB1  HA      0.003886
-ATOM 1HB2  HA      0.003886
-ATOM 1CG   CPH1    0.016759
-ATOM 1ND1  NR2     0.002556
-ATOM 1CE1  CPH2   -0.055005
-ATOM 1HE1  HR1     0.197876
-ATOM 1NE2  NR1     0.208230
-ATOM 1CD2  CPH1   -0.332167
-ATOM 1HD2  HR3     0.164636
-! Tyr240
-ATOM 2CB   CT2    -0.005668
-ATOM 2HB1  HA      0.016300
-ATOM 2HB2  HA      0.016300
-ATOM 2CG   CA      0.175389
-ATOM 2CD1  CA     -0.180176
-ATOM 2HD1  HP      0.157492
-ATOM 2CE1  CA     -0.260948
-ATOM 2HE1  HP      0.145727
-ATOM 2CZ   CA      0.343802
-ATOM 2OH   OH1    -0.663620
-ATOM 2HH   H       0.456168
-ATOM 2CD2  CA     -0.428980
-ATOM 2HD2  HP      0.297081
-ATOM 2CE2  CA      0.090690
+GROUP                   ! residues 1-His240, 3-His290, 4-His291 5-Cu
+! HSE 240               ! CuB(II)-OH, Cui 2009
+ATOM 1CB   CT2    -0.25
+ATOM 1HB1  HA      0.19
+ATOM 1HB2  HA      0.19
+ATOM 1CG   CPH1    0.23
+ATOM 1ND1  NR2    -0.26
+ATOM 1CE1  CPH2   -0.12
+ATOM 1HE1  HR1     0.17
+ATOM 1NE2  NR1     0.29
+ATOM 1CD2  CPH1   -0.39
+ATOM 1HD2  HR3     0.23
 ! HSD 290
-ATOM 3CB   CT2     0.011633
-ATOM 3HB1  HA      0.045358
-ATOM 3HB2  HA      0.045358
-ATOM 3CG   CPH1    0.095567
-ATOM 3ND1  NR1    -0.146556
-ATOM 3HD1  H       0.286155
-ATOM 3CE1  CPH2   -0.078013
-ATOM 3HE1  HR1     0.120886
-ATOM 3NE2  NR2    -0.010291
-ATOM 3CD2  CPH1   -0.210191
-ATOM 3HD2  HR3     0.194082
+ATOM 2CB   CT2    -0.42
+ATOM 2HB1  HA      0.20
+ATOM 2HB2  HA      0.20
+ATOM 2CG   CPH1    0.25
+ATOM 2ND1  NR1    -0.25
+ATOM 2HD1  H       0.34
+ATOM 2CE1  CPH2   -0.01
+ATOM 2HE1  HR1     0.13
+ATOM 2NE2  NR2    -0.15
+ATOM 2CD2  CPH1   -0.24
+ATOM 2HD2  HR3     0.20
 ! HSD 291
-ATOM 4CB   CT2     0.046472
-ATOM 4HB1  HA      0.035933
-ATOM 4HB2  HA      0.035933
-ATOM 4CG   CPH1    0.088450
-ATOM 4ND1  NR1    -0.204587
-ATOM 4HD1  H       0.320814
-ATOM 4CE1  CPH2   -0.064746
-ATOM 4HE1  HR1     0.178625
-ATOM 4NE2  NR2     0.049623
-ATOM 4CD2  CPH1   -0.240760
-ATOM 4HD2  HR3     0.129655 
+ATOM 3CB   CT2    -0.40
+ATOM 3HB1  HA      0.20
+ATOM 3HB2  HA      0.20
+ATOM 3CG   CPH1    0.29
+ATOM 3ND1  NR1    -0.26
+ATOM 3HD1  H       0.34
+ATOM 3CE1  CPH2   -0.09
+ATOM 3HE1  HR1     0.24
+ATOM 3NE2  NR2     0.01
+ATOM 3CD2  CPH1   -0.37
+ATOM 3HD2  HR3     0.20 
 !
-ATOM 5CU   CU      0.253928
-ATOM 5OH1  OW     -0.786068
-ATOM 5H1   H       0.372336
+ATOM 4CU   CU      0.60
+ATOM 4OH1  OW     -0.89
+ATOM 4H1   H       0.40
 !
-delete atom 1HE2
-delete atom 2HE2
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH1               ! the water bound to Cu
-BOND 5OH1 5H1   
-ANGLE 5OH1 5CU  4NE2   5OH1 5CU  3NE2    5OH1 5CU 1ND1
-ANGLE 5H1  5OH1 5CU  
+!delete atom 1HE2
+BOND 4CU  3NE2   4CU  2NE2    4CU  1ND1
+BOND 4CU  4OH1               ! the water bound to Cu
+BOND 4OH1 4H1   
+ANGLE 4OH1 4CU  3NE2   4OH1 4CU  2NE2    4OH1 4CU 1ND1
+ANGLE 4H1  4OH1 4CU  
 !  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH1
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
+ANGLE 1ND1 4CU 2NE2   1ND1 4CU 3NE2   2NE2 4CU 3NE2
+angle 1CG  1ND1 4CU     1CE1 1ND1 4CU
+angle 2CE1 2NE2 4CU     2CD2 2NE2 4CU  ! added to keep the histidines
+angle 3CE1 3NE2 4CU     3CD2 3NE2 4CU  ! symmetric to Cu
+dihe 1CG  1ND1 4CU  4OH1
+IMPR    1ND1 1CG   1CE1   4CU
+IMPR    2NE2 2CE1  2CD2   4CU
+IMPR    3NE2 3CE1  3CD2   4CU
+IC 3ND1  3CE1  3NE2  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 2ND1  2CE1  2NE2  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 1NE2  1CE1  1ND1  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 3CE1  3CD2 *3NE2  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 2CE1  2CD2 *2NE2  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 1CG   1CE1 *1ND1  4CU  0.0000  0.0000  180.0000  0.0000  0.0000
+IC 3CE1  3NE2  4CU   4OH1   1.33   130    -18.0    90.0     2.00
+IC 3NE2  4CU   4OH1  4H1    2.00    91.0 -124.0   118.0     0.97
+IC 1CG   1ND1  4CU   4OH1   0.00     0.0 -130.0     0.0     2.0
+auto angles dihe
+
+! histidine-tyrosine  crosslink
+! 1-His240, 2-Tyr244
+PRES TYHI     0.00
+DELETE ATOM 1HE2
+DELETE ATOM 2HE2
+BOND 1NE2 2CE2
+ANGLE 1NE2 2CE2 2CD2
+ANGLE 1NE2 2CE2 2CZ
+ANGLE 1CE1 1NE2 2CE2
+ANGLE 1CD2 1NE2 2CE2
+DIHE 1CD2 1NE2 2CE2 2CD2
+DIHE 1CE1 1NE2 2CE2 2CZ
+IMPR 1CD2 2CE2 1NE2 1CE1
+IMPR 2CZ 1NE2 2CE2 2CD2
 IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
 IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
 IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
 IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH1   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH1  5H1    2.00    91.0 -124.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH1   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
-PRES CUYM         0.000 ! patch for the CuB center, oxidized, OH- @ Cu, Tyr anion
-GROUP                   ! residues 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(II)-OH-Ym, J. Comput. Chem. 29: 753-767, 2008 (CUY- in Table 1)
-ATOM 1CB   CT2     0.098511
-ATOM 1HB1  HA     -0.028775
-ATOM 1HB2  HA     -0.028775
-ATOM 1CG   CPH1   -0.085463
-ATOM 1ND1  NR2     0.089266
-ATOM 1CE1  CPH2   -0.152225
-ATOM 1HE1  HR1     0.212796
-ATOM 1NE2  NR1     0.273858
-ATOM 1CD2  CPH1   -0.297459
-ATOM 1HD2  HR3     0.129844
-! Tyr244
-ATOM 2CB   CT2     0.011884
-ATOM 2HB1  HA     -0.011038
-ATOM 2HB2  HA     -0.011038
-ATOM 2CG   CA      0.037383
-ATOM 2CD1  CA     -0.135702
-ATOM 2HD1  HP      0.115278
-ATOM 2CE1  CA     -0.344068
-ATOM 2HE1  HP      0.136210
-ATOM 2CZ   CA      0.589582
-ATOM 2OH   OH1    -0.732861
-ATOM 2CD2  CA     -0.322636
-ATOM 2HD2  HP      0.239052
-ATOM 2CE2  CA     -0.145084
-! HSD 290
-ATOM 3CB   CT2     0.029531
-ATOM 3HB1  HA      0.032115
-ATOM 3HB2  HA      0.032115
-ATOM 3CG   CPH1    0.020780
-ATOM 3ND1  NR1    -0.132723
-ATOM 3HD1  H       0.269612
-ATOM 3CE1  CPH2   -0.026801
-ATOM 3HE1  HR1     0.106853
-ATOM 3NE2  NR2    -0.083008
-ATOM 3CD2  CPH1   -0.111848
-ATOM 3HD2  HR3     0.153771
-! HSD 291
-ATOM 4CB   CT2     0.060756
-ATOM 4HB1  HA      0.020716
-ATOM 4HB2  HA      0.020716
-ATOM 4CG   CPH1    0.027780
-ATOM 4ND1  NR1    -0.171657
-ATOM 4HD1  H       0.302634
-ATOM 4CE1  CPH2   -0.101260
-ATOM 4HE1  HR1     0.177384
-ATOM 4NE2  NR2     0.112814
-ATOM 4CD2  CPH1   -0.235564
-ATOM 4HD2  HR3     0.099496
-!
-ATOM 5CU   CU      0.218016
-ATOM 5OH1  OW     -0.804174
-ATOM 5HO1  H       0.343406
-!
-delete atom 1HE2
-delete atom 2HE2
-delete atom 2HH
-!
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH1               ! the water bound to Cu
-BOND 5OH1 5HO1 
-ANGLE 5OH1 5CU  4NE2   5OH1 5CU  3NE2    5OH1 5CU 1ND1
-ANGLE 5HO1 5OH1 5CU   
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH1
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH1   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH1  5HO1   2.00    91.0 -124.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH1   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
-PRES CUYR         1.000 ! patch for the CuB center, oxidized radical
-GROUP                   ! residues 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! CuB(II)-OH-Yr, J. Comput. Chem. 29: 753-767, 2008 (CUY* in Table 1)
-ATOM 1CB   CT2     0.082403
-ATOM 1HB1  HA      0.005239
-ATOM 1HB2  HA      0.005239
-ATOM 1CG   CPH1   -0.055937
-ATOM 1ND1  NR2     0.010365
-ATOM 1CE1  CPH2   -0.057060
-ATOM 1HE1  HR1     0.201233
-ATOM 1NE2  NR1     0.095843
-ATOM 1CD2  CPH1   -0.209650
-ATOM 1HD2  HR3     0.134644
-! Tyr244
-ATOM 2CB   CT2     0.011476
-ATOM 2HB1  HA      0.014578
-ATOM 2HB2  HA      0.014578
-ATOM 2CG   CA      0.268694
-ATOM 2CD1  CA     -0.234966
-ATOM 2HD1  HP      0.165380
-ATOM 2CE1  CA     -0.181574
-ATOM 2HE1  HP      0.159185
-ATOM 2CZ   CA      0.491551
-ATOM 2OH   OH1    -0.532875
-ATOM 2CD2  CA     -0.472792
-ATOM 2HD2  HP      0.321115
-ATOM 2CE2  CA      0.119209
-! HSD 290
-ATOM 3CB   CT2     0.019749
-ATOM 3HB1  HA      0.043947
-ATOM 3HB2  HA      0.043947
-ATOM 3CG   CPH1    0.089923
-ATOM 3ND1  NR1    -0.146163
-ATOM 3HD1  H       0.282609
-ATOM 3CE1  CPH2   -0.031849
-ATOM 3HE1  HR1     0.105917
-ATOM 3NE2  NR2    -0.098622
-ATOM 3CD2  CPH1   -0.168602
-ATOM 3HD2  HR3     0.179326
-! HSD 291
-ATOM 4CB   CT2     0.030681
-ATOM 4HB1  HA      0.036209
-ATOM 4HB2  HA      0.036209
-ATOM 4CG   CPH1    0.083867
-ATOM 4ND1  NR1    -0.162475
-ATOM 4HD1  H       0.306399
-ATOM 4CE1  CPH2   -0.127435
-ATOM 4HE1  HR1     0.189996
-ATOM 4NE2  NR2     0.027938
-ATOM 4CD2  CPH1   -0.225588
-ATOM 4HD2  HR3     0.120360
-!
-ATOM 5CU   CU      0.301668
-ATOM 5OH1  OW     -0.663610
-ATOM 5HO1  H       0.369721
-!
-delete atom 1HE2
-delete atom 2HE2
-delete atom 2HH
-!
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH1               ! the water bound to Cu
-BOND 5OH1 5HO1 
-ANGLE 5OH1 5CU  4NE2   5OH1 5CU  3NE2    5OH1 5CU 1ND1
-ANGLE 5HO1 5OH1 5CU   
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-angle 1CG  1ND1 5CU     1CE1 1ND1 5CU
-angle 3CE1 3NE2 5CU     3CD2 3NE2 5CU  ! added to keep the histidines
-angle 4CE1 4NE2 5CU     4CD2 4NE2 5CU  ! symmetric to Cu
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH1
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4NE2  3NE2  1ND1 *5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH1   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH1  5HO1   2.00    91.0 -124.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH1   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
-PRES OWYM         1.000 ! patch for the CuB center, oxidized, H2O on copper Y-O-
-			! NOTICE:  this is effectively a Cu(I)-Yr state !
-GROUP                   ! residues in order 1-His240, 2-Tyr244, 3-His290, 4-His291 5-Cu
-! HSE 240               ! a water molecule is bound to the Cu, and treated as a part of it
-ATOM 1CB   CT2    -0.035443  ! it not read in in sequence, but created in the patch
-ATOM 1HB1  HA      0.003750  ! for minimal changes to the structure file
-ATOM 1HB2  HA      0.083220  ! 
-ATOM 1CG   CPH1    0.120740  ! if used, cite the following paper:
-ATOM 1ND1  NR2    -0.206958  ! V.R.I. Kaila, M.P. Johansson, D. Sundholm, L. Laakkonen, M. Wikström,
-ATOM 1CE1  CPH2    0.002122  ! Biochim. Biophys. Acta - Bioenergetics 1787 (2009) 221-233. 
-ATOM 1HE1  HR1     0.179300
-ATOM 1NE2  NR1     0.113500
-ATOM 1CD2  CPH1   -0.237981
-ATOM 1HD2  HR3     0.139648
-! Tyr244
-ATOM 2CB   CT2    -0.000920
-ATOM 2HB1  HA      0.050643
-ATOM 2HB2  HA      0.005261
-ATOM 2CG   CA      0.202138
-ATOM 2CD1  CA     -0.195535
-ATOM 2HD1  HP      0.150108
-ATOM 2CE1  CA     -0.176560
-ATOM 2HE1  HP      0.149557
-ATOM 2CZ   CA      0.509500
-ATOM 2OH   OH1    -0.540677	!ATOM 2HH   H       ********
-ATOM 2CD2  CA     -0.389059
-ATOM 2HD2  HP      0.291731
-ATOM 2CE2  CA      0.047907
-! HSD 290
-ATOM 3CB   CT2    -0.001099
-ATOM 3HB1  HA      0.034919
-ATOM 3HB2  HA      0.056153
-ATOM 3CG   CPH1    0.118467
-ATOM 3ND1  NR1    -0.174265
-ATOM 3HD1  H       0.285134
-ATOM 3CE1  CPH2   -0.105517
-ATOM 3HE1  HR1     0.141607
-ATOM 3NE2  NR2     0.020402
-ATOM 3CD2  CPH1   -0.270831
-ATOM 3HD2  HR3     0.214600
-! HSD 291
-ATOM 4CB   CT2     0.006983
-ATOM 4HB1  HA      0.051658
-ATOM 4HB2  HA      0.041659
-ATOM 4CG   CPH1    0.108532
-ATOM 4ND1  NR1    -0.234089
-ATOM 4HD1  H       0.309525
-ATOM 4CE1  CPH2    0.054394
-ATOM 4HE1  HR1     0.112228
-ATOM 4NE2  NR2    -0.067694
-ATOM 4CD2  CPH1   -0.249953
-ATOM 4HD2  HR3     0.143225
-!
-ATOM 5CU   CU      0.026818
-ATOM 5OH2  OW     -0.565240
-ATOM 5HO1  H       0.326908
-ATOM 5HO2  H       0.349484
-delete atom 1HE2
-delete atom 2HE2
-delete atom 2HH
-BOND 5CU  4NE2   5CU  3NE2    5CU  1ND1
-BOND 1NE2 2CE2               ! histidine-tyrosine  crosslink
-BOND 5CU  5OH2               ! the water bound to Cu
-BOND 5OH2 5HO1    5OH2 5HO2  !   5HO1 5HO2    ! the last bond is needed for shake
-ANGLE 5OH2 5CU  4NE2   5OH2 5CU  3NE2    5OH2 5CU 1ND1
-ANGLE 5HO1 5OH2 5HO2
-ANGLE 5HO1 5OH2 5CU    5HO2 5OH2 5CU
-!  other new angles
-ANGLE 1ND1 5CU 3NE2   1ND1 5CU 4NE2   3NE2 5CU 4NE2
-angle 1NE2 2CE2 2CD2
-angle 1NE2 2CE2 2CZ
-angle 1CE1 1NE2 2CE2
-angle 1CD2 1NE2 2CE2
-dihe 1CD2 1NE2 2CE2 2CD2
-dihe 1CE1 1NE2 2CE2 2CZ
-dihe 1CG  1ND1 5CU  5OH2
-!dihe 1CE1 1NE2 2CE2 2CD2
-IMPR    1ND1 1CG   1CE1   5CU
-IMPR    3NE2 3CE1  3CD2   5CU
-IMPR    4NE2 4CE1  4CD2   5CU
-impr 1CD2 2CE2 1NE2 1CE1
-impr 2CZ 1NE2 2CE2 2CD2
-IC 1CD2  1NE2  2CE2  2CD2   1.37   131.0   34.0    109.0    1.41
-IC 1CE1  1NE2  2CE2  2CZ    1.32   122.0   42.0    130.0    1.38
-IC 1CD2  2CE2 *1NE2  1CE1   1.37   131.0 -167.0    122.0    1.32
-IC 2CZ   1NE2 *2CE2  2CD2   1.38   130.0 -175.0    109.0    1.41
-IC 4ND1  4CE1  4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3ND1  3CE1  3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1NE2  1CE1  1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4CD2 *4NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-IC 4CE1  4NE2  5CU   5OH2   1.33   130    -18.0    90.0     2.00
-IC 4NE2  5CU   5OH2  5HO1   2.00    91.0 -124.0   118.0     0.97
-IC 4NE2  5CU   5OH2  5HO2   2.00    91.0  104.0   118.0     0.97
-IC 1CG   1ND1  5CU   5OH2   0.00     0.0 -130.0     0.0     2.0
-auto angles dihe
-
-PRES PLO1         0.00 ! Patch residue for an oxo-group i heme
-ATOM  O1 OW       0.00 ! use in generate, charges from a separate patch
-!ATOM  FE FE       0.00 ! O1 oxygen bonded to the iron.
-BOND  O1 FE
-DELETE ANGLE NA FE NC   NB FE ND
-ANGLE O1 FE NA    O1 FE NB
-ANGLE O1 FE NC    O1 FE ND
-IC    O1 FE NA  C1A   1.6300   94.0000  -90.0000  0.0000  0.0000
-
-PRES PHEX         0.00 ! Patch OH  for heme ligand
-ATOM OH1 OW       0.0  ! use in generate, to set up the IC table
-ATOM HO1 H        0.0  ! real charges come from A3OH
-!ATOM FE  FE       0.0
-BOND OH1 FE           
-BOND HO1 OH1 
-DELET ANGLE NA FE NC   NB FE ND
-ANGLE OH1 FE  NA      OH1 FE NB    OH1 FE  NC      OH1 FE ND
-ANGLE FE  OH1 HO1
-!DIHE  OH1 FE NA  C1A ! vrik, NAMD complains
-!DIHE  NA  FE OH1 HO1 ! vrik, NAMD complains
-IC    OH1 FE NA  C1A   1.6300   94.0000  -89.0000  0.0000  0.0000
-IC    C1A NA  FE  O1   0.0     90.         0.0     0.0      0.0
-!IC    HO1 OH1 FE  NA   0.9572  120.0000    0.0000  90.0000  0.0000
-!IC    HO1 OH1 FE  NB   0.9572  120.0000    0.0000  90.0000  0.0000
-!IC    HO1 OH1 FE  NC   0.9572  120.0000    0.0000  90.0000  0.0000
-!IC    HO1 OH1 FE  ND   0.9572  120.0000    0.0000  90.0000  0.0000
-
-PRES PHEW         0.00 ! Patch H2O for heme ligand to set up the IC table
-ATOM OH2  OW      0.0  ! real charges come from separate heme patches  
-ATOM HO1  H       0.0  ! 
-ATOM HO2  H       0.0
-!ATOM FE   FE      0.0
-BOND  FE OH2 
-BOND  OH2 HO1     
-BOND  OH2 HO2
-delete angle NA FE NC   NB FE ND
-ANGLE OH2 FE NA    OH2 FE NB    OH2 FE NC    OH2 FE ND
-ANGLE FE  OH2 HO1    FE OH2 HO2
-ANGLE HO1 OH2 HO2  
-!DIHE  OH2 FE NA  C1A ! NAMD complains vrik
-!DIHE  NA  FE OH1 HO1 ! NAMD complains vrik
-!IMPR  HO1 FE HO2 OH2
-!IMPR  OH2 HO1 FE HO2 
-!IMPR   FE  HO1 OH2 HO2
-IC    OH2 FE   NA  C1A   1.6300  90.0000  -90.0000  0.0000  0.0000 ! vrik OH1-> OH2
-IC    HO1 OH2  FE  NA    0.9572 120.0000    45.000   90.0000  0.0000 
-!IC    FE  HO2 *OH2 HO1   2.5       0       180.0     109.0    0.97
-! OH2-FE, OH2-FE-NA, OH2-FE-NA-C1A, FE-NA-C1A, NA-C1A
-! HO1-OH2, HO1-OH2-FE, HO1-OH2-FE-NA, OH2-FE-NA, FE-NA
-!IMPR    1ND1 1CG   1CE1   5CU
-!IMPR    3NE2 3CE1  3CD2   5CU
-!IMPR    4NE2 4CE1  4CD2   5CU
-!impr 1CD2 2CE2 1NE2 1CE1
-!impr 2CZ 1NE2 2CE2 2CD2
-!IC 3CE1  3CD2 *3NE2  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 1CG   1CE1 *1ND1  5CU  0.0000  0.0000  180.0000  0.0000  0.0000
-!IC 4CE1  4NE2  5CU   5OH2   1.33   130    -18.0    90.0     2.00
-!IC 4NE2  5CU   5OH2  5HO1   2.00    91.0 -124.0   118.0     0.97
-!IC 4NE2  5CU   5OH2  5HO2   2.00    91.0  104.0   118.0     0.97
-!IC 1CG   1ND1  5CU   5OH2   0.00     0.0 -130.0     0.0     2.0
-
-
-RESI OH          -1.00 ! Hydroxide ion
-GROUP
-ATOM OH   OH1    -1.10
-ATOM HO   H       0.10
-bond OH HO
-acceptor OH         ! why no donor in TIP3? gets skitrzofrenic?
-!donor HO  OH       ! add the donor line, it's charged, anyway. Oct2004, ljl
-PATCH FIRST NONE LAST NONE
-
-RESI OHH         -1.00 ! Hydroxide ion for MEAD, de/protonatable
-GROUP
-ATOM OH2  OW     -1.10
-ATOM HO1  H       0.10
-ATOM HO2  H       0.00
-bond OH2 HO1   OH2 HO2
-acceptor OH2         ! why no donor in TIP3? gets skitzofrenic?
-PATCH FIRST NONE LAST NONE
-
 END
 
