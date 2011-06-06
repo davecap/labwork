@@ -106,6 +106,10 @@ BONDS
 !
 ! CAPLAN 2011: strong restraint for CuA (CU-CU)
 CU  CU      500.0    4.0
+CU    NR2    100.0      2.38
+CU    NR1    100.0      2.38 
+CU    S      100.0      2.55
+CU    O      50.0       2.40
 ! CAPLAN 2011: CcO MG extra coordination bonds
 MG    OC    500.0   1.67
 MG    NR2   500.0   2.21
@@ -500,8 +504,8 @@ CA   NR2   230.000     1.4900
 CU   NR2   270.2        2.10
 !cu-Ne in his240
 CU   NR1   270.2        2.10
-CU   OZ    250.0        1.90
-OZ   HZ    450.0        0.97
+CU   OW    250.0        1.90
+OW   H     450.0        0.97
 !protonated propionate
 OC   H     545.000     0.9600 ! ALLOW   ALC ARO
                 ! EMB 11/21/89 methanol vib fit
@@ -526,12 +530,6 @@ OA   CA    334.300     1.4110 ! ALLOW   ARO ALC
                 ! copied from above for Tyr anion, Jul 2003, ljl
 OH1  CTL1  428.000     1.4200 ! ALLOW   ALI ALC ARO
                 ! copied from above fro true heme a/cox, Feb 2001, ljl
-! CuB/CuA pseudo bonds to the histidine ligands, Jun 03 ljl
-! bond length from oxidase crystals, force constant from heme-iron to His
-!CU    NR2    100.0      2.38
-!CU    NR1    100.0      2.38 
-!CU    S      100.0      2.55
-!CU    O      50.0       2.40
 
 ! CuB pseudo bond to the Oxygenous ligand, Sep 05 ljl
 ! bond length from QM calculations, force constant from heme-iron to His
@@ -1555,12 +1553,12 @@ OW   FE   NPH     5.000    90.0000 ! ALLOW HEM
 SS   CS   CT1    55.000   118.0000 ! ALLOW SUL
                 ! copied from above for cox, Feb 2001, ljl
 ! angle for CuB in oxidase, Jun 03, ljl
-NR2   CU   NR2    60.0     104.0    ! crystals, * ad hoc* CHECK THE VALUES 
+!NR2   CU   NR2    60.0     104.0    ! crystals, * ad hoc* CHECK THE VALUES 
 !NR2  CU   FE     30        95.0    ! closer to truth in oxidase
 NR2   CU   OW     30        95
 NR2   CU   OT     30        95
-CPH1  NR2  CU     60       120      ! ljl, Oct06
-CPH2  NR2  CU     60       120      ! ljl, to keep the angles even
+!CPH1  NR2  CU     60       120      ! ljl, Oct06
+!CPH2  NR2  CU     60       120      ! ljl, to keep the angles even
 H     OW   CU     60.0     115.6    ! crystals, * ad hoc* CHECK THE VALUES
 HT    OT   CU     60.0     115.6    ! crystals, * ad hoc* CHECK THE VALUES
 H     OW   H      60       109
@@ -1568,7 +1566,7 @@ H     OW   H      60       109
 FE   OT   HT      30      130.000   ! weak ligand => low constant
 OT   FE   NPH     5.000    90.0000  ! Oct 05, by Anne
 FE   OW   H       30      130.000
-OF   FE   NPH     5.000    90.0000  !
+!OF   FE   NPH     5.000    90.0000  !
 ! JOHANSSON END
 
 !lipid section
@@ -1738,6 +1736,12 @@ CU  NR2  CPH1  CPH1     0.00    1    180.00
 CU  NR2  CPH2  NR1      0.00    1    180.00
 CU  NR2  CPH2  HR1      0.00    1    180.00
 CU  NR2  CPH1  CT2      0.00    1    180.00
+NR2  CPH2  NR1  CA      0.00    1    180.00
+HR1  CPH2  NR1  CA      0.00    1    180.00
+NR1  CA  CA  OH1          0.00   1 180.00
+NR1  CA  CA  CA           0.00   1 180.00
+NR1  CA  CA  HP           0.00   1 180.00
+HR3  CPH1  NR1  CA        0.00   1 180.00
 ! CAPLAN 2011 END
 
 !Neutral N terminus
@@ -4578,14 +4582,9 @@ HF             0.00000  -0.046000 0.224500 ! HT nonbond parameters
 
 ! JOHANSSON START
 OW     0.000000  -0.152100     1.768200 ! Copied from OT, ljl 2006
-!OF     0.000000  -0.152100     1.768200 ! Copied from OT, ljl 2006
-!OF1    0.000000  -0.120000     1.700000   0.000000  -0.120000     1.400000 ! 
+OF     0.000000  -0.152100     1.768200 ! Copied from OT, ljl 2006
+OF1    0.000000  -0.120000     1.700000   0.000000  -0.120000     1.400000 ! 
                 ! copied from O, for heme formyl, Nov 2000, ljl
-!FE     0.010000  -0.250000     0.650000 ! ALLOW HEM
-                ! Heme (6-liganded): Iron atom (KK 05/13/91)
-                ! had to change for oxidase calculations, Sep 2003, ljl
-!CU     0.000000  -0.250000     1.090000  ! ljl
-               ! ljl ad hoc, May 2003
 ! JOHANSSON END
 HBOND CUTHB 0.5  ! If you want to do hbond analysis (only), then use
                  ! READ PARAM APPEND CARD

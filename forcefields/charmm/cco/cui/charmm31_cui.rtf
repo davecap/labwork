@@ -543,7 +543,6 @@ ATOM 1C11  CTL1    0.14  ! Charges from in Thr
 ATOM 1H11  HAL1    0.09
 ATOM 1O11  OH1    -0.66
 ATOM 1HO11 H       0.43
-
 ATOM 1C12  CTL2   -0.18
 ATOM 1H121 HAL2    0.09
 ATOM 1H122 HAL2    0.09
@@ -569,18 +568,6 @@ ATOM 1HBD2 HA      0.09
 ATOM 1CGD  CC      0.62
 ATOM 1O1D  OC     -0.76 
 ATOM 1O2D  OC     -0.76
-! HIS: axial ligand
-!ATOM 2CB   CT2    -0.115424
-!ATOM 2HB1  HA      0.029053
-!ATOM 2HB2  HA      0.029053
-!ATOM 2ND1  NR1    -0.060068
-!ATOM 2HD1  H       0.215068
-!ATOM 2CG   CPH1   -0.034135
-!ATOM 2CE1  CPH2    0.064432
-!ATOM 2HE1  HR1     0.112405
-!ATOM 2NE2  NR2    -0.445476
-!ATOM 2CD2  CPH1   -0.033263
-!ATOM 2HD2  HR3     0.081291
 BOND 1FE   1O1
 DELETE ANGLE 1NA 1FE 1NC   1NB 1FE 1ND
 ANGLE 1O1 1FE 1NA    1O1 1FE 1NB
@@ -668,31 +655,7 @@ ATOM 1HBD2 HA      0.09
 ATOM 1CGD  CC      0.62
 ATOM 1O1D  OC     -0.76 
 ATOM 1O2D  OC     -0.76
-!
-! 2:His from helix 2
-!ATOM 2CB   CT2    -0.084616
-!ATOM 2HB1  HA      0.037126
-!ATOM 2HB2  HA      0.027353
-!ATOM 2ND1  NR1    -0.127148
-!ATOM 2HD1  H       0.241669
-!ATOM 2CG   CPH1    0.037965
-!ATOM 2CE1  CPH2   -0.003375
-!ATOM 2HE1  HR1     0.111018
-!ATOM 2NE2  NR2    -0.116884
-!ATOM 2CD2  CPH1   -0.179332
-!ATOM 2HD2  HR3     0.103677
-!! 3: His from helix 10
-!ATOM 3CB   CT2    -0.073009
-!ATOM 3HB1  HA      0.002089
-!ATOM 3HB2  HA      0.050030
-!ATOM 3ND1  NR1    -0.303700
-!ATOM 3HD1  H       0.271367
-!ATOM 3CG   CPH1    0.141720
-!ATOM 3CE1  CPH2    0.040957
-!ATOM 3HE1  HR1     0.078559
-!ATOM 3NE2  NR2    -0.104721
-!ATOM 3CD2  CPH1   -0.202459
-!ATOM 3HD2  HR3     0.128886
+
 
 PRES A_3        -1.00   ! oxidized bis-His heme a, a(III), JCC 29: 753-767, 2008
 GROUP                   ! 1-HEM2, 2-His from helix2, 3-His from helix10
@@ -774,30 +737,7 @@ ATOM 1HBD2 HA      0.09
 ATOM 1CGD  CC      0.62
 ATOM 1O1D  OC     -0.76
 ATOM 1O2D  OC     -0.76
-!! 2His, igen på samma sida som prop.
-!ATOM 2CB   CT2    -0.053083 
-!ATOM 2HB1  HA      0.053204
-!ATOM 2HB2  HA      0.039276
-!ATOM 2ND1  NR1    -0.071126
-!ATOM 2HD1  H       0.252946
-!ATOM 2CG   CPH1    0.007802
-!ATOM 2CE1  CPH2    0.002151
-!ATOM 2HE1  HR1     0.117962
-!ATOM 2NE2  NR2    -0.180600
-!ATOM 2CD2  CPH1   -0.133675
-!ATOM 2HD2  HR3     0.107146
-!! O 3His på motsatt sida.
-!ATOM 3CB   CT2    -0.107833
-!ATOM 3HB1  HA      0.030135
-!ATOM 3HB2  HA      0.067846
-!ATOM 3ND1  NR1    -0.245140
-!ATOM 3HD1  H       0.267809
-!ATOM 3CG   CPH1    0.182791
-!ATOM 3CE1  CPH2    0.074443
-!ATOM 3HE1  HR1     0.075806
-!ATOM 3NE2  NR2    -0.176663
-!ATOM 3CD2  CPH1   -0.210554
-!ATOM 3HD2  HR3     0.140115
+
 
 PRES CUAR         0.00  ! Copper A center, reduced, formally CuICuI
 GROUP                   ! residues 1:CuA, 2:CuA, 3:HSE161, 4:CYS196, 5:GLU198
@@ -911,7 +851,7 @@ delete atom 4HG1
 delete atom 6HG1
 
 PRES CUBX         1.000 ! patch for the CuB center, oxidized + OH 
-GROUP                   ! residues 1-His240, 3-His290, 4-His291 5-Cu
+GROUP                   ! residues 1-His240, 2-His290, 3-His291 4-Cu
 ! HSE 240               ! CuB(II)-OH, Cui 2009
 ATOM 1CB   CT2    -0.25
 ATOM 1HB1  HA      0.19
@@ -960,10 +900,10 @@ ANGLE 4OH1 4CU  3NE2   4OH1 4CU  2NE2    4OH1 4CU 1ND1
 ANGLE 4H1  4OH1 4CU  
 !  other new angles
 ANGLE 1ND1 4CU 2NE2   1ND1 4CU 3NE2   2NE2 4CU 3NE2
-angle 1CG  1ND1 4CU     1CE1 1ND1 4CU
-angle 2CE1 2NE2 4CU     2CD2 2NE2 4CU  ! added to keep the histidines
-angle 3CE1 3NE2 4CU     3CD2 3NE2 4CU  ! symmetric to Cu
-dihe 1CG  1ND1 4CU  4OH1
+ANGLE 1CG  1ND1 4CU     1CE1 1ND1 4CU
+ANGLE 2CE1 2NE2 4CU     2CD2 2NE2 4CU  ! added to keep the histidines
+ANGLE 3CE1 3NE2 4CU     3CD2 3NE2 4CU  ! symmetric to Cu
+DIHE 1CG  1ND1 4CU  4OH1
 IMPR    1ND1 1CG   1CE1   4CU
 IMPR    2NE2 2CE1  2CD2   4CU
 IMPR    3NE2 3CE1  3CD2   4CU
@@ -980,7 +920,7 @@ auto angles dihe
 
 ! histidine-tyrosine  crosslink
 ! 1-His240, 2-Tyr244
-PRES TYHI     0.00
+PRES HITY     0.00
 DELETE ATOM 1HE2
 DELETE ATOM 2HE2
 BOND 1NE2 2CE2
