@@ -15,7 +15,7 @@
 !distributions in molecular dynamics simulations, Journal of
 !Computational Chemistry, 25: 1400-1415, 2004.
 !
-!MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.;
+!MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.;mm
 !Evanseck, J.D.; Field, M.J.; Fischer, S.; Gao, J.; Guo, H.; Ha, S.;
 !Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos,
 !C.; Michnick, S.; Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III,
@@ -85,6 +85,16 @@
 !Journal of Chemical Physics, 1994, 100: 9050-9063
 !
 
+! Heme/CuA/CuB parameters from
+!
+! Ghosh et al. Microscopic pKa analysis of Glu286 in cytochrome c oxidase (Rhodobacter
+! sphaeroides): toward a calibrated molecular model. Biochemistry (2009) vol. 48 (11)
+! pp. 2468-85
+!
+! Johansson et al. Charge parameterization of the metal centers in cytochrome c oxidase.
+! Journal of computational chemistry (2008) vol. 29 (5) pp. 753-67
+!
+
 BONDS
 !
 !V(bond) = Kb(b - b0)**2
@@ -94,13 +104,17 @@ BONDS
 !
 !atom type Kb          b0
 !
-! Cu-OH Fragment START
-CU   NR2   1000.0        2.064
-CU   OZ    1000.0        1.876
-OZ   HZ    1000.0        0.971
-! Tyr244-his240 crosslink (from ct2-ca)
-! CA   NR2   230.000      1000.0
-! Cu-OH Fragment END
+! CAPLAN 2011: strong restraint for CuA (CU-CU)
+CU  CU      500.0    4.0
+CU    NR2    100.0      2.38
+CU    NR1    100.0      2.38 
+CU    S      100.0      2.55
+CU    O      50.0       2.40
+! CAPLAN 2011: CcO MG extra coordination bonds
+MG    OC    500.0   1.67
+MG    NR2   500.0   2.21
+! END CAPLAN 2011
+
 NH2   CT1   240.00      1.455  ! From LSN NH2-CT2
 !Carbon Dioxide
 CST  OST   937.96      1.1600 ! JES
@@ -333,7 +347,7 @@ NY   CPT   270.000     1.3750 ! ALLOW   ARO
 NY   H     465.000     0.9760 ! ALLOW   ARO
                 ! indole JWK   08/28/89
 O    C     620.000     1.2300 ! ALLOW   PEP POL ARO
-                ! Peptide geometry, condensed phase (LK)
+                ! Peptide geometry, condensed phase (LK)             
 O    CC    650.000     1.2300 ! ALLOW   PEP POL ARO
                 ! adm jr. 4/10/91, acetamide
 OB   CC    750.000     1.2200 ! ALLOW   PEP POL ARO
@@ -476,6 +490,60 @@ CEL1  CEL2  500.000     1.342   ! propene, yin,adm jr., 12/95
 HEL1  CEL1  360.500     1.100   ! propene, yin,adm jr., 12/95
 CEL1  CTL2  365.000     1.502   ! butene; from propene, yin,adm jr., 12/95
 CEL1  CEL1  440.000     1.340   ! butene, yin,adm jr., 12/95
+! CUI START
+OF   FE    410.311     1.618 ! ALLOW HEM
+                ! Heme (6-liganded): O2 ligand (KK 05/13/91)
+OF   HF    450.000     0.9572 ! ALLOW   WAT
+                ! FROM TIPS3P GEOM
+CPB  CA    450.000     1.3800 ! from cpb ce1
+CA   O     620.000     1.2300 ! from O C
+CPB  CT1   230.000     1.4900 ! ct2 cpb
+    !Tyr244-his240 crosslink (from ct2-ca)
+CA   NR2   230.000     1.4900
+!copper (from heme: NPH  FE. averaged computed distance)
+CU   NR2   270.2        2.10
+!cu-Ne in his240
+CU   NR1   270.2        2.10
+CU   OW    250.0        1.90
+OW   H     450.0        0.97
+!protonated propionate
+OC   H     545.000     0.9600 ! ALLOW   ALC ARO
+                ! EMB 11/21/89 methanol vib fit
+! CUI END
+
+! JOHANSSON START
+! Johansson CF1 is a modification to allow formyl bond
+!   (CF1 is basically CA)
+CPB  CF1   450.000     1.3800 ! ALLOW HEM
+                ! Heme (6-liganded): copied from above, ljl, Nov 2000
+HF1  CF1   330.000     1.1000 ! 
+                ! Heme formyl, copied from heme vinyl, ljl, Nov 2000
+CTL1 CPB   230.000     1.4900 ! ALLOW HEM
+                ! copied form above for true heme a/cox, Feb 2001, ljl
+CT1  CS    190.000     1.5310 ! ALLOW   SUL
+                ! copied from above for cox, Feb 2001, ljl
+NH1  CF1   320.000     1.4300 ! for N-formyl group
+                ! Mar2004, ljl
+NR1  CA    260.0       1.37   ! HAND MADE FOR HIS-TYR, May 2003, ljl
+OF1  CF1   620.000     1.2300 ! copied from above for heme formyl, ljl Nov 2000
+OA   CA    334.300     1.4110 ! ALLOW   ARO ALC
+                ! copied from above for Tyr anion, Jul 2003, ljl
+OH1  CTL1  428.000     1.4200 ! ALLOW   ALI ALC ARO
+                ! copied from above fro true heme a/cox, Feb 2001, ljl
+
+! CuB pseudo bond to the Oxygenous ligand, Sep 05 ljl
+! bond length from QM calculations, force constant from heme-iron to His
+!CU    OW     85.0       2.00    ! CHECK THE VALUES!
+!CU    OT     85.0       2.00    ! CHECK THE VALUES!
+!OW    H      80.0         1.0
+!OW    H      100.0         0.97 ! DAC converged DFT Fe-OH, Cu-OH 2011
+
+! sixth ligand for reduced high spin heme, H2O experimentally always there 
+!OT    FE    50.000     2.5000   ! by AnneTuukkanen, Oct 2005
+!OW    FE    85.000     2.5000  
+!OF    FE    50.000     2.0000 ! Using Cui instead
+!OW    FE    100.000     1.78 ! DAC converged DFT Fe-OH 2011
+! JOHANSSON END
 
 ANGLES
 !
@@ -490,21 +558,16 @@ ANGLES
 !
 !atom types     Ktheta    Theta0   Kub     S0
 !
-! Cu-OH Fragment START
-! NR1  CU   OZ      42.00  1000.0
-! NR1  CU   NR2     42.00  1000.0
-! CPH1 NR1  CU       2.00  1000.0
-! CPH2 NR1  CU       2.00  1000.0
-NR2  CU   NR2     10.0    115.43
-NR2  CU   OZ      10.0    81.73  
-CPH1 NR2  CU      30.0    131.77 
-CPH2 NR2  CU      30.0    121.4 
-CU   OZ   HZ      50.0    109.1 
-!Tyr244-his240 crosslink. from CT2  CPH1 CPH1
-! CPH2 NR2  CA     45.800   1000.0
-! NR2  CA   CA     45.800   1000.0
-! CPH1 NR2  CA     45.800   1000.0
-! Cu-OH Fragment END
+! CAPLAN 2011
+! CcO MG coordination dummy params
+CT2    SM     S     0.00   0.00
+CT2    S      SM    0.00   0.00
+NR2    MG     OC    0.00   0.00
+OC     MG     OC    0.00   0.00
+CC     OC     MG    0.00   0.00
+CPH1   NR2    MG    0.00   0.00
+CPH2   NR2    MG    0.00   0.00
+! END CAPLAN 2011
 H    NH2  CT1   50.000    111.00              ! From LSN HC-NH2-CT2
 NH2  CT1  CT2   67.700    110.00              ! From LSN NH2-CT2-CT2
 CT1  CD   OH1   55.000    110.50              ! From ASPP CT2-CD-OH1
@@ -1224,9 +1287,13 @@ SS   CS   HA     40.000   112.3000 ! ALLOW SUL
 ! HEME
 CPA  CPB  C      70.000   126.7400 ! ALLOW HEM
                 ! Heme (6-liganded): substituents (KK 05/13/91)
-CPB  CPB  C      70.000   126.7400 ! ALLOW BCL
-                ! RP 15-1-96
+CPA  CPB  CF1    70.000   126.7400 ! 
+                ! copied from above, for heme formyl, Nov 2000, ljl
 CPA  CPM  CT1    94.200   125.1200 ! ALLOW BCL
+                ! RP 15-1-96
+CPB  CPB  CF1    70.000   126.7500 ! 
+                ! copied from above, for heme formyl, Nov 2000, ljl
+CPB  CPB  C      70.000   126.7400 ! ALLOW BCL
                 ! RP 15-1-96
 CPB  C    C      70.000   121.5000 ! ALLOW HEM
                 ! Heme (6-liganded): substituents (KK 05/13/91)
@@ -1238,6 +1305,7 @@ CPB  C    CT3    70.000   126.7500 ! ALLOW BCL
                 ! RP 15-1-96
 CPB  C    CPB    70.000   126.7500 ! ALLOW BCL
                 ! RP 21-5-97
+CPB  CF1  OF1     85.0     118.5  20.0  2.43 !copied from NIC, ljl, nad/ppi, jjp1/adm jr. 7/95
 CPB  CT2  CT3    70.000   126.7500 ! ALLOW BCL
                 ! RP 15-1-96
 CPM  CT1  CC     52.000   108.0000 ! ALLOW BCL
@@ -1278,6 +1346,8 @@ C    CT1  CC     52.000   108.0000 ! ALLOW  BCL
                 ! RP 15-1-96
 CT1  CC    HA     50.000   117.3000 ! ALLOW   CHO
                 ! aldehyde C-terminus (RP 06-8-96), untested
+CT1  NH1  CF1    50.000   120.0000 ! copied from above for N-formyl
+                ! Mar2004 ljl
 CT2  CT1  CT2   53.350    114.00    8.00   2.56100 ! ALLOW   BCL
                 ! RP 15-1-96
 CT3  CT   CT2   53.350    114.00    8.00   2.56100 ! ALLOW   SPO
@@ -1374,6 +1444,131 @@ HAL  CTL3 CTL2   34.600    110.10   22.53   2.179  ! alkane, 3/92
 HAL  CTL3 CTL3   37.500    110.10   22.53   2.179  ! alkane, 3/92
 O    C    HA     44.000   122.0000 ! ALLOW POL
                 ! adm jr., 5/13/91, formamide geometry and vibrations  (copy (TBW) )
+! CUI START
+!from 3point calc: xavier@dali:~/CcO/SmallModels/FE/HARM
+!the data is given in degrees but the constants are in kcal/(mol*rad**2)
+OF   FE   NPH    59.10     93.1600 ! ALLOW HEM
+                ! Heme (6-liganded): ligand links (KK 05/13/91)
+HF   OF   FE     65.000   108.0000 ! ALLOW   ALC ARO
+                ! JES 8/25/89 phenol *NEO from tyrosine*
+HF   OF   HF     55.000   104.5200 ! ALLOW WAT
+                ! TIP3P GEOMETRY, ADM JR.
+                ! from CPM  CPA  CPB
+CPB  CPB  CA     61.600   124.0700 
+CPA  CPB  CA     61.600   124.0700
+    ! from CT3  CPB  CPA to emulate farnesyl
+CPB  CPB  CT1    65.000   126.7400
+CPA  CPB  CT1    65.000   126.7400
+    ! from O    C    CT1
+CPB  CA   O      80.000   121.0000
+    !the following two are invented
+CPB  CA   HA     80.000   121.0000
+O    CA   HA     80.000   121.0000
+    ! from OH1  CT1  CT1
+CPB  CT1  OH1    75.700   110.1000 
+    ! from HA   CT3  CPB
+CPB  CT1  HA     50.000   109.5000
+    ! from CT2  CT2  CPB
+CPB  CT1  CT2    70.000   113.0000
+OH1  CT1  CT2    75.700   110.1000
+CT2  CT2  CE1    70.000   113.0000
+    ! from CE2  CE1  CT2
+CT3  CE1  CT2    48.00    126.00
+CT3  CE1  CT3    48.00    126.00
+    ! Tyr244-his240 crosslink. from CT2  CPH1 CPH1
+CPH2 NR2  CA     45.800   130.0000
+NR2  CA   CA     45.800   130.0000
+CPH1 NR2  CA     45.800   130.0000
+    ! Copper
+    ! these angles can be very different, so lets apply very soft pot.
+    ! unless you design different atom types for his 242, 290 and 291
+CPH2 NR2  CU       2.00  124.0
+CPH1 NR2  CU       2.00  124.0
+!NR2  CU   NR2      2.00  109.0
+!NR2  CU   OZ       2.00  109.0
+NR2  CU   NR2     42.00  109.0 !tetrahedral copper
+NR2  CU   OZ      42.00  109.0 !tetrahedral copper
+    ! from H    OH1  CT1
+CU   OZ   HZ      57.500   106.0000
+    ! cu-Ne in his240
+CPH1 NR1  CU       2.00  124.0
+CPH2 NR1  CU       2.00  124.0
+NR1  CU   NR2     42.00  109.0 !tetrahedral copper
+NR1  CU   OZ      42.00  109.0 !tetrahedral copper
+
+! protonated propionate
+H    OC   CC     55.000   115.0000 ! ALLOW   ALC ARO PEP POL
+                ! adm jr. 5/02/91, acetic acid pure solvent
+! CUI END
+
+! JOHANSSON START
+CS   CT1  C      52.000   108.0000 ! copied from CT2  CT1  C 
+                ! for acidic CYS (from ES1), Dec 2000, ljl
+CTL2 CTL1 CPB    70.000   113.0000 ! copied from CT2  CT2  CPB
+                ! for heme Et-Oh-Farn, Nov 2000, ljl
+CTL1 CPB  CPA    65.000   126.7400 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (ljl. Nov 2000)
+CTL1 CPB  CPB    65.000   126.7500 ! ALLOW HEM
+                ! Heme (6-liganded): substituents (ljl, Nov 2000)
+OF1  CF1  NH1    80.000   122.5000 ! copied from above, for N-formyl peptide
+                                    ! Mar2004, ljl
+OF1  CF1  HF1     85.0     128.5  20.0  2.17 !copied from NIC, ljl, nad/ppi, jjp1/adm jr. 7/95
+NH1  CF1  HF1    80.000   116.5000 ! copied from above, for N-formyl group
+                                    ! Mar 2004, ljl
+HF1  CF1  CPB    50.000   120.0000 ! copied from above, for heme formyl, Nov 2000, ljl
+! add funny angles for His-Tyr linkage, aped from nucleic acids, May 2003 ljl
+CPH1  NR1 CA      70.0     131.0   ! ljl
+CPH2  NR1 CA      70.0     122.0   ! ljl
+CA    CA  NR1     50.0     120.0   ! ljl
+H    NH1  CF1    34.000   123.0000 ! copied from above for N-formyl peptide
+                ! Mar2004, ljl
+H    OH1  CTL1   57.500   106.0000 ! 
+                ! copied from above for Et-OH-Farn, Nov 2000, ljl
+HF1  CF1  CPB    50.000   120.0000 ! 
+                ! copied from above, for heme formyl, Nov 2000, ljl
+HAL1 CTL1 CPB    50.000   109.5000 ! 
+                ! copied from above for heme Et-OH-farn, Nov 2000, ljl
+HA   CS   CT1   33.430    110.10   22.53   2.17900 ! copied from HA   CT2  CT1
+                ! fro acidic CYS (from ES1), DEc 2000, ljl
+HB   CT1  CS     35.000   111.0000 ! copied from HB   CT1  CT2  
+                ! for acidic CYS (from ES1), Dec 2000, ljl
+NH1  CF1  HF1    80.000   116.5000 ! copied from above, for N-formyl group
+                ! Mar 2004, ljl
+NH1  CT1  CS     70.000   113.5000 ! copied from NH1  CT1  CT2
+                ! for adicid CYS (from ES1) Dec 2000, ljl
+OF1  CF1  NH1    80.000   122.5000 ! copied from above, for N-formyl peptide
+                ! Mar2004, ljl
+CPB  CF1  OF1     85.0     118.5  20.0  2.43 !copied from NIC, ljl, nad/ppi, jjp1/adm jr. 7/95
+OF1  CF1  HF1     85.0     128.5  20.0  2.17 !copied from NIC, ljl, nad/ppi, jjp1/adm jr. 7/95
+OA   CA   CA     45.200   120.0000 ! ALLOW   ARO ALC
+                !  copied from above for Tyr anion, Jul 2003, ljl
+OH1  CTL1 HAL1   45.900   108.8900 ! 
+                ! copied from above, for Et-OH-farn, Nov 2000, ljl
+OH1  CTL1 CTL2   75.700   110.1000 ! copied from OH1  CT2  CT2
+                ! for Et-OH-farn, Nov 2000, ljl
+OH1  CTL1 CPB    50.000   109.5000 ! copied from HA/CT3,2/CPB
+                ! for heme Et-OH-farn, Nov 2000, ljl
+OW   FE   NPH     5.000    90.0000 ! ALLOW HEM
+                ! Copied from above, ljl 2006
+SS   CS   CT1    55.000   118.0000 ! ALLOW SUL
+                ! copied from above for cox, Feb 2001, ljl
+! angle for CuB in oxidase, Jun 03, ljl
+!NR2   CU   NR2    60.0     104.0    ! crystals, * ad hoc* CHECK THE VALUES 
+!NR2  CU   FE     30        95.0    ! closer to truth in oxidase
+NR2   CU   OW     30        95
+NR2   CU   OT     30        95
+!CPH1  NR2  CU     60       120      ! ljl, Oct06
+!CPH2  NR2  CU     60       120      ! ljl, to keep the angles even
+H     OW   CU     60.0     115.6    ! crystals, * ad hoc* CHECK THE VALUES
+HT    OT   CU     60.0     115.6    ! crystals, * ad hoc* CHECK THE VALUES
+H     OW   H      60       109
+! angles for Fe-OHx bond, the sixth weak ligand of a high spin heme 
+FE   OT   HT      30      130.000   ! weak ligand => low constant
+OT   FE   NPH     5.000    90.0000  ! Oct 05, by Anne
+FE   OW   H       30      130.000
+!OF   FE   NPH     5.000    90.0000  !
+! JOHANSSON END
+
 !lipid section
 OBL  CL   CTL3    70.0     125.0     20.0   2.442  ! methyl acetate
 OBL  CL   CTL2    70.0     125.0     20.0   2.442  ! methyl acetate
@@ -1508,6 +1703,7 @@ HAL2 CTL2 CEL1   45.00     111.50   ! 1-butene; from propene, yin,adm jr., 12/95
 HAL3 CTL3 CEL1   42.00     111.50   ! 2-butene, yin,adm jr., 12/95
 CEL1 CTL2 CEL1   30.0      114.0    ! 1,4-dipentene, adm jr., 2/00
 
+
 DIHEDRALS
 !
 !V(dihedral) = Kchi(1 + cos(n(chi) - delta))
@@ -1518,42 +1714,35 @@ DIHEDRALS
 !
 !atom types             Kchi    n   delta
 !
-! Cu-OH Fragment START
-!Tyr244-his240 crosslink
-!the following two dihedrals should force the tyrCE(ca) to be in the Imdz plane
-!from: CT2  CA   CA   CA       3.1000  2   180.00 ! ALLOW   ARO ! JES 8/25/89 toluene and ethylbenzene
-!NR1  CPH2 NR2  CA       3.10   2 1000.00
-!CPH1 CPH1 NR2  CA       3.10   2 1000.00
-!CPH2 NR2  CA   CA       0.00   1 1000.00
-!HR1  CPH2 NR2  CA       0.00   1 1000.00
-!NR2  CA   CA   CA       3.10   2 1000.00
-!NR2  CA   CA   OH1      0.00   1 1000.00
-!NR2  CA   CA   HP       0.00   1 1000.00
-!CPH1 NR2  CA   CA       0.00   1 1000.00
-!HR3  CPH1 NR2  CA       0.00   1 1000.00
-!copper
-CPH1 CPH1 NR2  CU        0.00   1 1000.00
-CPH1 NR2  CU   OZ        0.00   1 1000.00
-CPH2 NR2  CU   OZ        0.00   1 1000.00
-HR1  CPH2 NR2  CU        0.00   1 1000.00
-HR3  CPH1 NR2  CU        0.00   1 1000.00
-NR1  CPH2 NR2  CU        0.00   1 1000.00
-NR2  CU   NR2  CPH1      0.00   1 1000.00
-NR2  CU   NR2  CPH2      0.00   1 1000.00
-NR2  CU   OZ   HZ        0.00   1 1000.00
-!cu-Ne his240
-!CT2  CPH1 NR1  CU        0.00   1 1000.00
-!NR1  CU   NR2  CPH2      0.00   1 1000.00
-!NR1  CU   NR2  CPH1      0.00   1 1000.00
-!NR1  CU   OZ   HZ        0.00   1 1000.00
-!CPH1 NR1  CU   NR2       0.00   1 1000.00
-!CPH1 NR1  CU   OZ        0.00   1 1000.00
-!CPH2 NR1  CU   NR2       0.00   1 1000.00
-!CPH2 NR1  CU   OZ        0.00   1 1000.00
-!HR1  CPH2 NR1  CU        0.00   1 1000.00
-!NR2  CPH2 NR1  CU        0.00   1 1000.00
-!CPH1 CPH1 NR1  CU        0.00   1 1000.00
-! Cu-OH Fragment END
+! CAPLAN 2011 dummy dihedrals
+CA   NR1  CPH1 CPH1     0.00    2    180.00
+CPH2  NR2  MG  OC       0.00    1    180.00
+NR2  MG  OC  CC         0.00    1    180.00
+CPH1  NR2  MG  OC       0.00    1    180.00
+CT2  S  SM  CT2         0.00    1    180.00
+HA  CT2  S  SM          0.00    1    180.00
+S  SM  CT2  CT1         0.00    1    180.00
+S  SM  CT2  HA          0.00    1    180.00
+CT1  CT2  S  SM         0.00    1    180.00
+CC  OC  MG  OC          0.00    1    180.00
+MG  OC  CC  CT2         0.00    1    180.00
+MG  OC  CC  OC          0.00    1    180.00
+MG  NR2  CPH1  HR3      0.00    1    180.00
+MG  NR2  CPH1  CPH1     0.00    1    180.00
+MG  NR2  CPH2  NR1      0.00    1    180.00
+MG  NR2  CPH2  HR1      0.00    1    180.00
+CU  NR2  CPH1  HR3      0.00    1    180.00
+CU  NR2  CPH1  CPH1     0.00    1    180.00
+CU  NR2  CPH2  NR1      0.00    1    180.00
+CU  NR2  CPH2  HR1      0.00    1    180.00
+CU  NR2  CPH1  CT2      0.00    1    180.00
+NR2  CPH2  NR1  CA      0.00    1    180.00
+HR1  CPH2  NR1  CA      0.00    1    180.00
+NR1  CA  CA  OH1          0.00   1 180.00
+NR1  CA  CA  CA           0.00   1 180.00
+NR1  CA  CA  HP           0.00   1 180.00
+HR3  CPH1  NR1  CA        0.00   1 180.00
+! CAPLAN 2011 END
 
 !Neutral N terminus
 NH2  CT1  C    O        0.0000  1     0.00
@@ -2202,6 +2391,7 @@ NR1  CPH1 CT3  HA       0.1900  3     0.00 ! ALLOW ARO
                 ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89
 NR1  CPH2 NR2  CPH1    14.0000  2   180.00 ! ALLOW ARO
                 ! his, ADM JR., 7/20/89
+NR1  CPH2  NR2  CA        3.10   2 180.00 ! CUI
 NR2  CPH1 CPH1 CT2      3.0000  2   180.00 ! ALLOW ARO
                 ! his, ADM JR., 7/22/89, FROM NR2 CPH1 CPH1 HA
 NR2  CPH1 CPH1 CT3      3.0000  2   180.00 ! ALLOW ARO
@@ -2370,6 +2560,161 @@ SM   SM   CT3  HA       0.1580  3     0.00 ! ALLOW   ALI SUL ION
                 ! expt. dimethyldisulfide,    3/26/92 (FL)
 SS   CS   CT3  HA       0.1500  3     0.00 ! ALLOW SUL
                 ! ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92
+
+! CUI START
+X    FE   NR2  X        0.0500  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): from param19.inp
+X    OF   FE   X        0.0000  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): from ./original.par*.prm! CUI END
+                
+CPB  CPB  CA   O       0.00   1 180.00
+CPB  CPB  CA   HA      0.00   1 180.00
+CPA  CPB  CA   O       0.00   1 180.00
+CPA  CPB  CA   HA      0.00   1 180.00
+CPB  CPB  CT1  OH1     0.00   1 180.00
+CPB  CPB  CT1  HA      0.00   1 180.00
+CPB  CPB  CT1  CT2     0.00   1 180.00
+CPA  CPB  CT1  OH1     0.00   1 180.00
+CPA  CPB  CT1  HA      0.00   1 180.00
+CPA  CPB  CT1  CT2     0.00   1 180.00
+CT2  CT2  CE1  HE1     0.00   1 180.00
+HA   CT2  CE1  CE1     0.00   1 180.00
+CE1  CE1  CT2  HA      0.00   1 180.00
+CE1  CE1  CT2  CT2     0.00   1 180.00
+CT3  CE1  CT2  HA      0.00   1 180.00
+CT3  CE1  CT2  CT2     0.00   1 180.00
+HA   CT3  CE1  CT2     0.00   1 180.00
+CT3  CE1  CT3  HA      0.00   1 180.00
+HA   CT3  CE1  CT3     0.00   1 180.00                                      
+    ! Tyr244-his240 crosslink
+    ! the following two dihedrals should force the tyrCE(ca) to be in the Imdz plane
+    ! from: CT2  CA   CA   CA       3.1000  2   180.00 ! ALLOW   ARO ! JES 8/25/89 toluene and ethylbenzene
+NR1  CPH2 NR2  CA       3.10   2 180.00
+CPH1 CPH1 NR2  CA       3.10   2 180.00
+CPH2 NR2  CA   CA       0.00   1 180.00
+HR1  CPH2 NR2  CA       0.00   1 180.00
+NR2  CA   CA   CA       3.10   2 180.00
+NR2  CA   CA   OH1      0.00   1 180.00
+NR2  CA   CA   HP       0.00   1 180.00
+CPH1 NR2  CA   CA       0.00   1 180.00
+HR3  CPH1 NR2  CA       0.00   1 180.00
+    ! copper
+CPH1 CPH1 NR2  CU        0.00   1 180.00
+CPH1 NR2  CU   OZ        0.00   1 180.00
+CPH2 NR2  CU   OZ        0.00   1 180.00
+HR1  CPH2 NR2  CU        0.00   1 180.00
+HR3  CPH1 NR2  CU        0.00   1 180.00
+NR1  CPH2 NR2  CU        0.00   1 180.00
+NR2  CU   NR2  CPH1      0.00   1 180.00
+NR2  CU   NR2  CPH2      0.00   1 180.00
+NR2  CU   OZ   HZ        0.00   1 180.00
+    ! Cu-Ne his240
+CT2  CPH1 NR1  CU        0.00   1 180.00
+NR1  CU   NR2  CPH2      0.00   1 180.00
+NR1  CU   NR2  CPH1      0.00   1 180.00
+NR1  CU   OZ   HZ        0.00   1 180.00
+CPH1 NR1  CU   NR2       0.00   1 180.00
+CPH1 NR1  CU   OZ        0.00   1 180.00
+CPH2 NR1  CU   NR2       0.00   1 180.00
+CPH2 NR1  CU   OZ        0.00   1 180.00
+HR1  CPH2 NR1  CU        0.00   1 180.00
+NR2  CPH2 NR1  CU        0.00   1 180.00
+CPH1 CPH1 NR1  CU        0.00   1 180.00
+
+!protonated propionate
+!X    CC   O2D  X        2.0500  2   180.00 ! ALLOW   PEP POL ARO ALC
+!                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+!protonated HEM3
+H    OC   CC   OC        2.0500  2   0.00 ! ALLOW   PEP POL ARO ALC
+                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+H    OC   CC   CT2       2.0500  2   180.00 ! ALLOW   PEP POL ARO ALC
+                ! adm jr, 10/17/90, acetic acid C-Oh rotation barrier
+
+! CUI END
+
+! JOHANSSON START
+OF1  CF1  NH1  CT1      2.5000  2   180.00 ! copied from above for N-formyl
+                !   Mar 2004, ljl
+OF1  CF1  NH1  H        2.5000  2   180.00 !  copied from above for N-formyl
+                !  Mar 2004, ljl                
+! add a funny dihedral for HIs-Tyr, May 2003, ljl
+CPH2 NR1  CA   CA      5.0      3     42.0 ! ljl
+CPH1 NR1  CA   CA      5.0      3     34.0 ! viv
+HF1  CF1  NH1  CT1      1.6000  1     0.00 ! for N-formyl 
+HF1  CF1  NH1  CT1      2.5000  2   180.00 ! Mar2004, ljl
+H    NH1  CF1  HF1      2.5000  2   180.00 !  copied from above, for N-formyl
+                ! Mar 2004, ljl
+HB   CT1  NH1  CF1      0.0000  1     0.00 ! ALLOW PEP
+                ! copied from above for N-formyl, Mar 2004, ljl                
+OF1  CF1  NH1  CT1      2.5000  2   180.00 ! copied from above for N-formyl
+                !   Mar 2004, ljl
+OF1  CF1  NH1  H        2.5000  2   180.00 !  copied from above for N-formyl
+                !  Mar 2004, ljl
+OW   FE   NPH  X	1.0000  2   -90.00	
+OM   FE   NPH  CPA      1.0000  2   -90.00
+NPH  FE   NPH  X        0.0500  2     0.00
+NPH  FE   NPH  CPA      0.0500  2     0.00
+NR2   CPH2 NR2  CU      10.000   2    180.00
+CPH2  NR2  CU   OW      10.000   2    0.00 ! dac 2011 His-CuB-O
+CPH1  NR2  CU   OW      10.000   2   -120.00  ! Nov2006, ljl 
+CPH1  NR2  CU   OT      10.000   2   -120.00  !
+NR2   CU   OW   H       10.0     2     30.00
+NR2   CU   OT   HT      10.0     2     30.00
+                ! CuB ligands, for keeping the ligands in space, Jun 03, ljl
+C    CT1  NH1  CF1      0.2000  1   180.00 ! copied from above
+                !  for N-formyl, ljl Mar 2004
+
+CS   CT1  C    NH1      1.6000  1     0.00 !  ALLOW PEP
+                ! Copied from above for CYL, Feb 2001, ljl
+CS   CT1  C    NH1      2.5000  2   180.00 !  ALLOW PEP
+                ! Copied from above for CYL, Feb 2001, ljl
+
+CT2  CT1  NH1  CF1      1.8000  1     0.00 ! copied from above, for N-formyl
+                !  Mar 2004, ljl
+CS   CT1  NH1  C        1.8000  1     0.00 ! ALLOW PEP
+                ! copied from above for CYL, Feb 2001, ljl
+
+HF1  CF1  NH1  CT1      1.6000  1     0.00 ! for N-formyl 
+HF1  CF1  NH1  CT1      2.5000  2   180.00 ! Mar2004, ljl
+
+                ! JWK 05/14/91 fit to indole
+! add a funny dihedral for HIs-Tyr, May 2003, ljl
+CPH2 NR1  CA   CA      5.0      3     42.0 ! ljl
+
+H    NH1  CF1  HF1      2.5000  2   180.00 !  copied from above, for N-formyl
+                ! Mar 2004, ljl
+
+H    NH1  CT1  CS       0.0000  1     0.00 ! ALLOW PEP
+                ! copied from above for CYL, Feb 2001, ljl
+
+H    OH1  CTL1 CTL2     1.3300  1     0.00 ! ALLOW ALC
+                ! copied from above for heme 1/farnesyl, Feb 01, ljl        
+H    OH1  CTL1 CTL2     0.1800  2     0.00 ! ALLOW ALC
+                ! copied from above for heme 1/farnesyl, Feb 01, ljl
+H    OH1  CTL1 CTL2     0.3200  3     0.00 ! ALLOW ALC
+                ! copied from above for heme 1/farnesyl, Feb 01, ljl
+
+HB   CT1  NH1  CF1      0.0000  1     0.00 ! ALLOW PEP
+                ! copied from above for N-formyl, Mar 2004, ljl
+
+O    C    CT1  CS       1.4000  1     0.00 !   ALLOW PEP
+                ! copied from above for CYL, Feb 2001, ljl 
+
+OF1  CF1  NH1  CT1      2.5000  2   180.00 ! copied from above for N-formyl
+                !   Mar 2004, ljl 
+
+OF1  CF1  NH1  H        2.5000  2   180.00 !  copied from above for N-formyl
+                !  Mar 2004, ljl
+
+OA   CA   CA   HP       4.2000  2   180.00 ! ALLOW   ARO
+                ! copied from above for Tyr anion, ljl, Jul 2003
+NR2   CPH2 NR2  CU      10.000   2    180.00
+NR2   CU   OT   HT      10.0     2     30.00
+                ! CuB ligands, for keeping the ligands in space, Jun 03, ljl
+CPB  CPB  CPA  CTL1   90.0000         0      0.0000 ! ALLOW HEM
+                ! Heme farnesyl chain, Oct05, ljl
+! JOHANSSON END
+
 ! HEME
 OS   CT2  C    HA       0.2300  2   180.00 ! ALLOW   BCL
                 ! RP 15-1-96
@@ -2464,6 +2809,26 @@ X    CPB  C    X        3.0000  2   180.00 ! ALLOW HEM
 X    C    C    X        4.0000  2   180.00 ! ALLOW HEM
                 ! Heme (6-liganded): substituents (KK 05/13/91)
 ! END HEME ,START WILDCARD
+
+! JOHANSSON WILDCARD HEME
+X    CPB  CF1  X        3.0000  2   180.00 ! ALLOW HEM
+                ! copied from above for heme a, Feb 01, ljl
+X    FE   OM   X        0.0000  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): ligands (KK 05/13/91)
+X    FE   OW   X        0.0000  4     0.00 ! ALLOW HEM
+                ! copied from above, ljl 2006
+X    NPH  CPA  X        0.0000  2     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): dummy for "auto dihe" (KK 05/13/91)
+X    FE   NR2  X        0.0500  4     0.00 ! ALLOW HEM
+                ! Heme (6-liganded): from param19.inp   
+X    CPB  CTL1 X        0.0000  6     0.00 ! ALLOW HEM
+                ! copied from above for heme a/farnesyl, Feb 01, ljl
+X    CT1  CS   X        0.2000  3     0.00 ! ALLOW   ALI
+                ! copied from above for cox, Feb 2001, ljl
+X    CTL1 OH1  X        0.1400  3     0.00 ! ALLOW   ALI ALC ARO
+                ! copied from above for heme a farnesyl, Feb 01, ljl
+! END JOHANSSON WILDCARD HEME
+
 X    C    NC2  X        2.2500  2   180.00 ! ALLOW   PEP POL ARO
                 ! 9.0->2.25 GUANIDINIUM (KK)
 X    CD   OH1  X        2.0500  2   180.00 ! ALLOW   PEP POL ARO ALC
@@ -2556,14 +2921,8 @@ X    CT3  OS   X       -0.1000  3     0.00 ! ALLOW   PEP POL
                 ! adm jr. 3/19/92, from lipid methyl acetate
 X    FE   CM   X        0.0500  4     0.00 ! ALLOW HEM
                 ! Heme (6-liganded): ligands (KK 05/13/91)
-X    FE   NPH  X        0.0000  2     0.00 ! ALLOW HEM
-                ! Heme (6-liganded): for "ic para" only (KK 05/13/91)
-X    FE   NR2  X        0.0500  4     0.00 ! ALLOW HEM
-                ! Heme (6-liganded): from param19.inp
-X    FE   OM   X        0.0000  4     0.00 ! ALLOW HEM
-                ! Heme (6-liganded): ligands (KK 05/13/91)
-X    NPH  CPA  X        0.0000  2     0.00 ! ALLOW HEM
-                ! Heme (6-liganded): dummy for "auto dihe" (KK 05/13/91)
+
+
 !lipid section
 X    CTL1 OHL  X        0.14    3     0.00 ! glycerol
 X    CTL2 OHL  X        0.14    3     0.00 ! glycerol
@@ -2753,6 +3112,7 @@ CEL1 CEL1 CTL2 CEL1     0.200   4     0.00 !2,5-diheptane
 !CEL1 CEL1 CTL2 CEL1     1.200   3   180.00 !2,5-diheptane
 !CEL1 CEL1 CTL2 CEL1     0.100   4   180.00 !2,5-diheptane
 
+
 IMPROPER
 !
 !V(improper) = Kpsi(psi - psi0)**2
@@ -2763,8 +3123,12 @@ IMPROPER
 !
 !atom types           Kpsi                   psi0
 !
+CA   NR1  CA   CA     20.8000         0    -175.000 ! vivek  was/ljl 180.00 
+CPH1 CA   NR1  CPH2   20.8000         0    -167.000 ! vivek  was/ljl 180.00
 CPB  CPA  NPH  CPA    20.8000         0      0.0000 ! ALLOW HEM
                 ! Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)
+CPB  CPA  CTL1 CPB    90.0000         0      0.0000 ! ALLOW HEM
+                ! copied from above for heme a farnesyl, Feb 01, ljl
 CPB  X    X    CE1    90.0000         0      0.0000 ! ALLOW HEM
                 ! Heme (6-liganded): substituents (KK 05/13/91)
 CT2  X    X    CPB    90.0000         0      0.0000 ! ALLOW HEM
@@ -2815,6 +3179,10 @@ NR1  CPH1 CPH2 H       0.4500         0      0.0000 ! ALLOW ARO
                 ! his, adm jr., 7/05/90
 NR1  CPH2 CPH1 H       0.4500         0      0.0000 ! ALLOW ARO
                 ! his, adm jr., 7/05/90
+NR2  CPH2 CPH1 CU     50.000          0      0.000  ! ljl 2004, for CuB 
+NR2  CPH1 CPH2 CU     50.000          0      0.000  ! ljl 2004, for CuB
+NR2  NR2  NR2   CU   550.0000        0      0.000 
+                ! CuB ligands, for keeping the ligands in space, Jun 03, ljl
 NR3  CPH1 CPH2 H       1.2000         0      0.0000 ! ALLOW ARO
                 ! his, adm jr., 6/27/90
 NR3  CPH2 CPH1 H       1.2000         0      0.0000 ! ALLOW ARO
@@ -2862,6 +3230,8 @@ C    X    X    CT3    90.0000         0      0.0000 ! ALLOW U10
                 ! RP 15-1-96
 C    X    X    C      90.0000         0      0.0000 ! ALLOW U10
                 ! RP 15-1-96
+CPB  X    X    CF1    90.0000         0      0.0000 ! ALLOW HEM
+                ! copied from above for heme a farnesyl, Feb 01, ljl
 CPB  X    X    C      90.0000         0      0.0000 ! ALLOW HEM
                 ! Heme (6-liganded): substituents (KK 05/13/91)
 CPM  X    X    CPA    90.0000         0      0.0000 ! ALLOW BCL
@@ -2885,6 +3255,20 @@ HA   X    X    CC     120.0000         0      0.0000 ! ALLOW   CHO
                 ! Aldehyde C-terminus (RP 06-8-96)
 O    X    X    CC     96.0000         0      0.0000 ! ALLOW  RBS 
                 ! RP 15-1-96
+! CUI DUMMY IMPROPERS
+CPB  CPB  CPA  CA     0.0     0     0.00 
+CA   CPB  O    HA     0.0     0     0.00
+CE1  CE2  CPB  HE1    0.0     0     0.00
+CE2  CE1  HE2  HE2    0.0     0     0.00
+CE1  CE1  CT3  CT3    0.0     0     0.00
+CE1  CE1  HE1  CT2    0.0     0     0.00
+CE1  CE1  CT2  CT3    0.0     0     0.00
+CE1  CT2  HE1  CE1    0.0     0     0.00
+CPH2 NR3  NR3  HR2    0.0     0     0.00
+CPH1 CPH1 NR3  HR1    0.0     0     0.00
+CPH1 NR3  CPH1 HR1    0.0     0     0.00
+! END CUI
+
 !lipid section
 OBL  X    X    CL         100.00    0     0.00 ! acetic acid
 HEL2 HEL2 CEL2 CEL2         3.00    0     0.00 ! ethene, yin,adm jr., 12/95
@@ -3990,6 +4374,10 @@ CT3    0.000000  -0.080000     2.060000   0.000000  -0.010000     1.900000 ! ALL
                 ! methane/ethane a.i. and ethane pure solvent, adm jr, 2/3/92
 CY     0.000000  -0.070000     1.992400 ! ALLOW   ARO
                 ! TRP, JWK 08/29/89
+! JOHANSSON START
+CF1    0.000000  -0.110000     2.000000 ! 
+                ! copied form line C, for heme formyl, Nov 2000, ljl
+! JOHANSSON END
 !new alkanes atoms types for conversion to new LJ parameters for c27 (see toppar_all22_prot_aliphatic_c27.str)
 CT       0.0       -0.0200    2.275 0.0 -0.01 1.9 ! from CT1x: needs work
 CT1x     0.0       -0.0200    2.275 0.0 -0.01 1.9 ! alkane, 3/92: needs work
@@ -4072,17 +4460,17 @@ SM     0.000000  -0.380000     1.975000 ! ALLOW  SUL  ION
 SS     0.000000  -0.470000     2.200000 ! ALLOW  SUL
                 ! methylthiolate to water and F.E. of solvation, adm jr. 6/1/92
 ! ions and miscellaneous types
-SOD      0.0     -0.0469    1.36375   ! sodium
+!SOD      0.0     -0.0469    1.36375   ! sodium
                    ! D. Beglovd and B. Roux, dA=-100.8 kcal/mol
-POT      0.0     -0.0870    1.76375   ! potassium
+!POT      0.0     -0.0870    1.76375   ! potassium
                    ! D. Beglovd and B. Roux, dA=-82.36+2.8 = -79.56 kca/mol
-CLA      0.0     -0.150     2.27      ! chloride
+!CLA      0.0     -0.150     2.27      ! chloride
                    ! D. Beglovd and B. Roux, dA=-83.87+4.46 = -79.40 kcal/mol
-CAL      0.0     -0.120     1.367     ! Calcium
+!CAL      0.0     -0.120     1.367     ! Calcium
                    ! S. Marchand and B. Roux, dA = -384.8 kcal/mol
 !CAL      0.000000  -0.120000     1.710000 ! Calcium (BP) in proteins prior
                    ! to 2003; not recommended due to need for NBFIX terms
-MG       0.0     -0.0150    1.18500   ! Magnesium
+!MG       0.0     -0.0150    1.18500   ! Magnesium
                    ! B. Roux dA = -441.65
 CES      0.0     -0.1900    2.100
                    ! Cesium, so far untested.
@@ -4091,7 +4479,8 @@ ZN     0.000000  -0.250000     1.090000 ! ALLOW  ION
 !FE     0.010000   0.000000     0.650000 ! ALLOW HEM
                 ! Heme (6-liganded): Iron atom (KK 05/13/91)
 !FE     0.0000     -0.0200      1.4443  ! FE (II) CHARMM Johan Bredenberg & Lennart Nilson
-FE     0.0000     -0.0115      1.4411  ! FE (III) CHARMM Johan Bredenberg & Lennart Nilson
+!FE     0.0000     -0.0115      1.4411  ! FE (III) CHARMM Johan Bredenberg & Lennart Nilson
+
 HE     0.000000  -0.021270     1.4800   !
                 ! helium, experimental pot. energy surface, adm jr., 12/95
 NE     0.000000  -0.086000     1.5300
@@ -4109,7 +4498,7 @@ NC     0.000000  -0.600000     1.850000 ! cyanopyridine
 OCA    0.000000  -0.120000     1.700000   0.000000  -0.120000 1.400000 ! 3acp
 COA    0.000000  -0.110000     2.000000 ! 3acp
 !fluorinated alkanes LJ parameters (see toppar_fluoro_alkanes.str)
-CF1    0.000000  -0.060000     1.900000
+!CF1    0.000000  -0.060000     1.900000
 CF2    0.000000  -0.042000     2.050000
 CF3    0.000000  -0.020000     2.300000
 HF1    0.000000  -0.028000     1.3200
@@ -4178,17 +4567,25 @@ CES    0.0       -0.1900    2.100
                    ! Cesium, so far untested.
 ZN     0.0       -0.250000   1.090000  !
                    ! RHS March 18, 1990
+                   
 ! HEME
 CTL4     0.0       -0.0800    2.06  0.0 -0.01 1.9 ! alkane, 3/92
 HAL      0.0       -0.022     1.3200 ! alkane, 3/92
-! CU     0.000000  -0.250000     1.000000 ! ALLOW  ION
-               ! R. Pomes 97-08-05 for cytox, dummy values to refine
-
-! From Cui 
+! CUI START
 CU             0.00000  -0.331867 0.227909
 OZ             0.00000  -0.201016 1.659440
 HZ             0.00000  -0.088043 0.223907
+FE             0.00000  -0.495601 1.581938
+OF             0.00000  -0.260191 1.618953
+HF             0.00000  -0.046000 0.224500 ! HT nonbond parameters
+! CUI END
 
+! JOHANSSON START
+OW     0.000000  -0.152100     1.768200 ! Copied from OT, ljl 2006
+OF     0.000000  -0.152100     1.768200 ! Copied from OT, ljl 2006
+OF1    0.000000  -0.120000     1.700000   0.000000  -0.120000     1.400000 ! 
+                ! copied from O, for heme formyl, Nov 2000, ljl
+! JOHANSSON END
 HBOND CUTHB 0.5  ! If you want to do hbond analysis (only), then use
                  ! READ PARAM APPEND CARD
                  ! to append hbond parameters from the file: par_hbond.inp
