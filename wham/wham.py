@@ -263,10 +263,12 @@ def main():
         # process the PMFs        
         item = outfile_q.get_nowait()
         results = {}
+        pmfs = {}
         while True:
             outfile = item['outfile']
             #sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
             pmf = process_pmf(outfile, shift=options.autoshift)
+            pmfs[item['start_index']] = pmf
             # correction = dG_bind(pmf, imin=-32, imax=-22)
             correction = 0.0
             # print "%d,%0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
@@ -281,7 +283,22 @@ def main():
                 break
         for k in sorted(results.keys()):
             print "%d,%0.5f" % (k,results[k])
-        
+        # write PMFs
+        (fd, fpath) = tempfile.mkstemp()
+        outfile = open(fpath, 'w')
+        sys.stderr.write("Writing PMFs to %s\n" % fpath)
+        pmf_bins = {}
+        for p in sorted(pmfs.keys()):
+            for x,y in pmfs[p]:
+                if x not in pmf_bins:
+                    pmf_bins[x] = [str(y)]
+                else:
+                    pmf_bins[x].append(str(y))
+
+        for bin in sorted(pmf_bins.keys()):
+            outfile.write('%f,%s\n' % (bin, ','.join(pmf_bins[bin])))
+        outfile.close()
+
     elif options.error > 0:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
