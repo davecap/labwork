@@ -12,8 +12,10 @@ from threading import Thread
 
 q = Queue()
 
+SEL='segname PEPA or ions'
+
 def gunzip(gzfile):
-    command = "/usr/bin/gunzip %s" % (gzfile)
+    command = "/usr/bin/gunzip -f %s" % (gzfile)
     p = subprocess.Popen(command, shell=True)
     p.wait()
     return gzfile.replace('.gz','')
@@ -27,14 +29,31 @@ quit
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = p.communicate(input=tcl)
 
+def VMD_write_psf(pdb_file, psf_file, selection="protein", outfile="outfile.psf"):
+    tcl = """set A [atomselect top "%s"]
+$A writepsf %s
+quit
+    """ % (selection, outfile)
+    command = "vmd -dispdev none -psf %s -pdb %s" % (psf_file, pdb_file)
+    p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    (stdoutdata, stderrdata) = p.communicate(input=tcl)
+
 def worker():
     while True:
         item = q.get()
         try:
             sys.stderr.write("Processing: %s\n" % item['pdb'])
-            # run VMD on the pdb file
             pdb = gunzip(item['pdb'])
-            VMD_filter_pdb(pdb, item['options'].psf_file, selection="protein or ions", output_filename=pdb+'_')
+
+            # write new PSF
+            if item['write_psf']:
+                sys.stderr.write("Writing PSF file\n")
+                newpsf = item['options'].psf_file.replace('.psf','_trim.psf')
+                VMD_write_psf(pdb, item['options'].psf_file, selection=SEL, outfile=newpsf)
+                sys.stderr.write("Wrote trimmed PSF file: %s\n" % newpsf)
+
+            # run VMD on the pdb file
+            VMD_filter_pdb(pdb, item['options'].psf_file, selection=SEL, outfile=pdb+'_')
             shutil.move(pdb+'_',pdb)
         except Exception, e:
             sys.stderr.write("\nException while running VMD: %s\n" % e)
@@ -48,6 +67,7 @@ def main():
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default='/dev/shm', help="Output directory [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
+    parser.add_option("-f", "--frames", dest="frames_per_replica", type="int", default=-1, help="Frames per replica [default: all]")
     # parser.add_option("-s", "--selection", dest="selection", default="protein", help="VMD selection to keep [default: %default]")
     parser.add_option("-p", "--psf", dest="psf_file", default=None, help="PSF structure file [default: %default]")
     
@@ -79,36 +99,37 @@ def main():
 
     # for each replica (sorted by coord) copy all the PDBs to the output dir
     i=0
+    write_psf = True
     for r in sorted(reps, key=lambda r: r[1]):
         pdb_path = os.path.join(scratch_path, r[0])
         for dirname, dirnames, filenames in os.walk(pdb_path):
-            for filename in filenames:
-                if filename.endswith('.pdb.gz'):
-                    pdb = os.path.join(options.output_dir, '%d.pdb.gz' % i)
-                    shutil.copy(os.path.join(dirname, filename), pdb)
-                    # send it to be processed by VMD
-                    q.put({'options': options, 'pdb':pdb})
-                    i = i+1
+            for j,filename in enumerate(filenames):
+                if j == options.frames_per_replica:
                     break
-            break
-        break
+                if filename.endswith('.pdb.gz'):
+                    if not os.path.exists(os.path.join(options.output_dir,'%d.pdb'%i)):
+                        pdb = os.path.join(options.output_dir, '%d.pdb.gz' % i)
+                        shutil.copy(os.path.join(dirname, filename), pdb)
+                        # send it to be processed by VMD
+                        # HACK: this is stupid
+                        if write_psf:
+                            q.put({'options': options, 'pdb':pdb, 'write_psf': True})
+                            write_psf = False
+                        else:
+                            q.put({'options': options, 'pdb':pdb, 'write_psf': False})
+                    else:
+                        sys.stderr.write("Skipping PDB %d\n" % i)
+                    i = i+1
                         
     sys.stderr.write("Waiting for jobs to complete\n")
     q.join()
     
     # now run catdcd on all the PDBs
+    newpsf = options.psf_file.replace('.psf','_trim.psf')
+    cmd = "catdcd -o out.dcd -stype psf -s %s %s" % (newpsf, ' '.join([ '-pdb %s' % os.path.join(options.output_dir, '%d.pdb' % j) for j in range(i) ]))
+    #print "catdcd -o out.dcd -s %s %s" % (newpsf, ' '.join([ '-pdb %d.pdb' % j for j in range(i) ]))
+    p = subprocess.Popen(cmd, shell=True)
+    p.wait()
     
-    
-    # try:
-    #     outfile = outfile_q.get_nowait()
-    #     while True:
-    #         print outfile
-    #         outfile_q.task_done()
-    #         outfile = outfile_q.get_nowait()
-    # except:
-    #     # queue empty
-    #     pass
-
-
 if __name__=='__main__':
     main()
