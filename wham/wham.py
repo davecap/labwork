@@ -196,6 +196,7 @@ def main():
     
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
+    parser.add_option("-p", "--output-pmf", dest="output_pmf", default=None, help="Output PMF file [default: temporary file]")
     parser.add_option("--convergence", dest="convergence", type="int", default=0, help="Analyze convergence over specified block size [default: %default]")    
     parser.add_option("--error", dest="error", type="int", default=0, help="Analyze error by block averaging [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
@@ -343,7 +344,11 @@ def main():
                 break
 
         # now we have the combined PMF data
-        (fd, fpath) = tempfile.mkstemp()
+        if options.output_pmf:
+            fpath = options.output_pmf
+        else:
+            (fd, fpath) = tempfile.mkstemp()
+
         outfile = open(fpath, 'w')
         sys.stderr.write("Writing errors\n")
         outfile.write('BIN,MEAN,SEM,STDEV,MIN,MAX\n')
