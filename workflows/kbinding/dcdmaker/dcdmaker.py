@@ -27,7 +27,8 @@ quit
     """ % (selection, outfile)
     command = "vmd -dispdev none -psf %s -pdb %s" % (psf_file, pdb_file)
     p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (stdoutdata, stderrdata) = p.communicate(input=tcl)
+    return p.communicate(input=tcl)
+
 
 def VMD_write_psf(pdb_file, psf_file, selection="protein", outfile="outfile.psf"):
     tcl = """set A [atomselect top "%s"]
@@ -53,7 +54,7 @@ def worker():
                 sys.stderr.write("Wrote trimmed PSF file: %s\n" % newpsf)
 
             # run VMD on the pdb file
-            VMD_filter_pdb(pdb, item['options'].psf_file, selection=SEL, outfile=pdb+'_')
+            (stdout, stderr) = VMD_filter_pdb(pdb, item['options'].psf_file, selection=SEL, outfile=pdb+'_')
             shutil.move(pdb+'_',pdb)
         except Exception, e:
             sys.stderr.write("\nException while running VMD: %s\n" % e)
@@ -67,7 +68,7 @@ def main():
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default='/dev/shm', help="Output directory [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
-    parser.add_option("-f", "--frames", dest="frames_per_replica", type="int", default=-1, help="Frames per replica [default: all]")
+    parser.add_option("-f", "--frames", dest="frames_per_replica", type="int", default=-1, help="Frames per replica [default: all frames]")
     # parser.add_option("-s", "--selection", dest="selection", default="protein", help="VMD selection to keep [default: %default]")
     parser.add_option("-p", "--psf", dest="psf_file", default=None, help="PSF structure file [default: %default]")
     
