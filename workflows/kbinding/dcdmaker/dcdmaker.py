@@ -125,9 +125,10 @@ def main():
     sys.stderr.write("Waiting for jobs to complete\n")
     q.join()
     
+    sys.stderr.write("Running catdcd\n")
     # now run catdcd on all the PDBs
     newpsf = options.psf_file.replace('.psf','_trim.psf')
-    cmd = "catdcd -o out.dcd -stype psf -s %s %s" % (newpsf, ' '.join([ '-pdb %s' % os.path.join(options.output_dir, '%d.pdb' % j) for j in range(i) ]))
+    cmd = "catdcd -o /dev/shm/%s.dcd -stype psf -s %s %s" % (config.title, newpsf, ' '.join([ '-pdb %s' % os.path.join(options.output_dir, '%d.pdb' % j) for j in range(i) ]))
     #print "catdcd -o out.dcd -s %s %s" % (newpsf, ' '.join([ '-pdb %d.pdb' % j for j in range(i) ]))
     p = subprocess.Popen(cmd, shell=True)
     p.wait()
