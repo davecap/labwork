@@ -55,6 +55,7 @@ def worker():
 
             # run VMD on the pdb file
             (stdout, stderr) = VMD_filter_pdb(pdb, item['options'].psf_file, selection=SEL, outfile=pdb+'_')
+            print stderr
             shutil.move(pdb+'_',pdb)
         except Exception, e:
             sys.stderr.write("\nException while running VMD: %s\n" % e)
@@ -127,9 +128,13 @@ def main():
     
     sys.stderr.write("Running catdcd\n")
     # now run catdcd on all the PDBs
-    newpsf = options.psf_file.replace('.psf','_trim.psf')
-    cmd = "catdcd -o /dev/shm/%s.dcd -stype psf -s %s %s" % (config.title, newpsf, ' '.join([ '-pdb %s' % os.path.join(options.output_dir, '%d.pdb' % j) for j in range(i) ]))
+    #newpsf = options.psf_file.replace('.psf','_trim.psf')
+    #cmd = "catdcd -o /dev/shm/%s.dcd -stype psf -s %s %s" % (config['title'], newpsf, ' '.join([ '-pdb %s' % os.path.join(options.output_dir, '%d.pdb' % j) for j in range(i) ]))
     #print "catdcd -o out.dcd -s %s %s" % (newpsf, ' '.join([ '-pdb %d.pdb' % j for j in range(i) ]))
+    
+    cmd = "cd %s;catdcd -o %s.dcd -s 0.pdb `ls *.pdb | sort -n | xargs -s 50 -I %% echo -n \"-pdb %% \"`" % (options.output_dir, config['title'])
+    print cmd
+    
     p = subprocess.Popen(cmd, shell=True)
     p.wait()
     

@@ -94,10 +94,10 @@ def main():
     
     # Nov. 8, 2010: saw that there is a potassium ion coordinated by N139D and D132
     # Count potassium ions near 132 and 139
-    #analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=4.0))
-    #analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=4.0))
-    #analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT', cutoff=4.0))
-    #analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_139_POT', NearbyCountAnalysis('segid PEPA and resid 139', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_132_POT', NearbyCountAnalysis('segid PEPA and resid 132', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_286_POT', NearbyCountAnalysis('segid PEPA and resid 286', 'resname POT', cutoff=4.0))
+    analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT', cutoff=4.0))
         
     # HBONDS: 139, 207, 286 <-> water/protein
     #analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
@@ -120,8 +120,11 @@ def main():
     #analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_PROTEIN', HydrogenBondAnalysis('atom PEPA 102 O1D or atom PEPA 102 O2D', 'protein', selection1_type='acceptor'))
     
     # dihedrals of 132, 139, 286
-    analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
-    analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
+    try:
+        analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
+        analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG", "atom PEPA 139 OD1")))
+    except:
+        print "Unsupported residue 139 PEPA"
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 N", "atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_132_CHI2', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 132 CA", "atom PEPA 132 CB", "atom PEPA 132 CG", "atom PEPA 132 OD1")))
     analysis.add_timeseries('/protein/dihedrals/PEPA_286_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 286 N", "atom PEPA 286 CA", "atom PEPA 286 CB", "atom PEPA 286 CG")))
@@ -167,13 +170,15 @@ def main():
     analysis.add_timeseries('/protein/distances/HDH419O2A_ASPP407HD2', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 419 O2A", "atom PEPA 407 HD2")))
     analysis.add_timeseries('/protein/distances/HDH419O2A_ASPP407OD1', Timeseries.Distance("r", trj.selectAtoms("atom PEPA 419 O2A", "atom PEPA 407 OD1")))
     
-    analysis.add_timeseries('/protein/distances/POT4845_PEPA139CA', Timeseries.Distance("r", trj.selectAtoms("atom POT 4845 POT", "atom PEPA 139 CA")))
-    analysis.add_timeseries('/protein/distances/POT4845_PEPA132CA', Timeseries.Distance("r", trj.selectAtoms("atom POT 4845 POT", "atom PEPA 132 CA")))
+    analysis.add_timeseries('/protein/distances/POT4712_PEPA139CA', Timeseries.Distance("r", trj.selectAtoms("atom POT 4712 POT", "atom PEPA 139 CA")))
+    analysis.add_timeseries('/protein/distances/POT4712_PEPA132CA', Timeseries.Distance("r", trj.selectAtoms("atom POT 4712 POT", "atom PEPA 132 CA")))
+    analysis.add_timeseries('/protein/distances/POT4712_PEPA286CA', Timeseries.Distance("r", trj.selectAtoms("atom POT 4712 POT", "atom PEPA 286 CA")))
     
     # coordinates of POT and CA of 132 and 139 and 286
-    analysis.add_timeseries('/protein/coords/POT4845_X', Timeseries.Atom("x", trj.selectAtoms("atom POT 4845 POT")))
-    analysis.add_timeseries('/protein/coords/POT4845_Y', Timeseries.Atom("y", trj.selectAtoms("atom POT 4845 POT")))
-    analysis.add_timeseries('/protein/coords/POT4845_Z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4845 POT")))
+    analysis.add_timeseries('/protein/coords/POT4712_X', Timeseries.Atom("x", trj.selectAtoms("atom POT 4712 POT")))
+    analysis.add_timeseries('/protein/coords/POT4712_Y', Timeseries.Atom("y", trj.selectAtoms("atom POT 4712 POT")))
+    analysis.add_timeseries('/protein/coords/POT4712_Z', Timeseries.Atom("z", trj.selectAtoms("atom POT 4712 POT")))
+    analysis.add_timeseries('/protein/coords/PEPA286_Z', Timeseries.Atom("z", trj.selectAtoms("atom PEPA 286 CA")))
 
     # Nov 18, 2010, cylinder search for water and potassium
     r132 = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
