@@ -99,24 +99,24 @@ def main():
     analysis.add_to_sequence('/protein/ions/PEPA_207_POT', NearbyCountAnalysis('segid PEPA and resid 207', 'resname POT', cutoff=4.0))
         
     # HBONDS: 139, 207, 286 <-> water/protein
-    analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_132_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 132', 'protein'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_139_WATER', HydrogenBondAnalysis('segid PEPA and resid 139', 'resname TIP3'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_139_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 139', 'protein'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_207_WATER', HydrogenBondAnalysis('segid PEPA and resid 207', 'resname TIP3'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_207_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 207', 'protein'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_286_WATER', HydrogenBondAnalysis('segid PEPA and resid 286', 'resname TIP3'))
-    analysis.add_to_sequence('/protein/hbonds/PEPA_286_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 286', 'protein'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_132_WATER', HydrogenBondAnalysis('segid PEPA and resid 132', 'resname TIP3'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_132_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 132', 'protein'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_139_WATER', HydrogenBondAnalysis('segid PEPA and resid 139', 'resname TIP3'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_139_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 139', 'protein'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_207_WATER', HydrogenBondAnalysis('segid PEPA and resid 207', 'resname TIP3'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_207_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 207', 'protein'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_286_WATER', HydrogenBondAnalysis('segid PEPA and resid 286', 'resname TIP3'))
+    #analysis.add_to_sequence('/protein/hbonds/PEPA_286_PROTEIN', HydrogenBondAnalysis('segid PEPA and resid 286', 'protein'))
     
     # HEME A and A3 <-> water/protein
-    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_WATER', HydrogenBondAnalysis('atom HEM3 1 O1A or atom HEM3 1 O2A', 'resname TIP3', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_PROTEIN', HydrogenBondAnalysis('atom HEM3 1 O1A or atom PEHEM3PA 1 O2A', 'protein', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_WATER', HydrogenBondAnalysis('atom HEM3 1 O1D or atom HEM3 1 O2D', 'resname TIP3', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_PROTEIN', HydrogenBondAnalysis('atom HEM3 1 O1D or atom HEM3 1 O2D', 'protein', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_WATER', HydrogenBondAnalysis('atom HEMA 1 O1A or atom HEMA 1 O2A', 'resname TIP3', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_PROTEIN', HydrogenBondAnalysis('atom HEMA 1 O1A or atom HEMA 1 O2A', 'protein', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_WATER', HydrogenBondAnalysis('atom HEMA 1 O1D or atom HEMA 1 O2D', 'resname TIP3', selection1_type='acceptor'))
-    analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_PROTEIN', HydrogenBondAnalysis('atom HEMA 1 O1D or atom HEMA 1 O2D', 'protein', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_WATER', HydrogenBondAnalysis('atom HEM3 1 O1A or atom HEM3 1 O2A', 'resname TIP3', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROA_PROTEIN', HydrogenBondAnalysis('atom HEM3 1 O1A or atom PEHEM3PA 1 O2A', 'protein', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_WATER', HydrogenBondAnalysis('atom HEM3 1 O1D or atom HEM3 1 O2D', 'resname TIP3', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA3_PROD_PROTEIN', HydrogenBondAnalysis('atom HEM3 1 O1D or atom HEM3 1 O2D', 'protein', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_WATER', HydrogenBondAnalysis('atom HEMA 1 O1A or atom HEMA 1 O2A', 'resname TIP3', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA_PROA_PROTEIN', HydrogenBondAnalysis('atom HEMA 1 O1A or atom HEMA 1 O2A', 'protein', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_WATER', HydrogenBondAnalysis('atom HEMA 1 O1D or atom HEMA 1 O2D', 'resname TIP3', selection1_type='acceptor'))
+    #analysis.add_to_sequence('/protein/hbonds/HEMEA_PROD_PROTEIN', HydrogenBondAnalysis('atom HEMA 1 O1D or atom HEMA 1 O2D', 'protein', selection1_type='acceptor'))
     
     # dihedrals of 132, 139, 286
     analysis.add_timeseries('/protein/dihedrals/PEPA_139_CHI1', Timeseries.Dihedral(trj.selectAtoms("atom PEPA 139 N", "atom PEPA 139 CA", "atom PEPA 139 CB", "atom PEPA 139 CG")))
@@ -157,6 +157,8 @@ def main():
     analysis.add_timeseries('/protein/distances/MET263SD_CUA2', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 263 SD", "atom CUA 2 CU")))
     analysis.add_timeseries('/protein/distances/GLU254O_CUA1', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 254 O", "atom CUA 1 CU")))
     analysis.add_timeseries('/protein/distances/E254OE1_MG', Timeseries.Distance("r", trj.selectAtoms("atom PEPB 254 OE1", "atom MG 1 MG")))
+    
+    analysis.add_timeseries('/protein/distances/K4712_E286', Timeseries.Distance("z", trj.selectAtoms("atom POT 4712 POT", "atom PEPA 286 CA")))
     
     # Nov 18, 2010, cylinder search for water and potassium
     r132 = 'segid PEPA and resid 132 and ( name CA or name CB or name N )'
