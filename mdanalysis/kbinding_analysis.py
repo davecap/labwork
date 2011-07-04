@@ -189,7 +189,7 @@ def main():
     rHA3FE = 'atom PEPA 419 FE'
 
     # D-channel
-    analysis.add_to_sequence('/arrays/cylinder_132_286', CylinderSearch(r132, r286, 'resname TIP3 or resname POT', extension=5.0, radius=10.0), array=True)
+    analysis.add_to_sequence('/arrays/cylinder_132_286', CylinderSearch(r132, r286, 'resname TIP3 or resname POT', extension=20.0, radius=10.0), array=True)
     analysis.add_to_sequence('/arrays/cylinder_132_139', CylinderSearch(r132, r139, 'resname TIP3 or resname POT', extension=30.0, radius=6.0), array=True)
     analysis.add_to_sequence('/arrays/cylinder_139_286', CylinderSearch(r139, r286, 'resname TIP3 or resname POT', extension=1.0, radius=5.0), array=True)
 
