@@ -8,8 +8,6 @@ import tables
 import numpy
 import os
 
-from nearby import NearbyListAnalysis
-
 def main():
     from MDAnalysis.tests.datafiles import PSF,DCD
     print "Loading reference system: %s, %s" % (PSF, DCD)
@@ -29,9 +27,6 @@ def main():
     analysis.add_timeseries('/timeseries/com/COM_ALL', Timeseries.CenterOfMass(ref.atoms))
     analysis.add_timeseries('/timeseries/com/COM_ALL1', Timeseries.CenterOfMass(ref.atoms))
     analysis.add_timeseries('/timeseries/com/COM_ALL2', Timeseries.CenterOfMass(ref.atoms))
-    
-    # Test sequence
-    # analysis.add_to_sequence('/sequence/nearby_list', NearbyListAnalysis(), format=tables.Float32Atom(shape=()), array=True)
     
     analysis.run(trj=trj, ref=ref)
     analysis.save()
