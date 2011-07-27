@@ -2,11 +2,12 @@ import optparse
 import subprocess
 from string import Template
 
-def pdb_stage_tcl(staging_pdb, starting_pdb, align_selection, target_selection, output_pdb="staged"):    
+def pdb_stage_tcl(staging_pdb, starting_pdb, align_selection, template_target_selection, starting_target_selection, output_pdb="staged"):    
     data = {    'staging_pdb': staging_pdb,
                 'starting_pdb': starting_pdb,
                 'align_selection': align_selection,
-                'target_selection': target_selection,
+                'template_target_selection': template_target_selection,
+                'starting_target_selection': starting_target_selection,
                 'output_pdb': output_pdb,
             }
     
@@ -24,8 +25,8 @@ set trans_mat [measure fit $$sel0align $$sel1align]
 $$sel0all move $$trans_mat
 
 # move target in starting (1) to position of the same target in staging (0)
-set sel0target [atomselect 0 "$target_selection"]
-set sel1target [atomselect 1 "$target_selection"]
+set sel0target [atomselect 0 "$template_target_selection"]
+set sel1target [atomselect 1 "$starting_target_selection"]
 set trans_mat [measure fit $$sel1target $$sel0target]
 $$sel1target move $$trans_mat
 
@@ -44,6 +45,9 @@ def main():
         usage: %prog [options] <starting structure PDB> <template PDB> <output PDB>
     """
     parser = optparse.OptionParser(usage)
+    parser.add_option("-t", dest="template_target", default='segname POT and resid 4712', help="Template target selection")
+    parser.add_option("-s", dest="starting_target", default='segname POT and resid 4719', help="Starting target selection")
+
     options, args = parser.parse_args()
     
     try:
@@ -54,7 +58,7 @@ def main():
         parser.error("Please verify parameters")
     
     # Align using the VMD TCL script
-    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and backbone", target_selection="segname POT and resid 4712", output_pdb=output_pdb)
+    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and backbone", template_target_selection=options.template_target, starting_target_selection=options.starting_target, output_pdb=output_pdb)
     (stderr, stdout) = run_VMD(tcl)
     #print stderr
     #print stdout
