@@ -198,6 +198,7 @@ def main():
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
     parser.add_option("-p", "--output-pmf", dest="output_pmf", default=None, help="Output PMF file [default: temporary file]")
     parser.add_option("--convergence", dest="convergence", type="int", default=0, help="Analyze convergence over specified block size [default: %default]")    
+    parser.add_option("--percentage", dest="percentage", type="int", default=25, help="Percentage of data for block size [default: %default]")    
     parser.add_option("--error", dest="error", type="int", default=0, help="Analyze error by block averaging [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
@@ -312,7 +313,7 @@ def main():
             wham_dicts = []
             for config_file in args:
                 sys.stderr.write("Processing config file: %s\n" % config_file)                
-                md = process_config(config_file, options, percent=25, randomize=True, start_index=options.start_index)
+                md = process_config(config_file, options, percent=options.percentage, randomize=True, start_index=options.start_index)
                 md.update(wham_defaults)
                 wham_dicts.append(md)
             combined_dict = combine_metadatas(wham_dicts)
