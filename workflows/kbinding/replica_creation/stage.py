@@ -21,9 +21,9 @@ mol load pdb "$starting_pdb"
 set sel0all [atomselect 0 all]
 set sel1all [atomselect 1 all]
 set sel0align [atomselect 0 "$align_selection"]
-$$sel0align writepdb "sel0_align.pdb"
+#$$sel0align writepdb "sel0_align.pdb"
 set sel1align [atomselect 1 "$align_selection"]
-$$sel1align writepdb "sel1_align.pdb"
+#$$sel1align writepdb "sel1_align.pdb"
 set trans_mat [measure fit $$sel0align $$sel1align]
 $$sel0all move $$trans_mat
 
