@@ -1,6 +1,7 @@
 import optparse
 import subprocess
 from string import Template
+import os
 
 def pdb_stage_tcl(staging_pdb, starting_pdb, align_selection, template_target_selection, starting_target_selection, output_pdb="staged"):    
     data = {    'staging_pdb': staging_pdb,
@@ -20,7 +21,9 @@ mol load pdb "$starting_pdb"
 set sel0all [atomselect 0 all]
 set sel1all [atomselect 1 all]
 set sel0align [atomselect 0 "$align_selection"]
+$$sel0align writepdb "sel0_align.pdb"
 set sel1align [atomselect 1 "$align_selection"]
+$$sel1align writepdb "sel1_align.pdb"
 set trans_mat [measure fit $$sel0align $$sel1align]
 $$sel0all move $$trans_mat
 
@@ -58,15 +61,14 @@ def main():
         parser.error("Please verify parameters")
     
     # Align using the VMD TCL script
-    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and backbone", template_target_selection=options.template_target, starting_target_selection=options.starting_target, output_pdb=output_pdb)
+    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and name CA and not resname H284", template_target_selection=options.template_target, starting_target_selection=options.starting_target, output_pdb=output_pdb)
     (stderr, stdout) = run_VMD(tcl)
     #print stderr
     #print stdout
+    if "selections must have the same number of atoms" in stderr:
+        print "ERROR ALIGNING STRUCTURES, DELETING OUTPUT"
+        os.remove(output_pdb)
                     
 if __name__ == "__main__":
     main()
-
-
-
-
 
