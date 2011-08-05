@@ -70,7 +70,6 @@ def main():
     parser.add_option("-o", "--output-dir", dest="output_dir", default='/dev/shm', help="Output directory [default: %default]")
     parser.add_option("-t", "--threads", dest="worker_threads", type="int", default=1, help="Number of WHAM threads to use [default: %default]")
     parser.add_option("-f", "--frames", dest="frames_per_replica", type="int", default=-1, help="Frames per replica [default: all frames]")
-    # parser.add_option("-s", "--selection", dest="selection", default="protein", help="VMD selection to keep [default: %default]")
     parser.add_option("-p", "--psf", dest="psf_file", default=None, help="PSF structure file [default: %default]")
     
     (options, args) = parser.parse_args()
@@ -105,6 +104,11 @@ def main():
     for r in sorted(reps, key=lambda r: r[1]):
         pdb_path = os.path.join(scratch_path, r[0])
         for dirname, dirnames, filenames in os.walk(pdb_path):
+            # add the starting frame to the end, just in case there are no output frames yet
+            start_pdb_path = os.path.join(project_path, 'pdbs', '%s.pdb.gz' % str(r[0]))
+            if os.path.exists(start_pdb_path):
+                filenames.append(start_pdb_path)
+
             for j,filename in enumerate(filenames):
                 if j == options.frames_per_replica:
                     break
