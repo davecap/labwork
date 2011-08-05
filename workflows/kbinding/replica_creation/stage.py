@@ -61,7 +61,7 @@ def main():
         parser.error("Please verify parameters")
     
     # Align using the VMD TCL script
-    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and name CA and not resname H284", template_target_selection=options.template_target, starting_target_selection=options.starting_target, output_pdb=output_pdb)
+    tcl = pdb_stage_tcl(staging_pdb=template_pdb, starting_pdb=starting_pdb, align_selection="protein and name CA and (resname LYS HSE GLN SER GLU GLY MET ARG PRO TYR THR ALA TRP ILE VAL LEU)", template_target_selection=options.template_target, starting_target_selection=options.starting_target, output_pdb=output_pdb)
     (stderr, stdout) = run_VMD(tcl)
     #print stderr
     #print stdout
