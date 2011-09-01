@@ -2,7 +2,7 @@ import sys
 import numpy
 import subprocess
 
-def run_wham(min, max, bins, metafilepath, temp=315.0, tol=0.0001,**kwargs):
+def run_wham(min, max, bins, metafilepath, temp=323.15, tol=0.0001,**kwargs):
     outfile = "%s_wham.out" % metafilepath
     sys.stderr.write("Running WHAM: %s -> %s\n" % (metafilepath, outfile))
     command = "wham %f %f %d %f %f 0 %s %s" % (min, max, bins, tol, temp, metafilepath, outfile)
@@ -39,7 +39,7 @@ def dG_bind(pmf, imin=0, imax=1):
     """ Calculate the relative binding free energy for a PMF given bounds """
     # dGbind = -(1/kB)
     kB = 0.00198721 # kcal/mol/K
-    t = 315.0 # K
+    t = 323.15 # K
     Beta = kB*t
     
     x_prev = None
