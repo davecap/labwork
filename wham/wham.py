@@ -363,29 +363,56 @@ def main():
         
     else:
         # standard procedure
-        wham_dicts = []
-        for config_file in args:
-            sys.stderr.write("Processing config file: %s\n" % config_file)
-            wham_dict = process_config(config_file, options, start_index=options.start_index)
-            wham_dict.update(wham_defaults)
-            wham_dicts.append(wham_dict)
+        # does not combine files
         
-        combined_dict = combine_metadatas(wham_dicts)
-        q.put(combined_dict)
-            
+        # for each config file, send it to wham
+        for config_file in args:
+            sys.stderr.write("Processing config file: %s\n" % config_file)                
+            md = process_config(config_file, options, percent=options.percentage, randomize=True, start_index=options.start_index)
+            md.update(wham_defaults)
+            q.put(combined_dict)
+                            
         # Wait for wham to finish
         sys.stderr.write("Waiting for WHAM to complete\n")
         q.join() 
     
-        try:
-            outfile = outfile_q.get_nowait()
-            while True:
-                print outfile
-                outfile_q.task_done()
-                outfile = outfile_q.get_nowait()
-        except:
-            # queue empty
-            pass
+    
+        # process the PMFs
+        error_data = {}
+        item = outfile_q.get_nowait()
+        while True:
+            outfile = item['outfile']
+            sys.stderr.write("Processing WHAM outfile: %s\n" % outfile)
+            pmf = process_pmf(outfile, shift=options.autoshift)            
+            for x,y in pmf:
+                if x not in error_data:
+                    error_data[x] = [y]
+                else:
+                    error_data[x].append(y)
+            outfile_q.task_done()
+            try:
+                item = outfile_q.get_nowait()
+            except:
+                sys.stderr.write("All outfiles processed...\n")
+                break
+    
+        # now we have the combined PMF data
+        if options.output_pmf:
+            fpath = options.output_pmf
+        else:
+            (fd, fpath) = tempfile.mkstemp()
+
+        outfile = open(fpath, 'w')
+        
+        sys.stderr.write("Writing errors\n")
+        outfile.write('BIN,MEAN,SEM,STDEV,MIN,MAX\n')
+        for key in sorted(error_data.keys()):
+            d = numpy.array(error_data[key])
+            sys.stderr.write("%0.2f,%d " % (key, d.size))
+            sem = numpy.std(d, ddof=1)/numpy.sqrt(d.size)
+            outfile.write('%f,%f,%f,%f,%f,%f\n' % (key,d.mean(),sem,numpy.std(d),d.min(),d.max()))
+        outfile.close()
+        sys.stderr.write("\n"+fpath+"\n")
 
 
 if __name__=='__main__':
