@@ -206,7 +206,7 @@ def main():
     parser.add_option("--wham-max", dest="wham_max", type="float", default=0, help="Maximum bin value for WHAM [default: %default]")
     parser.add_option("--wham-bins", dest="wham_bins", type="int", default=200, help="Number of bins for WHAM [default: %default]")
     parser.add_option("--wham-tol", dest="wham_tol", type="float", default=0.0001, help="Tolerance for WHAM [default: %default]")
-    parser.add_option("--wham-temp", dest="wham_temp", type="float", default=315.0, help="Temperature for WHAM [default: %default]")
+    parser.add_option("--wham-temp", dest="wham_temp", type="float", default=323.15, help="Temperature for WHAM [default: %default]")
     parser.add_option("--start-index", dest="start_index", type="int", default=0, help="Start index for data selection [default: %default]")
     parser.add_option("-d", "--data-file", dest="data_file", default="distances", help="Replica data file name [default: %default]")
     
