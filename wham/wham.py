@@ -370,7 +370,7 @@ def main():
             sys.stderr.write("Processing config file: %s\n" % config_file)                
             md = process_config(config_file, options, percent=options.percentage, randomize=True, start_index=options.start_index)
             md.update(wham_defaults)
-            q.put(combined_dict)
+            q.put(md)
                             
         # Wait for wham to finish
         sys.stderr.write("Waiting for WHAM to complete\n")
