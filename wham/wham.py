@@ -12,7 +12,7 @@ import datetime
 from Queue import Queue
 from threading import Thread
 
-from pmf import process_pmf, dG_bind, run_wham
+from pmf import process_pmf, dG_bind, dG, run_wham
 
 
 q = Queue()
@@ -197,7 +197,10 @@ def main():
     parser = optparse.OptionParser(usage)
     parser.add_option("-o", "--output-dir", dest="output_dir", default=None, help="Output directory [default: temporary dir]")
     parser.add_option("-p", "--output-pmf", dest="output_pmf", default=None, help="Output PMF file [default: temporary file]")
-    parser.add_option("--convergence", dest="convergence", type="int", default=0, help="Analyze convergence over specified block size [default: %default]")    
+    parser.add_option("--convergence", dest="convergence", default=False, help="Analyze convergence [default: %default]")
+    parser.add_option("--conv-x", dest="convergence_x", tyle="float", default=25, help="Convergence of this reaction coordinate [default: %default]")    
+    parser.add_option("--conv-block-size", dest="convergence_block_size", type="float", default=80, help="Convergence block size [default: %default]")    
+    parser.add_option("--conv-shift", dest="convergence_shift", type="float", default=40, help="Convergence shift size [default: %default]")    
     parser.add_option("--percentage", dest="percentage", type="int", default=25, help="Percentage of data for block size [default: %default]")    
     parser.add_option("--error", dest="error", type="int", default=0, help="Analyze error by block averaging [default: %default]")
     parser.add_option("--autoshift", dest="autoshift", default=True, action="store_false", help="Auto-shift PMF [default: %default]")
@@ -225,7 +228,7 @@ def main():
             
     wham_defaults = {'min':options.wham_min, 'max':options.wham_max, 'bins':options.wham_bins, 'tol':options.wham_tol, 'temp':options.wham_temp}
     
-    if options.convergence > 0:
+    if options.convergence:
         # note: ALWAYS COMBINES INPUT CONFIG FILES
         
         # 1) calculate blocks of data in sequential order for each config file
@@ -234,8 +237,8 @@ def main():
         # 3) calculate some value from each PMF (dG_bind)
         # 4) print <block>,<value> to plot
         
-        block_size = options.convergence
-        shift = options.convergence
+        block_size = options.convergence_block_size
+        shift = options.convergence_shift
         start_index = 0
         done = False
         while not done:
@@ -272,11 +275,10 @@ def main():
             pmf = process_pmf(outfile, shift=options.autoshift)
             pmfs[item['start_index']] = pmf
             # correction = dG_bind(pmf, imin=-32, imax=-22)
-            correction = 0.0
+            #correction = 0.0
             # print "%d,%0.5f" % (item['start_index'],item['end_index'],dG_bind(pmf, imin=-32, imax=-22)-correction)
-            results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-19)-correction
-            #results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-22)-correction
-            
+            #results[item['start_index']] = dG_bind(pmf, imin=-32, imax=-19)-correction
+            results[item['start_index']] = dG(pmf, options.convergence_x)
             outfile_q.task_done()
             try:
                 item = outfile_q.get_nowait()
@@ -285,20 +287,31 @@ def main():
                 break
         for k in sorted(results.keys()):
             print "%d,%0.5f" % (k,results[k])
-        # write PMFs
-        (fd, fpath) = tempfile.mkstemp()
+        
+        # write PMFs        
+        if options.output_pmf:
+            fpath = options.output_pmf
+        else:
+            (fd, fpath) = tempfile.mkstemp()
+        
         outfile = open(fpath, 'w')
         sys.stderr.write("Writing PMFs to %s\n" % fpath)
         pmf_bins = {}
+        pmf_titles = []
         for p in sorted(pmfs.keys()):
+            pmf_titles.append(str(p))
             for x,y in pmfs[p]:
                 if x not in pmf_bins:
-                    pmf_bins[x] = [str(y)]
+                    pmf_bins[x] = [y]
                 else:
-                    pmf_bins[x].append(str(y))
+                    pmf_bins[x].append(y)
 
+        outfile.write('BIN,MEAN,SEM,STDEV,MIN,MAX,%s\n' % (','.join(pmf_titles)))
         for bin in sorted(pmf_bins.keys()):
-            outfile.write('%f,%s\n' % (bin, ','.join(pmf_bins[bin])))
+            pmf_values = ','.join([ str(v) for v in pmf_bins[bin] ])
+            d = numpy.array(pmf_bins[bin])
+            sem = numpy.std(d, ddof=1)/numpy.sqrt(d.size)
+            outfile.write('%f,%f,%f,%f,%f,%f,%s\n' % (bin, d.mean(), sem, numpy.std(d), d.min(), d.max(), pmf_values))
         outfile.close()
 
     elif options.error > 0:
