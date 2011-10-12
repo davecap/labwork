@@ -58,4 +58,8 @@ def dG_bind(pmf, imin=0, imax=1):
     dGbind = (-1.0*Beta)*numpy.log(s)
     return dGbind
 
-
+def dG(pmf, x):
+    for xx, dG in pmf:
+        if xx >= x:
+            return dG
+    raise Exception('invalid x value (%f) for pmf' % x)
